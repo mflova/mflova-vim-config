@@ -16,7 +16,7 @@ If vim is already installed, you only need to copy the content of the vimrc and 
 ## How to use
 Following tables gather all the commands and shortcuts I like using:
 
-#### Main VIM use
+### Main VIM use
 Main use
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
@@ -66,7 +66,7 @@ Resizing and moving split planes
 | Moving split panes  | Select a split pane, press Ctrl + e (resize mode), then e (move mode) and move it with the arrows  |
 
 
-#### NERDTree
+### NERDTree
 
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
@@ -82,7 +82,7 @@ Resizing and moving split planes
 | :ntrm name  | Remove NERDTree directory  |
 
 
-#### Searching
+### Searching
 
 Search for strings in a file
 | Command/Shortcut  | Description |
@@ -100,7 +100,7 @@ Search for strings in files
 | v  | Opens file in vertical split  |
 
 *By default, the window search will be closed. If you want to change this, comment the line `autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>` in the vimrc.
-	
+
 Search for files
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
