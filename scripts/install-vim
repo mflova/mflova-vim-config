@@ -12,3 +12,4 @@ read -p "Press [ENTER] when done..."
 sed -i 's/nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t/nnoremap <silent> <buffer> v  <C-w><CR><C-w>L/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
 sed -i 's/nnoremap <silent> <buffer> h  <C-W><CR><C-w>K/nnoremap <silent> <buffer> x  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
 sed -i 's/nnoremap <silent> <buffer> H  <C-W><CR><C-w>K/nnoremap <silent> <buffer> X  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
+echo "Installation finished"
