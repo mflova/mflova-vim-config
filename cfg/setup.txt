@@ -1,8 +1,0 @@
-""" Important setup! Might be outdated, as it is handled by the script
-" Install: sudo apt-get install -y vim-nox
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" Install: sudo apt-get install exuberant-ctags
-" Install: sudo apt-get install silversearcher-ag
-" Open vim and write :PlugInstall
-" Change from ~.vim/bundle/ag.vim, the block if l:apply_mappings, change h to x and H to X
-" Change the v mapping to this one: nnoremap <silent> <buffer> v  <C-w><CR><C-w>L

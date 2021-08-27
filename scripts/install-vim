@@ -7,9 +7,15 @@ sudo apt-get install -y silversearcher-ag
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp "$PWD/cfg/.vimrc" "$HOME"
 
+cp "$PWD/README.md" "$HOME/.vim"
+cp "$PWD/todo.txt" "$HOME/.vim"
+
 echo "Open VIM and execute :PluginInstall"
 read -p "Press [ENTER] when done..."
 sed -i 's/nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t/nnoremap <silent> <buffer> v  <C-w><CR><C-w>L/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
 sed -i 's/nnoremap <silent> <buffer> h  <C-W><CR><C-w>K/nnoremap <silent> <buffer> x  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
 sed -i 's/nnoremap <silent> <buffer> H  <C-W><CR><C-w>K/nnoremap <silent> <buffer> X  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
+
+cp "$PWD/cfg/update_vim_repo" "$HOME/.vim"
+sed -i 's,VIM_CONFIG_REPO,'"$PWD"',' $HOME/.vim/update_vim_repo
 echo "Installation finished"

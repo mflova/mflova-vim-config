@@ -1,10 +1,10 @@
 # mflova-vim-config
 
-Repository used to install and set up vim and my main configuration used.
+Repository used to install and set up vim and my main configuration used. The idea is to have this repository whenever you want. When local files from the .vim folder are changed, a script will automatically update this repository so that you can push it in github.
 
 ## Installation
 
-Just run `./install` from the repository's root directory. This will
+Just run `./install` from the repository's root directory. Do not forget to set its permissions with chmod +x install. This will
 automatically do the following:
 - Install vim-nox and its dependencies
 - Initialize the vimrc file
@@ -13,7 +13,13 @@ automatically do the following:
 
 If vim is already installed, you only need to copy the content of the vimrc and change the mapping of the av.vim plugin to better use the editor.
 
-## How to use
+## How to update this repository
+After modifying the local files from your VIM, you can execute the `./update_vim_repo` to update the files from this repo. Then, you can git commit the changes. Only following files will be updated:
+- .vimrc
+- README.md
+- todo.txt 
+
+## How to use this setup
 Following tables gather all the commands and shortcuts I like using:
 
 ### Main VIM use
