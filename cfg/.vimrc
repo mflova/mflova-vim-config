@@ -39,6 +39,11 @@ call vundle#end()
 " Set CtrlP to ignore specific extensions
 set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o
 
+" When using the / tool, it will not be sensitive case unless you write some case letters.
+set ignorecase
+set smartcase
+
+" Set colortheme
 syntax on
 colorscheme molokai
 

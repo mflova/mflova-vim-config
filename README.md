@@ -65,10 +65,10 @@ Resizing and moving split planes
 
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| Ctrl + e  | Content Cell  |
-| Enter  | Content Cell  |
-| e  | Content Cell  |
-| q  | Content Cell  |
+| Ctrl + e  | Enters the mode to resize or move split panes  |
+| Enter  | Confirm changes and quite mode  |
+| e  | Swap between different moves such as resize or move mode  |
+| q  | Quit mode  |
 | Moving split panes  | Select a split pane, press Ctrl + e (resize mode), then e (move mode) and move it with the arrows  |
 
 
@@ -76,7 +76,7 @@ Resizing and moving split planes
 
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| F2  | Content Cell  |
+| F2  | Toggle and untoggle the NERDTree  |
 | v in file  | Opens a file in vertical split  |
 | x in file  | Opens a file in horizontal split  |
 | t in file  | Opens a file in new tab  |
@@ -93,7 +93,7 @@ Resizing and moving split planes
 Search for strings in a file
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| /word + enter  | Enters visual mode  |
+| /word + enter  | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
 | /word + enter + n/N  | Previous and next matches  |
 
 Search for strings in files
