@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+./scripts/install-vim
+./scripts/install-plugins

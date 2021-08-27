@@ -1,0 +1,77 @@
+" Guide
+" ctrl + p            ->    Search for files in current directory
+" :vsave name         ->    Save a vim session with all the tabs
+" :vload name         ->    Load a vim session (ignore the errors and open NERDTree again)
+" ctrl + r            ->    Update opened file (in theory is automatic)
+" ctrl + t            ->    Opens a new tab
+" ctrl + k            ->    Alternate between source and header file
+" Tab and Shift + Tab ->    Jump between TODOs comments
+" F3                  ->    Opens current taglist of the files (i.e structure of the file, classes, variables...). Used for fast navigation.
+" Enter (Normal mode) ->    Selects everything between the two brackets. Keep pressing for selecting outer ones.
+" Ctrl + u/d          ->    Moves the cursor half the screen
+"
+" Grep in VIM
+" :vgrep (or :ag) word->    Search recursively a string in the current working directory and displays the files
+"                           By default, the window with matches will be closed after a file is selected. To avoid this
+"                           comment the line autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+" t/T                 ->    Open in new tab
+" x/X                 ->    Horizontal split
+" v/V                 ->    Vertical split
+"
+"
+" CtrlP
+" ctrl + p            ->    Search for files in current working space
+" ctrl + v            ->    Open the file in vertical split
+" ctrl + x            ->    Open the file in horizontal split
+" ctrl + t            ->    Opens the file in new tab
+"
+" NERDTree
+" F2                  ->    Toggles NERDTree
+" v in NERDTree       ->    Vertical split window
+" x in NERDTree       ->    Horizontal split window
+" R in NERDTree       ->    Refresh the tree
+" t in a folder       ->    Changes the current directory to that one
+" t in a file         ->    Opens file in a new tab 
+" T in a file         ->    Opens file in a new tab (silent)
+" :ntsave <name>      ->    Save NERDTree directory
+" :ntload <name>      ->    Load NERDTree directory
+" :ntrm <name>        ->    Remove NERDTree directory
+"
+" Searching words
+" Type / and the word to search + ENTER. Then:
+"       n             ->    Following matches
+"       N             ->    Previous matches 
+"
+" Editing (Insert mode if nothing else is indicated)
+" ctrl + u            ->    Removes from cursor to the start of the line
+" u (normal mode)     ->    Undo changes
+" y/d (visual mode)   ->    Copy/Cut
+" p                   ->    Paste
+"
+" Windows and tabs handling (in general, shift is used for splits panes and ctrl for tabs)
+" shift + arrows (n)  ->    Move between tabs in same window
+" ctrl + up/down      ->    Move between tabs
+" ctrl + w            ->    Close current tab
+" ctrl + W and then T ->    Moves one split into a new tab
+" shift + x           ->    Temporary fulscreens a splited window
+" :vsplit             -     Creates a new vertical split with the same file
+" :split              -     Creates a new horizontal split with the same file
+"   Resizing splits windows (uses plugin):
+"   Ctrl + e          ->    Starts resizing mode
+"   Enter             ->    Exits mode
+"   e                 ->    Swap between different modes (resizing, focus and move)
+"   q                 ->    Cancel changes
+"   To move the window, press ctrl + e in the window to move and go to move window config. Then
+"   with the arrows you can easily move the window
+" 
+" VISUAL Mode
+" v
+" w                    ->   Highlight up to the next word
+" ctrl + row           ->   Highlight up to next space
+" vv                   ->   Resets the highlighted text (basically restart the visual mode)
+"
+" Pending:
+"     Edit this plugin https://github.com/kkoomen/vim-doge to be used
+"     | Find and replace | easy tool/Plugin
+"     Sync vimrc with github. Follow: https://github.com/igemnace/vim-config
+"        Ideas: Repo git that installs vim and copies the files to vimrc. It will also copy a script (update_vim_git) that will contain the root of the repo so that each time is executed, the repo is updated.

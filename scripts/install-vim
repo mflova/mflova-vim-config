@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+sudo apt-get install -y vim-nox
+sudo apt-get install -y exuberant-ctags
+sudo apt-get install -y silversearcher-ag
+
+cp -faTs "$PWD/cfg/plugins" "$HOME/.vim"
+cp "$PWD/cfg/.vimrc" "$HOME"
+
+sed -i 's/nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t/nnoremap <silent> <buffer> v  <C-w><CR><C-w>L/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
+sed -i 's/nnoremap <silent> <buffer> h  <C-W><CR><C-w>K/nnoremap <silent> <buffer> x  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
+sed -i 's/nnoremap <silent> <buffer> H  <C-W><CR><C-w>K/nnoremap <silent> <buffer> X  <C-W><CR><C-w>K/' $HOME/.vim/bundle/ag.vim/autoload/ag.vim
