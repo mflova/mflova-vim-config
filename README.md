@@ -1,6 +1,6 @@
 # mflova-vim-config
 
-Repository used to install and set up vim and my main configuration used. The idea is to have this repository wherever you want. When local files from the .vim folder are changed, a script will automatically update this repository so that you can push it in github.
+Repository used to install and set up vim and my main configuration used. The idea is not to modify anything from this repository. All changes can be made in .vim folder (including README.md and todo.txt). When local files from the .vim folder are changed, the script /update_vim_repo from .vim will automatically update this repository so that you can push it to github.
 
 ## Installation
 
