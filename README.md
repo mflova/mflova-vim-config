@@ -29,6 +29,7 @@ Main use
 |  :vsave name | Save a session with all splits and NERDTree  |
 |  :vload name | Load sessions  |
 |  u | Undo changes  |
+| . | Repeat last action performed in vim|
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
 |   ctrl + k| Switch between source and header files  |
