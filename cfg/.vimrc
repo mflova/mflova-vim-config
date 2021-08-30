@@ -34,6 +34,7 @@ call vundle#begin()
   Plugin 'rking/ag.vim'
   Plugin 'RRethy/vim-illuminate'
   Plugin 'gcmt/wildfire.vim'
+  Plugin 'miyakogi/conoline.vim'
 call vundle#end()
 
 " Set CtrlP to ignore specific extensions
@@ -46,6 +47,9 @@ set smartcase
 " Set colortheme
 syntax on
 colorscheme molokai
+
+" Highlights the current line of the cursor
+let g:conoline_auto_enable = 1
 
 " Change between tabs
 nnoremap <C-Down> :tabprevious<CR>
@@ -68,7 +72,8 @@ set statusline+=%=%l:%c
 set mouse=a
 set number
 set autoindent
-
+" Highlights the word while being written in /
+set incsearch
 
 " Close tabs with Ctrl + w
 nnoremap <silent> <C-w> :tabclose<CR> 
@@ -95,6 +100,9 @@ let NERDTreeMapOpenSplit='x'
 
 " Set directory of Ctrl + P
 let g:ctrlp_cmd='CtrlP :pwd'
+
+" Insert space and go to insert mode
+nnoremap space i<space>
 
 " Easier commands definition
 cmap ntsave NERDTreeProjectSave

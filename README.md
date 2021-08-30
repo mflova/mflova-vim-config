@@ -38,16 +38,21 @@ Main use
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
 |*/# | When the cursor is on a word, it will jump to next (or previous) matching word|
-| f/F/t/T -> char -> (;) | Jumps to the next (or previous) one char that matches. Press ; to continue with more matches|
+| f/F/t/T -> char -> (;) | Jumps to the next (or previous) one char that matches. This will be recorded. You can press ; at any time to continue with more matches. T comes from "till" and f from "find"|
 | (number)dd | Removes the following (number) lines. 1 if not specified |
 | c/d -> t/T/f/F -> char | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
 |H/M/L| Moves the cursosr to the highest, middle or lower part of the screen|
 | Shift + D/C | Removes from cursor to right. D will also enter into insert mode|
 |:number| Jump to that line|
 | % over parenthesis | Will jump to the other corresponding parenthesis. It can be combined with commands such as c% to remove everything contained between brackets/parenthesis|
-
-
-
+| I/A | Enters insert mode at the beggining/end of the line|
+| Space | Insert space and go to insert mode|
+| x/s | Delete char. s will also go into insert mode |
+| dw/dW/cw/cW | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
+| daw/caw | Removes the entire word|
+|>> or <<| Shifts the line while being in normal mode|  
+| 0 | Move to the start of the line|
+| b or w| Moves backwards/forwards a word. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
 
 
 Highlighting and copy/pasting
@@ -58,6 +63,7 @@ Highlighting and copy/pasting
 | Ctrl + Arrows | Highlights up to next space  |
 | vv  | Resets highlighted text  |
 | y  | Copy  |
+| yy | Copy line. p will paste it below|
 | d  | Cut  |
 |  u | Undo changes  |
 | p/P  | Paste  |
