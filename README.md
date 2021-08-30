@@ -35,6 +35,19 @@ Main use
 |  F3 | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
 |   ctrl + u/d| Moves the cursor half the screen  |
+|o/O | Inserts a new line below and above and enters into insert mode |
+|*/# | When the cursor is on a word, it will jump to next (or previous) matching word|
+| f/F/t/T -> char -> (;) | Jumps to the next (or previous) one char that matches. Press ; to continue with more matches|
+| (number)dd | Removes the following (number) lines. 1 if not specified |
+| c/d -> t/T/f/F -> char | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
+|H/M/L| Moves the cursosr to the highest, middle or lower part of the screen|
+| Shift + D/C | Removes from cursor to right. D will also enter into insert mode|
+|:number| Jump to that line|
+| % over parenthesis | Will jump to the other corresponding parenthesis. It can be combined with commands such as c% to remove everything contained between brackets/parenthesis|
+
+
+
+
 
 Highlighting and copy/pasting
 | Command/Shortcut  | Description |

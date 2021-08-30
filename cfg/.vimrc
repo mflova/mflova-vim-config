@@ -105,9 +105,8 @@ cmap vload OpenSession
 cmap vgrep Ag
 cmap ag Ag
 
-
+"Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
-
 
 " Move between tabs in same window
 " Left
