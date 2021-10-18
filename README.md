@@ -38,7 +38,7 @@ Main use
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
 |*/# | When the cursor is on a word, it will jump to next (or previous) matching word|
-| f/F/t/T -> char -> (;) | Jumps to the next (or previous) one char that matches. This will be recorded. You can press ; at any time to continue with more matches. T comes from "till" and f from "find"|
+| f/F/t/T -> char -> (, or ;) | Jumps to the next (or previous) one char that matches. This will be recorded. You can press , or ; at any time to continue with previous and next matches. T comes from "till" and f from "find"|
 | (number)dd | Removes the following (number) lines. 1 if not specified |
 | c/d -> t/T/f/F -> char | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
 |H/M/L| Moves the cursosr to the highest, middle or lower part of the screen|
@@ -47,13 +47,22 @@ Main use
 | % over parenthesis | Will jump to the other corresponding parenthesis. It can be combined with commands such as c% to remove everything contained between brackets/parenthesis|
 | I/A | Enters insert mode at the beggining/end of the line|
 | Space | Insert space and go to insert mode|
-| x/s | Delete char. s will also go into insert mode |
+| x/s | Delete char. s will also go into insert mode after writing a character|
 | dw/dW/cw/cW | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
 | daw/caw | Removes the entire word|
 |>> or <<| Shifts the line while being in normal mode|  
 | 0 | Move to the start of the line|
-| b or w| Moves backwards/forwards a word. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
+| b or w| Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
+| e | Jump between the end of next words|
+| dgg/D | Remove from the cursor to the beginning/end of the line|
 
+Find and replace
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| :s/foo/bar/  | Changes foo by bar (first occurence) |
+| :s/foo/bar/g  | Changes foo by bar (entire line) |
+| :%s/foo/bar/g  | Changes foo by bar (all file) |
+| :%s/foo/bar/gc  | Changes foo by bar (all file. Confirmation prompt) |
 
 Highlighting and copy/pasting
 | Command/Shortcut  | Description |
@@ -76,7 +85,8 @@ Highlighting and copy/pasting
 | ------------- | ------------- |
 | Shift + Arrows  | Moves between split panes  |
 | Ctrl + Up/Down  | Moves between tabs  |
-| Ctrl + w  | Close current tab  |
+| Ctrl + W | Close current tab  |
+| Shift + W | Close current split pane|
 | Shift + x  | Temporary fulscreens a split pane  |
 | :vsplit  | Creates a new vertical split with the same file  |
 | :split  | Creates a new horizontal split with the same file  |
@@ -119,7 +129,7 @@ Search for strings in a file
 Search for strings in files
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| :vgrep or :ag name  | Enters visual mode  |
+| :vgrep or :Ag name  | Enters visual mode  |
 | Enter  | Opens file where the cursor is*  |
 | t  | Opens file in new tab  |
 | x  | Opens file in horizontal split  |

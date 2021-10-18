@@ -37,8 +37,9 @@ call vundle#begin()
   Plugin 'miyakogi/conoline.vim'
 call vundle#end()
 
+
 " Set CtrlP to ignore specific extensions
-set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o
+set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o,*/.pyc/* 
 
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
@@ -69,13 +70,16 @@ set statusline+=%*
 " show line#:column# on the right hand side
 set statusline+=%=%l:%c
 
+" Set tab to be 4 spaces
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 set mouse=a
 set number
 set autoindent
 " Highlights the word while being written in /
 set incsearch
 
-" Close tabs with Ctrl + w
+" Close tabs with Ctrl + w 
 nnoremap <silent> <C-w> :tabclose<CR> 
 nnoremap <silent> <S-w> :q<CR>
 
@@ -111,7 +115,6 @@ cmap ntrm NERDTreeProjectRm
 cmap vsave SaveSession
 cmap vload OpenSession
 cmap vgrep Ag
-cmap ag Ag
 
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'

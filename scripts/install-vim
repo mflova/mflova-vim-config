@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-
 sudo apt-get install -y vim-nox
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y silversearcher-ag
+sudo apt install -y golang
+sudo apt install -y mono-complete
+sudo apt install -y nodejs
+sudo apt install -y default-jdk
+
+pip install doq
+pip3 install doq
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp "$PWD/cfg/.vimrc" "$HOME"
@@ -18,4 +24,9 @@ sed -i 's/nnoremap <silent> <buffer> H  <C-W><CR><C-w>K/nnoremap <silent> <buffe
 
 cp "$PWD/scripts/update_vim_repo" "$HOME/.vim"
 sed -i 's,VIM_CONFIG_REPO,'"$PWD"',' $HOME/.vim/update_vim_repo
+
+cd ~/.vim/bundle/YouCompleteMe
+python3 install.py --all
+cd ~
+
 echo "Installation finished"
