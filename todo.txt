@@ -1,4 +1,3 @@
 Pending:
  - Edit this plugin https://github.com/kkoomen/vim-doge to be used
  - "Find and replace" easy tool/Plugin
- - Autocomplete function (YCM plugin)

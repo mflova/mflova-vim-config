@@ -31,12 +31,14 @@ call vundle#begin()
   Plugin 'xolox/vim-misc'
   Plugin 'xolox/vim-session'
   Plugin 'ericcurtin/CurtineIncSw.vim'
-  Plugin 'rking/ag.vim'
+  Plugin 'mflova/ag.vim'
   Plugin 'RRethy/vim-illuminate'
   Plugin 'gcmt/wildfire.vim'
   Plugin 'miyakogi/conoline.vim'
+  Plugin 'ycm-core/YouCompleteMe'
+  Plugin 'nvie/vim-flake8'
+  Plugin 'mflova/vim-easycomment' 
 call vundle#end()
-
 
 " Set CtrlP to ignore specific extensions
 set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o,*/.pyc/* 
@@ -73,7 +75,7 @@ set statusline+=%=%l:%c
 " Set tab to be 4 spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
-set mouse=a
+set mouse-=a
 set number
 set autoindent
 " Highlights the word while being written in /
@@ -104,6 +106,10 @@ let NERDTreeMapOpenSplit='x'
 
 " Set directory of Ctrl + P
 let g:ctrlp_cmd='CtrlP :pwd'
+" When disabled, CtrlP won't visualize cache
+" Which means that if a new file is created
+" it will appear instantly
+let g:ctrlp_use_caching=0
 
 " Insert space and go to insert mode
 nnoremap space i<space>
@@ -147,7 +153,40 @@ let g:NERDTreeChDirMode = 2
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
+" Limit maximumg of line: gqap in normal mode
+highlight ColorColumn ctermbg=233
+set colorcolumn=90 textwidth=90
+
 " Jump between TODOs
 " TODO
 
+" Enable/Disable autocomplete (YCM Based)
+let g:loaded_youcompleteme = 0
+
+""" Flake8 
+" Autodetects python files to run flake8
+" Runs Flake8 and maps it in F4
+if !empty(glob("~/.vim/bundle/vim-flake8/ftplugin/python_flake8.vim"))
+    source ~/.vim/bundle/vim-flake8/ftplugin/python_flake8.vim
+endif
+" Display the markers in the file
+let g:flake8_show_in_file=1  " show
+autocmd FileType python map <buffer> <F4> :call flake8#Flake8()<CR>
+autocmd BufNewFile,BufRead *.py set ft=python
+" This searches for the .flake8 to be loaded.
+" It will start in the current path and it will go back in folders n_folders times
+let flake8_string = ".flake8"
+let n_folders = 7
+let counter = 0
+while counter <= n_folders
+  if !empty(glob(flake8_string))
+    let g:flake8_cmd=flake8_string
+  endif
+  let flake8_string = "../" . flake8_string
+  let counter += 1
+endwhile
+
+
+vmap <silent> <C-x> :call ToggleCommentVisual()<CR>
+nmap <silent> <C-x> :call ToggleCommentLine()<CR>
 

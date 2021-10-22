@@ -55,6 +55,7 @@ Main use
 | b or w| Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
 | e | Jump between the end of next words|
 | dgg/D | Remove from the cursor to the beginning/end of the line|
+| gqap | In normal mode, it break long lines|
 
 Find and replace
 | Command/Shortcut  | Description |
@@ -144,6 +145,13 @@ Search for files
 | v | Open the file in vertical split   |
 | x |  Open the file in horizontal split  |
 | t |  Open the file in new tab  |
+
+### Misc
+Misc 
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| F4 | Runs flake8 |
+| ctrl+x | Comment line/block in Python|
 
 
 
