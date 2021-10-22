@@ -49,7 +49,8 @@ Main use
 | Space | Insert space and go to insert mode|
 | x/s | Delete char. s will also go into insert mode after writing a character|
 | dw/dW/cw/cW | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
-| daw/caw | Removes the entire word|
+| daw/caw | Removes the entire word, including prev character|
+| de/ce | Removes the entire word (Better use this ones)|
 |>> or <<| Shifts the line while being in normal mode|  
 | 0 | Move to the start of the line|
 | b or w| Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
@@ -64,6 +65,7 @@ Find and replace
 | :s/foo/bar/g  | Changes foo by bar (entire line) |
 | :%s/foo/bar/g  | Changes foo by bar (all file) |
 | :%s/foo/bar/gc  | Changes foo by bar (all file. Confirmation prompt) |
+| Se | (Plugin) Removes the word with se and write new one. Press . to replace following matches |
 
 Highlighting and copy/pasting
 | Command/Shortcut  | Description |

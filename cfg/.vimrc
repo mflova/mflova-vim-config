@@ -38,6 +38,7 @@ call vundle#begin()
   Plugin 'ycm-core/YouCompleteMe'
   Plugin 'nvie/vim-flake8'
   Plugin 'mflova/vim-easycomment' 
+  Plugin 'hauleth/sad.vim'
 call vundle#end()
 
 " Set CtrlP to ignore specific extensions
@@ -189,4 +190,9 @@ endwhile
 
 vmap <silent> <C-x> :call ToggleCommentVisual()<CR>
 nmap <silent> <C-x> :call ToggleCommentLine()<CR>
+
+
+" Normal mode
+nmap S <Plug>(sad-change-forward)
+xmap S <Plug>(sad-change-forward)
 
