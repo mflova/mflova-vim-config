@@ -10,39 +10,44 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
-  Plugin 'flazz/vim-colorschemes'
-  Plugin 'preservim/nerdtree'
-  Plugin 'xuyuanp/nerdtree-git-plugin'
-  Plugin 'scrooloose/nerdtree-project-plugin'
-  Plugin 'PhilRunninger/nerdtree-visual-selection'
-  Plugin 'octol/vim-cpp-enhanced-highlight'
-  Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'itchyny/lightline.vim'  
-  Plugin 'simeji/winresizer'
-  Plugin 'vim-scripts/ZoomWin'
-  Plugin 'LucHermitte/lh-vim-lib'
-  Plugin 'LucHermitte/alternate-lite'
-  Plugin 'kkoomen/vim-doge'
-  Plugin 'yegappan/taglist'
-  Plugin 'google/vim-searchindex'
-  Plugin 'xolox/vim-misc'
-  Plugin 'xolox/vim-session'
-  Plugin 'ericcurtin/CurtineIncSw.vim'
-  Plugin 'mflova/ag.vim'
-  Plugin 'RRethy/vim-illuminate'
-  Plugin 'gcmt/wildfire.vim'
-  Plugin 'miyakogi/conoline.vim'
-  Plugin 'ycm-core/YouCompleteMe'
-  Plugin 'nvie/vim-flake8'
-  Plugin 'mflova/vim-easycomment' 
-  Plugin 'hauleth/sad.vim'
+  Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
+  Plugin 'preservim/nerdtree' " NerdTree stuff
+  Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
+  Plugin 'scrooloose/nerdtree-project-plugin' " NerdTree stuff
+  Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
+  Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
+  Plugin 'ctrlpvim/ctrlp.vim' " Search for files by its name
+  Plugin 'itchyny/lightline.vim' " Coloourfil info at the bottom of file edited
+  Plugin 'simeji/winresizer' " Resize and move window splits
+  Plugin 'vim-scripts/ZoomWin' " Zoom a window pane
+  Plugin 'LucHermitte/lh-vim-lib' " ??
+  Plugin 'LucHermitte/alternate-lite' " ??
+  Plugin 'kkoomen/vim-doge' " Document files and jump between TODOs
+  Plugin 'yegappan/taglist' " DIsplay taglist of the current file (classes, variables...)
+  Plugin 'google/vim-searchindex' " Display more info when searching a word/pattern
+  Plugin 'xolox/vim-misc' " Needed for vim-session
+  Plugin 'xolox/vim-session' " Save VIM sessions
+  Plugin 'ericcurtin/CurtineIncSw.vim' " Toggle between source and header files
+  Plugin 'mflova/ag.vim' " Search file by string
+  Plugin 'RRethy/vim-illuminate' " Illuminates al words selected by the cursor
+  Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
+  Plugin 'miyakogi/conoline.vim' " Highlights the line of the cursor
+  Plugin 'ycm-core/YouCompleteMe' " YCM Plugin to autocomplete and syntaxis check
+  Plugin 'nvie/vim-flake8' " Flake 8 Plugin
+  Plugin 'mflova/vim-easycomment' " Plugin to comment lines
+  Plugin 'hauleth/sad.vim' " Plugin to easily replace words
+  Plugin 'hienvd/vim-stackoverflow' " Search in Stack Overflow
+  Plugin 'airblade/vim-gitgutter' " Performs git diffs
+  Plugin 'andymass/vim-matchup' " Matching brackets and improved use of %
 call vundle#end()
 
 " Set CtrlP to ignore specific extensions
 set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o,*/.pyc/* 
+
+" Updates vim each 100ms instead of 4000ms (default value)
+set updatetime=100
 
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
@@ -76,9 +81,15 @@ set statusline+=%=%l:%c
 " Set tab to be 4 spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
+" Use mouse to copy-paste
 set mouse-=a
+
+" Numbers in line VIM
 set number
+
+" Autoindent
 set autoindent
+
 " Highlights the word while being written in /
 set incsearch
 
@@ -107,8 +118,7 @@ let NERDTreeMapOpenSplit='x'
 
 " Set directory of Ctrl + P
 let g:ctrlp_cmd='CtrlP :pwd'
-" When disabled, CtrlP won't visualize cache
-" Which means that if a new file is created
+" When disabled, CtrlP won't visualize cache Which means that if a new file is created
 " it will appear instantly
 let g:ctrlp_use_caching=0
 
@@ -128,7 +138,7 @@ let g:session_autosave = 'no'
 
 " Move between tabs in same window
 " Left
-nnoremap <S-Left> <C-W>h 
+nnoremap <S-Left> <C-W>h
 " Bottom
 nnoremap <S-Down> <C-W>j
 " Top
@@ -138,7 +148,6 @@ nnoremap <S-Right> <C-W>l
 
 " Temporary makes a window full screen (uses plugin)
 map <S-x> <c-w>o
-
 
 " Resize windows (uses a plugin)"
 let g:winresizer_keycode_up = "\<UP>"
@@ -158,9 +167,6 @@ autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 highlight ColorColumn ctermbg=233
 set colorcolumn=90 textwidth=90
 
-" Jump between TODOs
-" TODO
-
 " Enable/Disable autocomplete (YCM Based)
 let g:loaded_youcompleteme = 0
 
@@ -172,27 +178,21 @@ if !empty(glob("~/.vim/bundle/vim-flake8/ftplugin/python_flake8.vim"))
 endif
 " Display the markers in the file
 let g:flake8_show_in_file=1  " show
+" Mapping the key to F4
 autocmd FileType python map <buffer> <F4> :call flake8#Flake8()<CR>
+" Only works with Python
 autocmd BufNewFile,BufRead *.py set ft=python
-" This searches for the .flake8 to be loaded.
-" It will start in the current path and it will go back in folders n_folders times
-let flake8_string = ".flake8"
-let n_folders = 7
-let counter = 0
-while counter <= n_folders
-  if !empty(glob(flake8_string))
-    let g:flake8_cmd=flake8_string
-  endif
-  let flake8_string = "../" . flake8_string
-  let counter += 1
-endwhile
 
+" vim airline (status bar) also available with one window split 
+set laststatus=2
 
+" Commenting line(s) with these two lines
 vmap <silent> <C-x> :call ToggleCommentVisual()<CR>
 nmap <silent> <C-x> :call ToggleCommentLine()<CR>
 
-
-" Normal mode
+" Replace mode
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
 
+" Jump between TODOs
+" TODO

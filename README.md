@@ -153,10 +153,8 @@ Misc
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
 | F4 | Runs flake8 |
+| :SO write here the issue | Search the issue in stack overflow |
 | ctrl+x | Comment line/block in Python|
-
-
-
 
 ## Notes           
 
