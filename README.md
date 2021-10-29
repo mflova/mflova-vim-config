@@ -40,10 +40,12 @@ Main use
 |*/# | When the cursor is on a word, it will jump to next (or previous) matching word|
 | f/F/t/T -> char -> (, or ;) | Jumps to the next (or previous) one char that matches. This will be recorded. You can press , or ; at any time to continue with previous and next matches. T comes from "till" and f from "find"|
 | (number)dd | Removes the following (number) lines. 1 if not specified |
+| :(number)d | Removes the specified line|
 | c/d -> t/T/f/F -> char | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
-|H/M/L| Moves the cursosr to the highest, middle or lower part of the screen|
+|H/M/L| Moves the cursosr to the highest, midle or lower part of the screen|
 | Shift + D/C | Removes from cursor to right. D will also enter into insert mode|
 |:number| Jump to that line|
+|:numberd| Remove that line |
 | % over parenthesis | Will jump to the other corresponding parenthesis. It can be combined with commands such as c% to remove everything contained between brackets/parenthesis|
 | I/A | Enters insert mode at the beggining/end of the line|
 | Space | Insert space and go to insert mode|
@@ -55,7 +57,7 @@ Main use
 | 0 | Move to the start of the line|
 | b or w| Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
 | e | Jump between the end of next words|
-| dgg/D | Remove from the cursor to the beginning/end of the line|
+| dgg/D/d$ | Remove from the cursor to the beginning/end of the line|
 | gqap | In normal mode, it break long lines|
 
 Find and replace
@@ -79,6 +81,7 @@ Highlighting and copy/pasting
 | d  | Cut  |
 |  u | Undo changes  |
 | p/P  | Paste  |
+| :pu  | Paste in new line  |
 | Enter (normal mode)  | Selects everything between two brackets. Multiple enters will select more  |
 
 
@@ -154,7 +157,12 @@ Misc
 | ------------- | ------------- |
 | F4 | Runs flake8 |
 | :SO write here the issue | Search the issue in stack overflow |
-| ctrl+x | Comment line/block in Python|
+| :Google write here the issue | Search the issue in google|
+| :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
+| Leader c | Comment line/block in Python|
+| ctrl+p (Inser mode) | Autocomplete the word based on the document |
+| :dcs or :Dosctring | Generates docstring for a given Python function or class|
+| Leader -> arrow up/down | Inserts a print statement above or below with the variable chosen by the cursor|
 
 ## Notes           
 

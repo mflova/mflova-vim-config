@@ -1,6 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" Maps the leader key
+let mapleader = " "
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -41,10 +44,21 @@ call vundle#begin()
   Plugin 'hienvd/vim-stackoverflow' " Search in Stack Overflow
   Plugin 'airblade/vim-gitgutter' " Performs git diffs
   Plugin 'andymass/vim-matchup' " Matching brackets and improved use of %
+  Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
+  Plugin 'mflova/vim-printer' " Print debugging variables easily
+  Plugin 'szw/vim-g' " Google searches
 call vundle#end()
 
+" Set up docstrin
+let g:python_style = 'rest'
+" dcs (from docstring) will generate documentation
+cmap dcs Docstring
+
+cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
+
 " Set CtrlP to ignore specific extensions
-set wildignore+=*/.git/*,*/.dir/*,*/.make/*,*/.o/*,*/.cmake,*/.cpp.o,*/.pyc/* 
+let g:ctrlp_custom_ignore = '\.pyc$\|\.cpp.o$\|\.dat$\|\.git$\|\.dir$\|__init__.py$'
+
 
 " Updates vim each 100ms instead of 4000ms (default value)
 set updatetime=100
@@ -165,10 +179,10 @@ autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Limit maximumg of line: gqap in normal mode
 highlight ColorColumn ctermbg=233
-set colorcolumn=90 textwidth=90
+" set colorcolumn=90 textwidth=90
 
 " Enable/Disable autocomplete (YCM Based)
-let g:loaded_youcompleteme = 0
+let g:loaded_youcompleteme = 1 
 
 """ Flake8 
 " Autodetects python files to run flake8
@@ -187,12 +201,14 @@ autocmd BufNewFile,BufRead *.py set ft=python
 set laststatus=2
 
 " Commenting line(s) with these two lines
-vmap <silent> <C-x> :call ToggleCommentVisual()<CR>
-nmap <silent> <C-x> :call ToggleCommentLine()<CR>
+vmap <silent> <Leader>c :call ToggleCommentVisual()<CR>
+nmap <silent> <Leader>c :call ToggleCommentLine()<CR>
 
 " Replace mode
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
+
+
 
 " Jump between TODOs
 " TODO
