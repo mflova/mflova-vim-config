@@ -18,7 +18,7 @@ call vundle#begin()
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
   Plugin 'preservim/nerdtree' " NerdTree stuff
   Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
-  Plugin 'scrooloose/nerdtree-project-plugin' " NerdTree stuff
+"  Plugin 'scrooloose/nerdtree-project-plugin' " NerdTree stuff
   Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
   Plugin 'ctrlpvim/ctrlp.vim' " Search for files by its name
@@ -47,6 +47,7 @@ call vundle#begin()
   Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
+  Plugin 'puremourning/vimspector' " Debugger
 call vundle#end()
 
 " Set up docstrin
@@ -103,6 +104,9 @@ set number
 
 " Autoindent
 set autoindent
+
+" Maps the delete key in the normal way
+set backspace=indent,eol,start
 
 " Highlights the word while being written in /
 set incsearch
@@ -208,7 +212,6 @@ nmap <silent> <Leader>c :call ToggleCommentLine()<CR>
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
 
-
-
 " Jump between TODOs
 " TODO
+
