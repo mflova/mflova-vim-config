@@ -47,7 +47,9 @@ call vundle#begin()
   Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
-  Plugin 'puremourning/vimspector' " Debugger
+  Plugin 'mflova/vimspector' " Debugger
+  Plugin 'easymotion/vim-easymotion' " Improved motion for vim
+  Plugin 'tpope/vim-fugitive' " GIT commands in VIM
 call vundle#end()
 
 " Set up docstrin
@@ -113,7 +115,6 @@ set incsearch
 
 " Close tabs with Ctrl + w 
 nnoremap <silent> <C-w> :tabclose<CR> 
-nnoremap <silent> <S-w> :q<CR>
 
 " Toggle and untoggle NERDTree and TagList
 nmap <F2> :NERDTreeToggle<CR>
@@ -153,6 +154,7 @@ cmap vgrep Ag
 
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 " Move between tabs in same window
 " Left
@@ -215,3 +217,21 @@ xmap S <Plug>(sad-change-forward)
 " Jump between TODOs
 " TODO
 
+" Easy motion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" One char
+map <Leader>. <Plug>(easymotion-repeat)
+map <Leader>f <Plug>(easymotion-bd-f)
+map <Leader>F <Plug>(easymotion-overwin-f)
+map <Leader>e <Plug>(easymotion-bd-e)
+map <Leader>j <Plug>(easymotion-overwin-line)
+map <Leader>k <Plug>(easymotion-overwin-line)
+map <Leader>w <Plug>(easymotion-bd-w)
+map <Leader>W <Plug>(easymotion-overwin-w)
+
+" Two char
+map <Leader><Leader>f <Plug>(easymotion-bd-f2)
+map <Leader><Leader>F <Plug>(easymotion-overwin-f2)
+
+" Introduces Git diff from fugitive
+map <Leader>g :Gvdiffsplit<CR>

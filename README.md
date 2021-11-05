@@ -91,7 +91,7 @@ Highlighting and copy/pasting
 | ------------- | ------------- |
 | Shift + Arrows  | Moves between split panes  |
 | Ctrl + Up/Down  | Moves between tabs  |
-| Ctrl + W | Close current tab  |
+| :q | Close current tab  |
 | Shift + W | Close current split pane|
 | Shift + x  | Temporary fulscreens a split pane  |
 | :vsplit  | Creates a new vertical split with the same file  |
@@ -162,7 +162,20 @@ Misc
 | Leader c | Comment line/block in Python|
 | ctrl+p (Inser mode) | Autocomplete the word based on the document |
 | :dcs or :Dosctring | Generates docstring for a given Python function or class|
-| Leader -> arrow up/down | Inserts a print statement above or below with the variable chosen by the cursor|
+| Leader -> p/P| Inserts a print statement above or below with the variable chosen by the cursor|
+| :terminal | Runs a terminal in VIM|
+| Leader g | Performs git diff on that file. By quitting it will return to the same file|
+
+Vim-easy-motion
+
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| <Leader>f | Displays how to jump to the start of a word|
+| <Leader>e | Displays how to jump to the end of a word|
+| <Leader><Leader>f | Displays how to jump to the two indicated keys |
+| <Leader>w | Displays how to jump to the start of every single word, including all splits|
+| <Leader>. | Repeat last vim-easy-motion command|
+| <Leader>j or k| Jump to specified line|
 
 ## Notes           
 
