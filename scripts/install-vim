@@ -9,19 +9,15 @@ pip install flake8
 pip install doq
 pip3 install doq
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-cp "$PWD/cfg/.vimrc" "$HOME"
-
-cp "$PWD/README.md" "$HOME/.vim"
-cp "$PWD/todo.txt" "$HOME/.vim"
+#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "Open VIM, ignore the errors and execute :PluginInstall"
-
-cp "$PWD/scripts/update_vim_repo" "$HOME/.vim"
-sed -i 's,VIM_CONFIG_REPO,'"$PWD"',' $HOME/.vim/update_vim_repo
 
 cd ~/.vim/bundle/YouCompleteMe
 python3 install.py --all
 cd ~
+
+echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
+echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/.vimrc'" >> ~/.bashrc
 
 echo "Installation finished, Just call :PluginInstall in VIM and restart it"

@@ -47,7 +47,7 @@ call vundle#begin()
   Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
-  Plugin 'mflova/vimspector' " Debugger
+  " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2
   Plugin 'easymotion/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
 call vundle#end()

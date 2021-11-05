@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# Updates vimrc
-cp "$HOME/.vimrc" "VIM_CONFIG_REPO/cfg"
-# Updates README.md
-cp "$HOME/.vim/README.md" "VIM_CONFIG_REPO"
-# Updates todo.txt 
-cp "$HOME/.vim/todo.txt" "VIM_CONFIG_REPO"
-
