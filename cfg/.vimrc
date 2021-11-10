@@ -18,10 +18,9 @@ call vundle#begin()
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
   Plugin 'preservim/nerdtree' " NerdTree stuff
   Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
-"  Plugin 'scrooloose/nerdtree-project-plugin' " NerdTree stuff
   Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
-  Plugin 'ctrlpvim/ctrlp.vim' " Search for files by its name
+"  Plugin 'ctrlpvim/ctrlp.vim' " Search for files by its name. BETTER THE FZF
   Plugin 'itchyny/lightline.vim' " Coloourfil info at the bottom of file edited
   Plugin 'simeji/winresizer' " Resize and move window splits
   Plugin 'vim-scripts/ZoomWin' " Zoom a window pane
@@ -33,7 +32,7 @@ call vundle#begin()
   Plugin 'xolox/vim-misc' " Needed for vim-session
   Plugin 'xolox/vim-session' " Save VIM sessions
   Plugin 'ericcurtin/CurtineIncSw.vim' " Toggle between source and header files
-  Plugin 'mflova/ag.vim' " Search file by string
+  Plugin 'ggreer/the_silver_searcher'
   Plugin 'RRethy/vim-illuminate' " Illuminates al words selected by the cursor
   Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
   Plugin 'miyakogi/conoline.vim' " Highlights the line of the cursor
@@ -50,6 +49,8 @@ call vundle#begin()
   " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2
   Plugin 'easymotion/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
+  Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plugin 'junegunn/fzf.vim'
 call vundle#end()
 
 " Set up docstrin
@@ -84,7 +85,6 @@ nnoremap <C-Up> :tabnext<CR>
 "Auto reload files
 set autoread 
 au CursorHold * checktime 
-
 
 " [buffer number] followed by filename:
 set statusline=[%n]\ %t
@@ -152,6 +152,13 @@ cmap vsave SaveSession
 cmap vload OpenSession
 cmap vgrep Ag
 
+" Fzf remaps
+nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-g> :Ag<Cr>
+" Set how the window appears in the FZF command
+let g:fzf_layout = { 'down': '~30%' }
+
+
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
@@ -167,7 +174,7 @@ nnoremap <S-Up> <C-W>k
 nnoremap <S-Right> <C-W>l
 
 " Temporary makes a window full screen (uses plugin)
-map <S-x> <c-w>o
+nnoremap <S-x> <c-w>o
 
 " Resize windows (uses a plugin)"
 let g:winresizer_keycode_up = "\<UP>"

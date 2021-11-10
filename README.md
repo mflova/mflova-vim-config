@@ -115,9 +115,6 @@ Resizing and moving split planes
 | T in file  | Opens a file in new tab (silent)  |
 | r/R  | Refresh node and root node  |
 | t in a folder  | Changes current dir to that one  |
-| :ntsave name | Save NERDTree directory  |
-| :ntload name  | Load NERDTree directory  |
-| :ntrm name  | Remove NERDTree directory  |
 
 
 ### Searching
@@ -128,24 +125,14 @@ Search for strings in a file
 | /word + enter  | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
 | /word + enter + n/N  | Previous and next matches  |
 
-Search for strings in files
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| :vgrep or :Ag name  | Enters visual mode  |
-| Enter  | Opens file where the cursor is*  |
-| t  | Opens file in new tab  |
-| x  | Opens file in horizontal split  |
-| v  | Opens file in vertical split  |
-
-*By default, the window search will be closed. If you want to change this, comment the line `autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>` in the vimrc.
-
 Search for files
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| Ctrl + p | Search for file in the NERDTree directory   |
-| v | Open the file in vertical split   |
-| x |  Open the file in horizontal split  |
-| t |  Open the file in new tab  |
+| Ctrl + p | Search for file in the current directory|
+| Ctrl + g | Search for a file in the current directory given a string|
+| Ctrl + v | Open the file in vertical split   |
+| Ctrl + x |  Open the file in horizontal split  |
+| Ctrl + t |  Open the file in new tab  |
 
 ### Misc
 Misc 
