@@ -55,6 +55,10 @@ Main use
 | e | Jump between the end of next words|
 | dgg/D/d$ | Remove from the cursor to the beginning/end of the line|
 | gqap | In normal mode, it break long lines|
+| ctrl + d | Autocomplete command line|
+| ctrl + d (Insert mode) | Delete word under cursor in inser mode|
+| ctrl + v (Insert mode) | Paste a yanked work in insert mode|
+| v/x (Quickfix/location window)| Opens the file in vertical/horizontal split |
 
 Find and replace
 | Command/Shortcut  | Description |
@@ -87,7 +91,7 @@ Highlighting and copy/pasting
 | ------------- | ------------- |
 | Shift + Arrows  | Moves between split panes  |
 | Ctrl + Up/Down  | Moves between tabs  |
-| :q | Close current tab  |
+| :tclose | Close current tab|
 | Shift + W | Close current split pane|
 | Shift + x  | Temporary fulscreens a split pane  |
 | :vsplit  | Creates a new vertical split with the same file  |
@@ -128,8 +132,9 @@ Search for strings in a file
 Search for files
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| Ctrl + p | Search for file in the current directory|
+| Ctrl + b | Search for a file in the current buffer (opened files)|
 | Ctrl + g | Search for a file in the current directory given a string|
+| Ctrl + p | Search for file name in the current directory. Use <Tab> to select more than one file|
 | Ctrl + v | Open the file in vertical split   |
 | Ctrl + x |  Open the file in horizontal split  |
 | Ctrl + t |  Open the file in new tab  |
@@ -149,13 +154,28 @@ Misc
 | :terminal | Runs a terminal in VIM|
 | Leader g | Performs git diff on that file. By quitting it will return to the same file|
 
+Vim-fugitive or git integration
+Note: g stands for git
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| <Leader>gf | Git diff of the current file wrt the previous commit|
+| <Leader>gd | Git diff of the current file wrt the develop branch |
+| <Leader>gm | Git diff of the current file wrt the master branch|
+| <Leader>gt | Function to toggle/untoggle the folds found in the code|
+| <Leader>gh | Check history of changes for the current file (previous commits)|
+| <Leader>gH | Check history of changes for the current function (previous commits)|
+
+CTags: Jumping from file to file to look for function definitions
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| <Leader>td | use Tags to jump to Definition of a function. Opened in vertical split|
+
 Vim-easy-motion
 
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
 | <Leader>f | Displays how to jump to the start of a word|
 | <Leader>e | Displays how to jump to the end of a word|
-| <Leader><Leader>f | Displays how to jump to the two indicated keys |
 | <Leader>w | Displays how to jump to the start of every single word, including all splits|
 | <Leader>. | Repeat last vim-easy-motion command|
 | <Leader>j or k| Jump to specified line|

@@ -47,7 +47,7 @@ call vundle#begin()
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
   " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2
-  Plugin 'easymotion/vim-easymotion' " Improved motion for vim
+  Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plugin 'junegunn/fzf.vim'
@@ -79,8 +79,8 @@ colorscheme molokai
 let g:conoline_auto_enable = 1
 
 " Change between tabs
-nnoremap <C-Down> :tabprevious<CR>
-nnoremap <C-Up> :tabnext<CR>
+nnoremap <silent><C-Down> :tabprevious<CR>
+nnoremap <silent><C-Up> :tabnext<CR>
 
 "Auto reload files
 set autoread 
@@ -114,7 +114,7 @@ set backspace=indent,eol,start
 set incsearch
 
 " Close tabs with Ctrl + w 
-nnoremap <silent> <C-w> :tabclose<CR> 
+cmap tclose tabclose 
 
 " Toggle and untoggle NERDTree and TagList
 nmap <F2> :NERDTreeToggle<CR>
@@ -153,10 +153,16 @@ cmap vload OpenSession
 cmap vgrep Ag
 
 " Fzf remaps
-nnoremap <C-p> :GFiles<Cr>
-nnoremap <C-g> :Ag<Cr>
+nnoremap <silent><C-p> :Files<Cr>
+nnoremap <silent><C-g> :Ag<Cr>
+nnoremap <silent><C-b> :Buffers<CR>
 " Set how the window appears in the FZF command
 let g:fzf_layout = { 'down': '~30%' }
+" Avoid opening files if the are already opened
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab drop',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 
 "Do not ask about saving session evey time the program is closed
@@ -228,7 +234,7 @@ xmap S <Plug>(sad-change-forward)
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " One char
 map <Leader>. <Plug>(easymotion-repeat)
-map <Leader>f <Plug>(easymotion-bd-f)
+map <Leader>f <Plug>(easymotion-bd-f) 
 map <Leader>F <Plug>(easymotion-overwin-f)
 map <Leader>e <Plug>(easymotion-bd-e)
 map <Leader>j <Plug>(easymotion-overwin-line)
@@ -236,9 +242,39 @@ map <Leader>k <Plug>(easymotion-overwin-line)
 map <Leader>w <Plug>(easymotion-bd-w)
 map <Leader>W <Plug>(easymotion-overwin-w)
 
-" Two char
-map <Leader><Leader>f <Plug>(easymotion-bd-f2)
-map <Leader><Leader>F <Plug>(easymotion-overwin-f2)
-
+" Toggle fold/unfolded code in the file. Not only valid for diff
+" Mapped below
+let g:is_folded=1
+function! ToggleFoldDiff()
+    if g:is_folded == 1
+        call feedkeys("\zR")
+        let g:is_folded=0
+    else
+        call feedkeys("\zM")
+        let g:is_folded=1
+    endif
+endfunction
 " Introduces Git diff from fugitive
-map <Leader>g :Gvdiffsplit<CR>
+command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
+map <silent><Leader>gf :Gvdiffsplit<CR>
+map <silent><Leader>gd :Gvdiffsplit develop<CR>
+map <silent><Leader>gm :Gvdiffsplit master<CR>
+map <silent><Leader>gt :call ToggleFoldDiff()<CR>
+map <silent><Leader>gh :%Gclog<CR>
+map <silent><Leader>gH :Gclogfunc<CR>
+
+" Delete entire word in insert mode
+imap <C-d> <C-[>diwi
+" Paste something yanked in insert mode
+imap <C-v> <C-[>pi
+
+" Ctags (jump to function definitions)
+" Build tags file automatically
+" Auto generate tags file on file write of *.c and *.h files
+autocmd BufWritePost *.c,*.h,*.py silent! !ctags . &
+nnoremap <Leader>td <c-w>v<c-]>
+
+" Quickfix and location windows maps:
+" v and x for vertical/horizontal split
+autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
+autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
