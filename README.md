@@ -2,6 +2,24 @@
 
 Repository used to install and set up vim and my main configuration used. This wills etup vim with the vimrc found at cfg/vimrc.
 
+## Features
+Main features of this VIM:
+- Tree window: to display files of a project
+- Taglist window: to summarize and easy access to classes, functions and variables of a file.
+- Fuzzy finder: Search any file given its name or any string inside it. Open the file in any split you want.
+- Git integration: check files changed, diff of the file wrt 1) the last commit or 2) any branch. Also integrated change history for files and even functions. Displays in the editor which lines have been changed.
+- Temporary maximize one window to better code
+- Easy resizing and moving window splits with the keyboard
+- Auto-generate templates for documenting functions
+- Easy toggle between source (.cpp) and header (.h) files
+- Easy selection of sentences enclosed by brackets or any delimiter
+- Autocomplete functionality
+- Flake8 formatter integrated to easy format the Python code
+- Fast and easy replace mode
+- Extremely quick script to print variables and its type.
+- Improved motion all over the document with just a few keys
+
+
 ## Installation
 
 Just run `./install` from the repository's root directory. Do not forget to set its permissions with chmod +x install. This will
@@ -13,7 +31,7 @@ automatically do the following:
 If vim is already installed, you only need to copy the content of the vimrc and change the mapping of the av.vim plugin to better use the editor.
 
 ## How to update this repository
-The two main files (todo.txt and cfg/.vimrc) are expected to be changed directly from here. During vim installation, the .vimrc that will be read from now on is the one at cfg/.vimrc! Not the one by default at .vim/.vimrc
+The two main files (todo.txt and cfg/.vimrc) are expected to be changed directly from there. During vim installation, the .vimrc that will be read from now on is the one at cfg/.vimrc! Not the one by default at .vim/.vimrc
 
 ## How to use this setup
 Following tables gather all the commands and shortcuts I like using:

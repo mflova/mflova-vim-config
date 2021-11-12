@@ -41,7 +41,7 @@ call vundle#begin()
   Plugin 'mflova/vim-easycomment' " Plugin to comment lines
   Plugin 'hauleth/sad.vim' " Plugin to easily replace words
   Plugin 'hienvd/vim-stackoverflow' " Search in Stack Overflow
-  Plugin 'airblade/vim-gitgutter' " Performs git diffs
+  Plugin 'airblade/vim-gitgutter' " Only used to show the +,- and ~ of changed lines from last commit
   Plugin 'andymass/vim-matchup' " Matching brackets and improved use of %
   Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
   Plugin 'mflova/vim-printer' " Print debugging variables easily
