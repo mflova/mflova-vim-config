@@ -305,6 +305,4 @@ let g:ale_fixers = ['autopep8', 'yapf']
 let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle', 'pydocstyle']}
 " Ignoring specific warnings/errors
 let g:ale_python_mypy_options = '--ignore-missing-imports'
-let g:ale_python_pylint_options = '--disable=W0102, W0212, R0913, R0903, R0902, R0914'
-let g:ale_python_pycodestyle_options = '--ignore=E501' " Handled by Flake8
-let g:ale_python_flake8_options = '-m flake8 --max-line-length=90' " If removed, .flake8 will be read isntead with the proper configuration
+let g:ale_python_pylint_options = '--disable="W0102, W0212, R0913, R0903, R0902, R0914"'
