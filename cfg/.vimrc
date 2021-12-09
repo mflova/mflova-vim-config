@@ -20,10 +20,9 @@ call vundle#begin()
   Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
   Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
-"  Plugin 'ctrlpvim/ctrlp.vim' " Search for files by its name. BETTER THE FZF
   Plugin 'itchyny/lightline.vim' " Coloourfil info at the bottom of file edited
   Plugin 'simeji/winresizer' " Resize and move window splits
-  Plugin 'vim-scripts/ZoomWin' " Zoom a window pane
+  Plugin 'szw/vim-maximizer' " Zoom a window pane
   Plugin 'LucHermitte/lh-vim-lib' " ??
   Plugin 'LucHermitte/alternate-lite' " ??
   Plugin 'kkoomen/vim-doge' " Document files and jump between TODOs
@@ -46,17 +45,28 @@ call vundle#begin()
   Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
-  " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2
+  " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2. To be set up in the future.
   Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
-  Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plugin 'junegunn/fzf.vim'
+  Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
+  Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
+  Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
+  Plugin 'rhysd/vim-grammarous' " Grammar checks
+  Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
 call vundle#end()
 
 " Set up docstrin
 let g:python_style = 'rest'
 " dcs (from docstring) will generate documentation
 cmap dcs Docstring
+
+" Shorts the import according to PEP8
+cmap isort Isort
+
+" vterm for vertical term
+" term for horintal term
+nnoremap <silent><leader>tv :vert term<CR>
+nnoremap <silent><leader>tx :term<CR>
 
 cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
 
@@ -117,14 +127,14 @@ set incsearch
 cmap tclose tabclose 
 
 " Toggle and untoggle NERDTree and TagList
-nmap <F2> :NERDTreeToggle<CR>
-nmap <F3> :TlistToggle<CR>
+nmap <silent><F2> :NERDTreeToggle<CR>
+nmap <Leader>t :TlistToggle<CR>
 
 " Creates a new tab
-nmap <C-t> :tabnew<CR>
+nmap <silent><C-t> :tabnew<CR>
 
 " Alternate between source and header file
-map <C-k> :call CurtineIncSw()<CR>
+map <silent><C-k> :call CurtineIncSw()<CR>
 
 " Opens TagList at right
 let Tlist_Use_Right_Window   = 1
@@ -155,7 +165,9 @@ cmap vgrep Ag
 " Fzf remaps
 nnoremap <silent><C-p> :Files<Cr>
 nnoremap <silent><C-g> :Ag<Cr>
-nnoremap <silent><C-b> :Buffers<CR>
+nnoremap <silent><C-b> :BLines<CR>
+nnoremap <silent><C-f> :Lines<CR>
+
 " Set how the window appears in the FZF command
 let g:fzf_layout = { 'down': '~30%' }
 " Avoid opening files if the are already opened
@@ -172,15 +184,19 @@ let g:session_autoload = 'no'
 " Move between tabs in same window
 " Left
 nnoremap <S-Left> <C-W>h
+tnoremap <S-Left> <C-W>h
 " Bottom
 nnoremap <S-Down> <C-W>j
+tnoremap <S-Down> <C-W>j
 " Top
 nnoremap <S-Up> <C-W>k
+tnoremap <S-Up> <C-W>k
 " Right
 nnoremap <S-Right> <C-W>l
+tnoremap <S-Right> <C-W>l
 
 " Temporary makes a window full screen (uses plugin)
-nnoremap <S-x> <c-w>o
+nnoremap <silent><S-x> :MaximizerToggle<CR>
 
 " Resize windows (uses a plugin)"
 let g:winresizer_keycode_up = "\<UP>"
@@ -212,7 +228,7 @@ endif
 " Display the markers in the file
 let g:flake8_show_in_file=1  " show
 " Mapping the key to F4
-autocmd FileType python map <buffer> <F4> :call flake8#Flake8()<CR>
+autocmd FileType python map <buffer> <silent><F4> :call flake8#Flake8()<CR>
 " Only works with Python
 autocmd BufNewFile,BufRead *.py set ft=python
 
@@ -256,9 +272,9 @@ function! ToggleFoldDiff()
 endfunction
 " Introduces Git diff from fugitive
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
-map <silent><Leader>gf :Gvdiffsplit<CR>
-map <silent><Leader>gd :Gvdiffsplit develop<CR>
-map <silent><Leader>gm :Gvdiffsplit master<CR>
+map <silent><Leader>gdf :Gvdiffsplit<CR>
+map <silent><Leader>gdd :Gvdiffsplit develop<CR>
+map <silent><Leader>gdm :Gvdiffsplit master<CR>
 map <silent><Leader>gt :call ToggleFoldDiff()<CR>
 map <silent><Leader>gh :%Gclog<CR>
 map <silent><Leader>gH :Gclogfunc<CR>
@@ -278,3 +294,22 @@ nnoremap <Leader>td <c-w>v<c-]>
 " v and x for vertical/horizontal split
 autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
+
+" ALE toggle: It uses mypy, flake8...
+nnoremap <silent><Leader>at :ALEToggle<CR>
+nnoremap <silent><Leader>af :ALEFix<CR>
+
+let g:ale_fixers = ['autopep8', 'yapf']
+" Dictionary that maps languages with linters
+" let g:ale_linters = {'javacsript': ['prettier']}
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" allow modifying the completeopt variable, or it will
+" be overridden all the time
+let g:asyncomplete_auto_completeopt = 0
+
+set completeopt=menuone,noinsert,noselect,preview
+

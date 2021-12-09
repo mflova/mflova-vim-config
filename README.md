@@ -47,7 +47,7 @@ Main use
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
 |   ctrl + k| Switch between source and header files  |
-|  F3 | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
+|  <Leader>t | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
@@ -77,6 +77,7 @@ Main use
 | ctrl + d (Insert mode) | Delete word under cursor in inser mode|
 | ctrl + v (Insert mode) | Paste a yanked work in insert mode|
 | v/x (Quickfix/location window)| Opens the file in vertical/horizontal split |
+| :term or :vert term | Opens a new terminal (horizontal or vertical)|
 
 Find and replace
 | Command/Shortcut  | Description |
@@ -150,7 +151,8 @@ Search for strings in a file
 Search for files
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| Ctrl + b | Search for a file in the current buffer (opened files)|
+| Ctrl + b | Find a specific line within a file (fuzzy finder) |
+| Ctrl + f | Find a specific line within all the opened files (fuzzy finder) |
 | Ctrl + g | Search for a file in the current directory given a string|
 | Ctrl + p | Search for file name in the current directory. Use <Tab> to select more than one file|
 | Ctrl + v | Open the file in vertical split   |
@@ -161,7 +163,6 @@ Search for files
 Misc 
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| F4 | Runs flake8 |
 | :SO write here the issue | Search the issue in stack overflow |
 | :Google write here the issue | Search the issue in google|
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
@@ -169,16 +170,15 @@ Misc
 | ctrl+p (Inser mode) | Autocomplete the word based on the document |
 | :dcs or :Dosctring | Generates docstring for a given Python function or class|
 | Leader -> p/P| Inserts a print statement above or below with the variable chosen by the cursor|
-| :terminal | Runs a terminal in VIM|
 | Leader g | Performs git diff on that file. By quitting it will return to the same file|
 
 Vim-fugitive or git integration
 Note: g stands for git
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader>gf | Git diff of the current file wrt the previous commit|
-| <Leader>gd | Git diff of the current file wrt the develop branch |
-| <Leader>gm | Git diff of the current file wrt the master branch|
+| <Leader>gdf | Git diff of the current file wrt the previous commit|
+| <Leader>gdd | Git diff of the current file wrt the develop branch |
+| <Leader>gdm | Git diff of the current file wrt the master branch|
 | <Leader>gt | Function to toggle/untoggle the folds found in the code|
 | <Leader>gh | Check history of changes for the current file (previous commits)|
 | <Leader>gH | Check history of changes for the current function (previous commits)|
@@ -189,7 +189,6 @@ CTags: Jumping from file to file to look for function definitions
 | <Leader>td | use Tags to jump to Definition of a function. Opened in vertical split|
 
 Vim-easy-motion
-
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
 | <Leader>f | Displays how to jump to the start of a word|
@@ -197,6 +196,16 @@ Vim-easy-motion
 | <Leader>w | Displays how to jump to the start of every single word, including all splits|
 | <Leader>. | Repeat last vim-easy-motion command|
 | <Leader>j or k| Jump to specified line|
+
+Linters/Syntaxis check
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| <Leader>at | Toggle the ALE tool (combination of multiple tools that refresh automatically in the buffer. These are as mypy, flake8...)|
+| <Leader>af | Fixes some of the changes. The fixers are in the vim config|
+| :GrammarousCheck | Display grammar errors |
+| :GrammarousReset | Remove the errors |
+| F4 | Flake8 quickfix window |
+| :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
 ## Notes           
 
