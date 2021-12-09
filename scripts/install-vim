@@ -10,6 +10,23 @@ sudo apt-get install -y yapf
 sudo apt-get install -y autopep8
 
 pip install flake8
+pip3 install flake8
+
+pip install pydocstyle
+pip3 install pydocstyle
+
+pip install pylint
+pip3 install pylint
+
+pip install bandit
+pip3 install bandit
+
+pip install mypy
+pip3 install mypy
+
+pip3 install pycodestyle
+pip install pydocstyle
+
 pip install doq
 pip3 install doq
 

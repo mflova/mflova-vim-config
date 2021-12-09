@@ -300,16 +300,6 @@ nnoremap <silent><Leader>at :ALEToggle<CR>
 nnoremap <silent><Leader>af :ALEFix<CR>
 
 let g:ale_fixers = ['autopep8', 'yapf']
-" Dictionary that maps languages with linters
-" let g:ale_linters = {'javacsript': ['prettier']}
-
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-" allow modifying the completeopt variable, or it will
-" be overridden all the time
-let g:asyncomplete_auto_completeopt = 0
-
-set completeopt=menuone,noinsert,noselect,preview
-
+" Dictionary that maps languages with linters. Only Python as been added so far
+let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle', 'pydocstyle']}
+let g:ale_python_mypy_executable = '--ignore-missing-imports'
