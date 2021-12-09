@@ -14,7 +14,7 @@ Main features of this VIM:
 - Easy toggle between source (.cpp) and header (.h) files
 - Easy selection of sentences enclosed by brackets or any delimiter
 - Autocomplete functionality
-- Flake8 formatter integrated to easy format the Python code
+- Plenty of linters based on format, code analysis, syntaxis and style for Python (pydocstyle, flake8, pylint, mypy and pycodestyle)
 - Fast and easy replace mode
 - Extremely quick script to print variables and its type.
 - Improved motion all over the document with just a few keys

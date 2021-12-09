@@ -302,7 +302,7 @@ nnoremap <silent><Leader>af :ALEFix<CR>
 " ALE CONFIG
 let g:ale_fixers = ['autopep8', 'yapf']
 " Dictionary that maps languages with linters. Only Python as been added so far
-let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle', 'pydocstyle']}
+let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle']}
 " Ignoring specific warnings/errors
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_pylint_options = '--disable="W0102, W0212, R0913, R0903, R0902, R0914"'
