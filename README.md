@@ -200,11 +200,11 @@ Vim-easy-motion
 Linters/Syntaxis check
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader>at | Toggle the ALE tool (combination of multiple tools that refresh automatically in the buffer. These are as mypy, flake8...)|
+| <Leader>at | Toggle the ALE tool (combination of multiple tools that refresh automatically in the buffer. These are as mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraing in the vimrc file, the .flake8 will be read with the proper config instead|
 | <Leader>af | Fixes some of the changes. The fixers are in the vim config|
 | :GrammarousCheck | Display grammar errors |
 | :GrammarousReset | Remove the errors |
-| F4 | Flake8 quickfix window |
+| F4 | Flake8 quickfix window. Not recommendedm automatically done with ALE now |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
 ## Notes           
