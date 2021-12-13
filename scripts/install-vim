@@ -30,6 +30,9 @@ pip install pydocstyle
 pip install doq
 pip3 install doq
 
+pip install darglint
+pip3 install darglint
+
 #git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "Open VIM, ignore the errors and execute :PluginInstall"

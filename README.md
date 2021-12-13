@@ -207,6 +207,12 @@ Linters/Syntaxis check
 | F4 | Flake8 quickfix window. Not recommendedm automatically done with ALE now |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
+To do list manager
+| Command/Shortcut  | Description |
+| ------------- | ------------- |
+| <Leader><Leader> | Swap between the todo list and the file that is being edit|
+| All status | DONE, WIP, TODO, HELP, WAIT, BLOCKED|
+
 ## Notes           
 
 Inspired by [igemnace][1] repository.

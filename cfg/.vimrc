@@ -3,6 +3,7 @@ filetype off                  " required
 
 " Maps the leader key
 let mapleader = " "
+let maplocalleader=" "
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -52,7 +53,8 @@ call vundle#begin()
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
-  Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
+  Plugin 'mflova/ale' " Complete syntax plugin: checker and fixes based on differed plugins
+  Plugin 'mflova/vim-getting-things-down' " ToDo list manager
 call vundle#end()
 
 " Set up docstrin
@@ -74,8 +76,6 @@ cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
 let g:ctrlp_custom_ignore = '\.pyc$\|\.cpp.o$\|\.dat$\|\.git$\|\.dir$\|__init__.py$'
 
 
-" Updates vim each 100ms instead of 4000ms (default value)
-set updatetime=100
 
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
@@ -302,9 +302,14 @@ nnoremap <silent><Leader>af :ALEFix<CR>
 " ALE CONFIG
 let g:ale_fixers = ['autopep8', 'yapf']
 " Dictionary that maps languages with linters. Only Python as been added so far
-let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle']}
+let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle', 'vulture', 'darglint']}
 " Ignoring specific warnings/errors
-let g:ale_python_mypy_options = '--ignore-missing-imports'
-let g:ale_python_pylint_options = '--disable="W0102, W0212, R0913, R0903, R0902, R0914"'
+let g:ale_python_mypy_options = '--ignore-missing-imports --strict'
+let g:ale_python_pylint_options = '--disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
 let g:ale_python_pycodestyle_options = '--ignore=E501' " Handled by Flake8
 let g:ale_python_flake8_options = '-m flake8 --max-line-length=90' " If removed, .flake8 will be read isntead with the proper configuration
+let g:ale_python_darglint_options = ' --docstring-style sphinx' 
+
+" To do list manager
+" Quick-switch between current file and `TODO.md` of project root
+nnoremap <LocalLeader><LocalLeader> :call getting_things_down#show_todo()<CR>
