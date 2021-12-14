@@ -14,6 +14,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+filetype plugin on  " Added by me. If bundle does not work properly, delete it temporary. Used for Doge documentation generator
+
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
@@ -26,7 +28,7 @@ call vundle#begin()
   Plugin 'szw/vim-maximizer' " Zoom a window pane
   Plugin 'LucHermitte/lh-vim-lib' " ??
   Plugin 'LucHermitte/alternate-lite' " ??
-  Plugin 'kkoomen/vim-doge' " Document files and jump between TODOs
+  Plugin 'kkoomen/vim-doge', { 'do': { ->doge#install() } }  " Document files and jump between TODOs
   Plugin 'yegappan/taglist' " DIsplay taglist of the current file (classes, variables...)
   Plugin 'google/vim-searchindex' " Display more info when searching a word/pattern
   Plugin 'xolox/vim-misc' " Needed for vim-session
@@ -43,7 +45,7 @@ call vundle#begin()
   Plugin 'hienvd/vim-stackoverflow' " Search in Stack Overflow
   Plugin 'airblade/vim-gitgutter' " Only used to show the +,- and ~ of changed lines from last commit
   Plugin 'andymass/vim-matchup' " Matching brackets and improved use of %
-  Plugin 'pixelneo/vim-python-docstring' " Easy docstirng
+  Plugin 'mflova/vim-python-docstring' " Modified for the templates
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
   " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2. To be set up in the future.
@@ -58,9 +60,9 @@ call vundle#begin()
 call vundle#end()
 
 " Set up docstrin
-let g:python_style = 'rest'
-" dcs (from docstring) will generate documentation
-cmap dcs Docstring
+let g:python_style = 'rest' " Used for documenting classes, as Doge only handles functions
+nnoremap <silent><C-j>c :Docstring<CR>
+nnoremap <silent><C-j>f :DogeGenerate sphinx<CR>
 
 " Shorts the import according to PEP8
 cmap isort Isort
@@ -295,20 +297,22 @@ nnoremap <Leader>td <c-w>v<c-]>
 autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
 
+" ALE CONFIG (Used for its linters)
 " ALE toggle: It uses mypy, flake8...
 nnoremap <silent><Leader>at :ALEToggle<CR>
 nnoremap <silent><Leader>af :ALEFix<CR>
-
-" ALE CONFIG
 let g:ale_fixers = ['autopep8', 'yapf']
-" Dictionary that maps languages with linters. Only Python as been added so far
-let g:ale_linters = {'python': ['pydocstyle', 'flake8', 'pylint', 'mypy', 'pycodestyle', 'vulture', 'darglint']}
-" Ignoring specific warnings/errors
+" Dictionary that maps languages with linters. Only Python has been added so far
+let g:ale_linters = {'python': ['pydocstyle', 'pylint', 'mypy', 'pycodestyle', 'vulture', 'darglint']}
+" Ignoring specific warnings/errors. Strict one forces you to write always the optional typing
 let g:ale_python_mypy_options = '--ignore-missing-imports --strict'
-let g:ale_python_pylint_options = '--disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
-let g:ale_python_pycodestyle_options = '--ignore=E501' " Handled by Flake8
-let g:ale_python_flake8_options = '-m flake8 --max-line-length=90' " If removed, .flake8 will be read isntead with the proper configuration
+" Those variables with less than 3 characteres and not in this list will be considered as warning
+let g:ale_python_pylint_options = '--good-names="q1, q2, q3, q4, q5, q, i, j, k, df, dt" --disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
+let g:ale_python_pycodestyle_options = '--ignore="E226" --max-line-length=90' " This one also uses Flake8 internally
+" Darglintt requires the whitespace before. It checks docstring format
 let g:ale_python_darglint_options = ' --docstring-style sphinx' 
+" Update the messages printed in the status bar to show the liner, the message and the severity
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " To do list manager
 " Quick-switch between current file and `TODO.md` of project root

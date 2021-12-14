@@ -1,6 +1,6 @@
 # mflova-vim-config
 
-Repository used to install and set up vim and my main configuration used. This wills etup vim with the vimrc found at cfg/vimrc.
+Repository used to install and set up vim and my main configuration used. This wills etup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might still be buggy.
 
 ## Features
 Main features of this VIM:
@@ -168,7 +168,8 @@ Misc
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
 | Leader c | Comment line/block in Python|
 | ctrl+p (Inser mode) | Autocomplete the word based on the document |
-| :dcs or :Dosctring | Generates docstring for a given Python function or class|
+| ctrl+j f | Generates docstring for a given Python function |
+| ctrl+j c | Generates docstring for a given Python class |
 | Leader -> p/P| Inserts a print statement above or below with the variable chosen by the cursor|
 | Leader g | Performs git diff on that file. By quitting it will return to the same file|
 
@@ -200,7 +201,7 @@ Vim-easy-motion
 Linters/Syntaxis check
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader>at | Toggle the ALE tool (combination of multiple tools that refresh automatically in the buffer. These are as mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraing in the vimrc file, the .flake8 will be read with the proper config instead|
+| <Leader>at | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead|
 | <Leader>af | Fixes some of the changes. The fixers are in the vim config|
 | :GrammarousCheck | Display grammar errors |
 | :GrammarousReset | Remove the errors |
