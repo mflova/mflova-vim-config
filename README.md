@@ -2,6 +2,14 @@
 
 Repository used to install and set up vim and my main configuration used. This wills etup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might still be buggy.
 
+## Set up as merge tool
+Use the following lines:
+
+git config --global mergetool.fugitive.cmd 'vim -f -c "Gvdiffsplit!" "$MERGED"'
+git config --global merge.tool fugitive
+
+And then you can use "git mergetool" after finding conflicts to use Vim fugitive tool. The centered window corresponds to the final changes that will be applied.
+
 ## Features
 Main features of this VIM:
 - Tree window: to display files of a project
@@ -9,6 +17,7 @@ Main features of this VIM:
 - Fuzzy finder: Search any file given its name or any string inside it. Open the file in any split you want.
 - Git integration: check files changed, diff of the file wrt 1) the last commit or 2) any branch. Also integrated change history for files and even functions. Displays in the editor which lines have been changed.
 - Temporary maximize one window to better code
+- Documentation template for docstrings easily auto-generated in multiple standards
 - Easy resizing and moving window splits with the keyboard
 - Auto-generate templates for documenting functions
 - Easy toggle between source (.cpp) and header (.h) files
@@ -18,6 +27,7 @@ Main features of this VIM:
 - Fast and easy replace mode
 - Extremely quick script to print variables and its type.
 - Improved motion all over the document with just a few keys
+- Integrated unit test frameworks within VIM (such as PyTest)
 
 
 ## Installation
@@ -47,7 +57,7 @@ Main use
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
 |   ctrl + k| Switch between source and header files  |
-|  <Leader>t | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
+|  F4 | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
@@ -154,10 +164,11 @@ Search for files
 | Ctrl + b | Find a specific line within a file (fuzzy finder) |
 | Ctrl + f | Find a specific line within all the opened files (fuzzy finder) |
 | Ctrl + g | Search for a file in the current directory given a string|
-| Ctrl + p | Search for file name in the current directory. Use <Tab> to select more than one file|
+| Ctrl + p | Search for file name in the current directory. Use <Tab> to select more than one file and then opened them with ctrl+v or ctrl+x|
 | Ctrl + v | Open the file in vertical split   |
 | Ctrl + x |  Open the file in horizontal split  |
 | Ctrl + t |  Open the file in new tab  |
+| Ctrl + q |  Open multiple selected files in a quickfix window |
 
 ### Misc
 Misc 
@@ -167,11 +178,11 @@ Misc
 | :Google write here the issue | Search the issue in google|
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
 | Leader c | Comment line/block in Python|
-| ctrl+p (Inser mode) | Autocomplete the word based on the document |
-| ctrl+j f | Generates docstring for a given Python function |
-| ctrl+j c | Generates docstring for a given Python class |
+| ctrl+p (Insert mode) | Autocomplete the word based on the document |
+| ctrl+d | Generates docstring for a given function or class. The cursor must be in the same line as the declaration|
 | Leader -> p/P| Inserts a print statement above or below with the variable chosen by the cursor|
 | Leader g | Performs git diff on that file. By quitting it will return to the same file|
+| gS/gJ| Splits/Join the arguments from a function into multiple lines (or the code in general)|
 
 Vim-fugitive or git integration
 Note: g stands for git
@@ -184,17 +195,19 @@ Note: g stands for git
 | <Leader>gh | Check history of changes for the current file (previous commits)|
 | <Leader>gH | Check history of changes for the current function (previous commits)|
 
-CTags: Jumping from file to file to look for function definitions
-| Command/Shortcut  | Description |
+Test inside vim
+| command/shortcut  | description |
 | ------------- | ------------- |
-| <Leader>td | use Tags to jump to Definition of a function. Opened in vertical split|
+| tfile | Runs all the tests from the file|
+| tsuite| Runs all the suite test|
+| tthis | Runs the test that is the nearest to the cursor |
 
 Vim-easy-motion
-| Command/Shortcut  | Description |
+| command/shortcut  | description |
 | ------------- | ------------- |
-| <Leader>f | Displays how to jump to the start of a word|
-| <Leader>e | Displays how to jump to the end of a word|
-| <Leader>w | Displays how to jump to the start of every single word, including all splits|
+| <leader>f | displays how to jump to the start of a word|
+| <leader>e | displays how to jump to the end of a word|
+| <leader>w | displays how to jump to the start of every single word, including all splits|
 | <Leader>. | Repeat last vim-easy-motion command|
 | <Leader>j or k| Jump to specified line|
 
@@ -205,7 +218,6 @@ Linters/Syntaxis check
 | <Leader>af | Fixes some of the changes. The fixers are in the vim config|
 | :GrammarousCheck | Display grammar errors |
 | :GrammarousReset | Remove the errors |
-| F4 | Flake8 quickfix window. Not recommendedm automatically done with ALE now |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
 To do list manager

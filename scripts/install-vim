@@ -30,8 +30,27 @@ pip install pydocstyle
 pip install doq
 pip3 install doq
 
+# Integrated in flake8
 pip install darglint
-pip3 install darglint
+pip install flake8-pytest-style
+pip install flake8-simplify
+pip install flake8-todo
+pip install flake8-bugbear
+pip install dlint
+pip install flake8-comprehensions
+pip install flake8-commas
+pip install flake8-rst-docstring
+pip install flake8-markdown
+
+# Linters for rst
+sudo apt install python3-proselint
+pip install rstcheck
+
+# Linters for yaml
+sudo apt-get install yamllint
+
+# Linters for cmake
+pip install cmakelint
 
 #git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -44,4 +63,4 @@ cd ~
 echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
 echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/.vimrc'" >> ~/.bashrc
 
-echo "Installation finished, Just call :PluginInstall in VIM and restart it"
+read -p "Vim installed. Call :PluginInstall and press [ENTER]"

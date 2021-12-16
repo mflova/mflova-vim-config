@@ -20,15 +20,18 @@ call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
   Plugin 'preservim/nerdtree' " NerdTree stuff
+  Plugin 'tomasr/molokai' " Theme
+  Plugin 'morhetz/gruvbox' " Theme
   Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
   Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
-  Plugin 'itchyny/lightline.vim' " Coloourfil info at the bottom of file edited
+  Plugin 'vim-airline/vim-airline' " Status line at the bottom
+  Plugin 'vim-airline/vim-airline-themes' " Themes for vim airline
   Plugin 'simeji/winresizer' " Resize and move window splits
   Plugin 'szw/vim-maximizer' " Zoom a window pane
   Plugin 'LucHermitte/lh-vim-lib' " ??
   Plugin 'LucHermitte/alternate-lite' " ??
-  Plugin 'kkoomen/vim-doge', { 'do': { ->doge#install() } }  " Document files and jump between TODOs
+  Plugin 'mflova/vim-doge', { 'do': { ->doge#install() } }  " Document files and jump between TODOs
   Plugin 'yegappan/taglist' " DIsplay taglist of the current file (classes, variables...)
   Plugin 'google/vim-searchindex' " Display more info when searching a word/pattern
   Plugin 'xolox/vim-misc' " Needed for vim-session
@@ -55,14 +58,39 @@ call vundle#begin()
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
-  Plugin 'mflova/ale' " Complete syntax plugin: checker and fixes based on differed plugins
+  Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
   Plugin 'mflova/vim-getting-things-down' " ToDo list manager
+  Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
+  Plugin 'vim-test/vim-test' " Execute unit tests in VIM
 call vundle#end()
 
-" Set up docstrin
+" It will update the time in which gitguutter is refreshed
+set updatetime=200 
+" Use vim as mergetool with
+" git config --global mergetool.fugitive.cmd 'vim -f -c "Gvdiffsplit!" "$MERGED"'
+" git config --global merge.tool fugitive
+"
+" Open files unfolded by default
+au BufRead * normal zR
+
+" Set up docstrings
 let g:python_style = 'rest' " Used for documenting classes, as Doge only handles functions
-nnoremap <silent><C-j>c :Docstring<CR>
-nnoremap <silent><C-j>f :DogeGenerate sphinx<CR>
+let g:doge_remove_nones = 1 " Only works for sphinx-python
+" Python docstring generator. It uses a different command for functions and
+" classes, as the DoGe plugin does not generate properly the attributes of a
+" class. Only for python. The other files uses DogeGenerate
+nnoremap <silent><C-d> :DogeGenerate<CR>
+autocmd FileType python nnoremap <silent><C-d> :call PythonGenerateDocstring()<CR>
+function! PythonGenerateDocstring()
+    let l:line = getline('.')
+    let l:words = split(l:line, ' ')
+    if l:words[0] == 'def'
+        DogeGenerate sphinx
+    endif
+    if l:words[0] == 'class'
+        Docstring
+    endif
+endfunction
 
 " Shorts the import according to PEP8
 cmap isort Isort
@@ -77,15 +105,15 @@ cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
 " Set CtrlP to ignore specific extensions
 let g:ctrlp_custom_ignore = '\.pyc$\|\.cpp.o$\|\.dat$\|\.git$\|\.dir$\|__init__.py$'
 
-
-
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
 set smartcase
 
 " Set colortheme
 syntax on
-colorscheme molokai
+colorscheme molokai " molokai or gruvbox
+"set bg=dark " For gruvbox only
+"let g:gruvbox_contrast_dark='hard' " For gruvbox
 
 " Highlights the current line of the cursor
 let g:conoline_auto_enable = 1
@@ -97,15 +125,6 @@ nnoremap <silent><C-Up> :tabnext<CR>
 "Auto reload files
 set autoread 
 au CursorHold * checktime 
-
-" [buffer number] followed by filename:
-set statusline=[%n]\ %t
-" for Syntastic messages:
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" show line#:column# on the right hand side
-set statusline+=%=%l:%c
 
 " Set tab to be 4 spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -130,7 +149,6 @@ cmap tclose tabclose
 
 " Toggle and untoggle NERDTree and TagList
 nmap <silent><F2> :NERDTreeToggle<CR>
-nmap <Leader>t :TlistToggle<CR>
 
 " Creates a new tab
 nmap <silent><C-t> :tabnew<CR>
@@ -162,21 +180,28 @@ cmap ntload NERDTreeProjectLoad
 cmap ntrm NERDTreeProjectRm 
 cmap vsave SaveSession
 cmap vload OpenSession
-cmap vgrep Ag
 
 " Fzf remaps
 nnoremap <silent><C-p> :Files<Cr>
 nnoremap <silent><C-g> :Ag<Cr>
 nnoremap <silent><C-b> :BLines<CR>
 nnoremap <silent><C-f> :Lines<CR>
-
 " Set how the window appears in the FZF command
-let g:fzf_layout = { 'down': '~30%' }
-" Avoid opening files if the are already opened
+let g:fzf_layout = { 'down': '~35%' }
+" Define a function that will allow fzf to build a quicfix list from selected
+" files
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab drop',
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
 
 
 "Do not ask about saving session evey time the program is closed
@@ -220,19 +245,7 @@ highlight ColorColumn ctermbg=233
 
 " Enable/Disable autocomplete (YCM Based)
 let g:loaded_youcompleteme = 1 
-
-""" Flake8 
-" Autodetects python files to run flake8
-" Runs Flake8 and maps it in F4
-if !empty(glob("~/.vim/bundle/vim-flake8/ftplugin/python_flake8.vim"))
-    source ~/.vim/bundle/vim-flake8/ftplugin/python_flake8.vim
-endif
-" Display the markers in the file
-let g:flake8_show_in_file=1  " show
-" Mapping the key to F4
-autocmd FileType python map <buffer> <silent><F4> :call flake8#Flake8()<CR>
-" Only works with Python
-autocmd BufNewFile,BufRead *.py set ft=python
+let g:ycm_auto_trigger = 1
 
 " vim airline (status bar) also available with one window split 
 set laststatus=2
@@ -262,7 +275,7 @@ map <Leader>W <Plug>(easymotion-overwin-w)
 
 " Toggle fold/unfolded code in the file. Not only valid for diff
 " Mapped below
-let g:is_folded=1
+let g:is_folded=0 " This is how the file is opened by default
 function! ToggleFoldDiff()
     if g:is_folded == 1
         call feedkeys("\zR")
@@ -274,9 +287,10 @@ function! ToggleFoldDiff()
 endfunction
 " Introduces Git diff from fugitive
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
-map <silent><Leader>gdf :Gvdiffsplit<CR>
-map <silent><Leader>gdd :Gvdiffsplit develop<CR>
-map <silent><Leader>gdm :Gvdiffsplit master<CR>
+" Zr means that by default, the diff will be fully unfolded
+map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
+map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
+map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gt :call ToggleFoldDiff()<CR>
 map <silent><Leader>gh :%Gclog<CR>
 map <silent><Leader>gH :Gclogfunc<CR>
@@ -286,34 +300,88 @@ imap <C-d> <C-[>diwi
 " Paste something yanked in insert mode
 imap <C-v> <C-[>pi
 
-" Ctags (jump to function definitions)
-" Build tags file automatically
-" Auto generate tags file on file write of *.c and *.h files
-autocmd BufWritePost *.c,*.h,*.py silent! !ctags . &
-nnoremap <Leader>td <c-w>v<c-]>
-
 " Quickfix and location windows maps:
 " v and x for vertical/horizontal split
 autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
 
 " ALE CONFIG (Used for its linters)
+" Enabled at startup by default. Only read at startup
+let g:ale_enabled = 1
+" Constant defined for the vim airline status bar
+let g:mflova_linters_on = ''
+let g:mflova_linters_off = 'LINTERS OFF'
+" Init the status bar with the correct message
+if g:ale_enabled
+    let g:ale_status_bar = g:mflova_linters_on
+else
+    let g:ale_status_bar = g:mflova_linters_off
+endif
 " ALE toggle: It uses mypy, flake8...
-nnoremap <silent><Leader>at :ALEToggle<CR>
+nnoremap <silent><Leader>at :call ALEToggleWrapper()<CR>
+" Function that not only toggles ALE but also its message to be printed in vim
+" airline
+function! ALEToggleWrapper()
+    if g:ale_status_bar == g:mflova_linters_on
+        let g:ale_status_bar = g:mflova_linters_off
+    else
+        let g:ale_status_bar = g:mflova_linters_on
+    endif
+    ALEToggle
+endfunction
 nnoremap <silent><Leader>af :ALEFix<CR>
 let g:ale_fixers = ['autopep8', 'yapf']
 " Dictionary that maps languages with linters. Only Python has been added so far
-let g:ale_linters = {'python': ['pydocstyle', 'pylint', 'mypy', 'pycodestyle', 'vulture', 'darglint']}
+" Flake8 Plugins Installed:
+"    - darglint -> Errors at docstrings
+"    - pytest style -> Extra functions for pytest for better code
+"    - flake8-simplify -> Simplify code
+"    - flake8-todo -> Warnings if TODO found
+"    - flake8-bugbear -> Detecting bugs
+"    - dlint -> Security stuff. It might be annoying
+"    - comprehensions -> Comprehension stuff (list, set, dicts...)
+"    - flake8-commas -> Check for missing trailing commas
+"    - flake8-rst-docstrings -> rst docstring checker
+"    - flake8-markdown -> Checks for python code blocks in .md
+let g:ale_linters = {'python': ['pylint', 'mypy', 'pydocstyle', 'vulture', 'flake8'], 'rst': ['proselint', 'rstcheck'], 'yaml': ['yamllint'], 'cmake': ['cmakelint']}
 " Ignoring specific warnings/errors. Strict one forces you to write always the optional typing
 let g:ale_python_mypy_options = '--ignore-missing-imports --strict'
 " Those variables with less than 3 characteres and not in this list will be considered as warning
 let g:ale_python_pylint_options = '--good-names="q1, q2, q3, q4, q5, q, i, j, k, df, dt" --disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
-let g:ale_python_pycodestyle_options = '--ignore="E226" --max-line-length=90' " This one also uses Flake8 internally
-" Darglintt requires the whitespace before. It checks docstring format
-let g:ale_python_darglint_options = ' --docstring-style sphinx' 
+" Some plugins were integrated into flake8. Install with pip the following
+" ones:
+let g:ale_python_flake8_options = ' --docstring-style sphinx --max-line-length=90' 
+let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {line-length:{max: 90}}}"' 
+let g:ale_cmake_cmakelint_options = '--linelength=120' 
 " Update the messages printed in the status bar to show the liner, the message and the severity
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " To do list manager
 " Quick-switch between current file and `TODO.md` of project root
 nnoremap <LocalLeader><LocalLeader> :call getting_things_down#show_todo()<CR>
+
+" TagList
+nmap <F4> :TlistToggle<CR>
+
+" Testing inside vim
+cmap tfile TestFile
+cmap tsuite TestSuite
+cmap tthis TestNearest
+
+" Colortheme for the statusline
+let g:airline_theme='onedark'
+" Removes the encoding in the status bar
+let g:airline#extensions#default#layout = [['a','b', 'c'], ['x', 'z', 'warning', 'error']] 
+" A
+" b will be the first oen truncated (branch name)
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'b': 100,
+      \ 'x': 60,
+      \ 'y': 88,
+      \ 'z': 45,
+      \ 'warning': 80,
+      \ 'error': 80,
+      \ }
+
+" Update the var by reading this variable
+let g:airline_section_warning = '%{ale_status_bar}'
