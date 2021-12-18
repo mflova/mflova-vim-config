@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+read -p "First make sure npm is installed with npm --version as press [ENTER]"
 sudo apt-get install -y vim-nox silversearcher-ag
 sudo apt-get update && sudo apt-get install -y exuberant-ctags
 sudo apt install -y build-essential cmake vim-nox python3-dev
@@ -34,13 +35,19 @@ pip3 install doq
 pip install darglint
 pip install flake8-pytest-style
 pip install flake8-simplify
-pip install flake8-todo
+pip install flake8-fixme
 pip install flake8-bugbear
 pip install dlint
 pip install flake8-comprehensions
 pip install flake8-commas
 pip install flake8-rst-docstring
 pip install flake8-markdown
+pip install flake8-builtins
+pip install flake8-broken-line
+pip install flake8-class-attributes-order
+
+# Linters for markdown integrated in ALE vim
+npm install mdl
 
 # Linters for rst
 sudo apt install python3-proselint
@@ -51,6 +58,20 @@ sudo apt-get install yamllint
 
 # Linters for cmake
 pip install cmakelint
+
+# Linters for C++
+sudo apt install clang-tidy
+pip install cpplint
+sudo apt-get install cppcheck
+
+# Stubs
+pip install pandas-stubs
+pip install data-science-types
+# Where mypy will read all the stubs generated
+# generate them with:
+# - stubgen -m module -o $MYPYPATH
+# - stubgen path -o $MYPYPATH
+echo "export MYPYPATH=$HOME/stubs" >> ~/.bashrc
 
 #git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
