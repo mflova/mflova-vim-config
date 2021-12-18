@@ -67,6 +67,8 @@ sudo apt-get install cppcheck
 # Stubs
 pip install pandas-stubs
 pip install data-science-types
+pip install pyright # Used only for the LSP to navigate throught function definitions
+
 # Where mypy will read all the stubs generated
 # generate them with:
 # - stubgen -m module -o $MYPYPATH

@@ -217,11 +217,14 @@ Linters/Syntaxis check
 | <Leader>at | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead|
 | <Leader>af | Fixes some of the changes. The fixers are in the vim config|
 | <Leader>as | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed|
+| <Leader>ar | Find the references of the function in which the cursor is located |
+| <Leader>ah | Displays the information of a function (called Hover)|
+| <Leader>ad | Go to the definition of the function where the cursor is located|
 | :GrammarousCheck | Display grammar errors |
 | :GrammarousReset | Remove the errors |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
-About the stubs automatically generated, this is done with "stubgen" and it is done to detect more types mainly coming from modules outside of my repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY searces by default. When generating the modules, you have two main options when setting the flags:
+About the stubs automatically generated, this is done with "stubgen" (installed with mypy) and it is done to detect more types mainly coming from modules outside of my repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY searces by default. When generating the modules, you have two main options when setting the flags:
 
     - Flag -m: It will geneate the stubs only for this module. Ex: If I have the following package: A.B.C and I do "stubgen -m C", the stubs for the module C will be generated, but I will also need to generate the ones from A and B (the previous ones). By doing this, the stubs I created are much more in control. Useful when the package is big.
     - Flag -p: It will generate all modules found. Ex: If I have the module C as A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules A, B and C. However, if the package is big this wil take time and maybe some conflicts.
