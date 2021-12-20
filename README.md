@@ -208,12 +208,7 @@ Misc
 | \<Leader\>c | Comment line/block in Python|
 | ctrl+p (Insert mode) | Autocomplete the word based on the document |
 | ctrl+d | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
-<<<<<<< HEAD
-| \<Leader\>p/P| Inserts a print statement above or below with the variable chosen by the cursor|
-| \<Leader\>g | Performs git diff on that file. By quitting it will return to the same file|
-=======
 | \<Leader\> + p/P| Inserts a print statement above or below with the variable chosen by the cursor|
->>>>>>> example
 | gS/gJ| Splits/Join the arguments from a function into multiple lines (or the code in general)|
 
 Vim-fugitive or git integration
@@ -262,15 +257,15 @@ repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY
 searces by default. When generating the modules, you have two main options when
 setting the flags:
 
-    - Flag -m: It will geneate the stubs only for this module. Ex: If I have the
-      following package: A.B.C and I do "stubgen -m C", the stubs for the module
-      C will be generated, but I will also need to generate the ones from A and B
-      (the previous ones). By doing this, the stubs I created are much more in
-      control. Useful when the package is big.
-    - Flag -p: It will generate all modules found. Ex: If I have the module C as
-      A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules
-      A, B and C. However, if the package is big this wil take time and maybe
-      some conflicts.
+- Flag -m: It will geneate the stubs only for this module. Ex: If I have the
+  following package: A.B.C and I do "stubgen -m C", the stubs for the module
+  C will be generated, but I will also need to generate the ones from A and B
+  (the previous ones). By doing this, the stubs I created are much more in
+  control. Useful when the package is big.
+- Flag -p: It will generate all modules found. Ex: If I have the module C as
+  A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules
+  A, B and C. However, if the package is big this wil take time and maybe
+  some conflicts.
 
 For both methods if the module was imported as an absolute path, this one needs to
 be installed in the Python environment. This can be done with the pip framework.
