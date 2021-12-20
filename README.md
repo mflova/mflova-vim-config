@@ -1,21 +1,33 @@
 # mflova-vim-config
 
-Repository used to install and set up vim and my main configuration used. This wills etup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might still be buggy.
+Repository used to install and set up vim and my main configuration used. This will
+setup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might
+still be buggy.
 
 ## Set up as merge tool
+
 Use the following lines:
 
+```
 git config --global mergetool.fugitive.cmd 'vim -f -c "Gvdiffsplit!" "$MERGED"'
 git config --global merge.tool fugitive
+```
 
-And then you can use "git mergetool" after finding conflicts to use Vim fugitive tool. The centered window corresponds to the final changes that will be applied.
+And then you can use "git mergetool" after finding conflicts to use Vim fugitive
+tool. The centered window corresponds to the final changes that will be applied.
 
 ## Features
+
 Main features of this VIM:
+
 - Tree window: to display files of a project
-- Taglist window: to summarize and easy access to classes, functions and variables of a file.
-- Fuzzy finder: Search any file given its name or any string inside it. Open the file in any split you want.
-- Git integration: check files changed, diff of the file wrt 1) the last commit or 2) any branch. Also integrated change history for files and even functions. Displays in the editor which lines have been changed.
+- Taglist window: to summarize and easy access to classes, functions and variables
+  of a file.
+- Fuzzy finder: Search any file given its name or any string inside it.
+  Open the file in any split you want.
+- Git integration: check files changed, diff of the file wrt 1) the last commit
+  or 2) any branch. Also integrated change history for files and even functions.
+  Displays in the editor which lines have been changed.
 - Temporary maximize one window to better code
 - Documentation template for docstrings easily auto-generated in multiple standards
 - Easy resizing and moving window splits with the keyboard
@@ -23,30 +35,45 @@ Main features of this VIM:
 - Easy toggle between source (.cpp) and header (.h) files
 - Easy selection of sentences enclosed by brackets or any delimiter
 - Autocomplete functionality
-- Plenty of linters based on format, code analysis, syntaxis and style for Python (pydocstyle, flake8, pylint, mypy and pycodestyle)
+- Plenty of linters based on format, code analysis, syntaxis and type checking:
+  - Python: Pylint, mypy, pydocstyle, vulture, pyright, flake8. This last one
+    integtegrates: darglint, pytest-style, flake8-simplify, flake8-bugbear,
+    dlint, comprehensions, flake8-rst-docstrings, flake8-mardkwon, flake8-builtins,
+    flake8-borken-line, flake8-class-attributes-order.
+  - Markdown: mdl.
+  - C++:: Clangtidy.
+  - CMake: CMakelint.
+  - Yaml: yamllint.
+  - Rst: Proselint and rstcheck.
 - Fast and easy replace mode
 - Extremely quick script to print variables and its type.
 - Improved motion all over the document with just a few keys
 - Integrated unit test frameworks within VIM (such as PyTest)
 
-
 ## Installation
 
-Just run `./install` from the repository's root directory. Do not forget to set its permissions with chmod +x install. This will
-automatically do the following:
+Just run `./install` from the repository's root directory. Do not forget to set
+its permissions with chmod +x install. This will automatically do the following:
+
 - Install last vim-nox and its dependencies
 - Initialize the vimrc file
 - Copy all the plugins into the .vim folder
 
-If vim is already installed, you only need to copy the content of the vimrc and change the mapping of the av.vim plugin to better use the editor.
+If vim is already installed, you only need to copy the content of the vimrc and
+change the mapping of the av.vim plugin to better use the editor.
 
 ## How to update this repository
-The two main files (todo.txt and cfg/.vimrc) are expected to be changed directly from there. During vim installation, the .vimrc that will be read from now on is the one at cfg/.vimrc! Not the one by default at .vim/.vimrc
+
+The two main files (todo.txt and cfg/.vimrc) are expected to be changed directly
+from there. During vim installation, the .vimrc that will be read from now on is
+the one at cfg/.vimrc! Not the one by default at .vim/.vimrc
 
 ## How to use this setup
+
 Following tables gather all the commands and shortcuts I like using:
 
 ### Main VIM use
+
 Main use
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
@@ -57,7 +84,8 @@ Main use
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
 |   ctrl + k| Switch between source and header files  |
-|  F4 | Toggles and untoggles the taglist (summary of a file, defined by its classes or variables). To remove entries just press u  |
+|  F4 | Toggles and untoggles the taglist (summary of a file, defined by
+itsclasses or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
@@ -180,8 +208,12 @@ Misc
 | \<Leader\>c | Comment line/block in Python|
 | ctrl+p (Insert mode) | Autocomplete the word based on the document |
 | ctrl+d | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
+<<<<<<< HEAD
 | \<Leader\>p/P| Inserts a print statement above or below with the variable chosen by the cursor|
 | \<Leader\>g | Performs git diff on that file. By quitting it will return to the same file|
+=======
+| \<Leader\> + p/P| Inserts a print statement above or below with the variable chosen by the cursor|
+>>>>>>> example
 | gS/gJ| Splits/Join the arguments from a function into multiple lines (or the code in general)|
 
 Vim-fugitive or git integration
@@ -206,8 +238,8 @@ Vim-easy-motion
 | command/shortcut  | description |
 | ------------- | ------------- |
 | \<Leader\>f | displays how to jump to the start of a word|
-| \<leader\>e | displays how to jump to the end of a word|
-| \<leader\>w | displays how to jump to the start of every single word, including all splits|
+| \<Leader\>e | displays how to jump to the end of a word|
+| \<Leader\>w | displays how to jump to the start of every single word, including all splits|
 | \<Leader\>. | Repeat last vim-easy-motion command|
 | \<Leader\>j or k| Jump to specified line|
 
@@ -224,12 +256,26 @@ Linters/Syntaxis check
 | :GrammarousReset | Remove the errors |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
 
-About the stubs automatically generated, this is done with "stubgen" (installed with mypy) and it is done to detect more types mainly coming from modules outside of my repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY searces by default. When generating the modules, you have two main options when setting the flags:
+About the stubs automatically generated, this is done with "stubgen" (installed with
+mypy) and it is done to detect more types mainly coming from modules outside of my
+repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY
+searces by default. When generating the modules, you have two main options when
+setting the flags:
 
-    - Flag -m: It will geneate the stubs only for this module. Ex: If I have the following package: A.B.C and I do "stubgen -m C", the stubs for the module C will be generated, but I will also need to generate the ones from A and B (the previous ones). By doing this, the stubs I created are much more in control. Useful when the package is big.
-    - Flag -p: It will generate all modules found. Ex: If I have the module C as A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules A, B and C. However, if the package is big this wil take time and maybe some conflicts.
+    - Flag -m: It will geneate the stubs only for this module. Ex: If I have the
+      following package: A.B.C and I do "stubgen -m C", the stubs for the module
+      C will be generated, but I will also need to generate the ones from A and B
+      (the previous ones). By doing this, the stubs I created are much more in
+      control. Useful when the package is big.
+    - Flag -p: It will generate all modules found. Ex: If I have the module C as
+      A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules
+      A, B and C. However, if the package is big this wil take time and maybe
+      some conflicts.
 
-For both methods if the module was imported as an absolute path, this one needs to be installed in the Python environment. This can be done with the pip framework. If the import was relative, it wont be necessary to generate the stubs, as the linters such as mypy will detect automatically.
+For both methods if the module was imported as an absolute path, this one needs to
+be installed in the Python environment. This can be done with the pip framework.
+If the import was relative, it wont be necessary to generate the stubs, as the
+linters such as mypy will detect automatically.
 
 To do list manager
 | Command/Shortcut  | Description |
@@ -237,7 +283,7 @@ To do list manager
 | \<Leader\>\<Leader\> | Swap between the todo list and the file that is being edit|
 | All status | DONE, WIP, TODO, HELP, WAIT, BLOCKED|
 
-## Notes           
+## Notes
 
 Inspired by [igemnace][1] repository.
 
