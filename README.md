@@ -205,23 +205,22 @@ Misc
 | :SO write here the issue | Search the issue in stack overflow |
 | :Google write here the issue | Search the issue in google|
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
-| Leader c | Comment line/block in Python|
+| \<Leader\>c | Comment line/block in Python|
 | ctrl+p (Insert mode) | Autocomplete the word based on the document |
 | ctrl+d | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
-| Leader -> p/P| Inserts a print statement above or below with the variable chosen by the cursor|
-| Leader g | Performs git diff on that file. By quitting it will return to the same file|
+| \<Leader\> + p/P| Inserts a print statement above or below with the variable chosen by the cursor|
 | gS/gJ| Splits/Join the arguments from a function into multiple lines (or the code in general)|
 
 Vim-fugitive or git integration
 Note: g stands for git
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader>gdf | Git diff of the current file wrt the previous commit|
-| <Leader>gdd | Git diff of the current file wrt the develop branch |
-| <Leader>gdm | Git diff of the current file wrt the master branch|
-| <Leader>gt | Function to toggle/untoggle the folds found in the code|
-| <Leader>gh | Check history of changes for the current file (previous commits)|
-| <Leader>gH | Check history of changes for the current function (previous commits)|
+| \<Leader\>gdf | Git diff of the current file wrt the previous commit|
+| \<Leader\>gdd | Git diff of the current file wrt the develop branch |
+| \<Leader\>gdm | Git diff of the current file wrt the master branch|
+| \<Leader\>gt | Function to toggle/untoggle the folds found in the code|
+| \<Leader\>gh | Check history of changes for the current file (previous commits)|
+| \<Leader\>gH | Check history of changes for the current function (previous commits)|
 
 Test inside vim
 | command/shortcut  | description |
@@ -233,21 +232,21 @@ Test inside vim
 Vim-easy-motion
 | command/shortcut  | description |
 | ------------- | ------------- |
-| <leader>f | displays how to jump to the start of a word|
-| <leader>e | displays how to jump to the end of a word|
-| <leader>w | displays how to jump to the start of every single word, including all splits|
-| <Leader>. | Repeat last vim-easy-motion command|
-| <Leader>j or k| Jump to specified line|
+| \<Leader\>f | displays how to jump to the start of a word|
+| \<Leader\>e | displays how to jump to the end of a word|
+| \<Leader\>w | displays how to jump to the start of every single word, including all splits|
+| \<Leader\>. | Repeat last vim-easy-motion command|
+| \<Leader\>j or k| Jump to specified line|
 
 Linters/Syntaxis check
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader>at | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead|
-| <Leader>af | Fixes some of the changes. The fixers are in the vim config|
-| <Leader>as | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed|
-| <Leader>ar | Find the references of the function in which the cursor is located |
-| <Leader>ah | Displays the information of a function (called Hover)|
-| <Leader>ad | Go to the definition of the function where the cursor is located|
+| \<Leader\>at | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead|
+| \<Leader\>af | Fixes some of the changes. The fixers are in the vim config|
+| \<Leader\>as | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed|
+| \<Leader\>ar | Find the references of the function in which the cursor is located |
+| \<Leader\>ah | Displays the information of a function (called Hover)|
+| \<Leader\>ad | Go to the definition of the function where the cursor is located|
 | :GrammarousCheck | Display grammar errors |
 | :GrammarousReset | Remove the errors |
 | :Isort/:isort | Sorts the imports of Python script according to Pep8 |
@@ -276,7 +275,7 @@ linters such as mypy will detect automatically.
 To do list manager
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
-| <Leader><Leader> | Swap between the todo list and the file that is being edit|
+| \<Leader\>\<Leader\> | Swap between the todo list and the file that is being edit|
 | All status | DONE, WIP, TODO, HELP, WAIT, BLOCKED|
 
 ## Notes
