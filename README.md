@@ -84,8 +84,8 @@ Main use
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
 |   ctrl + k| Switch between source and header files  |
-|  F4 | Toggles and untoggles the taglist (summary of a file, defined by |
-|     | itsclasses or variables). To remove entries just press u         |
+|  F4 | Toggles and untoggles the taglist (summary of a file, defined by
+itsclasses or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
 |   ctrl + u/d| Moves the cursor half the screen  |
 |o/O | Inserts a new line below and above and enters into insert mode |
