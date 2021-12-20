@@ -60,6 +60,9 @@ sudo apt install clang-tidy
 pip install cpplint
 sudo apt-get install cppcheck
 
+# Linters for vim
+pip install vim-vint
+
 # Stubs
 pip install pandas-stubs
 pip install data-science-types
