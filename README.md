@@ -25,9 +25,10 @@ Main features of this VIM:
   of a file.
 - Fuzzy finder: Search any file given its name or any string inside it.
   Open the file in any split you want.
-- Git integration: check files changed, diff of the file wrt 1) the last commit
+- Git full integration: check files changed, diff of the file wrt 1) the last commit
   or 2) any branch. Also integrated change history for files and even functions.
-  Displays in the editor which lines have been changed.
+  Other git functions: Displays in the editor which lines have been changed, setup
+  as merge tool, branch control (checkout, delete, merge, rebase, track remotes...)
 - Temporary maximize one window to better code
 - Documentation template for docstrings easily auto-generated in multiple standards
 - Easy resizing and moving window splits with the keyboard
@@ -35,6 +36,7 @@ Main features of this VIM:
 - Easy toggle between source (.cpp) and header (.h) files
 - Easy selection of sentences enclosed by brackets or any delimiter
 - Autocomplete functionality
+- Quick snippets for Python and C++
 - Plenty of linters based on format, code analysis, syntaxis and type checking:
   - Python: Pylint, mypy, pydocstyle, vulture, pyright, flake8. This last one
     integtegrates: darglint, pytest-style, flake8-simplify, flake8-bugbear,
@@ -83,7 +85,7 @@ Main use
 | . | Repeat last action performed in vim|
 |  ctrl + r |  Update opened file (should be automatic) |
 |  ctrl + t | Opens a new tab  |
-|   ctrl + k| Switch between source and header files  |
+|   ctrl + x| Switch between source and header files  |
 |  F4 | Toggles and untoggles the taglist (summary of a file, defined by
 itsclasses or variables). To remove entries just press u  |
 |   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
@@ -147,12 +149,10 @@ Highlighting and copy/pasting
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
 | Shift + Arrows  | Moves between split panes  |
-| Ctrl + Up/Down  | Moves between tabs  |
-| :tclose | Close current tab|
-| Shift + W | Close current split pane|
 | Shift + x  | Temporary fulscreens a split pane  |
 | :vsplit  | Creates a new vertical split with the same file  |
 | :split  | Creates a new horizontal split with the same file  |
+| Ctrl+Up/Down | Move between items in the quickfix list |
 
 Resizing and moving split planes
 
@@ -215,12 +215,26 @@ Vim-fugitive or git integration
 Note: g stands for git
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
+| \<Leader\>gs  | Run the tool git status useful to stage, usntage... |
+| s/u | Stage/Unstage |
+|=| Visualize the changes to the file in quick format| 
+|dd on file | Performs diff in two windows | 
+| :Gcommit | Commit them |
+| :Gpush | Push to the remote |
+| dv on file | Solve conflicts. Tip: After finishing do ctrl+w o to close all the windows but the one I am currently at (it will close the diff) |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit|
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch |
 | \<Leader\>gdm | Git diff of the current file wrt the master branch|
-| \<Leader\>gt | Function to toggle/untoggle the folds found in the code|
-| \<Leader\>gh | Check history of changes for the current file (previous commits)|
-| \<Leader\>gH | Check history of changes for the current function (previous commits)|
+| \<Leader\>gt  | Function to toggle/untoggle the folds found in the code|
+| \<Leader\>gh  | Check history of changes for the current file (previous commits)|
+| \<Leader\>gH  | Check history of changes for the current function (previous commits)|
+| \<Leader\>gb  | Open the menu for operating with branches. Options below |
+| enter         | Checkout                                          |
+| alt-enter     | Track remote branch (Downloads the branch)        |
+| Ctrl + b      | Create new branch and checkout after writing name |
+| Ctrl + d      | Delete branch                                     |
+| Ctrl + e      | Merge                                             |
+| Ctrl + r      | Rebase                                            |
 
 Test inside vim
 | command/shortcut  | description |

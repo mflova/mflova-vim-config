@@ -12,7 +12,7 @@ let g:mflova_linters_off = 'LINTERS OFF'
 let g:mflova_python_max_line_length = '90'
 let g:mflova_python_indent_size = '4'
 let g:mflova_python_docstring_style= 'sphinx'
-" C++
+" C++ TODO:TO BE CONFIGURED
 let g:mflova_cpp_max_line_length = '90'
 " CMake
 let g:mflova_cmake_max_line_length = '90'
@@ -65,7 +65,7 @@ let g:ale_python_mypy_options = '--strict'
 let g:ale_python_pylint_options = '--good-names="q1, q2, q3, q4, q5, q, i, j, k, df, dt" --disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
 " Some plugins were integrated into flake8. Install with pip the following
 " ones:
-let g:ale_python_flake8_options = ' --docstring-style=' . g:mflova_python_docstring_style . ' --max-line-length=' . g:mflova_python_max_line_length . ' --indent-size=4' 
+let g:ale_python_flake8_options = ' --docstring-style=' . g:mflova_python_docstring_style . ' --max-line-length=' . g:mflova_python_max_line_length . ' --indent-size=4 --ignore="DAR402"' 
 let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {line-length:{max: ' . g:mflova_yaml_max_line_length . '}}}"' 
 let g:ale_cmake_cmakelint_options = '--linelength='  .  g:mflova_cmake_max_line_length
 let g:ale_cpp_cpplint_options = '--linelength=' . g:mflova_cpp_max_line_length . ' --filter="-legal/copyright, -whitespace/braces, -whitespace/newline"'  " The brace ones are ignore due to personal change in style

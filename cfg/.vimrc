@@ -4,6 +4,9 @@ filetype off                  " required
 " Maps the leader key
 let mapleader = " "
 let maplocalleader=" "
+" Map ALT as M
+" Example: nnoremap <M-j> j
+execute "set <M-j>=\ej"
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -63,6 +66,9 @@ call vundle#begin()
   Plugin 'mflova/vim-getting-things-down' " ToDo list manager
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
   Plugin 'vim-test/vim-test' " Execute unit tests in VIM
+  Plugin 'SirVer/ultisnips' " Snippets engine
+  Plugin 'mflova/vim-snippets' " Collection of snippets
+  Plugin 'stsewd/fzf-checkout.vim' " Manage git branches with FZF engine
 call vundle#end()
 
 " It will update the time in which gitguutter is refreshed
@@ -83,12 +89,14 @@ nnoremap <silent><C-d> :DogeGenerate<CR>
 autocmd FileType python nnoremap <silent><C-d> :call PythonGenerateDocstring()<CR>
 function! PythonGenerateDocstring()
     let l:line = getline('.')
-    let l:words = split(l:line, ' ')
-    if l:words[0] == 'def'
-        DogeGenerate sphinx
-    endif
-    if l:words[0] == 'class'
-        Docstring
+    if len(l:line) != 0
+        let l:words = split(l:line, ' ')
+        if l:words[0] == 'def'
+            DogeGenerate sphinx
+        endif
+        if l:words[0] == 'class'
+            Docstring
+        endif
     endif
 endfunction
 
@@ -115,13 +123,12 @@ colorscheme molokai " molokai or onedark
 " Highlights the current line of the cursor
 let g:conoline_auto_enable = 1
 
-" Change between tabs
-nnoremap <silent><C-Down> :tabprevious<CR>
-nnoremap <silent><C-Up> :tabnext<CR>
-
 "Auto reload files
 set autoread 
 au CursorHold * checktime 
+
+" Color
+highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 " Set tab to be 4 spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -151,7 +158,7 @@ nmap <silent><F2> :NERDTreeToggle<CR>
 nmap <silent><C-t> :tabnew<CR>
 
 " Alternate between source and header file
-map <silent><C-k> :call CurtineIncSw()<CR>
+nmap <silent><C-x> :call CurtineIncSw()<CR>
 
 " Opens TagList at right
 let Tlist_Use_Right_Window   = 1
@@ -199,7 +206,29 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-
+" Updates BLines command from FZF to have the preview window. Note: Needs ripgrep to be installed
+command! -bang -nargs=* BLines
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%'))
+    " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
+    "
+" Customize fzf colors to match your color scheme                                          
+" - fzf#wrap translates this to a set of `--color` options                                 
+let g:fzf_colors =                                                                         
+\ { 'fg':      ['fg', 'Normal'],                                                           
+  \ 'bg':      ['bg', 'Normal'],                                                           
+  \ 'hl':      ['fg', 'Comment'],                                                          
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],                             
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],                                       
+  \ 'hl+':     ['fg', 'Statement'],                                                        
+  \ 'info':    ['fg', 'PreProc'],                                                          
+  \ 'border':  ['fg', 'Ignore'],                                                           
+  \ 'prompt':  ['fg', 'Conditional'],                                                      
+  \ 'pointer': ['fg', 'Exception'],                                                        
+  \ 'marker':  ['fg', 'Keyword'],                                                          
+  \ 'spinner': ['fg', 'Label'],                                                            
+  \ 'header':  ['fg', 'Comment'] } 
 
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
@@ -285,12 +314,29 @@ endfunction
 " Introduces Git diff from fugitive
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 " Zr means that by default, the diff will be fully unfolded
+map <silent><Leader>gs :G<CR>:20wincmd_<CR> 
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
 map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gt :call ToggleFoldDiff()<CR>
 map <silent><Leader>gh :%Gclog<CR>
 map <silent><Leader>gH :Gclogfunc<CR>
+map <silent><Leader>gb :GBranches<CR>
+
+" As merge tool: gets from left and right
+nmap <silent><leader>g<Right> :diffget //3<CR>
+nmap <silent><leader>g<Left> :diffget //2<CR>
+let g:fzf_checkout_git_options = '--sort=-committerdate'
+let g:fzf_branch_actions = {
+      \ 'diff': {
+      \   'prompt': 'Diff> ',
+      \   'execute': 'Git diff {branch}',
+      \   'multiple': v:false,
+      \   'keymap': 'ctrl-f',
+      \   'required': ['branch'],
+      \   'confirm': v:false,
+      \ },
+      \}
 
 " Delete entire word in insert mode
 imap <C-d> <C-[>diwi
@@ -301,6 +347,8 @@ imap <C-v> <C-[>pi
 " v and x for vertical/horizontal split
 autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
+nmap <C-Down> :cn<CR>
+nmap <C-Up> :cp<CR>
 
 let s:vim_cfg_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
@@ -333,4 +381,8 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'error': 80,
       \ }
 
-
+" Snippets mapping
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']

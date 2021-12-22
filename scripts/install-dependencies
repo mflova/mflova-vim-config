@@ -5,6 +5,7 @@ sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y isort
 sudo apt-get install -y yapf
 sudo apt-get install -y autopep8
+sudo apt-get install -y ripgrep
 
 pip install flake8
 pip3 install flake8
