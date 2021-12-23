@@ -77,139 +77,140 @@ Following tables gather all the commands and shortcuts I like using:
 ### Main VIM use
 
 Main use
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-|  :vsave name | Save a session with all splits and NERDTree  |
-|  :vload name | Load sessions  |
-|  u | Undo changes  |
-| . | Repeat last action performed in vim|
-|  ctrl + r |  Update opened file (should be automatic) |
-|  ctrl + t | Opens a new tab  |
-|   ctrl + x| Switch between source and header files  |
-|  F4 | Toggles and untoggles the taglist (summary of a file, defined by
-itsclasses or variables). To remove entries just press u  |
-|   Enter (normal mode) | Selects everything between two brackets. Multiple enters will select more  |
-|   ctrl + u/d| Moves the cursor half the screen  |
-|o/O | Inserts a new line below and above and enters into insert mode |
-|*/# | When the cursor is on a word, it will jump to next (or previous) matching word|
-| f/F/t/T -> char -> (, or ;) | Jumps to the next (or previous) one char that matches. This will be recorded. You can press , or ; at any time to continue with previous and next matches. T comes from "till" and f from "find"|
-| (number)dd | Removes the following (number) lines. 1 if not specified |
-| :(number)d | Removes the specified line|
-| c/d -> t/T/f/F -> char | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
-|H/M/L| Moves the cursosr to the highest, midle or lower part of the screen|
-| Shift + D/C | Removes from cursor to right. D will also enter into insert mode|
-|:number| Jump to that line|
-|:numberd| Remove that line |
-| % over parenthesis | Will jump to the other corresponding parenthesis. It can be combined with commands such as c% to remove everything contained between brackets/parenthesis|
-| I/A | Enters insert mode at the beggining/end of the line|
-| Space | Insert space and go to insert mode|
-| x/s | Delete char. s will also go into insert mode after writing a character|
-| dw/dW/cw/cW | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
-| daw/caw | Removes the entire word, including prev character|
-| de/ce | Removes the entire word (Better use this ones)|
-|>> or <<| Shifts the line while being in normal mode|  
-| 0 | Move to the start of the line|
-| b or w| Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
-| e | Jump between the end of next words|
-| dgg/D/d$ | Remove from the cursor to the beginning/end of the line|
-| gqap | In normal mode, it break long lines|
-| ctrl + d | Autocomplete command line|
-| ctrl + d (Insert mode) | Delete word under cursor in inser mode|
-| ctrl + v (Insert mode) | Paste a yanked work in insert mode|
-| TBD/x (Quickfix/location window)| Opens the file in vertical/horizontal split |
-| :term or :vert term | Opens a new terminal (horizontal or vertical)|
+| Command/Shortcut   | Description                                                                |
+| ------------------ | -------------------------------------------------------------------------- |
+| :vsave name        | Save a session with all splits and NERDTree                                |
+| :vload name        | Load sessions                                                              |
+| u                  | Undo changes                                                               |
+| r                  | Redo changes                                                               |
+| .                  | Repeat last action performed in vim                                        |
+| ctrl + r           | Update opened file (should be automatic)                                   |
+| ctrl + t           | Opens a new tab                                                            |
+| ctrl + x           | Switch between source and header files                                     |
+| F4                 | Toggles and untoggles the taglist (summary of a file, defined by itsclasses or variables). To remove entries just press u |
+| Enter              | Selects everything between two brackets. Multiple enters will select more  |
+| ctrl + u/d         | Moves the cursor half the screen                                           |
+| o/O                | Inserts a new line below and above and enters into insert mode             |
+| */#                | When on a word, it will jump to next (or previous) matching word           |
+| f/F/t/T            | Jumps to the next (or previous) one char that matches. This will be recorded. You can press , or ; at any time to continue with previous and next matches. T comes from "till" and f from "find" |
+| (number)dd         | Removes the following (number) lines. 1 if not specified                   |
+| :(number)d         | Removes the specified line                                                 |
+| c/d -> t/T/f/F     | Deletes everything till the cursor reaches the specified char. If d is used it will also enter into insert mode|
+| H/M/L              | Moves the cursosr to the highest, midle or lower part of the screen        |
+| Shift + D/C        | Removes from cursor to right. D will also enter into insert mode           |
+| :number            | Jump to that line                                                          |
+| :numberd           | Remove that line                                                           |
+| %                  | Jump to paired bracket                                                     |
+| I/A                | Enters insert mode at the beggining/end of the line                        |
+| Space              | Insert space and go to insert mode                                         |
+| x/s                | Delete char. s will also go into insert mode after writing a character     |
+| dw/dW/cw/cW        | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
+| daw/caw            | Removes the entire word, including prev character                          |
+| de/ce              | Removes the entire word (Better use this ones)                             |
+| >> or <<           | Shifts the line while being in normal mode                                 |  
+| 0                  | Move to the start of the line                                              |
+| b or w             | Moves backwards/forwards between the start of different words. You can specific how many words with xb or can be used to remove x words with xcb/xdb|
+| e                  | Jump between the end of next words                                         |
+| dgg/D/d$           | Remove from the cursor to the beginning/end of the line                    |
+| gqap               | In normal mode, it break long lines                                        |
+| ctrl + d           | Autocomplete command line                                                  |
+| ctrl + d (Insert m)| Delete word under cursor in inser mode                                     |
+| ctrl + v (Insert m)| Paste a yanked work in insert mode                                         |
+| TBD/x (Quickfix/location window)| Opens the file in vertical/horizontal split                   |
+| :term/:vert term   | Opens a new terminal (horizontal or vertical)                              |
 
 Find and replace
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| :s/foo/bar/  | Changes foo by bar (first occurence) |
-| :s/foo/bar/g  | Changes foo by bar (entire line) |
-| :%s/foo/bar/g  | Changes foo by bar (all file) |
-| :%s/foo/bar/gc  | Changes foo by bar (all file. Confirmation prompt) |
-| Se | (Plugin) Removes the word with se and write new one. Press . to replace following matches |
+| Command/Shortcut  | Description                                                                   |
+| -------------- | -------------------------------------------------------------------------------- |
+| :s/foo/bar/    | Changes foo by bar (first occurence)                                             |
+| :s/foo/bar/g   | Changes foo by bar (entire line)                                                 |
+| :%s/foo/bar/g  | Changes foo by bar (all file)                                                    |
+| :%s/foo/bar/gc | Changes foo by bar (all file. Confirmation prompt)                               |
+| Se             | Removes the word with se and write new one. Press . to replace following matches |
 
 Highlighting and copy/pasting
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| v  | Enters visual mode  |
-| w  | Highlights up to next word  |
-| Ctrl + Arrows | Highlights up to next space  |
-| vv  | Resets highlighted text  |
-| y  | Copy  |
-| yy | Copy line. p will paste it below|
-| d  | Cut  |
-|  u | Undo changes  |
-| p/P  | Paste  |
-| :pu  | Paste in new line  |
-| Enter (normal mode)  | Selects everything between two brackets. Multiple enters will select more  |
+| Command/Shortcut  | Description                                                           |
+| ------------- | ------------------------------------------------------------------------- |
+| v             | Enters visual mode                                                        |
+| w             | Highlights up to next word                                                |
+| Ctrl + Arrows | Highlights up to next space                                               |
+| vv            | Resets highlighted text                                                   |
+| y             | Copy                                                                      |
+| yy            | Copy line. p will paste it below                                          |
+| d             | Cut                                                                       |
+| u             | Undo changes                                                              |
+| p/P           | Paste                                                                     |
+| :pu           | Paste in new line                                                         |
+| Enter         | Selects everything between two brackets. Multiple enters will select more |
 
 
 ### Window/Tab handling
 
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| Shift + Arrows  | Moves between split panes  |
-| Shift + x  | Temporary fulscreens a split pane  |
-| :vsplit  | Creates a new vertical split with the same file  |
-| :split  | Creates a new horizontal split with the same file  |
-| Ctrl+Up/Down | Move between items in the quickfix list |
+| Command/Shortcut  | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| Shift + Arrows    | Moves between split panes                          |
+| Shift + x         | Temporary fulscreens a split pane                  |
+| :vsplit           | Creates a new vertical split with the same file    |
+| :split            | Creates a new horizontal split with the same file  |
+| Ctrl+Up/Down      | Move between items in the quickfix list            |
 
 Resizing and moving split planes
 
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| Ctrl + e  | Enters the mode to resize or move split panes  |
-| Enter  | Confirm changes and quite mode  |
-| e  | Swap between different moves such as resize or move mode  |
-| q  | Quit mode  |
-| Moving split panes  | Select a split pane, press Ctrl + e (resize mode), then e (move mode) and move it with the arrows  |
+| Command/Shortcut   | Description                                              |
+| ------------------ | -------------------------------------------------------- |
+| Ctrl + e           | Enters the mode to resize or move split panes            |
+| Enter              | Confirm changes and quite mode                           |
+| e                  | Swap between different moves such as resize or move mode |
+| q                  | Quit mode                                                |
+| Arrows (move mode) | Select a split pane, press Ctrl + e (resize mode), then e (move mode) and move it with the arrows  |
 
 
 ### NERDTree
 
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| F2  | Toggle and untoggle the NERDTree  |
-| v in file  | Opens a file in vertical split  |
-| x in file  | Opens a file in horizontal split  |
-| t in file  | Opens a file in new tab  |
-| T in file  | Opens a file in new tab (silent)  |
-| r/R  | Refresh node and root node  |
-| t in a folder  | Changes current dir to that one  |
+| Command/Shortcut | Description                       |
+| ---------------- | --------------------------------- |
+| F2               | Toggle and untoggle the NERDTree  |
+| v in file        | Opens a file in vertical split    |
+| x in file        | Opens a file in horizontal split  |
+| t in file        | Opens a file in new tab           |
+| T in file        | Opens a file in new tab (silent)  |
+| r/R              | Refresh node and root node        |
+| t in a folder    | Changes current dir to that one   |
 
 
 ### Searching
 
 Search for strings in a file
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| /word + enter  | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
-| /word + enter + n/N  | Previous and next matches  |
+| Command/Shortcut     | Description               |
+| -------------------- | ------------------------- |
+| /word + enter        | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
+| /word + enter + n/N  | Previous and next matches |
 
 Search for files
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| Ctrl + b | Find a specific line within a file (fuzzy finder) |
-| Ctrl + f | Find a specific line within all the opened files (fuzzy finder) |
-| Ctrl + g | Search for a file in the current directory given a string|
-| Ctrl + p | Search for file name in the current directory. Use <Tab> to select more than one file and then opened them with ctrl+v or ctrl+x|
-| Ctrl + v | Open the file in vertical split   |
-| Ctrl + x |  Open the file in horizontal split  |
-| Ctrl + t |  Open the file in new tab  |
-| Ctrl + q |  Open multiple selected files in a quickfix window |
+| Command/Shortcut | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| Ctrl + b         | Find a specific line within a file (fuzzy finder)               |
+| Ctrl + f         | Find a specific line within all the opened files (fuzzy finder) |
+| Ctrl + g         | Search for a file in the current directory given a string       |
+| Ctrl + p         | Search for file name in the current directory. Use <Tab> to select more than one file and then opened them with ctrl+v or ctrl+x|
+| Ctrl + v         | Open the file in vertical split                                 |
+| Ctrl + x         | Open the file in horizontal split                               |
+| Ctrl + t         | Open the file in new tab                                        |
+| Ctrl + q         | Open multiple selected files in a quickfix window               |
 
 ### Misc
 Misc 
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| :SO write here the issue | Search the issue in stack overflow |
-| :Google write here the issue | Search the issue in google|
+| Command/Shortcut              | Description                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| :SO write here the issue      | Search the issue in stack overflow                        |
+| :Google write here the issue  | Search the issue in google                                |
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
-| \<Leader\>c | Comment line/block in Python|
-| ctrl+p (Insert mode) | Autocomplete the word based on the document |
-| ctrl+d | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
-| \<Leader\> + p/P| Inserts a print statement above or below with the variable chosen by the cursor|
-| gS/gJ| Splits/Join the arguments from a function into multiple lines (or the code in general)|
+| \<Leader\>c                   | Comment line/block in Python                              |
+| ctrl+p (Insert mode)          | Autocomplete the word based on the document               |
+| ctrl+d                        | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
+| \<Leader\> + p/P              | Inserts a print statement above or below with the variable chosen by the cursor|
+| gS/gJ                         | Splits/Join the arguments from a function into multiple lines (or the code in general)|
+| \<Leader\>\<Leader\>          | Swap between the todo list and the file that is being edit |
 
 Vim-fugitive or git integration
 Note: g stands for git
@@ -233,41 +234,42 @@ Note: g stands for git
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
 | enter         | Checkout                                                                                |
-| alt-enter     | Track remote branch (Downloads the branch)                                              | 
+| alt-enter     | Forced checkout                                                                         | 
 | Ctrl + b      | Create new branch and checkout after writing name                                       |
 | Ctrl + d      | Delete branch                                                                           |
 | Ctrl + e      | Merge                                                                                   |
 | Ctrl + r      | Rebase                                                                                  |
 | Ctrl + f      | Diff with the current file opened and the branch selected                               |
+| Ctrl + t      | Checkout and track the remote branch                                                    |
 
 Test inside vim
-| command/shortcut  | description |
-| ------------- | ------------- |
-| tfile | Runs all the tests from the file|
-| tsuite| Runs all the suite test|
-| tthis | Runs the test that is the nearest to the cursor |
+| Command/Shortcut | Description                                     |
+| ---------------- | ----------------------------------------------- |
+| tfile            | Runs all the tests from the file                |
+| tsuite           | Runs all the suite test                         |
+| tthis            | Runs the test that is the nearest to the cursor |
 
 Vim-easy-motion
-| command/shortcut  | description |
-| ------------- | ------------- |
-| \<Leader\>f | displays how to jump to the start of a word|
-| \<Leader\>e | displays how to jump to the end of a word|
-| \<Leader\>w | displays how to jump to the start of every single word, including all splits|
-| \<Leader\>. | Repeat last vim-easy-motion command|
-| \<Leader\>j or k| Jump to specified line|
+| Command/Shortcut | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| \<Leader\>f      | displays how to jump to the start of a word                                  |
+| \<Leader\>e      | displays how to jump to the end of a word                                    |
+| \<Leader\>w      | displays how to jump to the start of every single word, including all splits |
+| \<Leader\>.      | Repeat last vim-easy-motion command                                          |
+| \<Leader\>j or k | Jump to specified line                                                       |
 
 Linters/Syntaxis check
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| \<Leader\>at | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead|
-| \<Leader\>af | Fixes some of the changes. The fixers are in the vim config|
-| \<Leader\>as | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed|
-| \<Leader\>ar | Find the references of the function in which the cursor is located |
-| \<Leader\>ah | Displays the information of a function (called Hover)|
-| \<Leader\>ad | Go to the definition of the function where the cursor is located|
-| :GrammarousCheck | Display grammar errors |
-| :GrammarousReset | Remove the errors |
-| :Isort/:isort | Sorts the imports of Python script according to Pep8 |
+| Command/Shortcut | Description                                                        |
+| ---------------- | ------------------------------------------------------------------ |
+| \<Leader\>at     | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead |
+| \<Leader\>af     | Fixes some of the changes. The fixers are in the vim config        |
+| \<Leader\>as     | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed |
+| \<Leader\>ar     | Find the references of the function in which the cursor is located |
+| \<Leader\>ah     | Displays the information of a function (called Hover)              |
+| \<Leader\>ad     | Go to the definition of the function where the cursor is located   |
+| :GrammarousCheck | Display grammar errors                                             |
+| :GrammarousReset | Remove the errors                                                  |
+| :Isort/:isort    | Sorts the imports of Python script according to Pep8               |
 
 About the stubs automatically generated, this is done with "stubgen" (installed with
 mypy) and it is done to detect more types mainly coming from modules outside of my
@@ -289,12 +291,6 @@ For both methods if the module was imported as an absolute path, this one needs 
 be installed in the Python environment. This can be done with the pip framework.
 If the import was relative, it wont be necessary to generate the stubs, as the
 linters such as mypy will detect automatically.
-
-To do list manager
-| Command/Shortcut  | Description |
-| ------------- | ------------- |
-| \<Leader\>\<Leader\> | Swap between the todo list and the file that is being edit|
-| All status | DONE, WIP, TODO, HELP, WAIT, BLOCKED|
 
 ## Notes
 

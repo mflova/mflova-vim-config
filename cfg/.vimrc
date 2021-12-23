@@ -17,6 +17,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Path used to perform relative imports 
+let s:vim_cfg_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
 filetype plugin on  " Added by me. If bundle does not work properly, delete it temporary. Used for Doge documentation generator
 
 " Command to run other commands from shell (write them as argument)
@@ -193,51 +196,6 @@ cmap ntrm NERDTreeProjectRm
 cmap vsave SaveSession
 cmap vload OpenSession
 
-" Fzf remaps
-nnoremap <silent><C-p> :Files<Cr>
-nnoremap <silent><C-g> :Ag<Cr>
-nnoremap <silent><C-b> :BLines<CR>
-nnoremap <silent><C-f> :Lines<CR>
-" Set how the window appears in the FZF command
-let g:fzf_layout = { 'down': '~35%' }
-" Define a function that will allow fzf to build a quicfix list from selected
-" files
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Updates BLines command from FZF to have the preview window. Note: Needs ripgrep to be installed
-command! -bang -nargs=* BLines
-    \ call fzf#vim#grep(
-    \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
-    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%'))
-    " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
-    "
-" Customize fzf colors to match your color scheme                                          
-" - fzf#wrap translates this to a set of `--color` options                                 
-let g:fzf_colors =                                                                         
-\ { 'fg':      ['fg', 'Normal'],                                                           
-  \ 'bg':      ['bg', 'Normal'],                                                           
-  \ 'hl':      ['fg', 'Comment'],                                                          
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],                             
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],                                       
-  \ 'hl+':     ['fg', 'Statement'],                                                        
-  \ 'info':    ['fg', 'PreProc'],                                                          
-  \ 'border':  ['fg', 'Ignore'],                                                           
-  \ 'prompt':  ['fg', 'Conditional'],                                                      
-  \ 'pointer': ['fg', 'Exception'],                                                        
-  \ 'marker':  ['fg', 'Keyword'],                                                          
-  \ 'spinner': ['fg', 'Label'],                                                            
-  \ 'header':  ['fg', 'Comment'] } 
-
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
@@ -319,44 +277,6 @@ function! ToggleFoldDiff()
         let g:is_folded=1
     endif
 endfunction
-" Git integration
-" Loads the enhanced version of the diff from a plugin
-autocmd VimEnter * PatienceDiff
-" Introduces Git diff from fugitive (used below in a command)
-command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
-" Zr means that by default, the diff will be fully unfolded
-" Opens the window at minimum height
-map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(3,99)<CR> 
-map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
-map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
-map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
-map <silent><Leader>gt :call ToggleFoldDiff()<CR>
-map <silent><Leader>gH :%Gclog<CR>
-map <silent><Leader>gh :Gclogfunc<CR>
-map <silent><Leader>gb :GBranches --locals<CR>
-map <silent><Leader>gB :GBranches<CR>
-map <silent><Leader>gc :call Commitizen()<CR>
-map <silent><Leader>gp :Git push<CR>
-
-function! Commitizen()
-    execute ':RunCMDSilent ' . 'cz commit'
-endfunction
-
-
-" As merge tool: gets from left and right
-nmap <silent><leader>g<Right> :diffget //3<CR>
-nmap <silent><leader>g<Left> :diffget //2<CR>
-let g:fzf_checkout_git_options = '--sort=-committerdate'
-let g:fzf_branch_actions = {
-      \ 'diff': {
-      \   'prompt': 'Diff> ',
-      \   'execute': 'Gvdiffsplit {branch}',
-      \   'multiple': v:false,
-      \   'keymap': 'ctrl-f',
-      \   'required': ['branch'],
-      \   'confirm': v:false,
-      \ },
-      \}
 
 " Adjust the quickfix height to the number of elemens. Maximum 10
 
@@ -376,10 +296,6 @@ au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
-
-let s:vim_cfg_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
-exec 'source ' . s:ale_cfg_path
 
 " To do list manager
 " Quick-switch between current file and `TODO.md` of project root
@@ -413,3 +329,12 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']
+
+" Imports
+let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
+let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
+let s:fzf_cfg_path = s:vim_cfg_path . '/fzf.vim'
+
+exec 'source ' . s:ale_cfg_path
+exec 'source ' . s:git_cfg_path
+exec 'source ' . s:fzf_cfg_path

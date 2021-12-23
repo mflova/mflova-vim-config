@@ -3,7 +3,7 @@
 " PARAMS
 "
 " Enabled at startup by default. Only read at startup
-let g:ale_enabled = 1
+let g:ale_enabled = 0
 " Constants defined for the vim airline status bar when the ale linters are
 " ON/OFF. Shown in the vim-airline warning section
 let g:mflova_linters_on = ''
