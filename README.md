@@ -116,7 +116,7 @@ itsclasses or variables). To remove entries just press u  |
 | ctrl + d | Autocomplete command line|
 | ctrl + d (Insert mode) | Delete word under cursor in inser mode|
 | ctrl + v (Insert mode) | Paste a yanked work in insert mode|
-| v/x (Quickfix/location window)| Opens the file in vertical/horizontal split |
+| TBD/x (Quickfix/location window)| Opens the file in vertical/horizontal split |
 | :term or :vert term | Opens a new terminal (horizontal or vertical)|
 
 Find and replace
@@ -216,8 +216,9 @@ Note: g stands for git
 | Command/Shortcut  | Description |
 | ------------- | ------------- |
 | \<Leader\>gs  | Run the tool git status useful to stage, usntage... |
-| s/u | Stage/Unstage |
-|=| Visualize the changes to the file in quick format| 
+| s/u/U on a file or folder | Stage/Unstage(all) |
+|Enter on a file | Open the file | 
+|= on a file | Visualize the changes to the file in quick format| 
 |dd on file | Performs diff in two windows | 
 | :Gcommit | Commit them |
 | :Gpush | Push to the remote |
@@ -228,13 +229,15 @@ Note: g stands for git
 | \<Leader\>gt  | Function to toggle/untoggle the folds found in the code|
 | \<Leader\>gh  | Check history of changes for the current file (previous commits)|
 | \<Leader\>gH  | Check history of changes for the current function (previous commits)|
-| \<Leader\>gb  | Open the menu for operating with branches. Options below |
-| enter         | Checkout                                          |
-| alt-enter     | Track remote branch (Downloads the branch)        |
-| Ctrl + b      | Create new branch and checkout after writing name |
-| Ctrl + d      | Delete branch                                     |
-| Ctrl + e      | Merge                                             |
-| Ctrl + r      | Rebase                                            |
+| \<Leader\>gb  | Open the menu for operating with local branches. Options below |
+| \<Leader\>gB  | Open the menu for operating with all branches. Options below |
+| enter         | Checkout                                                  |
+| alt-enter     | Track remote branch (Downloads the branch)                |
+| Ctrl + b      | Create new branch and checkout after writing name         |
+| Ctrl + d      | Delete branch                                             |
+| Ctrl + e      | Merge                                                     |
+| Ctrl + r      | Rebase                                                    |
+| Ctrl + f      | Diff with the current file opened and the branch selected |
 
 Test inside vim
 | command/shortcut  | description |

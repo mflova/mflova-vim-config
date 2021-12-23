@@ -127,6 +127,10 @@ let g:conoline_auto_enable = 1
 set autoread 
 au CursorHold * checktime 
 
+" Common clipboard between vim and the ubuntu system
+set clipboard=unnamed
+set clipboard=unnamedplus
+
 " Color
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 
@@ -314,14 +318,16 @@ endfunction
 " Introduces Git diff from fugitive
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 " Zr means that by default, the diff will be fully unfolded
-map <silent><Leader>gs :G<CR>:20wincmd_<CR> 
+" Opens the window at minimum height
+map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(3,99)<CR> 
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
 map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gt :call ToggleFoldDiff()<CR>
 map <silent><Leader>gh :%Gclog<CR>
 map <silent><Leader>gH :Gclogfunc<CR>
-map <silent><Leader>gb :GBranches<CR>
+map <silent><Leader>gb :GBranches --locals<CR>
+map <silent><Leader>gB :GBranches<CR>
 
 " As merge tool: gets from left and right
 nmap <silent><leader>g<Right> :diffget //3<CR>
@@ -330,13 +336,15 @@ let g:fzf_checkout_git_options = '--sort=-committerdate'
 let g:fzf_branch_actions = {
       \ 'diff': {
       \   'prompt': 'Diff> ',
-      \   'execute': 'Git diff {branch}',
+      \   'execute': 'Gvdiffsplit {branch}',
       \   'multiple': v:false,
       \   'keymap': 'ctrl-f',
       \   'required': ['branch'],
       \   'confirm': v:false,
       \ },
       \}
+
+" Adjust the quickfix height to the number of elemens. Maximum 10
 
 " Delete entire word in insert mode
 imap <C-d> <C-[>diwi
@@ -345,10 +353,15 @@ imap <C-v> <C-[>pi
 
 " Quickfix and location windows maps:
 " v and x for vertical/horizontal split
-autocmd! FileType qf nnoremap <buffer> v <C-w><Enter><C-w>L
+"autocmd! FileType qf nnoremap <buffer> <leader>ov <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
 nmap <C-Down> :cn<CR>
 nmap <C-Up> :cp<CR>
+" Adjust the quickfix height to the number of elemens. Maximum 10
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
 
 let s:vim_cfg_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
