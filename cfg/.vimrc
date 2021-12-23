@@ -19,6 +19,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 filetype plugin on  " Added by me. If bundle does not work properly, delete it temporary. Used for Doge documentation generator
 
+" Command to run other commands from shell (write them as argument)
+command! -nargs=1 RunCMDSilent execute ':silent !'.<q-args> | execute ':redraw!'
+
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
@@ -69,6 +72,7 @@ call vundle#begin()
   Plugin 'SirVer/ultisnips' " Snippets engine
   Plugin 'mflova/vim-snippets' " Collection of snippets
   Plugin 'stsewd/fzf-checkout.vim' " Manage git branches with FZF engine
+  Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
 call vundle#end()
 
 " It will update the time in which gitguutter is refreshed
@@ -315,7 +319,10 @@ function! ToggleFoldDiff()
         let g:is_folded=1
     endif
 endfunction
-" Introduces Git diff from fugitive
+" Git integration
+" Loads the enhanced version of the diff from a plugin
+autocmd VimEnter * PatienceDiff
+" Introduces Git diff from fugitive (used below in a command)
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 " Zr means that by default, the diff will be fully unfolded
 " Opens the window at minimum height
@@ -324,10 +331,17 @@ map <silent><Leader>gdf :Gvdiffsplit<CR>zR
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
 map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gt :call ToggleFoldDiff()<CR>
-map <silent><Leader>gh :%Gclog<CR>
-map <silent><Leader>gH :Gclogfunc<CR>
+map <silent><Leader>gH :%Gclog<CR>
+map <silent><Leader>gh :Gclogfunc<CR>
 map <silent><Leader>gb :GBranches --locals<CR>
 map <silent><Leader>gB :GBranches<CR>
+map <silent><Leader>gc :call Commitizen()<CR>
+map <silent><Leader>gp :Git push<CR>
+
+function! Commitizen()
+    execute ':RunCMDSilent ' . 'cz commit'
+endfunction
+
 
 " As merge tool: gets from left and right
 nmap <silent><leader>g<Right> :diffget //3<CR>

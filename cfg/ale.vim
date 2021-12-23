@@ -117,8 +117,6 @@ function! ALERestoreStatus()
 endfunction
 
 
-" Stubs stuff: Generates the ones in the cursor with the Genstubs command
-command! -nargs=1 RunCMDSilent execute ':silent !'.<q-args> | execute ':redraw!'
 function! Genstubs()
     let l:line = getline('.')
     let l:words = split(l:line, '[ .]')
