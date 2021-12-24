@@ -223,14 +223,11 @@ Note: g stands for git
 | dd on file    | Performs diff in two windows                                                            | 
 | gi            | Opens the file .git/info/exclude under repo to add personal ignored files               | 
 | gI            | Ignore THAT file by adding it to the personal .git/info/ecxclude                        |
-| \<Leader\>gp  | Git push                                                                                |
-| \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
-| \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
-| \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
-| \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
-| \<Leader\>gt  | Function to toggle/untoggle the folds found in the diff code                            |
-| \<Leader\>gh  | Check history of changes for the current function (previous commits from all branches)  | 
-| \<Leader\>gH  | Check history of changes for the current file (previous commits from all branches)      |
+| \<Leader\>gt  | Run the stash tool                                                                      |
+| Ctrl + p      | Pop                                                                                     |
+| Ctrl + d      | Drop/Delete                                                                             |
+| Ctrl + s      | Save/Stash/Push with no name or the name written in the FZF                             |
+| Enter         | Apply                                                                                   |
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
 | enter         | Checkout                                                                                |
@@ -241,6 +238,14 @@ Note: g stands for git
 | Ctrl + r      | Rebase                                                                                  |
 | Ctrl + f      | Diff with the current file opened and the branch selected                               |
 | Ctrl + t      | Checkout and track the remote branch                                                    |
+| \<Leader\>gp  | Git push                                                                                |
+| \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
+| \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
+| \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
+| \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
+| \<Leader\>t   | Function to toggle/untoggle the folds found in the diff code                            |
+| \<Leader\>gh  | Check history of changes for the current function (previous commits from all branches)  | 
+| \<Leader\>gH  | Check history of changes for the current file (previous commits from all branches)      |
 
 Test inside vim
 | Command/Shortcut | Description                                     |

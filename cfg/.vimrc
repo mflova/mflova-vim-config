@@ -74,8 +74,9 @@ call vundle#begin()
   Plugin 'vim-test/vim-test' " Execute unit tests in VIM
   Plugin 'SirVer/ultisnips' " Snippets engine
   Plugin 'mflova/vim-snippets' " Collection of snippets
-  Plugin 'stsewd/fzf-checkout.vim' " Manage git branches with FZF engine
+  Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
+  Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
 call vundle#end()
 
 " It will update the time in which gitguutter is refreshed
@@ -265,6 +266,14 @@ map <Leader>k <Plug>(easymotion-overwin-line)
 map <Leader>w <Plug>(easymotion-bd-w)
 map <Leader>W <Plug>(easymotion-overwin-w)
 
+
+" Delete entire word in insert mode
+imap <C-d> <C-[>diwi
+" Paste something yanked in insert mode
+imap <C-v> <C-[>pi
+
+" Toggle/Untoggle folds
+map <silent><Leader>t :call ToggleFoldDiff()<CR>
 " Toggle fold/unfolded code in the file. Not only valid for diff
 " Mapped below
 let g:is_folded=0 " This is how the file is opened by default
@@ -278,19 +287,15 @@ function! ToggleFoldDiff()
     endif
 endfunction
 
-" Adjust the quickfix height to the number of elemens. Maximum 10
-
-" Delete entire word in insert mode
-imap <C-d> <C-[>diwi
-" Paste something yanked in insert mode
-imap <C-v> <C-[>pi
-
 " Quickfix and location windows maps:
 " v and x for vertical/horizontal split
 "autocmd! FileType qf nnoremap <buffer> <leader>ov <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
+" Move between items
 nmap <C-Down> :cn<CR>
 nmap <C-Up> :cp<CR>
+" QF default location: Very bottom
+autocmd FileType qf wincmd J
 " Adjust the quickfix height to the number of elemens. Maximum 10
 au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
