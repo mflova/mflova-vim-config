@@ -85,7 +85,6 @@ Main use
 | r                  | Redo changes                                                               |
 | .                  | Repeat last action performed in vim                                        |
 | ctrl + r           | Update opened file (should be automatic)                                   |
-| ctrl + t           | Opens a new tab                                                            |
 | ctrl + x           | Switch between source and header files                                     |
 | F4                 | Toggles and untoggles the taglist (summary of a file, defined by itsclasses or variables). To remove entries just press u |
 | Enter              | Selects everything between two brackets. Multiple enters will select more  |
@@ -190,8 +189,10 @@ Search for files
 | Command/Shortcut | Description                                                     |
 | ---------------- | --------------------------------------------------------------- |
 | Ctrl + b         | Find a specific line within a file (fuzzy finder)               |
-| Ctrl + f         | Find a specific line within all the opened files (fuzzy finder) |
+| Ctrl + f         | Search for any tag in the current buffer                        |
+| Ctrl + t         | Search for any tag in the current project                       |
 | Ctrl + g         | Search for a file in the current directory given a string       |
+| Ctrl + h         | Navigate in history of changes made on the buffers              |
 | Ctrl + p         | Search for file name in the current directory. Use <Tab> to select more than one file and then opened them with ctrl+v or ctrl+x|
 | Ctrl + v         | Open the file in vertical split                                 |
 | Ctrl + x         | Open the file in horizontal split                               |
@@ -226,7 +227,8 @@ Note: g stands for git
 | \<Leader\>gt  | Run the stash tool                                                                      |
 | Ctrl + p      | Pop                                                                                     |
 | Ctrl + d      | Drop/Delete                                                                             |
-| Ctrl + s      | Save/Stash/Push with no name or the name written in the FZF                             |
+| Ctrl + s      | Save/Stash/Push with no name or the name written in the FZF (staged and tracked)        |
+| Ctrl + k      | Save/Stash/Push and and continue with the same working dir (only staged)                |
 | Enter         | Apply                                                                                   |
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
@@ -238,14 +240,17 @@ Note: g stands for git
 | Ctrl + r      | Rebase                                                                                  |
 | Ctrl + f      | Diff with the current file opened and the branch selected                               |
 | Ctrl + t      | Checkout and track the remote branch                                                    |
+| \<Leader\>gl  | Log. Check commits for the current buffer                                               | 
+| \<Leader\>gL  | Log (Branch visualizer) at repo scope                                                   |
+| Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
+| q             | Quit                                                                                    |
 | \<Leader\>gp  | Git push                                                                                |
 | \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
 | \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
 | \<Leader\>t   | Function to toggle/untoggle the folds found in the diff code                            |
-| \<Leader\>gh  | Check history of changes for the current function (previous commits from all branches)  | 
-| \<Leader\>gH  | Check history of changes for the current file (previous commits from all branches)      |
+| \<Leader\>gh  | History of commits that affected that function                                          |
 
 Test inside vim
 | Command/Shortcut | Description                                     |

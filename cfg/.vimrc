@@ -77,6 +77,8 @@ call vundle#begin()
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
+  Plugin 'rbong/vim-flog'
+  Plugin 'junegunn/gv.vim'
 call vundle#end()
 
 " It will update the time in which gitguutter is refreshed
@@ -110,11 +112,6 @@ endfunction
 
 " Shorts the import according to PEP8
 cmap isort Isort
-
-" vterm for vertical term
-" term for horintal term
-nnoremap <silent><leader>tv :vert term<CR>
-nnoremap <silent><leader>tx :term<CR>
 
 cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
 
@@ -165,9 +162,6 @@ cmap tclose tabclose
 
 " Toggle and untoggle NERDTree and TagList
 nmap <silent><F2> :NERDTreeToggle<CR>
-
-" Creates a new tab
-nmap <silent><C-t> :tabnew<CR>
 
 " Alternate between source and header file
 nmap <silent><C-x> :call CurtineIncSw()<CR>
