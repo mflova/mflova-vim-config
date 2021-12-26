@@ -1,3 +1,7 @@
+# Neovim modules
+sudo npm install -g neovim
+sudo gem install neovim
+
 sudo apt install -y build-essential cmake python3-dev
 sudo apt install -y mono-complete golang nodejs default-jdk npm
 sudo apt-get install -y exuberant-ctags
@@ -27,6 +31,11 @@ pip install pydocstyle
 
 pip install doq
 pip3 install doq
+
+pip install --user pynvim
+pip3 install --user pynvim
+pip install --upgrade pynvim
+pip3 install --upgrade pynvim
 
 # Integrated in flake8
 pip install darglint

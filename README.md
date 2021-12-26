@@ -224,6 +224,8 @@ Note: g stands for git
 | dd on file    | Performs diff in two windows                                                            | 
 | gi            | Opens the file .git/info/exclude under repo to add personal ignored files               | 
 | gI            | Ignore THAT file by adding it to the personal .git/info/ecxclude                        |
+| cc            | Commit                                                                                  |
+| ca            | Ammend and commit (add something I forgot to the last commit)                           |
 | \<Leader\>gt  | Run the stash tool                                                                      |
 | Ctrl + p      | Pop                                                                                     |
 | Ctrl + d      | Drop/Delete                                                                             |
@@ -249,15 +251,13 @@ Note: g stands for git
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
 | \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
-| \<Leader\>t   | Function to toggle/untoggle the folds found in the diff code                            |
+| Ctrl + t      | Function to toggle/untoggle the folds found in the diff code                            |
 | \<Leader\>gh  | History of commits that affected that function                                          |
 
-Test inside vim
-| Command/Shortcut | Description                                     |
-| ---------------- | ----------------------------------------------- |
-| tfile            | Runs all the tests from the file                |
-| tsuite           | Runs all the suite test                         |
-| tthis            | Runs the test that is the nearest to the cursor |
+Developping modes
+| Command/Shortcut | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| \<Leader\>t      | Toggle/Untoggle testing mode (pytest and pyunit). Runs nearest test after saving |
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |

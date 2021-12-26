@@ -4,9 +4,6 @@ filetype off                  " required
 " Maps the leader key
 let mapleader = " "
 let maplocalleader=" "
-" Map ALT as M
-" Example: nnoremap <M-j> j
-execute "set <M-j>=\ej"
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -71,14 +68,14 @@ call vundle#begin()
   Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
   Plugin 'mflova/vim-getting-things-down' " ToDo list manager
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
-  Plugin 'vim-test/vim-test' " Execute unit tests in VIM
   Plugin 'SirVer/ultisnips' " Snippets engine
   Plugin 'mflova/vim-snippets' " Collection of snippets
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
-  Plugin 'rbong/vim-flog'
-  Plugin 'junegunn/gv.vim'
+  Plugin 'junegunn/gv.vim' " Git commits browser (commit tree visualizer)
+  Plugin 'mflova/vim-test' " To be used in ultest
+  Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
 call vundle#end()
 
 " It will update the time in which gitguutter is refreshed
@@ -156,6 +153,7 @@ set backspace=indent,eol,start
 
 " Highlights the word while being written in /
 set incsearch
+set nohlsearch " Avoid highlighting all words after /
 
 " Close tabs with Ctrl + w 
 cmap tclose tabclose 
@@ -267,7 +265,7 @@ imap <C-d> <C-[>diwi
 imap <C-v> <C-[>pi
 
 " Toggle/Untoggle folds
-map <silent><Leader>t :call ToggleFoldDiff()<CR>
+map <silent><C-t> :call ToggleFoldDiff()<CR>
 " Toggle fold/unfolded code in the file. Not only valid for diff
 " Mapped below
 let g:is_folded=0 " This is how the file is opened by default
@@ -298,15 +296,10 @@ endfunction
 
 " To do list manager
 " Quick-switch between current file and `TODO.md` of project root
-nnoremap <LocalLeader><LocalLeader> :call getting_things_down#show_todo()<CR>
+nnoremap <silent><LocalLeader><LocalLeader> :w<CR>:call getting_things_down#show_todo()<CR>
 
 " TagList
 nmap <F4> :TlistToggle<CR>
-
-" Testing inside vim
-cmap tfile TestFile
-cmap tsuite TestSuite
-cmap tthis TestNearest
 
 " Colortheme for the statusline
 let g:airline_theme='onedark'
@@ -328,6 +321,32 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']
+
+" Testing
+nmap <silent><leader>t :call Toggle_test_mode()<CR> 
+
+let g:mflova_test_mode = 0
+function Toggle_test_mode()
+
+    if g:mflova_test_mode == 1
+        let g:mflova_test_mode = 0
+        UltestStop
+        UltestSummaryClose
+        UltestClear
+        autocmd! UltestRunner
+    else
+        let g:mflova_test_mode = 1
+        Ultest
+        UltestSummaryOpen!
+        vertical resize 70
+        call feedkeys("\zR")
+        call feedkeys("\<C-W>h")
+        augroup UltestRunner
+            au!
+            au BufWritePost * UltestNearest
+        augroup ENDltestSummary
+    endif 
+endfunction
 
 " Imports
 let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
