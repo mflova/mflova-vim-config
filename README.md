@@ -99,7 +99,7 @@ Main use
 | Shift + D/C        | Removes from cursor to right. D will also enter into insert mode           |
 | :number            | Jump to that line                                                          |
 | :numberd           | Remove that line                                                           |
-| %                  | Jump to paired bracket                                                     |
+| % or z             | Jump to paired bracket                                                     |
 | I/A                | Enters insert mode at the beggining/end of the line                        |
 | Space              | Insert space and go to insert mode                                         |
 | x/s                | Delete char. s will also go into insert mode after writing a character     |
@@ -185,7 +185,7 @@ Search for strings in a file
 | /word + enter        | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
 | /word + enter + n/N  | Previous and next matches |
 
-Search for files
+Search for files and navigation
 | Command/Shortcut | Description                                                     |
 | ---------------- | --------------------------------------------------------------- |
 | Ctrl + b         | Find a specific line within a file (fuzzy finder)               |
@@ -198,6 +198,8 @@ Search for files
 | Ctrl + x         | Open the file in horizontal split                               |
 | Ctrl + t         | Open the file in new tab                                        |
 | Ctrl + q         | Open multiple selected files in a quickfix window               |
+| Ctrl + Arrows    | Move the content of the previow window up or down               |
+| Ctrl + a         | Alternate with the last file opened. Valid in insert mode       |
 
 ### Misc
 Misc 
@@ -226,6 +228,7 @@ Note: g stands for git
 | gI            | Ignore THAT file by adding it to the personal .git/info/ecxclude                        |
 | cc            | Commit                                                                                  |
 | ca            | Ammend and commit (add something I forgot to the last commit)                           |
+| X             | Discard changes of that file                                                            |
 | \<Leader\>gt  | Run the stash tool                                                                      |
 | Ctrl + p      | Pop                                                                                     |
 | Ctrl + d      | Drop/Delete                                                                             |
@@ -242,8 +245,8 @@ Note: g stands for git
 | Ctrl + r      | Rebase                                                                                  |
 | Ctrl + f      | Diff with the current file opened and the branch selected                               |
 | Ctrl + t      | Checkout and track the remote branch                                                    |
-| \<Leader\>gl  | Log. Check commits for the current buffer                                               | 
-| \<Leader\>gL  | Log (Branch visualizer) at repo scope                                                   |
+| \<Leader\>gl  | Log to visualize commits at file level                                                  | 
+| \<Leader\>gL  | Log to visualize commits at repo level                                                  | 
 | Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
 | q             | Quit                                                                                    |
 | \<Leader\>gp  | Git push                                                                                |
@@ -255,9 +258,12 @@ Note: g stands for git
 | \<Leader\>gh  | History of commits that affected that function                                          |
 
 Developping modes
-| Command/Shortcut | Description                                                                  |
-| ---------------- | ---------------------------------------------------------------------------- |
-| \<Leader\>t      | Toggle/Untoggle testing mode (pytest and pyunit). Runs nearest test after saving |
+| Command/Shortcut    | Description                                                                      |
+| ------------------- | -------------------------------------------------------------------------------- |
+| \<Leader\>tt        | Toggle/Untoggle testing mode (pytest and pyunit) for the given file. Runs nearest test after saving |
+| \<Leader\>tT        | Same as previous on but with summary                                             |
+| R in summary window | Rerun a test                                                                     |
+| \<Leader\>tr        | After entering in the test mode, this one runs all the tests regardless the current buffer |
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |

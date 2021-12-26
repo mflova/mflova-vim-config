@@ -66,7 +66,6 @@ call vundle#begin()
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
   Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
-  Plugin 'mflova/vim-getting-things-down' " ToDo list manager
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
   Plugin 'SirVer/ultisnips' " Snippets engine
   Plugin 'mflova/vim-snippets' " Collection of snippets
@@ -77,6 +76,12 @@ call vundle#begin()
   Plugin 'mflova/vim-test' " To be used in ultest
   Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
 call vundle#end()
+
+" Overwrite the key for the macros, since I do not use them
+nmap <silent>q :q<CR>
+
+" Edit anyway option if there exists a swap
+autocmd SwapExists * let v:swapchoice = "e"
 
 " It will update the time in which gitguutter is refreshed
 set updatetime=200 
@@ -110,7 +115,14 @@ endfunction
 " Shorts the import according to PEP8
 cmap isort Isort
 
-cmap <C-l> :set paste<CR>yaw<Esc>``:set nopaste<CR>
+" Alternate between the last two files
+nmap <silent><C-a> :w<CR>:e#<CR>
+inoremap <silent><C-a> <C-[>:w<CR>:e#<CR>
+
+" Limit char
+set colorcolumn=90
+
+nmap <silent>z %
 
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
@@ -224,10 +236,6 @@ let g:NERDTreeChDirMode = 2
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
-" Limit maximumg of line: gqap in normal mode
-highlight ColorColumn ctermbg=233
-" set colorcolumn=90 textwidth=90
-
 " Enable/Disable autocomplete (YCM Based)
 let g:loaded_youcompleteme = 1 
 let g:ycm_auto_trigger = 1
@@ -242,9 +250,6 @@ nmap <silent> <Leader>c :call ToggleCommentLine()<CR>
 " Replace mode
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
-
-" Jump between TODOs
-" TODO
 
 " Easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -266,6 +271,7 @@ imap <C-v> <C-[>pi
 
 " Toggle/Untoggle folds
 map <silent><C-t> :call ToggleFoldDiff()<CR>
+
 " Toggle fold/unfolded code in the file. Not only valid for diff
 " Mapped below
 let g:is_folded=0 " This is how the file is opened by default
@@ -296,7 +302,18 @@ endfunction
 
 " To do list manager
 " Quick-switch between current file and `TODO.md` of project root
-nnoremap <silent><LocalLeader><LocalLeader> :w<CR>:call getting_things_down#show_todo()<CR>
+nnoremap <silent><LocalLeader><LocalLeader> :call Swap_todo()<CR>
+let g:mflova_todo_mode=0
+function! Swap_todo()
+    write
+    if g:mflova_todo_mode == 0
+        edit ~/TODO.md
+        let g:mflova_todo_mode = 1
+    else
+        e#
+        let g:mflova_todo_mode = 0
+    endif
+endfunction
 
 " TagList
 nmap <F4> :TlistToggle<CR>
@@ -322,37 +339,13 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']
 
-" Testing
-nmap <silent><leader>t :call Toggle_test_mode()<CR> 
-
-let g:mflova_test_mode = 0
-function Toggle_test_mode()
-
-    if g:mflova_test_mode == 1
-        let g:mflova_test_mode = 0
-        UltestStop
-        UltestSummaryClose
-        UltestClear
-        autocmd! UltestRunner
-    else
-        let g:mflova_test_mode = 1
-        Ultest
-        UltestSummaryOpen!
-        vertical resize 70
-        call feedkeys("\zR")
-        call feedkeys("\<C-W>h")
-        augroup UltestRunner
-            au!
-            au BufWritePost * UltestNearest
-        augroup ENDltestSummary
-    endif 
-endfunction
-
 " Imports
 let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
 let s:fzf_cfg_path = s:vim_cfg_path . '/fzf.vim'
+let s:testing_cfg_path = s:vim_cfg_path . '/testing.vim'
 
 exec 'source ' . s:ale_cfg_path
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:fzf_cfg_path
+exec 'source ' . s:testing_cfg_path
