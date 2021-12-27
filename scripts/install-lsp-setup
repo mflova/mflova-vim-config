@@ -1,0 +1,9 @@
+sudo npm i -g pyright
+pip install -U setuptools
+pip install 'python-language-server[all]'
+
+# Linters
+pip install -U flake8-docstrings
+pip install -U pydocstyle
+pip install -U vulture
+pip install -U mypy

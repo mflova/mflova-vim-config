@@ -99,7 +99,7 @@ Main use
 | Shift + D/C        | Removes from cursor to right. D will also enter into insert mode           |
 | :number            | Jump to that line                                                          |
 | :numberd           | Remove that line                                                           |
-| % or z             | Jump to paired bracket                                                     |
+| %                  | Jump to paired bracket                                                     |
 | I/A                | Enters insert mode at the beggining/end of the line                        |
 | Space              | Insert space and go to insert mode                                         |
 | x/s                | Delete char. s will also go into insert mode after writing a character     |

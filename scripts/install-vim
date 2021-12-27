@@ -12,6 +12,6 @@ python3 install.py --all
 cd ~
 
 echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
-echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/.vimrc'" >> ~/.bashrc
+echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/init.vim'" >> ~/.bashrc
 
 read -p "Vim installed. Call :PluginInstall and press [ENTER]"

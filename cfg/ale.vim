@@ -3,11 +3,11 @@
 " PARAMS
 "
 " Enabled at startup by default. Only read at startup
-let g:ale_enabled = 0
+"let g:ale_enabled = 0
 " Constants defined for the vim airline status bar when the ale linters are
 " ON/OFF. Shown in the vim-airline warning section
-let g:mflova_linters_on = ''
-let g:mflova_linters_off = 'LINTERS OFF'
+"let g:mflova_linters_on = ''
+"let g:mflova_linters_off = 'LINTERS OFF'
 " Main parameters for each programming language
 let g:mflova_python_max_line_length = '90'
 let g:mflova_python_indent_size = '4'
@@ -20,18 +20,18 @@ let g:mflova_cmake_max_line_length = '90'
 let g:mflova_yaml_max_line_length = '90'
 
 " Files where ALE is disabled
-autocmd BufEnter TODO.md exe "call ALETemporaryDisable()"
-autocmd BufEnter NOTES.md exe "call ALETemporaryDisable()"
-autocmd BufLeave TODO.md exe "call ALERestoreStatus()"
-autocmd BufLeave NOTES.md exe "call ALERestoreStatus()"
+"autocmd BufEnter TODO.md exe "call ALETemporaryDisable()"
+"autocmd BufEnter NOTES.md exe "call ALETemporaryDisable()"
+"autocmd BufLeave TODO.md exe "call ALERestoreStatus()"
+"autocmd BufLeave NOTES.md exe "call ALERestoreStatus()"
 
-nnoremap <silent><Leader>at :call ALEToggleWrapper()<CR>
-nnoremap <silent><Leader>af :ALEFix<CR>
-nnoremap <silent><Leader>ad :ALEGoToDefinition<CR>
-nnoremap <silent><Leader>ar :ALEFindReferences<CR>
-nnoremap <silent><Leader>as :call Genstubs()<CR>
+"nnoremap <silent><Leader>at :call ALEToggleWrapper()<CR>
+"nnoremap <silent><Leader>af :ALEFix<CR>
+"nnoremap <silent><Leader>ad :ALEGoToDefinition<CR>
+"nnoremap <silent><Leader>ar :ALEFindReferences<CR>
+"nnoremap <silent><Leader>as :call Genstubs()<CR>
 " This one uses Pyright because of the LSP
-nnoremap <silent><Leader>ah :ALEHover<CR>
+"nnoremap <silent><Leader>ah :ALEHover<CR>
 
 " LINTERS CONFIG SECTION
 let g:ale_fixers = ['autopep8']
@@ -75,65 +75,45 @@ let g:ale_markdown_mdl_options = '--rules MD001,MD002,MD003,MD004,MD005,MD006,MD
 " Update the messages printed in the status bar to show the liner, the message and the severity
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-
+"
 " OWN FUNCTIONS
-let g:is_ale_running = g:ale_enabled
-if g:ale_enabled
-    let g:ale_status_bar = g:mflova_linters_on
-else
-    let g:ale_status_bar = g:mflova_linters_off
-endif
-
-let g:airline_section_warning = '%{g:ale_status_bar}'
-
-
+"let g:is_ale_running = g:ale_enabled
+"if g:ale_enabled
+"    let g:ale_status_bar = g:mflova_linters_on
+"else
+"    let g:ale_status_bar = g:mflova_linters_off
+"endif
+"
+"let g:airline_section_warning = '%{g:ale_status_bar}'
+"
+"
 " Function that not only toggles ALE but also its message to be printed in vim
 " airline
-function! ALEToggleWrapper()
-    if g:is_ale_running
-        let g:ale_status_bar = g:mflova_linters_off
-        let g:is_ale_running = 0
-    else
-        let g:ale_status_bar = g:mflova_linters_on
-        let g:is_ale_running = 1
-    endif
-    ALEToggle
-endfunction
-
+"function! ALEToggleWrapper()
+"    if g:is_ale_running
+"        let g:ale_status_bar = g:mflova_linters_off
+"        let g:is_ale_running = 0
+"    else
+"        let g:ale_status_bar = g:mflova_linters_on
+"        let g:is_ale_running = 1
+"    endif
+"    ALEToggle
+"endfunction
+"
 " Save the status when entering in a special file
-let g:mflova_ale_prev_status = g:is_ale_running
-function! ALETemporaryDisable()
-    let g:mflova_ale_prev_status = g:is_ale_running
-    let g:ale_status_bar = g:mflova_linters_off
-    ALEDisable
-endfunction
-
+"let g:mflova_ale_prev_status = g:is_ale_running
+"function! ALETemporaryDisable()
+"    let g:mflova_ale_prev_status = g:is_ale_running
+"    let g:ale_status_bar = g:mflova_linters_off
+"    ALEDisable
+"endfunction
+"
 " Restore the saved status
-function! ALERestoreStatus()
-    if g:mflova_ale_prev_status == 1
-        let g:ale_status_bar = g:mflova_linters_on
-        ALEEnable
-    endif
-endfunction
-
-
-function! Genstubs()
-    let l:line = getline('.')
-    let l:words = split(l:line, '[ .]')
-    let g:mflova_stubgen_args = 'stubgen -o $MYPYPATH '
-    if l:words[0] == "import"
-"    Case1: Import XXX (as XXX) -m XXX 
-        if l:words[2] == "as"
-            let g:mflova_stubgen_args = g:mflova_stubgen_args . '-m ' . l:words[1]
-"    Case2: Import XXX.XXX.XXX -p XXX (first)
-        else
-            let g:mflova_stubgen_args = g:mflova_stubgen_args . '-p ' . l:words[1]
-        endif
-    endif
-"    Case3: From XXX.XXX.XXX import XXX -p XXX (the first one)
-    if l:words[0] == "from"
-        let g:mflova_stubgen_args = g:mflova_stubgen_args . '-p ' . l:words[1]
-    endif
-    execute ':RunCMDSilent ' . g:mflova_stubgen_args
-endfunction
+"function! ALERestoreStatus()
+"    if g:mflova_ale_prev_status == 1
+"        let g:ale_status_bar = g:mflova_linters_on
+"        ALEEnable
+"    endif
+"endfunction
+"
 
