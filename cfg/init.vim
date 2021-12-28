@@ -353,7 +353,3 @@ exec 'source ' . s:fzf_cfg_path
 exec 'source ' . s:testing_cfg_path
 exec 'source ' . s:lsp_cfg_path
 exec 'source ' . s:linters_cfg_path
-
-au Filetype python lua require('lint').try_lint()
-"au BufWritePost python lua require('lint').try_lint()
-"au BufEnter python lua require('lint').try_lint()

@@ -13,15 +13,25 @@ autocmd BufLeave NOTES.md exe "call DiagnosRestoreStatus()"
 nnoremap <silent><leader>dt :call ToggleDiagWrapper()<CR>
 nnoremap <silent><Leader>ds :call Genstubs()<CR>
 
+" Set up linters to its given filetype
+au Filetype python lua require('lint').try_lint()
+au Filetype markdown lua require('lint').try_lint()
+au Filetype yaml lua require('lint').try_lint()
+au Filetype vim lua require('lint').try_lint()
+"au Filetype cmake lua require('lint').try_lint()
+
 lua << EOF
 -- Python params
 local python_max_line_length = 90
 local python_indent_size = 4
 local python_docstring_style = 'sphinx'
 
+local yaml_max_line_length = 90
+
 require('lint').linters.flake8.args = {'--docstring-style', python_docstring_style, 
                                        '--max-line-length', python_max_line_length,
                                        '--indent-size', python_indent_size,
+                                       '--ignore=W391',
                                        '--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s',
                                        '--no-show-source',
                                        '-',}
@@ -35,11 +45,17 @@ require('lint').linters.mypy.args = {'--strict',
                                      '--no-pretty',}
 
 require('lint').linters.pylint.args = {'--good-names', 'q1, q2, q3, q4, q5, q, i, j, k, df, dt',
-                                       '--disable', 'W0102, W0212, R0913, R0903, R0902, R0914, W0621',
+                                       '--disable', 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301',
                                        '-f', 'json',}
 
+require('lint').linters.yamllint.args = {'-d', '{extends: default, rules: {line-length:{max: ' .. yaml_max_line_length ..'}}}',
+                                         '--format', 'parsable'}
+
 require('lint').linters_by_ft = {
-  python = {'flake8', 'mypy', 'pylint', 'vulture'}
+  python = {'flake8', 'mypy', 'pylint', 'vulture'},
+  yaml = {'yamllint'},
+  markdown = {'markdownlint'},
+  vim = {'vint'},
 }
 -- To toggle the diags 
 EOF

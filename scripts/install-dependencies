@@ -16,57 +16,15 @@ sudo apt-get install -y isort
 sudo apt-get install -y yapf
 sudo apt-get install -y autopep8
 sudo apt-get install -y ripgrep
-
-pip install flake8
-pip3 install flake8
-
-pip install pydocstyle
-pip3 install pydocstyle
-
-pip install pylint
-pip3 install pylint
-
-pip install bandit
-pip3 install bandit
-
-pip install mypy
-pip3 install mypy
-
-pip3 install pycodestyle
-pip install pydocstyle
-
-pip install doq
-pip3 install doq
-
 pip install --user pynvim
 pip3 install --user pynvim
 pip install --upgrade pynvim
 pip3 install --upgrade pynvim
 
-# Integrated in flake8
-pip install darglint
-pip install flake8-pytest-style
-pip install flake8-simplify
-pip install flake8-fixme
-pip install flake8-bugbear
-pip install dlint
-pip install flake8-comprehensions
-pip install flake8-commas
-pip install flake8-rst-docstring
-pip install flake8-markdown
-pip install flake8-builtins
-pip install flake8-broken-line
-pip install flake8-class-attributes-order
-
-# Linters for markdown integrated in ALE vim
-npm install mdl
 
 # Linters for rst
 sudo apt install python3-proselint
 pip install rstcheck
-
-# Linters for yaml
-sudo apt-get install yamllint
 
 # Linters for cmake
 pip install cmakelint
@@ -75,14 +33,6 @@ pip install cmakelint
 sudo apt install clang-tidy
 pip install cpplint
 sudo apt-get install cppcheck
-
-# Linters for vim
-pip install vim-vint
-
-# Stubs
-pip install pandas-stubs
-pip install data-science-types
-pip install pyright # Used only for the LSP to navigate throught function definitions
 
 # Where mypy will read all the stubs generated
 # generate them with:

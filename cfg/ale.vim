@@ -52,26 +52,20 @@ let g:ale_python_autopep8_options = '--max-line-length 90'
 "    - flake8-class-attributes-order -> Checks order the attributes of a class
 "                   \ 'python': ['pylint', 'mypy', 'pydocstyle', 'vulture', 'flake8'],
 let g:ale_linters = {
-                   \ 'python': ['pylint', 'mypy', 'pydocstyle', 'vulture', 'flake8', 'pyright'],
                    \ 'rst': ['proselint', 'rstcheck'],
-                   \ 'yaml': ['yamllint'],
                    \ 'cmake': ['cmakelint'],
-                   \ 'cpp': ['clangtidy'],
-                   \ 'vim': ['vint'],
-                   \ 'markdown': ['mdl']}
+                   \ 'cpp': ['clangtidy']}
 " Ignoring specific warnings/errors. Strict one forces you to write always the optional typing
-let g:ale_python_mypy_options = '--strict'
+"let g:ale_python_mypy_options = '--strict'
 " Those variables with less than 3 characteres and not in this list will be considered as warning
-let g:ale_python_pylint_options = '--good-names="q1, q2, q3, q4, q5, q, i, j, k, df, dt" --disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
+"let g:ale_python_pylint_options = '--good-names="q1, q2, q3, q4, q5, q, i, j, k, df, dt" --disable="W0102, W0212, R0913, R0903, R0902, R0914, W0621"'
 " Some plugins were integrated into flake8. Install with pip the following
 " ones:
-let g:ale_python_flake8_options = ' --docstring-style=' . g:mflova_python_docstring_style . ' --max-line-length=' . g:mflova_python_max_line_length . ' --indent-size=4 --ignore="DAR402"' 
-let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {line-length:{max: ' . g:mflova_yaml_max_line_length . '}}}"' 
+"let g:ale_python_flake8_options = ' --docstring-style=' . g:mflova_python_docstring_style . ' --max-line-length=' . g:mflova_python_max_line_length . ' --indent-size=4 --ignore="DAR402"' 
 let g:ale_cmake_cmakelint_options = '--linelength='  .  g:mflova_cmake_max_line_length
 let g:ale_cpp_cpplint_options = '--linelength=' . g:mflova_cpp_max_line_length . ' --filter="-legal/copyright, -whitespace/braces, -whitespace/newline"'  " The brace ones are ignore due to personal change in style
 let g:ale_cpp_cppcheck_options = '--std="c++17"' 
 let g:ale_cpp_clangtidy_options = '--format-style="google"' 
-let g:ale_markdown_mdl_options = '--rules MD001,MD002,MD003,MD004,MD005,MD006,MD007,MD009,MD010,MD011,MD012,MD013,MD014,MD018,MD019,MD020,MD021,MD022,MD023,MD024,MD025,MD026,MD027,MD028,MD030,MD031,MD032,MD033,MD034,MD035,MD036,MD037,MD038,MD039,MD040,MD041,MD046,MD047' " Just wanted to ignore one rule...
 " Update the messages printed in the status bar to show the liner, the message and the severity
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 

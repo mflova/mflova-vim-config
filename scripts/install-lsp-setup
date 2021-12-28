@@ -1,9 +1,49 @@
+# Python LSP
 sudo npm i -g pyright
+pip install pyright
 pip install -U setuptools
 pip install 'python-language-server[all]'
 
-# Linters
+# Python linters
 pip install -U flake8-docstrings
 pip install -U pydocstyle
 pip install -U vulture
 pip install -U mypy
+pip install -U flake8
+pip install -U pydocstyle
+pip install -U pylint
+pip install -U doq
+
+# Integrated in flake8
+pip install darglint
+pip install flake8-pytest-style
+pip install flake8-simplify
+pip install flake8-fixme
+pip install flake8-bugbear
+pip install dlint
+pip install flake8-comprehensions
+pip install flake8-commas
+pip install flake8-rst-docstring
+pip install flake8-markdown
+pip install flake8-builtins
+pip install flake8-broken-line
+pip install flake8-class-attributes-order
+# Stubs (used by mypy or other linters)
+pip install pandas-stubs
+pip install data-science-types
+
+# YAML LSP
+sudo snap install yaml-language-server
+
+# VIM Linter
+pip install vim-vint
+
+# YAML linter
+sudo apt-get install yamllint
+
+# VIM Linter
+pip install vim-vint
+
+# MARKDOWN Linter
+sudo npm install mdl
+
