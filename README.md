@@ -25,10 +25,8 @@ Main features of this VIM:
   of a file.
 - Fuzzy finder: Search any file given its name or any string inside it.
   Open the file in any split you want.
-- Git full integration: check files changed, diff of the file wrt 1) the last commit
-  or 2) any branch. Also integrated change history for files and even functions.
-  Other git functions: Displays in the editor which lines have been changed, setup
-  as merge tool, branch control (checkout, delete, merge, rebase, track remotes...)
+- Git full integration: Full integration (log, stash, branch management, push,
+  commit...)
 - Temporary maximize one window to better code
 - Documentation template for docstrings easily auto-generated in multiple standards
 - Easy resizing and moving window splits with the keyboard
@@ -37,16 +35,18 @@ Main features of this VIM:
 - Easy selection of sentences enclosed by brackets or any delimiter
 - Autocomplete functionality
 - Quick snippets for Python and C++
-- Plenty of linters based on format, code analysis, syntaxis and type checking:
-  - Python: Pylint, mypy, pydocstyle, vulture, pyright, flake8. This last one
+- Plenty of linters based on format, code analysis, syntaxis and type checking.
+  All of them integrated in the built-in neovim LSP:
+  - Python: Pylint, mypy, vulture, pyright, flake8. This last one
     integtegrates: darglint, pytest-style, flake8-simplify, flake8-bugbear,
     dlint, comprehensions, flake8-rst-docstrings, flake8-mardkwon, flake8-builtins,
     flake8-borken-line, flake8-class-attributes-order.
   - Markdown: mdl.
-  - C++:: Clangtidy.
+  - C++: Clangtidy, cppcheck and cpplint.
   - CMake: CMakelint.
   - Yaml: yamllint.
-  - Rst: Proselint and rstcheck.
+  - Rst: rstlint and rstcheck.
+  - Grammar-based: codespell and proselint.
 - Fast and easy replace mode
 - Extremely quick script to print variables and its type.
 - Improved motion all over the document with just a few keys
@@ -100,7 +100,7 @@ Main use
 | :number            | Jump to that line                                                          |
 | :numberd           | Remove that line                                                           |
 | %                  | Jump to paired bracket                                                     |
-| I/A                | Enters insert mode at the beggining/end of the line                        |
+| I/A                | Enters insert mode at the beginning/end of the line                        |
 | Space              | Insert space and go to insert mode                                         |
 | x/s                | Delete char. s will also go into insert mode after writing a character     |
 | dw/dW/cw/cW        | Removes word from the cursor and goes into insert mode if c is used. A number before it specifies how many words to delete|
@@ -121,7 +121,7 @@ Main use
 Find and replace
 | Command/Shortcut  | Description                                                                   |
 | -------------- | -------------------------------------------------------------------------------- |
-| :s/foo/bar/    | Changes foo by bar (first occurence)                                             |
+| :s/foo/bar/    | Changes foo by bar (first occurrence)                                            |
 | :s/foo/bar/g   | Changes foo by bar (entire line)                                                 |
 | :%s/foo/bar/g  | Changes foo by bar (all file)                                                    |
 | :%s/foo/bar/gc | Changes foo by bar (all file. Confirmation prompt)                               |
@@ -149,7 +149,7 @@ Highlighting and copy/pasting
 | ----------------- | -------------------------------------------------- |
 | Shift + Arrows    | Moves between split panes                          |
 | Shift + x         | Temporary fulscreens a split pane                  |
-| :vsplit           | Creates a new vertical split with the same file    |
+| :vsplit or :vs    | Creates a new vertical split with the same file    |
 | :split            | Creates a new horizontal split with the same file  |
 | Ctrl+Up/Down      | Move between items in the quickfix list            |
 
@@ -193,7 +193,7 @@ Search for files and navigation
 | Ctrl + t         | Search for any tag in the current project                       |
 | Ctrl + g         | Search for a file in the current directory given a string       |
 | Ctrl + h         | Navigate in history of changes made on the buffers              |
-| Ctrl + p         | Search for file name in the current directory. Use <Tab> to select more than one file and then opened them with ctrl+v or ctrl+x|
+| Ctrl + p         | Search for file name in the current directory. Use \<Tab\> to select more than one file and then opened them with ctrl+v or ctrl+x|
 | Ctrl + v         | Open the file in vertical split                                 |
 | Ctrl + x         | Open the file in horizontal split                               |
 | Ctrl + t         | Open the file in new tab                                        |
@@ -221,13 +221,13 @@ Note: g stands for git
 | ------------- | --------------------------------------------------------------------------------------- |
 | \<Leader\>gs  | Run the tool git status useful to stage, usntage...                                     |
 | s/u/U on a file or folder | Stage/Unstage(all)                                                          |
-| Enter on file | Open the file                                                                           | 
-| = on a file   | Visualize the changes to the file in quick format                                       | 
-| dd on file    | Performs diff in two windows                                                            | 
-| gi            | Opens the file .git/info/exclude under repo to add personal ignored files               | 
+| Enter on file | Open the file                                                                           |
+| = on a file   | Visualize the changes to the file in quick format                                       |
+| dd on file    | Performs diff in two windows                                                            |
+| gi            | Opens the file .git/info/exclude under repo to add personal ignored files               |
 | gI            | Ignore THAT file by adding it to the personal .git/info/ecxclude                        |
 | cc            | Commit                                                                                  |
-| ca            | Ammend and commit (add something I forgot to the last commit)                           |
+| ca            | Amend and commit (add something I forgot to the last commit)                            |
 | X             | Discard changes of that file                                                            |
 | \<Leader\>gt  | Run the stash tool                                                                      |
 | Ctrl + p      | Pop                                                                                     |
@@ -238,15 +238,15 @@ Note: g stands for git
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
 | enter         | Checkout                                                                                |
-| alt-enter     | Forced checkout                                                                         | 
+| alt-enter     | Forced checkout                                                                         |
 | Ctrl + b      | Create new branch and checkout after writing name                                       |
 | Ctrl + d      | Delete branch                                                                           |
 | Ctrl + e      | Merge                                                                                   |
 | Ctrl + r      | Rebase                                                                                  |
 | Ctrl + f      | Diff with the current file opened and the branch selected                               |
 | Ctrl + t      | Checkout and track the remote branch                                                    |
-| \<Leader\>gl  | Log to visualize commits at file level                                                  | 
-| \<Leader\>gL  | Log to visualize commits at repo level                                                  | 
+| \<Leader\>gl  | Log to visualize commits at file level                                                  |
+| \<Leader\>gL  | Log to visualize commits at repo level                                                  |
 | Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
 | q             | Quit                                                                                    |
 | \<Leader\>gp  | Git push                                                                                |
@@ -293,19 +293,19 @@ repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY
 searces by default. When generating the modules, you have two main options when
 setting the flags:
 
-- Flag -m: It will geneate the stubs only for this module. Ex: If I have the
+- Flag -m: It will generate the stubs only for this module. Ex: If I have the
   following package: A.B.C and I do "stubgen -m C", the stubs for the module
   C will be generated, but I will also need to generate the ones from A and B
   (the previous ones). By doing this, the stubs I created are much more in
   control. Useful when the package is big.
 - Flag -p: It will generate all modules found. Ex: If I have the module C as
   A.B.C, if I do "stubgen -p A I will be creating the stubs for themodules
-  A, B and C. However, if the package is big this wil take time and maybe
+  A, B and C. However, if the package is big this will take time and maybe
   some conflicts.
 
 For both methods if the module was imported as an absolute path, this one needs to
 be installed in the Python environment. This can be done with the pip framework.
-If the import was relative, it wont be necessary to generate the stubs, as the
+If the import was relative, it won't be necessary to generate the stubs, as the
 linters such as mypy will detect automatically.
 
 ## Notes

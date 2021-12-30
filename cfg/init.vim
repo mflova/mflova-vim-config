@@ -65,7 +65,6 @@ call vundle#begin()
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
-  Plugin 'dense-analysis/ale' " Complete syntax plugin: checker and fixes based on differed plugins
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
   Plugin 'SirVer/ultisnips' " Snippets engine
   Plugin 'mflova/vim-snippets' " Collection of snippets
@@ -77,9 +76,13 @@ call vundle#begin()
   Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plugin 'neovim/nvim-lspconfig' " LSP configurations
-  Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
+  Plugin 'mfussenegger/nvim-lint' " Linters with the built-in LSP neovim
   Plugin 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim' " Easily toggle diagnotics
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
+  Plugin 'kyazdani42/nvim-web-devicons'
+  Plugin 'folke/lsp-colors.nvim'
+  Plugin 'folke/trouble.nvim'
+  Plugin 'folke/tokyonight.nvim'
 call vundle#end()
 
 " Overwrite the key for the macros, since I do not use them
@@ -340,14 +343,12 @@ let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']
 
 " Imports
-let s:ale_cfg_path = s:vim_cfg_path . '/ale.vim'
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
 let s:fzf_cfg_path = s:vim_cfg_path . '/fzf.vim'
 let s:testing_cfg_path = s:vim_cfg_path . '/testing.vim'
 let s:lsp_cfg_path = s:vim_cfg_path . '/lsp.vim'
 let s:linters_cfg_path = s:vim_cfg_path . '/linters.vim'
 
-exec 'source ' . s:ale_cfg_path
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:fzf_cfg_path
 exec 'source ' . s:testing_cfg_path

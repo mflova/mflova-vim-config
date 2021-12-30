@@ -24,10 +24,14 @@ pip install dlint
 pip install flake8-comprehensions
 pip install flake8-commas
 pip install flake8-rst-docstring
+pip install flake8-docstrings
 pip install flake8-markdown
 pip install flake8-builtins
 pip install flake8-broken-line
 pip install flake8-class-attributes-order
+pip install flake8-return
+pip install flake8-pie
+pip install pandas-vet
 # Stubs (used by mypy or other linters)
 pip install pandas-stubs
 pip install data-science-types
@@ -47,3 +51,26 @@ pip install vim-vint
 # MARKDOWN Linter
 sudo npm install mdl
 
+# Shell Linter
+sudo apt-get install -y shellcheck
+
+# Cmakelint Linter
+pip install cmakelint
+
+# C++ LSP
+sudo apt install -y ccls
+# C++ Linter
+sudo apt-get install -y clang-tidy
+pip install cpplint
+# Install cppcheck from here: https://github.com/danmar/cppcheck and then sudo make install
+
+# Lua Linter
+sudo apt install -y lua-check
+
+# RST Linter
+pip install rstcheck
+pip install restructuredtext-lint
+
+# Grammar-based linters
+pip install codespell
+pip install proselint

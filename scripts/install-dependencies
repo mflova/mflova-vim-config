@@ -4,8 +4,9 @@ sudo npm install -g neovim
 sudo gem install neovim
 
 # Fonts
-# Jetbrains Mono
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+# Install Patched fonts (Look for Nerdfonts)
+# This ones are used to visualize the icons in some plugins such as Trouble
+cp -r ../cfg/fonts/NerdFonts $HOME/.local/shared/fonts
 
 sudo apt-get install -y xclip
 sudo apt install -y build-essential cmake python3-dev

@@ -1,6 +1,20 @@
 lua << EOF
 require'lspconfig'.pyright.setup{}
 
+
+--local lspconfig = require'lspconfig'
+--lspconfig.ccls.setup {
+ -- init_options = {
+ --   compilationDatabaseDirectory = '/home/manuflya/flyability/build_gaston/build';
+ --   index = {
+ --     threads = 0;
+ --   };
+ --   clang = {
+--      extraArgs= { '-Weverything', '-Wall', '-Wextra', '-Wdocumentation', '-Wno-missing-prototypes'} ;
+ --   };
+--  }
+--}
+
 -- Disable underline in diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
  vim.lsp.with(
