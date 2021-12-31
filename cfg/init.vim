@@ -82,6 +82,14 @@ call vundle#begin()
   Plugin 'kyazdani42/nvim-web-devicons'
 "  Plugin 'folke/trouble.nvim' " To be configured
 
+  " cmp
+  Plugin 'hrsh7th/cmp-nvim-lsp'
+  Plugin 'hrsh7th/cmp-buffer'
+  Plugin 'hrsh7th/cmp-path'
+  Plugin 'hrsh7th/cmp-cmdline'
+  Plugin 'hrsh7th/nvim-cmp'
+  Plugin 'quangnguyen30192/cmp-nvim-ultisnips'
+
   " UI
   Plugin 'folke/lsp-colors.nvim'
   Plugin 'folke/tokyonight.nvim'

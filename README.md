@@ -289,7 +289,7 @@ Linters/Syntaxis check
 
 About the stubs automatically generated, this is done with "stubgen" (installed with
 mypy) and it is done to detect more types mainly coming from modules outside of my
-repo. This one is called with the flag -o $MYPYPATH to generate them where MYPY
+repo. This one is called with the flag -o $STUBSPATH to generate them where MYPY
 searces by default. When generating the modules, you have two main options when
 setting the flags:
 

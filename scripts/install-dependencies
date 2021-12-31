@@ -37,7 +37,8 @@ sudo apt-get install cppcheck
 
 # Where mypy will read all the stubs generated
 # generate them with:
-# - stubgen -m module -o $MYPYPATH
-# - stubgen path -o $MYPYPATH
-echo "export MYPYPATH=$HOME/stubs" >> ~/.bashrc
+# - stubgen -m module -o $STUBSPATH
+# - stubgen path -o $STUBSPATH
+echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
+echo "export MYPYPATH=$STUBSPATH" >> ~/.bashrc
 

@@ -1,19 +1,31 @@
+" Autocomplete
+set completeopt=menu,menuone,noselect
+
 lua << EOF
-require'lspconfig'.pyright.setup{}
+-- Python LSP
+require'lspconfig'.pyright.setup{settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "openFilesOnly",
+          stubPath = os.getenv('STUBSPATH'),
+        }
+      }
+    }
+}
 
-
---local lspconfig = require'lspconfig'
---lspconfig.ccls.setup {
- -- init_options = {
- --   compilationDatabaseDirectory = '/home/manuflya/flyability/build_gaston/build';
- --   index = {
- --     threads = 0;
- --   };
- --   clang = {
---      extraArgs= { '-Weverything', '-Wall', '-Wextra', '-Wdocumentation', '-Wno-missing-prototypes'} ;
- --   };
---  }
---}
+require'lspconfig'.ccls.setup { -- C++ LSP
+  init_options = {
+    -- Path where the compilationdatabase.json is located
+    compilationDatabaseDirectory = os.getenv('CPP_BUILD_DIR');
+    index = {
+      threads = 0;
+    };
+    clang = {
+      extraArgs= { '-Wno-everything'} ; -- Handled by linters
+   };
+  }
+}
 
 -- Disable underline in diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -21,27 +33,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
     underline = false,
-    update_in_insert = true,
+    update_in_insert = false,
   }
 )
 
 EOF
-
-"
-"if executable('pylsp')
-    " pip install python-language-server
-"    au User lsp_setup call lsp#register_server({
-"          \ 'name': 'pyls',
-"          \ 'cmd': {server_info->['pyls']},
-"          \ 'allowlist': ['python'],
-"          \ 'workspace_config': {
-"          \    'pyls':
-"          \        {'configurationSources': ['flake8'],
-"          \         'plugins': {'flake8': {'enabled': v:true},
-"          \                     'pyflakes': {'enabled': v:false},
-"          \                     'pycodestyle': {'enabled': v:true},
-"          \                    }
-"          \         }
-"          \ }})
-"endif
-"
