@@ -15,3 +15,4 @@ echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
 echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/init.vim'" >> ~/.bashrc
 
 read -p "Vim installed. Call :PluginInstall and press [ENTER]"
+read -p "Remember to install the Tresitter parsers (used for highlighting improved) with :TSUpdate and then :TSInstall filetype"

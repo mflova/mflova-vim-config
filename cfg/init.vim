@@ -80,9 +80,13 @@ call vundle#begin()
   Plugin 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim' " Easily toggle diagnotics
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons'
+"  Plugin 'folke/trouble.nvim' " To be configured
+
+  " UI
   Plugin 'folke/lsp-colors.nvim'
-  Plugin 'folke/trouble.nvim'
   Plugin 'folke/tokyonight.nvim'
+  Plugin 'mhartington/oceanic-next'
+  Plugin 'PHSix/nvim-hybrid'
 call vundle#end()
 
 " Overwrite the key for the macros, since I do not use them
@@ -130,15 +134,6 @@ inoremap <silent><C-a> <C-[>:w<CR>:e#<CR>
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
 set smartcase
-
-" Set colortheme
-syntax on
-colorscheme molokai " molokai or onedark
-"set bg=dark " For gruvbox only
-"let g:gruvbox_contrast_dark='hard' " For gruvbox
-
-" Highlights the current line of the cursor
-let g:conoline_auto_enable = 1
 
 "Auto reload files
 set autoread 
@@ -348,9 +343,11 @@ let s:fzf_cfg_path = s:vim_cfg_path . '/fzf.vim'
 let s:testing_cfg_path = s:vim_cfg_path . '/testing.vim'
 let s:lsp_cfg_path = s:vim_cfg_path . '/lsp.vim'
 let s:linters_cfg_path = s:vim_cfg_path . '/linters.vim'
+let s:ui_cfg_path = s:vim_cfg_path . '/ui.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:fzf_cfg_path
 exec 'source ' . s:testing_cfg_path
 exec 'source ' . s:lsp_cfg_path
 exec 'source ' . s:linters_cfg_path
+exec 'source ' . s:ui_cfg_path

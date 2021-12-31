@@ -29,7 +29,6 @@ pip install flake8-markdown
 pip install flake8-builtins
 pip install flake8-broken-line
 pip install flake8-class-attributes-order
-pip install flake8-return
 pip install flake8-pie
 pip install pandas-vet
 # Stubs (used by mypy or other linters)
