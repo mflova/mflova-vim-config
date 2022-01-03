@@ -22,18 +22,9 @@ pip3 install --user pynvim
 pip install --upgrade pynvim
 pip3 install --upgrade pynvim
 
+# Spotify
+sudo snap install spt
 
-# Linters for rst
-sudo apt install python3-proselint
-pip install rstcheck
-
-# Linters for cmake
-pip install cmakelint
-
-# Linters for C++
-sudo apt install clang-tidy
-pip install cpplint
-sudo apt-get install cppcheck
 
 # Where mypy will read all the stubs generated
 # generate them with:

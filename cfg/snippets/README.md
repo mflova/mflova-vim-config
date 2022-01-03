@@ -7,26 +7,26 @@ In case you change the files, it is recommended to call ``:call UltiSnips#Refres
 Python
 | Command/Shortcut            | Description                                          |
 | --------------------------- | ---------------------------------------------------- |
-| imp, from                   | Imports and froms                                    |
-| for/fo, wh, if, ife, el, ei | Basic calls                                          |
-| id                          | From "indexing". name[variable]                      |
-| id'                         | From index from string with ". name["string"]        |
-| id"                         | From index from string with '. name['string']        |
+| im, from                    | Imports and froms                                    |
+| for, while, if, ife         | Basic calls                                          |
+| i                           | From "indexing". name[variable]                      |
+| i'                          | From index from string with ". name["string"]        |
+| i"                          | From index from string with '. name['string']        |
 | lcp/dcp/scp                 | Comprehensions: l for list, d dictionary and s set   |
 | s, sa                       | s for self and sa for self.attribute = attribute     |
-| ret, as                     | return, as                                           |
+| re                          | return                                               |
+| with                        | with                                                 |
 | try/tryf                    | Try/Try with finally block                           |
-| attr                        | Change the way the attributs are accessed in a class |
 | context                     | Functions to define context of an object             |
-| cl/cla                      | Empty class (Without doc)                            |
-| cli/clai                    | Class with init method (Without doc)                 |
-| def                         | Create function                                      |
+| class                       | Empty class (Without doc)                            |
+| classi                      | Class with init method (Without doc)                 |
+| def/deft                    | Create function. deft adds typing                    |
 
 C++
 | Command/Shortcut                            | Description                                 |
 | ------------------------------------------- | ------------------------------------------- |
 | array, vector, list, set, map, stack, queue | Basic structures                            |
-| cl                                          | Class                                       |
-| cout                                        | Print statemnt                              |
-| fori, fore                                  | For loop with i counter or for each         |
+| class/classi                                | Class                                       |
+| cout                                        | Print statement                             |
+| for, foreach                                | For loop with i counter or for each         |
 | iter, itera                                 | Foor loop with iterator, for loop with auto |

@@ -1,27 +1,33 @@
 " Diagnotics params
-let g:diagnostics_enabled = 1
-let g:mflova_diagnostics_on = ''
-let g:mflova_diagnostics_off = 'DIAGS OFF'
+let g:diag_ignore_first_call = 1 " 1 to start with the diagnotics OFF byd efault
 
 " Mapping
-"nnoremap <silent><leader>dt :call ToggleDiagWrapper()<CR>
-nnoremap <silent><Leader>ds :call Genstubs()<CR>
+nmap <silent><leader>lv :call ToggleDiagWrapper()<CR>
+nnoremap <silent><Leader>ls :call Genstubs()<CR>
+nnoremap <silent><leader>ll <cmd>TroubleToggle<cr>
+nnoremap <silent><leader>lr <cmd>TroubleToggle lsp_references<cr>
+nnoremap <silent><leader>ld <cmd>TroubleToggle lsp_definitions<cr>
+nnoremap <silent><leader>lh <cmd>lua vim.lsp.buf.hover()<cr>
 
 " Needed to generate the event InsertLeave with C-c
 imap <C-c> <Esc>
 
+
+let g:IsDiagsAllowed = 0
+let g:mflova_diagnostics_status = 0
 " Set up linters to its given filetype
 augroup linters
     autocmd!
-    au Filetype python,cpp,markdown,yaml,vim,sh,cmake,rst,lua execute "lua require('lint').try_lint()"
-    au BufWritePost *.py,*.hpp,*.cpp,*.markdown,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt execute "lua require('lint').try_lint()"
-"    Exceptions
-"    au BufEnter TODO.md,NOTES.md exe "echo 'lol'"
-"    au BufEnter TODO.md exe "call DiagnosTemporaryDisable()"
-"    au BufEnter NOTES.md exe "call DiagnosTemporaryDisable()"
-"    au BufLeave TODO.md exe "call DiagnosRestoreStatus()"
-"    au BufLeave NOTES.md exe "call DiagnosRestoreStatus()"
+    " Launch the toggler but not in the exceptions
+    au FileType python,cpp,markdown,yaml,vim,sh,cmake,rst,lua if expand('%:t') != 'TODO.md' && expand('%:t') != 'NOTES.md' | call ActivateDiag(1) | endif 
+    au BufWritePost *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt  if expand('%:t') != 'TODO.md' && expand('%:t') != 'NOTES.md' | call ActivateDiag(1) | endif 
 augroup end
+
+function! SaveDiagsStatus()
+    if g:mflova_diagnostics_status == 0
+        let g:diag_ignore_first_call = 1
+    endif
+endfunction
 
 lua << EOF
 -- Python params
@@ -29,8 +35,8 @@ local python_max_line_length = 90
 local python_indent_size = 4 -- spaces
 local python_docstring_style = 'sphinx'
 local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt'
-local python_flake8_ignore = 'S101'
-local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, C0115, C0116'
+local python_flake8_ignore = 'S101, DAR402'
+local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, C0114, C0115, C0116'
 
 -- Yaml params
 local yaml_max_line_length = 90
@@ -114,11 +120,9 @@ require('lint').linters_by_ft = {
   yaml = {'yamllint', 'codespell', 'proselint'},
   cmake = {'cmakelint'},
   sh = {'shellcheck'},
-  rst = {'codespell'},
   lua = {'luacheck'},
   vim = {'vint'},
 }
--- To toggle the diags 
 EOF
 
 
@@ -131,52 +135,65 @@ function! Genstubs()
 "    Case1: Import XXX (as XXX) -m XXX 
         if l:words[2] == 'as'
             let l:stubgen_args = l:stubgen_args . '-m ' . l:words[1]
+            echo 'Generating stubs for module ' . l:words[1]
 "    Case2: Import XXX.XXX.XXX -p XXX (first)
         else
             let l:stubgen_args = l:stubgen_args . '-p ' . l:words[1]
+            echo 'Generating stubs for package ' . l:words[1]
         endif
     endif
 "    Case3: From XXX.XXX.XXX import XXX -p XXX (the first one)
     if l:words[0] == 'from'
         let l:stubgen_args = l:stubgen_args . '-p ' . l:words[1]
+        echo 'Generating stubs for package ' . l:words[1]
     endif
-    echo l:stubgen_args
     execute ':RunCMDSilent ' . l:stubgen_args
+    echo 'Stubs generated'
 endfunction
 
-" Init the status bar with the diagnos ON/OFF
-if g:diagnostics_enabled
-   let g:diagnos_status_bar = g:mflova_diagnostics_on
+" Diags toggling
+
+let g:mflova_diagnostics_status = 0
+function! UpdateDiagnosticsStatus(diag_on)
+    if a:diag_on == 1
+        let g:mflova_diagnostics_status = 1
+    else
+        let g:mflova_diagnostics_status = 0
+    endif
+endfunction
+
+" Startup
+if g:diag_ignore_first_call == 1
+    call UpdateDiagnosticsStatus(0)
+    au VimEnter * ToggleDiagOff
 else
-   let g:diagnos_status_bar = g:mflova_diagnostics_off
+    call UpdateDiagnosticsStatus(1)
 endif
 
 " Changes the status bar when toggled bar
 function! ToggleDiagWrapper()
-    if g:diagnostics_enabled
-        let g:diagnos_status_bar = g:mflova_diagnostics_off
-        let g:diagnostics_enabled = 0
-        autocmd! linters
+    if g:diag_ignore_first_call == 1
+        let g:diag_ignore_first_call = 0
+        call ActivateDiag(1)
+        call UpdateDiagnosticsStatus(1)
     else
-        let g:diagnos_status_bar = g:mflova_diagnostics_on
-        let g:diagnostics_enabled = 1
+        if g:mflova_diagnostics_status == 1
+            call UpdateDiagnosticsStatus(0)
+        else
+            call UpdateDiagnosticsStatus(1)
+        endif
     endif
     ToggleDiag
 endfunction
-let g:airline_section_warning = '%{g:diagnos_status_bar}'
 
-" Save the status when entering in a special file
-let g:mflova_diagnos_prev_status = g:diagnostics_enabled
-function! DiagnosTemporaryDisable()
-    let g:mflova_diagnos_prev_status = g:diagnostics_enabled
-    let g:diagnos_status_bar = g:mflova_diagnostics_off
-    ToggleDiagOff
+function! ActivateDiag(enable)
+        if g:diag_ignore_first_call == 0
+            if a:enable == 1
+                execute "lua require('lint').try_lint()"
+                call UpdateDiagnosticsStatus(1)
+            else
+                call UpdateDiagnosticsStatus(0)
+            endif
+        endif
 endfunction
 
-" Restore the saved status
-function! DiagnosRestoreStatus()
-    if g:mflova_diagnos_prev_status == 1
-        let g:diagnos_status_bar = g:mflova_diagnostics_on
-        ToggleDiagOn
-    endif
-endfunction

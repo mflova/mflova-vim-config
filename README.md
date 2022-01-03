@@ -4,6 +4,18 @@ Repository used to install and set up vim and my main configuration used. This w
 setup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might
 still be buggy.
 
+## Install
+
+- Install any patched fonts (done by the script) to have special icons.
+- FZF installed.
+- Install lsp dependencies, which also includes linters. While coding, the LSP
+  typically includes one linter while nvim-lint API provides many more, that can be
+  configured separately.
+- Install vim dependencies
+- Install vim
+- Call :PluginInstall
+- Install the TreeSitter parsers with :TSUpdate and :TSinstall [filetype]
+
 ## Set up as merge tool
 
 Use the following lines:
@@ -201,6 +213,27 @@ Search for files and navigation
 | Ctrl + Arrows    | Move the content of the previow window up or down               |
 | Ctrl + a         | Alternate with the last file opened. Valid in insert mode       |
 
+### LSP
+Mainly LSP-related functionalities
+| Command/Shortcut   | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| \<leader\>l        | LSP-related commands                                           |
+| \<leader\>lc       | Toggle CMP. CMP keys below                                     |
+| Tab/Shift-Tab      | Move between autocomplete options                              |
+| Ctrl + Up/Down     | Scroll the documentation of a function in case it is displayed |
+| Ctrl + q           | Quit the autocomplete menu                                     |
+| \<leader\>lv       | Disable virtual text (diagnotics basically)                    |
+| \<leader\>ls       | Generate stubs for python module/package                       |
+| \<leader\>ll       | Toggle a list of all diagnotics                                |
+| \<leader\>lr       | Open a list with references                                    |
+| \<leader\>ld       | Go to definition                                               |
+| \<leader\>lh       | Hover                                                          |
+
+## Refactor
+| Command/Shortcut       | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| \<leader\>rf (visual)  | Extract function                                               |
+
 ### Misc
 Misc 
 | Command/Shortcut              | Description                                               |
@@ -214,6 +247,7 @@ Misc
 | \<Leader\> + p/P              | Inserts a print statement above or below with the variable chosen by the cursor|
 | gS/gJ                         | Splits/Join the arguments from a function into multiple lines (or the code in general)|
 | \<Leader\>\<Leader\>          | Swap between the todo list and the file that is being edit |
+| :Isort/:isort                 | Sorts the imports of Python script according to Pep8       |
 
 Vim-fugitive or git integration
 Note: g stands for git
@@ -274,18 +308,6 @@ Vim-easy-motion
 | \<Leader\>.      | Repeat last vim-easy-motion command                                          |
 | \<Leader\>j or k | Jump to specified line                                                       |
 
-Linters/Syntaxis check
-| Command/Shortcut | Description                                                        |
-| ---------------- | ------------------------------------------------------------------ |
-| \<Leader\>at     | Toggle the ALE tool (combination of multiple linters that refresh automatically in the buffer. These are mypy, flake8, pylint...). Note: max-line-length fixed to 90. If you removed that constraint in the vimrc file, the .flake8 will be read with the proper config instead |
-| \<Leader\>af     | Fixes some of the changes. The fixers are in the vim config        |
-| \<Leader\>as     | When the cursor is on the same line as an import line in Python, this will generate the stubs needed from this module/package. You can repeat this command to re-generate the stubs in case any typing of the modules has been changed |
-| \<Leader\>ar     | Find the references of the function in which the cursor is located |
-| \<Leader\>ah     | Displays the information of a function (called Hover)              |
-| \<Leader\>ad     | Go to the definition of the function where the cursor is located   |
-| :GrammarousCheck | Display grammar errors                                             |
-| :GrammarousReset | Remove the errors                                                  |
-| :Isort/:isort    | Sorts the imports of Python script according to Pep8               |
 
 About the stubs automatically generated, this is done with "stubgen" (installed with
 mypy) and it is done to detect more types mainly coming from modules outside of my

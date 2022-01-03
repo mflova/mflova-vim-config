@@ -32,8 +32,6 @@ call vundle#begin()
   Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
   Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
-  Plugin 'vim-airline/vim-airline' " Status line at the bottom
-  Plugin 'vim-airline/vim-airline-themes' " Themes for vim airline
   Plugin 'simeji/winresizer' " Resize and move window splits
   Plugin 'szw/vim-maximizer' " Zoom a window pane
   Plugin 'LucHermitte/lh-vim-lib' " ??
@@ -45,10 +43,8 @@ call vundle#begin()
   Plugin 'xolox/vim-session' " Save VIM sessions
   Plugin 'ericcurtin/CurtineIncSw.vim' " Toggle between source and header files
   Plugin 'ggreer/the_silver_searcher'
-  Plugin 'RRethy/vim-illuminate' " Illuminates al words selected by the cursor
   Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
   Plugin 'miyakogi/conoline.vim' " Highlights the line of the cursor
-  Plugin 'ycm-core/YouCompleteMe' " YCM Plugin to autocomplete and syntaxis check
   Plugin 'nvie/vim-flake8' " Flake 8 Plugin
   Plugin 'mflova/vim-easycomment' " Plugin to comment lines
   Plugin 'hauleth/sad.vim' " Plugin to easily replace words
@@ -63,11 +59,10 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
+  Plugin 'nvim-telescope/telescope.nvim' " Another FZF finder
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
-  Plugin 'SirVer/ultisnips' " Snippets engine
-  Plugin 'mflova/vim-snippets' " Collection of snippets
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
@@ -79,8 +74,20 @@ call vundle#begin()
   Plugin 'mfussenegger/nvim-lint' " Linters with the built-in LSP neovim
   Plugin 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim' " Easily toggle diagnotics
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
-  Plugin 'kyazdani42/nvim-web-devicons'
-"  Plugin 'folke/trouble.nvim' " To be configured
+  Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
+  Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
+  Plugin 'folke/trouble.nvim' " Better diagnos navigation
+  Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
+
+  " Snippets
+  Plugin 'L3MON4D3/LuaSnip' " Snippets engine
+  Plugin 'rafamadriz/friendly-snippets' " Collection of snippets
+
+  " Spotify 
+  Plugin 'KadoBOT/nvim-spotify', { 'do': 'make' } " Wrapper for spotify
+  " Status line
+  Plugin 'nvim-lualine/lualine.nvim' " Staus line
+  Plugin 'SmiteshP/nvim-gps' " Component that tells you the current function
 
   " cmp
   Plugin 'hrsh7th/cmp-nvim-lsp'
@@ -88,9 +95,11 @@ call vundle#begin()
   Plugin 'hrsh7th/cmp-path'
   Plugin 'hrsh7th/cmp-cmdline'
   Plugin 'hrsh7th/nvim-cmp'
-  Plugin 'quangnguyen30192/cmp-nvim-ultisnips'
+  Plugin 'saadparwaiz1/cmp_luasnip'
 
   " UI
+  Plugin 'Yagua/nebulous.nvim'
+  Plugin 'onsails/lspkind-nvim'
   Plugin 'folke/lsp-colors.nvim'
   Plugin 'folke/tokyonight.nvim'
   Plugin 'mhartington/oceanic-next'
@@ -246,9 +255,6 @@ autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 let g:loaded_youcompleteme = 1 
 let g:ycm_auto_trigger = 1
 
-" vim airline (status bar) also available with one window split 
-set laststatus=2
-
 " Commenting line(s) with these two lines
 vmap <silent> <Leader>c :call ToggleCommentVisual()<CR>
 nmap <silent> <Leader>c :call ToggleCommentLine()<CR>
@@ -296,8 +302,8 @@ endfunction
 "autocmd! FileType qf nnoremap <buffer> <leader>ov <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
 " Move between items
-nmap <C-Down> :cn<CR>
-nmap <C-Up> :cp<CR>
+nmap <silent><C-Down> :cn<CR>
+nmap <silent><C-Up> :cp<CR>
 " QF default location: Very bottom
 autocmd FileType qf wincmd J
 " Adjust the quickfix height to the number of elemens. Maximum 10
@@ -324,26 +330,12 @@ endfunction
 " TagList
 nmap <F4> :TlistToggle<CR>
 
-" Colortheme for the statusline
-let g:airline_theme='onedark'
-" Removes the encoding in the status bar
-let g:airline#extensions#default#layout = [['a','b', 'c'], ['x', 'z', 'warning', 'error']] 
-" A
-" b will be the first oen truncated (branch name)
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 100,
-      \ 'x': 60,
-      \ 'y': 88,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
+" Luansip mapping
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
-" Snippets mapping
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", s:vim_cfg_path .'/snippets']
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 
 " Imports
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
@@ -352,6 +344,9 @@ let s:testing_cfg_path = s:vim_cfg_path . '/testing.vim'
 let s:lsp_cfg_path = s:vim_cfg_path . '/lsp.vim'
 let s:linters_cfg_path = s:vim_cfg_path . '/linters.vim'
 let s:ui_cfg_path = s:vim_cfg_path . '/ui.vim'
+let s:cmp_cfg_path = s:vim_cfg_path . '/cmp.vim'
+let s:refactor_cfg_path = s:vim_cfg_path . '/refactoring.vim'
+let s:snippets_cfg_path = s:vim_cfg_path . '/snippets.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:fzf_cfg_path
@@ -359,3 +354,6 @@ exec 'source ' . s:testing_cfg_path
 exec 'source ' . s:lsp_cfg_path
 exec 'source ' . s:linters_cfg_path
 exec 'source ' . s:ui_cfg_path
+exec 'source ' . s:cmp_cfg_path
+exec 'source ' . s:refactor_cfg_path
+exec 'source ' . s:snippets_cfg_path

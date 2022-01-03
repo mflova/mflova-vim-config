@@ -38,6 +38,8 @@ pip install data-science-types
 # YAML LSP
 sudo snap install yaml-language-server
 
+# VIM LSP
+sudo npm install -g vim-language-server
 # VIM Linter
 pip install vim-vint
 
@@ -47,12 +49,19 @@ sudo apt-get install yamllint
 # VIM Linter
 pip install vim-vint
 
+# MARKDOWN LSP
+read -p "Install the markdown lsp with :LSPInstall (with a .md opened). Then choose ltex. The path to this server is automatically added to PATH in bashrc now"
+echo "export PATH=$PATH:~/.local/share/nvim/lsp_servers/ltex" >> ~/.bashrc
 # MARKDOWN Linter
 sudo npm install mdl
 
-# Shell Linter
+# Shell/Bash LSP
+sudo npm i -g bash-language-server
+# Shell/Bash Linter
 sudo apt-get install -y shellcheck
 
+# CMAAKE LSP
+pip install cmake-language-server
 # Cmakelint Linter
 pip install cmakelint
 
@@ -61,11 +70,15 @@ sudo apt install -y ccls
 # C++ Linter
 sudo apt-get install -y clang-tidy
 pip install cpplint
-# Install cppcheck from here: https://github.com/danmar/cppcheck and then sudo make install
+sudo apt-get install cppcheck
 
+# LUA LSP
+brew install lua-language-server
 # Lua Linter
 sudo apt install -y lua-check
 
+# RST LSP
+pip install esbonio
 # RST Linter
 pip install rstcheck
 pip install restructuredtext-lint
