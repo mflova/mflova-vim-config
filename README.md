@@ -39,6 +39,8 @@ Main features of this VIM:
   Open the file in any split you want.
 - Git full integration: Full integration (log, stash, branch management, push,
   commit...)
+- LSP functionalities: go to reference, definition, hover, context-aware
+  statusline...
 - Temporary maximize one window to better code
 - Documentation template for docstrings easily auto-generated in multiple standards
 - Easy resizing and moving window splits with the keyboard
@@ -49,10 +51,10 @@ Main features of this VIM:
 - Quick snippets for Python and C++. With endless items some of them.
 - Plenty of linters based on format, code analysis, syntaxis and type checking.
   All of them integrated in the built-in neovim LSP:
-  - Python: Pylint, mypy, vulture, pyright, flake8. This last one
+  - Python: Pylint, mypy, vulture, pyright, pytestcov and flake8. This last one
     integtegrates: darglint, pytest-style, flake8-simplify, flake8-bugbear,
-    dlint, comprehensions, flake8-rst-docstrings, flake8-mardkwon, flake8-builtins,
-    flake8-borken-line, flake8-class-attributes-order.
+    dlint, comprehensions, flake8-rst-docstrings, flake8-markdown, flake8-builtins,
+    flake8-borken-line, flake8-class-attributes-order and more.
   - Markdown: mdl.
   - C++: Clangtidy, cppcheck and cpplint.
   - CMake: CMakelint.
