@@ -77,4 +77,4 @@ endfunction
 command! Changes call Changes()
 
 " Ignore some files in FZF
-let $FZF_DEFAULT_COMMAND="fdfind --exclude={.pyc,.bag,.bag.info,build,tmp} --type f"  
+let $FZF_DEFAULT_COMMAND="fdfind --exclude={.pyc,.bag,.bag.info,build,tmp,__init__.py} --type f"  

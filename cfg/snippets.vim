@@ -1,4 +1,15 @@
+" Luansip mapping
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
 lua << EOF
+-- Mapping for expanding choice nodes
+vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})  
+vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+
 -- Lua snippets defined in ~155
 -- Friendly snippets loaded here:
 require("luasnip/loaders/from_vscode").load({ paths = { "~/.vim/bundle/friendly-snippets" } })
@@ -11,7 +22,7 @@ require'luasnip'.config.setup({
 	ext_opts = {
 		[types.choiceNode] = {
 			active = {
-				virt_text = {{"●", "GruvboxOrange"}}
+				virt_text = {{"●?", "GruvboxOrange"}}
 			}
 		},
 		[types.insertNode] = {
@@ -63,6 +74,17 @@ rec_ls = function()
 			t({""}),
 			-- The same dynamicNode as in the snippet (also note: self reference).
 			sn(nil, {t({"", "\t\\item "}), i(1), d(2, rec_ls, {})}),
+		}),
+	});
+end
+local rec_lst
+rec_lst = function()
+	return sn(nil, {
+		c(1, {
+			-- important!! Having the sn(...) as the first choice will cause infinite recursion.
+			t({""}),
+			-- The same dynamicNode as in the snippet (also note: self reference).
+			sn(nil, {t({"\", \""}), i(1), d(2, rec_lst, {})}),
 		}),
 	});
 end
@@ -269,17 +291,19 @@ ls.snippets = {
             }),
         },
         python = {
-s("ls", {
-	t({"\\begin{itemize}",
-	"\t\\item "}), i(1), d(2, rec_ls, {}),
-	t({"", "\\end{itemize}"}), i(0)
-}),
+            s("lst", {
+                    t("var = [\""), i(1), d(2, rec_lst, {}), t("\"]"), i(0)
+            }),
             s("from", {
-                t("from "),
-                i(1),
-                t(" import "),
-                i(2),
-                i(0),
+                t("from "), i(1), t(" import "), i(2), i(0),
+                }),
+            s("is", {
+                t("isinstance("), i(1, "variable"), t(", "), i(2, "type"), t(")"), i(0),
+                }),
+            s("ifis", {
+                t("if isinstance("), i(1, "variable"), t(", "), i(2, "type"), t({"):",""}),
+                t("\t"), i(3, "pass"),
+                t({""}), i(0),
                 }),
             s("i", {
                 i(1, "variable"),

@@ -1,6 +1,6 @@
 # Python LSP
 sudo npm i -g pyright
-pip install pyright
+pip install -U pyright
 pip install -U setuptools
 pip install 'python-language-server[all]'
 
@@ -15,25 +15,27 @@ pip install -U pylint
 pip install -U doq
 
 # Integrated in flake8
-pip install darglint
-pip install flake8-pytest-style
-pip install flake8-simplify
-pip install flake8-fixme
-pip install flake8-bugbear
-pip install dlint
-pip install flake8-comprehensions
-pip install flake8-commas
-pip install flake8-rst-docstring
-pip install flake8-docstrings
-pip install flake8-markdown
-pip install flake8-builtins
-pip install flake8-broken-line
-pip install flake8-class-attributes-order
-pip install flake8-pie
-pip install pandas-vet
+pip install -U darglint
+pip install -U flake8-pytest-style
+pip install -U flake8-simplify
+pip install -U flake8-fixme
+pip install -U flake8-bugbear
+pip install -U dlint
+pip install -U flake8-comprehensions
+pip install -U flake8-commas
+pip install -U flake8-rst-docstring
+pip install -U flake8-docstrings
+pip install -U flake8-markdown
+pip install -U flake8-builtins
+pip install -U flake8-broken-line
+pip install -U flake8-class-attributes-order
+pip install -U flake8-pie
+pip install -U pandas-vet
+pip install -U flake8-mutable
 # Stubs (used by mypy or other linters)
-pip install pandas-stubs
-pip install data-science-types
+pip install -U pandas-stubs
+pip install -U data-science-types
+pip install -U numpy
 
 # YAML LSP
 sudo snap install yaml-language-server
@@ -41,13 +43,10 @@ sudo snap install yaml-language-server
 # VIM LSP
 sudo npm install -g vim-language-server
 # VIM Linter
-pip install vim-vint
+pip install -U vim-vint
 
 # YAML linter
 sudo apt-get install yamllint
-
-# VIM Linter
-pip install vim-vint
 
 # MARKDOWN LSP
 read -p "Install the markdown lsp with :LSPInstall (with a .md opened). Then choose ltex. The path to this server is automatically added to PATH in bashrc now"
@@ -61,15 +60,15 @@ sudo npm i -g bash-language-server
 sudo apt-get install -y shellcheck
 
 # CMAAKE LSP
-pip install cmake-language-server
+pip install -U cmake-language-server
 # Cmakelint Linter
-pip install cmakelint
+pip install -U cmakelint
 
 # C++ LSP
 sudo apt install -y ccls
 # C++ Linter
 sudo apt-get install -y clang-tidy
-pip install cpplint
+pip install -U cpplint
 sudo apt-get install cppcheck
 
 # LUA LSP
@@ -78,11 +77,11 @@ brew install lua-language-server
 sudo apt install -y lua-check
 
 # RST LSP
-pip install esbonio
+pip install -U esbonio
 # RST Linter
-pip install rstcheck
-pip install restructuredtext-lint
+pip install -U rstcheck
+pip install -U restructuredtext-lint
 
 # Grammar-based linters
-pip install codespell
-pip install proselint
+pip install -U codespell
+pip install -U proselint

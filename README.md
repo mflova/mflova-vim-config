@@ -46,7 +46,7 @@ Main features of this VIM:
 - Easy toggle between source (.cpp) and header (.h) files
 - Easy selection of sentences enclosed by brackets or any delimiter
 - Autocomplete functionality
-- Quick snippets for Python and C++
+- Quick snippets for Python and C++. With endless items some of them.
 - Plenty of linters based on format, code analysis, syntaxis and type checking.
   All of them integrated in the built-in neovim LSP:
   - Python: Pylint, mypy, vulture, pyright, flake8. This last one
@@ -224,12 +224,13 @@ Mainly LSP-related functionalities
 | Ctrl + q           | Quit the autocomplete menu                                     |
 | \<leader\>lv       | Disable virtual text (diagnotics basically)                    |
 | \<leader\>ls       | Generate stubs for python module/package                       |
-| \<leader\>ll       | Toggle a list of all diagnotics                                |
+| \<leader\>ll       | Toggle a list of all diagnotics for the current file           |
+| \<leader\>lL       | Toggle a list of all diagnotics for the entier working dir     |
 | \<leader\>lr       | Open a list with references                                    |
 | \<leader\>ld       | Go to definition                                               |
 | \<leader\>lh       | Hover                                                          |
 
-## Refactor
+### Refactor
 | Command/Shortcut       | Description                                                    |
 | ---------------------- | -------------------------------------------------------------- |
 | \<leader\>rf (visual)  | Extract function                                               |
@@ -248,6 +249,22 @@ Misc
 | gS/gJ                         | Splits/Join the arguments from a function into multiple lines (or the code in general)|
 | \<Leader\>\<Leader\>          | Swap between the todo list and the file that is being edit |
 | :Isort/:isort                 | Sorts the imports of Python script according to Pep8       |
+
+Spotify
+| Command/Shortcut       | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| \<leader\>ss           | Open spotify main menu to search                               |
+| \<leader\>sd           | Spotify devices                                                |
+| \<leader\>s\<Right\>   | Skip track                                                     |
+| \<leader\>s\<Down\>    | Pause track                                                    |
+| \<leader\>s\<Left\>    | Previous track                                                 |
+
+
+Snippets
+| Command/Shortcut              | Description                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| Tab/Shift tab                 | Jump between nodes                                        |
+| Ctrl + e                      | Expand choice node. These are nodes with ·? symbol        |
 
 Vim-fugitive or git integration
 Note: g stands for git
@@ -329,6 +346,11 @@ For both methods if the module was imported as an absolute path, this one needs 
 be installed in the Python environment. This can be done with the pip framework.
 If the import was relative, it won't be necessary to generate the stubs, as the
 linters such as mypy will detect automatically.
+
+## Quick fixes
+-  If spotify is not working, go to its directory and peform "make".
+-  If symbols cannot be properly seen, you need to isntall patched fonts.
+-  If C++ linters are not working, check the compilation database
 
 ## Notes
 

@@ -1,10 +1,11 @@
 " Diagnotics params
-let g:diag_ignore_first_call = 1 " 1 to start with the diagnotics OFF byd efault
+let g:diag_ignore_first_call = 1 " 1 to start with the diagnotics OFF by default
 
 " Mapping
-nmap <silent><leader>lv :call ToggleDiagWrapper()<CR>
+nnoremap <silent><leader>lv :call ToggleDiagWrapper()<CR>
 nnoremap <silent><Leader>ls :call Genstubs()<CR>
-nnoremap <silent><leader>ll <cmd>TroubleToggle<cr>
+nnoremap <silent><leader>ll <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <silent><leader>lL <cmd>TroubleToggle<cr>
 nnoremap <silent><leader>lr <cmd>TroubleToggle lsp_references<cr>
 nnoremap <silent><leader>ld <cmd>TroubleToggle lsp_definitions<cr>
 nnoremap <silent><leader>lh <cmd>lua vim.lsp.buf.hover()<cr>
@@ -23,11 +24,10 @@ augroup linters
     au BufWritePost *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt  if expand('%:t') != 'TODO.md' && expand('%:t') != 'NOTES.md' | call ActivateDiag(1) | endif 
 augroup end
 
-function! SaveDiagsStatus()
-    if g:mflova_diagnostics_status == 0
-        let g:diag_ignore_first_call = 1
-    endif
-endfunction
+augroup linters_exception_files
+    silent autocmd! linters
+    au VimEnter TODO.md,NOTES.md call ActivateDiag(0)
+augroup end
 
 lua << EOF
 -- Python params
@@ -35,8 +35,12 @@ local python_max_line_length = 90
 local python_indent_size = 4 -- spaces
 local python_docstring_style = 'sphinx'
 local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt'
-local python_flake8_ignore = 'S101, DAR402'
-local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, C0114, C0115, C0116'
+local python_flake8_ignore = 'S101, DAR402, F841, DU0116, S603, S607, DAR103'
+local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, W0613, C0115, C0114, C0116, C0501, ' .. -- Overlapping or clashing with my format
+                             'R6103, C0199, C0198, ' .. -- From extensions
+                             'R0915' ..
+                             --'W0612' .. -- unused variables: overlapping with other plugins
+                             '' 
 
 -- Yaml params
 local yaml_max_line_length = 90
@@ -63,6 +67,7 @@ require('lint').linters.flake8.args = {'--docstring-style', python_docstring_sty
                                        '-',}
 
 require('lint').linters.mypy.args = {'--strict',
+                                     '--warn-unreachable',
                                      '--show-column-numbers',
                                      '--hide-error-codes',
                                      '--hide-error-context',
@@ -72,6 +77,7 @@ require('lint').linters.mypy.args = {'--strict',
 
 require('lint').linters.pylint.args = {'--good-names', python_good_names,
                                        '--disable', python_pylint_ignore,
+                                       '--enable-all-extensions',
                                        '-f', 'json',}
 
 require('lint').linters.yamllint.args = {'-d', '{extends: default, rules: {line-length:{max: ' .. yaml_max_line_length ..'}}}',
@@ -113,7 +119,7 @@ require('lint').linters.cmakelint.args = {'--linelength=' .. cmake_max_line_leng
 require('lint').linters.rstlint.args = {'--level=info'}
 
 require('lint').linters_by_ft = {
-  python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell'},
+  python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell', 'pytestcov'},
   cpp = {'cppcheck', 'clangtidy', 'cpplint', 'codespell'},
   rst = {'rstlint', 'rstcheck', 'proselint', 'codespell'},
   markdown = {'markdownlint', 'codespell', 'proselint'},
@@ -153,7 +159,6 @@ endfunction
 
 " Diags toggling
 
-let g:mflova_diagnostics_status = 0
 function! UpdateDiagnosticsStatus(diag_on)
     if a:diag_on == 1
         let g:mflova_diagnostics_status = 1
@@ -161,14 +166,6 @@ function! UpdateDiagnosticsStatus(diag_on)
         let g:mflova_diagnostics_status = 0
     endif
 endfunction
-
-" Startup
-if g:diag_ignore_first_call == 1
-    call UpdateDiagnosticsStatus(0)
-    au VimEnter * ToggleDiagOff
-else
-    call UpdateDiagnosticsStatus(1)
-endif
 
 " Changes the status bar when toggled bar
 function! ToggleDiagWrapper()
@@ -178,22 +175,43 @@ function! ToggleDiagWrapper()
         call UpdateDiagnosticsStatus(1)
     else
         if g:mflova_diagnostics_status == 1
-            call UpdateDiagnosticsStatus(0)
+            call ActivateDiag(0)
         else
-            call UpdateDiagnosticsStatus(1)
+            call ActivateDiag(1)
         endif
     endif
-    ToggleDiag
 endfunction
 
 function! ActivateDiag(enable)
         if g:diag_ignore_first_call == 0
             if a:enable == 1
+                lua vim.diagnostic.enable()
                 execute "lua require('lint').try_lint()"
+                silent autocmd linters
                 call UpdateDiagnosticsStatus(1)
             else
                 call UpdateDiagnosticsStatus(0)
+                silent autocmd! linters
+                lua vim.diagnostic.disable()
             endif
         endif
 endfunction
+
+" Startup
+if g:diag_ignore_first_call == 1
+    let g:mflova_diagnostics_status = 0
+    augroup diags_start
+        au VimEnter * call UpdateDiagnosticsStatus(0)
+        au VimEnter * silent autocmd! linters
+        au VimEnter * lua vim.diagnostic.disable()
+    augroup end
+else
+    let g:mflova_diagnostics_status = 1
+    augroup diags_start
+        au VimEnter * execute "lua require('lint').try_lint()"
+        au VimEnter * call UpdateDiagnosticsStatus(1)
+        au VimEnter * silent autocmd linters
+        au VimEnter * lua vim.diagnostic.enable()
+    augroup end
+endif
 

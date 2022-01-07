@@ -7,7 +7,9 @@ In case you change the files, it is recommended to call ``:call UltiSnips#Refres
 Python
 | Command/Shortcut            | Description                                          |
 | --------------------------- | ---------------------------------------------------- |
+| lst                         | Infinite list                                        |
 | im, from                    | Imports and froms                                    |
+| (if)is                      | (if)isinstance(,)                                    |
 | for, while, if, ife         | Basic calls                                          |
 | i                           | From "indexing". name[variable]                      |
 | i'                          | From index from string with ". name["string"]        |

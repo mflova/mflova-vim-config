@@ -1,8 +1,6 @@
 nmap <silent>lt :call ToggleCmp()<CR>:call ToggleDiagWrapper()<CR>
 
 lua << EOF
-require'toggle_lsp_diagnostics'.init()
-
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()) -- To install the cmp in the LSP. nvim-cmp
 
 -- Python LSP
@@ -12,8 +10,9 @@ require'lspconfig'.pyright.setup{
       python = {
         analysis = {
           autoSearchPaths = true,
-          diagnosticMode = "openFilesOnly",
+          diagnosticMode = "workspace", -- openFilesOnly is the other option
           stubPath = os.getenv('STUBSPATH'),
+          typeCheckingMode = "off", -- linting disable, as mypy is much more accurate at the moment and the stubs are better read
         }
       }
     }

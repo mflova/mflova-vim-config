@@ -54,6 +54,7 @@ call vundle#begin()
   Plugin 'mflova/vim-python-docstring' " Modified for the templates
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
+  Plugin 'dominikduda/vim_current_word' "Highlight the current word 
   " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2. To be set up in the future.
   Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
@@ -71,8 +72,8 @@ call vundle#begin()
   Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plugin 'neovim/nvim-lspconfig' " LSP configurations
+"  Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
   Plugin 'mfussenegger/nvim-lint' " Linters with the built-in LSP neovim
-  Plugin 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim' " Easily toggle diagnotics
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
@@ -104,6 +105,13 @@ call vundle#begin()
   Plugin 'folke/tokyonight.nvim'
   Plugin 'mhartington/oceanic-next'
   Plugin 'PHSix/nvim-hybrid'
+  " Add maktaba and coverage to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-coverage'
+" Also add Glaive, which is used to configure coverage's maktaba flags. See
+" `:help :Glaive` for usage.
+Plugin 'google/vim-glaive'
 call vundle#end()
 
 " Overwrite the key for the macros, since I do not use them
@@ -163,8 +171,9 @@ set clipboard=unnamedplus
 " Color
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 
-" Set tab to be 4 spaces
+" Set tab to be 4 spaces (2 for lua)
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+autocmd FileType lua setlocal shiftwidth=2 softtabstop=2 smarttab
 
 " Use mouse to copy-paste
 set mouse-=a
@@ -330,12 +339,18 @@ endfunction
 " TagList
 nmap <F4> :TlistToggle<CR>
 
-" Luansip mapping
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
-inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+" Spotify
+nmap <silent>ss :Spotify<CR>
+nmap <silent>sd :SpotifyDevices<CR>
+nmap <silent>s<Down> <Plug>(SpotifyPause)
+nmap <silent>s<Left> <Plug>(SpotifyPrev)
+nmap <silent>s<Right> <Plug>(SpotifySkip)
 
-snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+nmap <silent>sa <Plug>(SpotifySkip)
+nmap <silent>s<Right> <Plug>(SpotifySkip)
+nmap <silent>s<Right> <Plug>(SpotifySkip)
+nmap <silent>s<Right> <Plug>(SpotifySkip)
+nmap <silent>s<Right> <Plug>(SpotifySkip)
 
 " Imports
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
