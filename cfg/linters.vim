@@ -1,8 +1,16 @@
+" README
+" COMPILATION DATABASE: It is necessary to tell the CPP based linters how to
+" compile the program. It can be done by adding
+" set(CMAKE_EXPORT_COMPILE_COMMANDS) in the CMakeLists or with the flag
+" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON in the cmake command. This will generate
+"  a compilationcommands.json that needs to be read by setting the env
+"  variable CPP_BUILD_DIR.
+"
 " Diagnotics params
-let g:diag_ignore_first_call = 1 " 1 to start with the diagnotics OFF by default
+let g:diags_at_startup = 0
 
 " Mapping
-nnoremap <silent><leader>lv :call ToggleDiagWrapper()<CR>
+nnoremap <silent><leader>lv :call SetDiagsState('TOGGLE')<CR>
 nnoremap <silent><Leader>ls :call Genstubs()<CR>
 nnoremap <silent><leader>ll <cmd>TroubleToggle document_diagnostics<cr>
 nnoremap <silent><leader>lL <cmd>TroubleToggle<cr>
@@ -12,22 +20,6 @@ nnoremap <silent><leader>lh <cmd>lua vim.lsp.buf.hover()<cr>
 
 " Needed to generate the event InsertLeave with C-c
 imap <C-c> <Esc>
-
-
-let g:IsDiagsAllowed = 0
-let g:mflova_diagnostics_status = 0
-" Set up linters to its given filetype
-augroup linters
-    autocmd!
-    " Launch the toggler but not in the exceptions
-    au FileType python,cpp,markdown,yaml,vim,sh,cmake,rst,lua if expand('%:t') != 'TODO.md' && expand('%:t') != 'NOTES.md' | call ActivateDiag(1) | endif 
-    au BufWritePost *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt  if expand('%:t') != 'TODO.md' && expand('%:t') != 'NOTES.md' | call ActivateDiag(1) | endif 
-augroup end
-
-augroup linters_exception_files
-    silent autocmd! linters
-    au VimEnter TODO.md,NOTES.md call ActivateDiag(0)
-augroup end
 
 lua << EOF
 -- Python params
@@ -119,7 +111,8 @@ require('lint').linters.cmakelint.args = {'--linelength=' .. cmake_max_line_leng
 require('lint').linters.rstlint.args = {'--level=info'}
 
 require('lint').linters_by_ft = {
-  python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell', 'pytestcov'},
+  --python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell', 'pytestcov'},
+  python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell'},
   cpp = {'cppcheck', 'clangtidy', 'cpplint', 'codespell'},
   rst = {'rstlint', 'rstcheck', 'proselint', 'codespell'},
   markdown = {'markdownlint', 'codespell', 'proselint'},
@@ -157,61 +150,86 @@ function! Genstubs()
     echo 'Stubs generated'
 endfunction
 
-" Diags toggling
 
-function! UpdateDiagnosticsStatus(diag_on)
-    if a:diag_on == 1
-        let g:mflova_diagnostics_status = 1
-    else
-        let g:mflova_diagnostics_status = 0
-    endif
-endfunction
-
-" Changes the status bar when toggled bar
-function! ToggleDiagWrapper()
-    if g:diag_ignore_first_call == 1
-        let g:diag_ignore_first_call = 0
-        call ActivateDiag(1)
-        call UpdateDiagnosticsStatus(1)
-    else
-        if g:mflova_diagnostics_status == 1
-            call ActivateDiag(0)
-        else
-            call ActivateDiag(1)
-        endif
-    endif
-endfunction
-
-function! ActivateDiag(enable)
-        if g:diag_ignore_first_call == 0
-            if a:enable == 1
-                lua vim.diagnostic.enable()
-                execute "lua require('lint').try_lint()"
-                silent autocmd linters
-                call UpdateDiagnosticsStatus(1)
-            else
-                call UpdateDiagnosticsStatus(0)
-                silent autocmd! linters
-                lua vim.diagnostic.disable()
-            endif
-        endif
-endfunction
-
-" Startup
-if g:diag_ignore_first_call == 1
+""" Linter toggler implementation "
+if g:diags_at_startup == 0
     let g:mflova_diagnostics_status = 0
-    augroup diags_start
-        au VimEnter * call UpdateDiagnosticsStatus(0)
-        au VimEnter * silent autocmd! linters
-        au VimEnter * lua vim.diagnostic.disable()
-    augroup end
+    let g:current_diags_state = 0
 else
     let g:mflova_diagnostics_status = 1
-    augroup diags_start
-        au VimEnter * execute "lua require('lint').try_lint()"
-        au VimEnter * call UpdateDiagnosticsStatus(1)
-        au VimEnter * silent autocmd linters
-        au VimEnter * lua vim.diagnostic.enable()
-    augroup end
-endif
+    let g:current_diags_state = 1
+    call SetDiagsState(1)
+end
 
+" Set up linters to its given filetype
+function SetAutoLinters(mode)
+    if a:mode == 'ON'
+        augroup auto_linters
+            autocmd!
+            " Launch the toggler but not in the exceptions
+            au BufWritePost *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
+            au BufEnter *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
+        augroup end
+    else
+        silent autocmd! auto_linters
+    end
+endfunction
+
+function! UpdateDiagnosticsStatusLine()
+    let g:mflova_diagnostics_status = g:current_diags_state
+endfunction
+
+" Diags toggler
+function SetDiagsState(mode)
+    if a:mode == 'ON'
+        let g:current_diags_state = 1
+        " Enable virtual text and diags
+        " Errors when many diagnostics
+        silent! lua vim.diagnostic.enable()
+        " Run lints
+        execute "lua require('lint').try_lint()"
+        " Set auto-linters
+        call SetAutoLinters("ON")
+    end
+    if a:mode == 'OFF'
+        let g:current_diags_state = 0
+        " Disable virtual text and diags
+        lua vim.diagnostic.disable()
+        " Disable auto-linters
+        call SetAutoLinters("OFF")
+        " Update status bar
+    end
+    if a:mode == 'TOGGLE'
+        if g:current_diags_state == 1
+            let g:current_diags_state = 0
+            lua vim.diagnostic.disable()
+            call SetAutoLinters("OFF")
+        elseif g:current_diags_state == 0
+            let g:current_diags_state = 1
+            " Errors when many diagnostics
+            silent! lua vim.diagnostic.enable()
+            execute "lua require('lint').try_lint()"
+            call SetAutoLinters("ON")
+        end
+    end
+    call UpdateDiagnosticsStatusLine()
+endfunction
+
+function! SaveDiagsState()
+   let g:saved_diags_state = g:current_diags_state
+endfunction
+let g:saved_diags_state = g:current_diags_state
+
+function! RestoreDiagsState()
+    if g:saved_diags_state == 1
+        call SetDiagsState('ON')
+    else
+        call SetDiagsState('OFF')
+    end
+endfunction
+ 
+augroup linters_exception_files
+    au BufEnter TODO.md,NOTES.md call SaveDiagsState() | call SetDiagsState('OFF')
+    au BufLeave TODO.md,NOTES.md call RestoreDiagsState()
+augroup end
+"
