@@ -291,18 +291,26 @@ ls.snippets = {
             }),
         },
         python = {
+            s("reveal", {
+                    t("reveal_type("), i(1,"var"), t(")"), i(0)
+            }),
             s("lst", {
                     t("var = [\""), i(1), d(2, rec_lst, {}), t("\"]"), i(0)
             }),
             s("from", {
                 t("from "), i(1), t(" import "), i(2), i(0),
                 }),
-            s("is", {
-                t("isinstance("), i(1, "variable"), t(", "), i(2, "type"), t(")"), i(0),
+            s("isin", {
+                t("isinstance("), i(1, "var_to_verify"), t(", "), i(2, "type"), t(")"), i(0),
                 }),
-            s("ifis", {
-                t("if isinstance("), i(1, "variable"), t(", "), i(2, "type"), t({"):",""}),
+            s("ifisin", {
+                t("if isinstance("), i(1, "var_to_verify"), t(", "), i(2, "type"), t({"):",""}),
                 t("\t"), i(3, "pass"),
+                t({""}), i(0),
+                }),
+            s("typeguard", {
+                t("def "), i(1, "funcname"), t("("), i(2, "val"), t(": "), i(3, "input_type"), t(") -> TypeGuard["), i(4, "type_to_narrow"), t({"]:", ""}),
+                t("\t"), i(5, "# TODO: Function that returns True if "), f(copy, 2), t(" is "), f(copy, 4),
                 t({""}), i(0),
                 }),
             s("i", {

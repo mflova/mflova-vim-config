@@ -26,11 +26,12 @@ lua << EOF
 local python_max_line_length = 90
 local python_indent_size = 4 -- spaces
 local python_docstring_style = 'sphinx'
-local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt'
-local python_flake8_ignore = 'S101, DAR402, F841, DU0116, S603, S607, DAR103'
+local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt, ax'
+local python_flake8_ignore = 'S101, DAR402, F841, DU0116, S603, S607, DAR103, PIE790'
 local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, W0613, C0115, C0114, C0116, C0501, ' .. -- Overlapping or clashing with my format
                              'R6103, C0199, C0198, ' .. -- From extensions
                              'R0915' ..
+                             'W9015, W0917, ' .. -- Overlapping with flake8-darglint
                              --'W0612' .. -- unused variables: overlapping with other plugins
                              '' 
 
@@ -55,13 +56,17 @@ require('lint').linters.flake8.args = {'--docstring-style', python_docstring_sty
                                        '--ignore', python_flake8_ignore,
                                        '--indent-size', python_indent_size,
                                        '--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s',
+                                       '--use-class-attributes-order-strict-mode',
                                        '--no-show-source',
+                                       '--percent-greedy', "2",
+                                       '--format-greedy', "2",
+                                       '--enable-extensions',"FS003",
+                                       '--scan-host-site-packages',
                                        '-',}
 
 require('lint').linters.mypy.args = {'--strict',
                                      '--warn-unreachable',
                                      '--show-column-numbers',
-                                     '--hide-error-codes',
                                      '--hide-error-context',
                                      '--no-color-output',
                                      '--no-error-summary',
@@ -80,6 +85,7 @@ require('lint').linters.markdownlint.args = {'--disable=MD013'} -- line-length
 require('lint').linters.clangtidy.ignore_exitcode = true
 require('lint').linters.clangtidy.args = {'--extra-arg=-Wall',
                                           '--extra-arg=-Weverything',
+                                          '--extra-arg=-pedantic',
                                           '--extra-arg=-std=' .. cpp_std_flag,
                                           '--extra-arg=-Wdocumentation',
                                           '--extra-arg=-Wno-c++98-compat',
@@ -111,8 +117,7 @@ require('lint').linters.cmakelint.args = {'--linelength=' .. cmake_max_line_leng
 require('lint').linters.rstlint.args = {'--level=info'}
 
 require('lint').linters_by_ft = {
-  --python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell', 'pytestcov'},
-  python = {'flake8', 'mypy', 'pylint', 'vulture', 'codespell'},
+  python = {'flake8', 'pylint', 'vulture', 'codespell', 'pytestcov'}, -- mypy in LSP
   cpp = {'cppcheck', 'clangtidy', 'cpplint', 'codespell'},
   rst = {'rstlint', 'rstcheck', 'proselint', 'codespell'},
   markdown = {'markdownlint', 'codespell', 'proselint'},
@@ -164,6 +169,7 @@ end
 " Set up linters to its given filetype
 function SetAutoLinters(mode)
     if a:mode == 'ON'
+        let g:is_autolinters_defined = 1
         augroup auto_linters
             autocmd!
             " Launch the toggler but not in the exceptions
@@ -171,7 +177,9 @@ function SetAutoLinters(mode)
             au BufEnter *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
         augroup end
     else
-        silent autocmd! auto_linters
+        if g:is_autolinters_defined
+            silent autocmd! auto_linters
+        endif
     end
 endfunction
 
@@ -180,6 +188,7 @@ function! UpdateDiagnosticsStatusLine()
 endfunction
 
 " Diags toggler
+let g:is_autolinters_defined = 0
 function SetDiagsState(mode)
     if a:mode == 'ON'
         let g:current_diags_state = 1
@@ -218,6 +227,7 @@ endfunction
 function! SaveDiagsState()
    let g:saved_diags_state = g:current_diags_state
 endfunction
+
 let g:saved_diags_state = g:current_diags_state
 
 function! RestoreDiagsState()
@@ -227,7 +237,7 @@ function! RestoreDiagsState()
         call SetDiagsState('OFF')
     end
 endfunction
- 
+
 augroup linters_exception_files
     au BufEnter TODO.md,NOTES.md call SaveDiagsState() | call SetDiagsState('OFF')
     au BufLeave TODO.md,NOTES.md call RestoreDiagsState()

@@ -2,10 +2,13 @@
 sudo npm i -g pyright
 pip install -U pyright
 pip install -U setuptools
+
+# Pylsp
 pip install 'python-language-server[all]'
+pip install pylsp-mypy
+pip install pylsp-rope
 
 # Python linters
-pip install -U flake8-docstrings
 pip install -U pydocstyle
 pip install -U vulture
 pip install -U mypy
@@ -13,14 +16,18 @@ pip install -U flake8
 pip install -U pydocstyle
 pip install -U pylint
 pip install -U doq
+pip install -U pytest
+pip install -U pytest-cov
 
 # Integrated in flake8
+pip install -U dlint
+pip install -U pandas-vet
 pip install -U darglint
 pip install -U flake8-pytest-style
 pip install -U flake8-simplify
 pip install -U flake8-fixme
 pip install -U flake8-bugbear
-pip install -U dlint
+pip install -U flake8-docstrings
 pip install -U flake8-comprehensions
 pip install -U flake8-commas
 pip install -U flake8-rst-docstring
@@ -30,8 +37,14 @@ pip install -U flake8-builtins
 pip install -U flake8-broken-line
 pip install -U flake8-class-attributes-order
 pip install -U flake8-pie
-pip install -U pandas-vet
 pip install -U flake8-mutable
+pip install -U flake8-deprecated
+
+pip install -U flake8-type-checking # Guard those imports only used by type checkers
+pip install -U flake8-typing-imports # Guard "typing" imports based on Python version
+pip install -U flake8-requirements # It must follows the standard structure (found in pypa/sampleproject repository, setup.py)
+pip install -U flake8-implicit-str-concat
+pip install -U flake8-use-fstring
 # Stubs (used by mypy or other linters)
 pip install -U pandas-stubs
 pip install -U data-science-types
