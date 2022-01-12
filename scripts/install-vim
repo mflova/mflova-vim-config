@@ -15,4 +15,6 @@ echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
 echo "export MYVIMRC='~/mflova-linux-setup/mflova-vim-config/cfg/init.vim'" >> ~/.bashrc
 
 read -p "Vim installed. Call :PluginInstall and press [ENTER]"
+read -p "Go to the folder of the spotify plugin in bundle and execute 'do make'. Press [ENTER]"
+read -p "Go to the folder of the sniprun plugin in bundle and execute 'bash install.sh'. Press [ENTER]"
 read -p "Remember to install the Tresitter parsers (used for highlighting improved) with :TSUpdate and then :TSInstall filetype"

@@ -68,8 +68,8 @@ call vundle#begin()
   Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plugin 'neovim/nvim-lspconfig' " LSP configurations
-"  Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
-  Plugin 'mfussenegger/nvim-lint' " Linters with the built-in LSP neovim
+  Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
+"  Plugin 'mfussenegger/nvim-lint' " Linters with the built-in LSP neovim
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
@@ -96,15 +96,17 @@ call vundle#begin()
   Plugin 'hrsh7th/cmp-path'
   Plugin 'hrsh7th/cmp-cmdline'
   Plugin 'hrsh7th/nvim-cmp'
-  Plugin 'saadparwaiz1/cmp_luasnip'
+
+  " Coding
+  Plugin 'michaelb/sniprun', {'do': 'bash install.sh'} " Run the specified lines
 
   " UI
-  Plugin 'Yagua/nebulous.nvim'
-  Plugin 'onsails/lspkind-nvim'
-  Plugin 'folke/lsp-colors.nvim'
-  Plugin 'folke/tokyonight.nvim'
-  Plugin 'mhartington/oceanic-next'
-  Plugin 'PHSix/nvim-hybrid'
+  Plugin 'Yagua/nebulous.nvim' " Theme
+  Plugin 'onsails/lspkind-nvim' " Pictograms
+  Plugin 'folke/lsp-colors.nvim' " Useful for themes
+  Plugin 'folke/tokyonight.nvim' " Theme
+  Plugin 'mhartington/oceanic-next' " Theme
+  Plugin 'PHSix/nvim-hybrid' " Theme
   " Add maktaba and coverage to the runtimepath.
 " (The latter must be installed before it can be used.)
 Plugin 'google/vim-maktaba'
@@ -242,14 +244,6 @@ let g:winresizer_vert_resize = 2
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
-" Enable/Disable autocomplete (YCM Based)
-let g:loaded_youcompleteme = 1 
-let g:ycm_auto_trigger = 1
-
-" Commenting line(s) with these two lines
-vmap <silent> <Leader>c :call ToggleCommentVisual()<CR>
-nmap <silent> <Leader>c :call ToggleCommentLine()<CR>
-
 " Replace mode
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
@@ -265,7 +259,6 @@ map <Leader>j <Plug>(easymotion-overwin-line)
 map <Leader>k <Plug>(easymotion-overwin-line)
 map <Leader>w <Plug>(easymotion-bd-w)
 map <Leader>W <Plug>(easymotion-overwin-w)
-
 
 " Delete entire word in insert mode
 imap <C-d> <C-[>diwi
@@ -341,6 +334,7 @@ let s:cmp_cfg_path = s:vim_cfg_path . '/cmp.vim'
 let s:refactor_cfg_path = s:vim_cfg_path . '/refactoring.vim'
 let s:snippets_cfg_path = s:vim_cfg_path . '/snippets.vim'
 let s:navigation_cfg_path = s:vim_cfg_path . '/navigation.vim'
+let s:coding_cfg_path = s:vim_cfg_path . '/coding.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:testing_cfg_path
@@ -351,3 +345,4 @@ exec 'source ' . s:cmp_cfg_path
 exec 'source ' . s:refactor_cfg_path
 exec 'source ' . s:snippets_cfg_path
 exec 'source ' . s:navigation_cfg_path
+exec 'source ' . s:coding_cfg_path

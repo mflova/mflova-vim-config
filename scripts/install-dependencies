@@ -23,7 +23,11 @@ pip install --upgrade pynvim
 pip3 install --upgrade pynvim
 
 # Spotify
-sudo snap install spt
+sudo snap install Spotify
+# Go to its directory and run do make
+
+# Sniprun
+# Go to its directory and run bash install.sh
 
 
 # Where mypy will read all the stubs generated

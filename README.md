@@ -240,6 +240,13 @@ Mainly LSP-related functionalities
 | ---------------------- | -------------------------------------------------------------- |
 | \<leader\>rf (visual)  | Extract function                                               |
 
+### Coding
+| Command/Shortcut       | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| \<leader\>cr           | Run the code selected (partially running code for testing      |
+| \<leader\>cR           | Clean the output of the pevious command                        |
+| \<Leader\>cc           | Comment line/block in Python                                   |
+
 ### Misc
 Misc 
 | Command/Shortcut              | Description                                               |
@@ -247,7 +254,6 @@ Misc
 | :SO write here the issue      | Search the issue in stack overflow                        |
 | :Google write here the issue  | Search the issue in google                                |
 | :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
-| \<Leader\>c                   | Comment line/block in Python                              |
 | ctrl+p (Insert mode)          | Autocomplete the word based on the document               |
 | ctrl+d                        | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
 | \<Leader\> + p/P              | Inserts a print statement above or below with the variable chosen by the cursor|
