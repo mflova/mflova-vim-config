@@ -178,17 +178,19 @@ Resizing and moving split planes
 | Arrows (move mode) | Select a split pane, press Ctrl + e (resize mode), then e (move mode) and move it with the arrows  |
 
 
-### NERDTree
+### File explorer
 
 | Command/Shortcut | Description                       |
 | ---------------- | --------------------------------- |
 | F2               | Toggle and untoggle the NERDTree  |
-| v in file        | Opens a file in vertical split    |
-| x in file        | Opens a file in horizontal split  |
-| t in file        | Opens a file in new tab           |
-| T in file        | Opens a file in new tab (silent)  |
-| r/R              | Refresh node and root node        |
-| t in a folder    | Changes current dir to that one   |
+| Ctrl + v         | Opens a file in vertical split    |
+| Ctrl + x         | Opens a file in horizontal split  |
+| Ctrl + t         | Opens a file in new tab           |
+| Ctrl + t         | Opens a file in new tab           |
+| r                | Rename a file                     |
+| p                | Paste a file                      |
+| d                | Rename a file                     |
+| R                | Refresh tree                      |
 
 
 ### Searching
@@ -230,6 +232,7 @@ Mainly LSP-related functionalities
 | \<leader\>lL       | Toggle a list of all diagnotics for the entier working dir     |
 | \<leader\>lr       | Open a list with references                                    |
 | \<leader\>ld       | Go to definition                                               |
+| Ctrl + o           | Goes to previews jump (useful after go to definition)          |
 | \<leader\>lh       | Hover                                                          |
 
 ### Refactor

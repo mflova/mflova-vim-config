@@ -25,19 +25,15 @@ command! -nargs=1 RunCMDSilent execute ':silent !'.<q-args> | execute ':redraw!'
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'flazz/vim-colorschemes' " Install multiple colorschemes
-  Plugin 'preservim/nerdtree' " NerdTree stuff
   Plugin 'tomasr/molokai' " Theme
   Plugin 'morhetz/gruvbox' " Theme
   Plugin 'joshdick/onedark.vim' " THeme
-  Plugin 'xuyuanp/nerdtree-git-plugin' " NerdTree stuff
-  Plugin 'PhilRunninger/nerdtree-visual-selection' " NerdTree stuff
   Plugin 'octol/vim-cpp-enhanced-highlight' " Improves colours while coding
   Plugin 'simeji/winresizer' " Resize and move window splits
   Plugin 'szw/vim-maximizer' " Zoom a window pane
   Plugin 'LucHermitte/lh-vim-lib' " ??
   Plugin 'LucHermitte/alternate-lite' " ??
   Plugin 'kkoomen/vim-doge', { 'do': { ->doge#install() } }  " Document files and jump between TODOs
-  Plugin 'yegappan/taglist' " DIsplay taglist of the current file (classes, variables...)
   Plugin 'google/vim-searchindex' " Display more info when searching a word/pattern
   Plugin 'xolox/vim-misc' " Needed for vim-session
   Plugin 'xolox/vim-session' " Save VIM sessions
@@ -79,6 +75,10 @@ call vundle#begin()
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
   Plugin 'folke/trouble.nvim' " Better diagnos navigation
   Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
+
+  " File explorer and file navigation
+  Plugin 'kyazdani42/nvim-tree.lua' " Lua file explorer
+  Plugin 'liuchengxu/vista.vim' " Taglist compatible with LSP
 
   " Snippets
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
@@ -194,20 +194,12 @@ set nohlsearch " Avoid highlighting all words after /
 " Close tabs with Ctrl + w 
 cmap tclose tabclose 
 
-" Toggle and untoggle NERDTree and TagList
-nmap <silent><F2> :NERDTreeToggle<CR>
-
 " Alternate between source and header file
 nmap <silent><C-x> :call CurtineIncSw()<CR>
-
-" Opens TagList at right
-let Tlist_Use_Right_Window   = 1
 
 " Split files by default at right and down
 set splitbelow
 set splitright
-let NERDTreeMapOpenVSplit='v'
-let NERDTreeMapOpenSplit='x'
 
 " Set directory of Ctrl + P
 let g:ctrlp_cmd='CtrlP :pwd'
@@ -217,13 +209,6 @@ let g:ctrlp_use_caching=0
 
 " Insert space and go to insert mode
 nnoremap space i<space>
-
-" Easier commands definition
-cmap ntsave NERDTreeProjectSave
-cmap ntload NERDTreeProjectLoad
-cmap ntrm NERDTreeProjectRm 
-cmap vsave SaveSession
-cmap vload OpenSession
 
 "Do not ask about saving session evey time the program is closed
 let g:session_autosave = 'no'
@@ -253,9 +238,6 @@ let g:winresizer_keycode_left = "\<LEFT>"
 let g:winresizer_keycode_right = "\<RIGHT>"
 let g:winresizer_horiz_resize = 2
 let g:winresizer_vert_resize = 2
-
-" NERDTree sets the current working directory. Useful for Vgrep command
-let g:NERDTreeChDirMode = 2
 
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
@@ -336,25 +318,21 @@ function! Swap_todo()
     endif
 endfunction
 
-" TagList
-nmap <F4> :TlistToggle<CR>
-
 " Spotify
-nmap <silent>ss :Spotify<CR>
-nmap <silent>sd :SpotifyDevices<CR>
-nmap <silent>s<Down> <Plug>(SpotifyPause)
-nmap <silent>s<Left> <Plug>(SpotifyPrev)
-nmap <silent>s<Right> <Plug>(SpotifySkip)
+nmap <silent><leader>ss :Spotify<CR>
+nmap <silent><leader>sd :SpotifyDevices<CR>
+nmap <silent><leader>s<Down> <Plug>(SpotifyPause)
+nmap <silent><leader>s<Left> <Plug>(SpotifyPrev)
+nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
 
-nmap <silent>sa <Plug>(SpotifySkip)
-nmap <silent>s<Right> <Plug>(SpotifySkip)
-nmap <silent>s<Right> <Plug>(SpotifySkip)
-nmap <silent>s<Right> <Plug>(SpotifySkip)
-nmap <silent>s<Right> <Plug>(SpotifySkip)
+nmap <silent><leader>sa <Plug>(SpotifySkip)
+nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
+nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
+nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
+nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
 
 " Imports
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
-let s:fzf_cfg_path = s:vim_cfg_path . '/fzf.vim'
 let s:testing_cfg_path = s:vim_cfg_path . '/testing.vim'
 let s:lsp_cfg_path = s:vim_cfg_path . '/lsp.vim'
 let s:linters_cfg_path = s:vim_cfg_path . '/linters.vim'
@@ -362,9 +340,9 @@ let s:ui_cfg_path = s:vim_cfg_path . '/ui.vim'
 let s:cmp_cfg_path = s:vim_cfg_path . '/cmp.vim'
 let s:refactor_cfg_path = s:vim_cfg_path . '/refactoring.vim'
 let s:snippets_cfg_path = s:vim_cfg_path . '/snippets.vim'
+let s:navigation_cfg_path = s:vim_cfg_path . '/navigation.vim'
 
 exec 'source ' . s:git_cfg_path
-exec 'source ' . s:fzf_cfg_path
 exec 'source ' . s:testing_cfg_path
 exec 'source ' . s:lsp_cfg_path
 exec 'source ' . s:linters_cfg_path
@@ -372,3 +350,4 @@ exec 'source ' . s:ui_cfg_path
 exec 'source ' . s:cmp_cfg_path
 exec 'source ' . s:refactor_cfg_path
 exec 'source ' . s:snippets_cfg_path
+exec 'source ' . s:navigation_cfg_path
