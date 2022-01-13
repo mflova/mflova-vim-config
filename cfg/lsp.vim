@@ -13,8 +13,20 @@
 " setting STUBSPATH to MYPYPATH will make both of them to work.
 
 
-" Toggle Autocomplete
-nmap <silent>lt :call ToggleCmp()<CR>:call ToggleDiagWrapper()<CR>
+" Toggle LSP Basic Linting
+nmap <silent>lt :call ToggleLSPLinting()<CR>
+
+let g:mflova_lsplinting_status = 1
+function! ToggleLSPLinting()
+    if g:mflova_lsplinting_status == 1
+        lua vim.diagnostic.disable()
+        let g:mflova_lsplinting_status = 0
+        call SetDiagsState('OFF')
+    else
+        lua vim.diagnostic.enable()
+        let g:mflova_lsplinting_status = 1
+    endif
+endfunction
 
 lua << EOF
 

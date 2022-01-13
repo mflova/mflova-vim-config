@@ -11,10 +11,29 @@ augroup END
 nmap <silent><Leader>cR :SnipClose<CR>
 vmap <silent><Leader>cR :SnipClose<CR>
 
+let g:instantrst_is_on = 0
+function ToggleInstantRst()
+    if g:instantrst_is_on == 1
+        silent! StopInstantRst
+        let g:instantrst_is_on= 0
+    else
+        let l:git_root= system("git rev-parse --show-toplevel | tr -d '\\n'")
+        " Paths where images might be located
+        let g:instant_rst_additional_dirs = [l:git_root . "/doc/resources/",
+                                            \l:git_root . "/docs/resources",
+                                            \l:git_root . "/doc/images",
+                                            \l:git_root . "/docs/images",
+                                            \]
+        silent! InstantRst
+        let g:instantrst_is_on= 1
+    end
+endfunction
 
+let g:instant_rst_browser = 'google-chrome'
 augroup visualizable
     autocmd!
-    autocmd filetype markdown nmap <silent><leader>cr :Glow<CR>
+    autocmd filetype markdown nmap <silent><leader>cr :MarkdownPreviewToggle<CR>
+    autocmd filetype rst nmap <silent><leader>cr :call ToggleInstantRst()<CR>
 augroup END
 
 

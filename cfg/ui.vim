@@ -38,7 +38,7 @@ function! UpdateStatusDiagsAndCmp()
 endfunction
 
 " Edit the icons of the Spotify status component
-function! UpdateSpotifyComponent()
+function! UpdateTogglers()
     let l:diags_status = ' '
     if g:mflova_diagnostics_status == 1
         let l:diags_status = l:diags_status . ''
@@ -52,7 +52,14 @@ function! UpdateSpotifyComponent()
     else
         let l:cmp_status = l:cmp_status . 'X'
     endif
-    return l:diags_status . '  ' . l:cmp_status
+
+    let l:diags_lsp_linting = 'ﳋ'
+    if g:mflova_lsplinting_status == 1
+        let l:diags_lsp_linting = l:diags_lsp_linting . ' '
+    else
+        let l:diags_lsp_linting = l:diags_lsp_linting . ' X'
+    endif
+    return l:diags_lsp_linting . '  ' . l:diags_status . '  ' . l:cmp_status
 endfunction
 
 lua <<EOF
@@ -95,7 +102,7 @@ require('lualine').setup {
      lualine_a = {'mode'},
      lualine_b = {'branch', 'diff'},
      lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},
-     lualine_x = {updateSpotifyStatusComponent, 'diagnostics', 'UpdateStatusDiagsAndCmp','filetype'},
+     lualine_x = {updateSpotifyStatusComponent, 'diagnostics', 'UpdateTogglers','filetype'},
      lualine_y = {'progress'},
      lualine_z = {'location'}
   },
@@ -130,3 +137,5 @@ vim.diagnostic.config({
 EOF
 
 
+"Startup
+let g:dashboard_default_executive ='telescope'

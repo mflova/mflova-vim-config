@@ -51,7 +51,7 @@ Main features of this VIM:
 - Quick snippets for Python and C++. With endless items some of them.
 - Plenty of linters based on format, code analysis, syntaxis and type checking.
   All of them integrated in the built-in neovim LSP:
-  - Python: Pylint, mypy, vulture, pyright, pytestcov and flake8. This last one
+  - Python: Pylint, mypy, vulture, pytestcov and flake8. This last one
     integtegrates: darglint, pytest-style, flake8-simplify, flake8-bugbear,
     dlint, comprehensions, flake8-rst-docstrings, flake8-markdown, flake8-builtins,
     flake8-borken-line, flake8-class-attributes-order and more.
@@ -61,10 +61,13 @@ Main features of this VIM:
   - Yaml: yamllint.
   - Rst: rstlint and rstcheck.
   - Grammar-based: codespell and proselint.
-- Fast and easy replace mode
+- Fast and easy replace mode.
 - Extremely quick script to print variables and its type.
-- Improved motion all over the document with just a few keys
-- Integrated unit test frameworks within VIM (such as PyTest)
+- Improved motion all over the document with just a few keys.
+- Integrated unit test frameworks within VIM (such as PyTest).
+- Previewers for RST and Markdown that are live updated.
+- Debugger for Python.
+- Refactor capabilites.
 
 ## Installation
 
@@ -223,12 +226,13 @@ Mainly LSP-related functionalities
 | Command/Shortcut   | Description                                                    |
 | ------------------ | -------------------------------------------------------------- |
 | \<leader\>l        | LSP-related commands                                           |
+| \<leader\>lt       | Toggle basic linting coming from LSP (as well as heavy linting)|
+| \<leader\>lv       | Toggle heavy linting                                           |
 | \<leader\>lc       | Toggle CMP. CMP keys below                                     |
 | Tab/Shift-Tab      | Move between autocomplete options                              |
 | Ctrl + Up/Down     | Scroll the documentation of a function in case it is displayed |
 | Ctrl + q           | Quit the autocomplete menu                                     |
-| \<leader\>lv       | Disable virtual text (diagnotics basically)                    |
-| \<leader\>ls       | Generate stubs for python module/package                       |
+| \<leader\>ls       | Generate stubs for python module/package when cursor over "import/from" statement |
 | \<leader\>ll       | Toggle a list of all diagnotics for the current file           |
 | \<leader\>lL       | Toggle a list of all diagnotics for the entier working dir     |
 | \<leader\>lr       | Open a list with references                                    |
@@ -239,14 +243,17 @@ Mainly LSP-related functionalities
 ### Refactor
 | Command/Shortcut       | Description                                                    |
 | ---------------------- | -------------------------------------------------------------- |
-| \<leader\>rf (visual)  | Extract function                                               |
+| \<leader\>rm (or rm)   | Extract function                                               |
+| \<leader\>rr           | Rename                                                         |
+| \<leader\>ru           | Undo changes performed by the API                              |
 
 ### Coding
 | Command/Shortcut       | Description                                                    |
 | ---------------------- | -------------------------------------------------------------- |
-| \<leader\>cr           | Run the code selected (Python and markdown)                    |
+| \<leader\>cr           | Run the code selected (Python)                                 |
 | \<leader\>cR           | Clean the output of the pevious command                        |
 | \<Leader\>cc           | Comment line/block in Python                                   |
+| \<leader\>cr           | Toggle preview for markdown and rst                            |
 
 ### Testing
 | Command/Shortcut    | Description                                                                      |

@@ -56,7 +56,7 @@ call vundle#begin()
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'nvim-telescope/telescope.nvim' " Another FZF finder
-  Plugin 'nvim-telescope/telescope-fzy-native.nvim' " Native FZF to be used in telescope
+  Plugin 'nvim-telescope/telescope-fzf-native.nvim' " FZF native sorter for telescope
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
@@ -74,7 +74,10 @@ call vundle#begin()
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
   Plugin 'folke/trouble.nvim' " Better diagnos navigation
-  Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
+
+  " Refactoring
+  Plugin 'python-rope/ropevim' " Refactoring for Python
+"  Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
 
   " File explorer and file navigation
   Plugin 'kyazdani42/nvim-tree.lua' " Lua file explorer
@@ -87,7 +90,6 @@ call vundle#begin()
   " Misc
   " Spotify 
   Plugin 'KadoBOT/nvim-spotify', { 'do': 'make' } " Wrapper for spotify
-  Plugin 'ellisonleao/glow.nvim'
   " CSV Visualizer
   Plugin 'chrisbra/csv.vim'
 
@@ -106,6 +108,9 @@ call vundle#begin()
   Plugin 'michaelb/sniprun', {'do': 'bash install.sh'} " Run the specified lines
   Plugin 'jiangmiao/auto-pairs' " Auto pairs for brackets and stuff like that
   Plugin 'yhat/vim-docstring' " Fold docstrings
+  Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " Markdown Previwer
+  Plugin 'Rykka/InstantRst' " RST previewers
+  Plugin 'Rykka/riv.vim' " RST previewers
   
   " Misc
   Plugin 'jbyuki/nabla.nvim'
@@ -117,6 +122,7 @@ call vundle#begin()
   Plugin 'theHamsta/nvim-dap-virtual-text'
 
   " UI
+  Plugin 'glepnir/dashboard-nvim' " Startup
   Plugin 'Yagua/nebulous.nvim' " Theme
   Plugin 'onsails/lspkind-nvim' " Pictograms
   Plugin 'folke/lsp-colors.nvim' " Useful for themes
@@ -323,7 +329,9 @@ endfunction
 nnoremap <silent><LocalLeader><LocalLeader> :call Swap_todo()<CR>
 let g:mflova_todo_mode=0
 function! Swap_todo()
-    write
+    if expand('%:t') != ''
+        write
+    end
     if g:mflova_todo_mode == 0
         edit ~/TODO.md
         let g:mflova_todo_mode = 1

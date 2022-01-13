@@ -21,6 +21,18 @@ pip install --user pynvim
 pip3 install --user pynvim
 pip install --upgrade pynvim
 pip3 install --upgrade pynvim
+pip install -U ropevim # Refactoring in python
+
+# RST previewer
+sudo pip install https://github.com/Rykka/instant-rst.py/archive/master.zip
+sudo apt-get install curl
+# BECAREFUL WITH THIS, THESE ARE OUTDATED BUT COMPATIBLE VERSIONS
+# However, without this it is not workign the setup to preview the rst files (called Instantrst)
+# In case this does not work, you can use the CLI version of InstantRst and you can better debug
+# If something is no longer working after outdating this, return to last versions with pip install -U XX
+pip install python-engineio==3.13.2
+pip install python-socketio==4.6.1
+# Maybe is also necessary Flask-SocketIO==4.3.1
 
 # Debugger
 pip install debugpy

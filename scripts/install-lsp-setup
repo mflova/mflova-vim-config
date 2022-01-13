@@ -30,7 +30,7 @@ pip install -U flake8-bugbear
 pip install -U flake8-docstrings
 pip install -U flake8-comprehensions
 pip install -U flake8-commas
-pip install -U flake8-rst-docstring
+pip install -U flake8-rst-docstrings
 pip install -U flake8-docstrings
 pip install -U flake8-markdown
 pip install -U flake8-builtins
@@ -47,7 +47,6 @@ pip install -U flake8-implicit-str-concat
 pip install -U flake8-use-fstring
 # Stubs (used by mypy or other linters)
 pip install -U pandas-stubs
-pip install -U data-science-types
 pip install -U numpy
 
 # YAML LSP
