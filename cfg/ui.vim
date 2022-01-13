@@ -36,8 +36,44 @@ function! UpdateStatusDiagsAndCmp()
     endif
     return l:diags_status . '  ' . l:cmp_status
 endfunction
+
+" Edit the icons of the Spotify status component
+function! UpdateSpotifyComponent()
+    let l:diags_status = ' '
+    if g:mflova_diagnostics_status == 1
+        let l:diags_status = l:diags_status . ''
+    else
+        let l:diags_status = l:diags_status . 'X'
+    endif
+
+    let l:cmp_status = ' '
+    if g:mflova_cmp_status == 1
+        let l:cmp_status = l:cmp_status . ''
+    else
+        let l:cmp_status = l:cmp_status . 'X'
+    endif
+    return l:diags_status . '  ' . l:cmp_status
+endfunction
+
 lua <<EOF
 local status = require'nvim-spotify'.status
+
+local function replace_char(pos, str, r)
+    return str:sub(1, pos-1) .. r .. str:sub(pos+1)
+end
+
+-- Overwrites the default icons
+function updateSpotifyStatusComponent()
+  local curr_status = status.listen()
+  local new_status = curr_status
+    if string.find(curr_status, '⏸') then
+        new_status = '' .. string.sub(new_status, 4)
+    end
+    if string.find(curr_status, '▶') then
+        new_status = '▶' .. string.sub(new_status, 4)
+    end
+   return new_status
+end
 
 status:start()
 -- Guess where I am located inside the file
@@ -59,7 +95,7 @@ require('lualine').setup {
      lualine_a = {'mode'},
      lualine_b = {'branch', 'diff'},
      lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},
-     lualine_x = {status.listen, 'diagnostics', 'UpdateStatusDiagsAndCmp','filetype'},
+     lualine_x = {updateSpotifyStatusComponent, 'diagnostics', 'UpdateStatusDiagsAndCmp','filetype'},
      lualine_y = {'progress'},
      lualine_z = {'location'}
   },

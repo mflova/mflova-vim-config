@@ -85,11 +85,7 @@ require'lspconfig'.esbonio.setup {
     server = {
       logLevel = "debug"
     },
-    sphinx = {
-      confDir = "docs/",
-      srcDir = "${confDir}/../docs-src"
-    }
-}
+  }
 }
 -- MARDKWON/MD
 require'lspconfig'.ltex.setup{

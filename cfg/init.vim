@@ -39,7 +39,7 @@ call vundle#begin()
   Plugin 'xolox/vim-session' " Save VIM sessions
   Plugin 'ericcurtin/CurtineIncSw.vim' " Toggle between source and header files
   Plugin 'ggreer/the_silver_searcher'
-  Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
+"  Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
   Plugin 'miyakogi/conoline.vim' " Highlights the line of the cursor
   Plugin 'nvie/vim-flake8' " Flake 8 Plugin
   Plugin 'mflova/vim-easycomment' " Plugin to comment lines
@@ -51,12 +51,12 @@ call vundle#begin()
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
   Plugin 'dominikduda/vim_current_word' "Highlight the current word 
-  " Plugin 'mflova/vimspector' " Debugger. Needs Vim 8.2. To be set up in the future.
   Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'nvim-telescope/telescope.nvim' " Another FZF finder
+  Plugin 'nvim-telescope/telescope-fzy-native.nvim' " Native FZF to be used in telescope
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python
   Plugin 'rhysd/vim-grammarous' " Grammar checks
   Plugin 'AndrewRadev/splitjoin.vim' " Split function arguments into multiple lines
@@ -84,8 +84,13 @@ call vundle#begin()
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
   Plugin 'rafamadriz/friendly-snippets' " Collection of snippets
 
+  " Misc
   " Spotify 
   Plugin 'KadoBOT/nvim-spotify', { 'do': 'make' } " Wrapper for spotify
+  Plugin 'ellisonleao/glow.nvim'
+  " CSV Visualizer
+  Plugin 'chrisbra/csv.vim'
+
   " Status line
   Plugin 'nvim-lualine/lualine.nvim' " Staus line
   Plugin 'SmiteshP/nvim-gps' " Component that tells you the current function
@@ -99,6 +104,17 @@ call vundle#begin()
 
   " Coding
   Plugin 'michaelb/sniprun', {'do': 'bash install.sh'} " Run the specified lines
+  Plugin 'jiangmiao/auto-pairs' " Auto pairs for brackets and stuff like that
+  Plugin 'yhat/vim-docstring' " Fold docstrings
+  
+  " Misc
+  Plugin 'jbyuki/nabla.nvim'
+
+  " Debugger
+  Plugin 'mfussenegger/nvim-dap'
+  Plugin 'rcarriga/nvim-dap-ui'
+  Plugin 'mfussenegger/nvim-dap-python'
+  Plugin 'theHamsta/nvim-dap-virtual-text'
 
   " UI
   Plugin 'Yagua/nebulous.nvim' " Theme
@@ -107,13 +123,6 @@ call vundle#begin()
   Plugin 'folke/tokyonight.nvim' " Theme
   Plugin 'mhartington/oceanic-next' " Theme
   Plugin 'PHSix/nvim-hybrid' " Theme
-  " Add maktaba and coverage to the runtimepath.
-" (The latter must be installed before it can be used.)
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-coverage'
-" Also add Glaive, which is used to configure coverage's maktaba flags. See
-" `:help :Glaive` for usage.
-Plugin 'google/vim-glaive'
 call vundle#end()
 
 " Overwrite the key for the macros, since I do not use them
@@ -244,21 +253,19 @@ let g:winresizer_vert_resize = 2
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
+if exists("did_load_csvfiletype")
+  finish
+endif
+let did_load_csvfiletype=1
+
+" Define filetype for CSV
+augroup filetypedetect
+  au! BufRead,BufNewFile *.csv,*.dat	setfiletype csv
+augroup END
+
 " Replace mode
 nmap S <Plug>(sad-change-forward)
 xmap S <Plug>(sad-change-forward)
-
-" Easy motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" One char
-map <Leader>. <Plug>(easymotion-repeat)
-map <Leader>f <Plug>(easymotion-bd-f) 
-map <Leader>F <Plug>(easymotion-overwin-f)
-map <Leader>e <Plug>(easymotion-bd-e)
-map <Leader>j <Plug>(easymotion-overwin-line)
-map <Leader>k <Plug>(easymotion-overwin-line)
-map <Leader>w <Plug>(easymotion-bd-w)
-map <Leader>W <Plug>(easymotion-overwin-w)
 
 " Delete entire word in insert mode
 imap <C-d> <C-[>diwi
@@ -267,6 +274,21 @@ imap <C-v> <C-[>pi
 
 " Toggle/Untoggle folds
 map <silent><C-t> :call ToggleFoldDiff()<CR>
+
+" Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<CR>",
+      node_incremental = "<CR>",
+      scope_incremental = "<TAB>",
+      node_decremental = "<S-TAB>",
+    },
+  },
+}
+EOF
 
 " Toggle fold/unfolded code in the file. Not only valid for diff
 " Mapped below
@@ -311,6 +333,8 @@ function! Swap_todo()
     endif
 endfunction
 
+" For glow (markdown visualizer)
+let g:glow_border = "rounded"
 " Spotify
 nmap <silent><leader>ss :Spotify<CR>
 nmap <silent><leader>sd :SpotifyDevices<CR>
@@ -335,6 +359,7 @@ let s:refactor_cfg_path = s:vim_cfg_path . '/refactoring.vim'
 let s:snippets_cfg_path = s:vim_cfg_path . '/snippets.vim'
 let s:navigation_cfg_path = s:vim_cfg_path . '/navigation.vim'
 let s:coding_cfg_path = s:vim_cfg_path . '/coding.vim'
+let s:debugger_cfg_path = s:vim_cfg_path . '/debugger.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:testing_cfg_path
@@ -346,3 +371,4 @@ exec 'source ' . s:refactor_cfg_path
 exec 'source ' . s:snippets_cfg_path
 exec 'source ' . s:navigation_cfg_path
 exec 'source ' . s:coding_cfg_path
+exec 'source ' . s:debugger_cfg_path

@@ -1,6 +1,6 @@
 " Testing mode
-nmap <silent><leader>tt :call Toggle_test_mode(0)<CR> 
-nmap <silent><leader>tT :call Toggle_test_mode(1)<CR> 
+nmap <silent><leader>tT :call Toggle_test_mode(0)<CR> 
+nmap <silent><leader>tt :call Toggle_test_mode(1)<CR> 
 nmap <silent><leader>tr :UltestLast<CR> 
 " Activate clors in the output. Kinda experimental
 let g:ultest_use_pty=1

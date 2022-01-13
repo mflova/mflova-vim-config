@@ -22,6 +22,9 @@ pip3 install --user pynvim
 pip install --upgrade pynvim
 pip3 install --upgrade pynvim
 
+# Debugger
+pip install debugpy
+
 # Spotify
 sudo snap install Spotify
 # Go to its directory and run do make
@@ -36,4 +39,5 @@ sudo snap install Spotify
 # - stubgen path -o $STUBSPATH
 echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
 echo "export MYPYPATH=$STUBSPATH" >> ~/.bashrc
+echo "export PYTHON_DIR=$(which python3)" >> ~/.bashrc
 

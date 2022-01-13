@@ -202,20 +202,21 @@ Search for strings in a file
 | /word + enter + n/N  | Previous and next matches |
 
 Search for files and navigation
-| Command/Shortcut | Description                                                     |
-| ---------------- | --------------------------------------------------------------- |
-| Ctrl + b         | Find a specific line within a file (fuzzy finder)               |
-| Ctrl + f         | Search for any tag in the current buffer                        |
-| Ctrl + t         | Search for any tag in the current project                       |
-| Ctrl + g         | Search for a file in the current directory given a string       |
-| Ctrl + h         | Navigate in history of changes made on the buffers              |
-| Ctrl + p         | Search for file name in the current directory. Use \<Tab\> to select more than one file and then opened them with ctrl+v or ctrl+x|
-| Ctrl + v         | Open the file in vertical split                                 |
-| Ctrl + x         | Open the file in horizontal split                               |
-| Ctrl + t         | Open the file in new tab                                        |
-| Ctrl + q         | Open multiple selected files in a quickfix window               |
-| Ctrl + Arrows    | Move the content of the previow window up or down               |
-| Ctrl + a         | Alternate with the last file opened. Valid in insert mode       |
+| Command/Shortcut   | Description                                                     |
+| ------------------ | --------------------------------------------------------------- |
+| Ctrl + b           | Find a specific line within a file (fuzzy finder)               |
+| Ctrl + f           | Search for any tag in the current buffer                        |
+| Ctrl + t           | Search for any tag in the current project                       |
+| Ctrl + g           | Search for a file in the current directory given a string       |
+| Ctrl + h           | Navigate in history of changes made on the buffers              |
+| Ctrl + p           | Search for file name in the current directory. Use \<Tab\> to select more than one file and then opened them with ctrl+v or ctrl+x |
+| \<leader\>Ctrl + p | Search within my own vim files                                  |
+| Ctrl + v           | Open the file in vertical split                                 |
+| Ctrl + x           | Open the file in horizontal split                               |
+| Ctrl + t           | Open the file in new tab                                        |
+| Ctrl + q           | Open multiple selected files in a quickfix window               |
+| Ctrl + Arrows      | Move the content of the previow window up or down               |
+| Ctrl + a           | Alternate with the last file opened. Valid in insert mode       |
 
 ### LSP
 Mainly LSP-related functionalities
@@ -243,9 +244,31 @@ Mainly LSP-related functionalities
 ### Coding
 | Command/Shortcut       | Description                                                    |
 | ---------------------- | -------------------------------------------------------------- |
-| \<leader\>cr           | Run the code selected (partially running code for testing      |
+| \<leader\>cr           | Run the code selected (Python and markdown)                    |
 | \<leader\>cR           | Clean the output of the pevious command                        |
 | \<Leader\>cc           | Comment line/block in Python                                   |
+
+### Testing
+| Command/Shortcut    | Description                                                                      |
+| ------------------- | -------------------------------------------------------------------------------- |
+| \<Leader\>tT        | Toggle/Untoggle testing mode (pytest and pyunit) for the given file. Runs nearest test after saving |
+| \<Leader\>tt        | Same as previous on but with summary                                             |
+| R in summary window | Rerun a test                                                                     |
+| \<Leader\>tr        | After entering in the test mode, this one runs all the tests regardless the current buffer |
+
+### Debugging
+| Command/Shortcut     | Description                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| \<Leader\>dd         | Toggle debugger mode (UI) (only python)                                          |
+| \<Leader\>dc or d\<Leader\>       | Run the code till breakpoint                                        |
+| \<Leader\>db         | Toggle breakpoint                                                                |
+| \<Leader\>d\<Up\>    | Step out                                                                         |
+| \<Leader\>d\<Down\>  | Step into                                                                        |
+| \<Leader\>d\<Right\> | Step over                                                                        |
+| \<Leader\>dt         | Debug a `test_` function from pytest                                             |
+| \<Leader\>dT         | Debug a `Class` containing multiple pytest test                                  |
+
+
 
 ### Misc
 Misc 
@@ -259,7 +282,9 @@ Misc
 | \<Leader\> + p/P              | Inserts a print statement above or below with the variable chosen by the cursor|
 | gS/gJ                         | Splits/Join the arguments from a function into multiple lines (or the code in general)|
 | \<Leader\>\<Leader\>          | Swap between the todo list and the file that is being edit |
+| \<Leader\><Right>             | Go to column 90 (useful when you want to split a long line)|
 | :Isort/:isort                 | Sorts the imports of Python script according to Pep8       |
+| :Glow                         | Previsualized markdown file                                |
 
 Spotify
 | Command/Shortcut       | Description                                                    |
@@ -318,14 +343,6 @@ Note: g stands for git
 | \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
 | Ctrl + t      | Function to toggle/untoggle the folds found in the diff code                            |
 | \<Leader\>gh  | History of commits that affected that function                                          |
-
-Developping modes
-| Command/Shortcut    | Description                                                                      |
-| ------------------- | -------------------------------------------------------------------------------- |
-| \<Leader\>tt        | Toggle/Untoggle testing mode (pytest and pyunit) for the given file. Runs nearest test after saving |
-| \<Leader\>tT        | Same as previous on but with summary                                             |
-| R in summary window | Rerun a test                                                                     |
-| \<Leader\>tr        | After entering in the test mode, this one runs all the tests regardless the current buffer |
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |
