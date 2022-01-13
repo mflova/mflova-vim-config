@@ -324,18 +324,12 @@ Note: g stands for git
 | Enter         | Apply                                                                                   |
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
-| enter         | Checkout                                                                                |
-| alt-enter     | Forced checkout                                                                         |
-| Ctrl + b      | Create new branch and checkout after writing name                                       |
-| Ctrl + d      | Delete branch                                                                           |
-| Ctrl + e      | Merge                                                                                   |
-| Ctrl + r      | Rebase                                                                                  |
-| Ctrl + f      | Diff with the current file opened and the branch selected                               |
-| Ctrl + t      | Checkout and track the remote branch                                                    |
 | \<Leader\>gl  | Log to visualize commits at file level                                                  |
 | \<Leader\>gL  | Log to visualize commits at repo level                                                  |
 | Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
 | q             | Quit                                                                                    |
+| \<Leader\>gm  | Resolve the merge conflicts for that file (m stands for mergetool). Options below       |
+| \<Leader\>g\<arrows\> | Select from which file (left or right) you want the code to solve the conflict  |
 | \<Leader\>gp  | Git push                                                                                |
 | \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
@@ -343,6 +337,7 @@ Note: g stands for git
 | \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
 | Ctrl + t      | Function to toggle/untoggle the folds found in the diff code                            |
 | \<Leader\>gh  | History of commits that affected that function                                          |
+| :Git revert COMMIT-SHA | Rever a specific commit. You can write HEAD~0 to select last commit            |
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |

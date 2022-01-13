@@ -46,13 +46,18 @@ function search_vimfiles()
         cwd = vim_dir,
         })
 end
+
+-- File explorer
 require'nvim-tree'.setup()
+
+local actions = require "telescope.actions"
 require('telescope').setup({
   defaults = {
     mappings = {
         i = {
-            ["<C-Up>"] = "preview_scrolling_up",
-            ["<C-Down>"] = "preview_scrolling_down",
+            ["<C-Up>"] = actions.preview_scrolling_up,
+            ["<C-Down>"] = actions.preview_scrolling_down,
+            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         }
     },
     -- other defaults configuration here
