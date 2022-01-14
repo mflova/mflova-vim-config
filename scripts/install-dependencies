@@ -11,7 +11,7 @@ cp -r ../cfg/fonts/NerdFonts $HOME/.local/shared/fonts
 sudo apt-get install -y xclip
 sudo apt install -y build-essential cmake python3-dev
 sudo apt install -y mono-complete golang nodejs default-jdk npm
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+sudo apt install universal-ctags
 sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y isort
 sudo apt-get install -y yapf

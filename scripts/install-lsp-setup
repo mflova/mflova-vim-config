@@ -84,7 +84,7 @@ pip install -U cpplint
 sudo apt-get install cppcheck
 
 # LUA LSP
-brew install lua-language-server
+read -p "Install the lua lsp with :LSPInstall (with a .lua opened). Then choose sumneko_lua."
 # Lua Linter
 sudo apt install -y lua-check
 
