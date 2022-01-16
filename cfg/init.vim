@@ -103,6 +103,7 @@ call vundle#begin()
   Plugin 'hrsh7th/cmp-path'
   Plugin 'hrsh7th/cmp-cmdline'
   Plugin 'hrsh7th/nvim-cmp'
+  Plugin 'saadparwaiz1/cmp_luasnip'
 
   " Coding
   Plugin 'michaelb/sniprun', {'do': 'bash install.sh'} " Run the specified lines
