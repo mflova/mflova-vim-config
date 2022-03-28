@@ -5,9 +5,14 @@ nmap <silent><leader>tr :UltestLast<CR>
 " Activate clors in the output. Kinda experimental
 let g:ultest_use_pty=1
 let g:ultest_running_sign='~'
-let g:ultest_summary_width=70
+let g:ultest_summary_width=60
+let g:ultest_output_on_run=0
 
 let g:mflova_test_mode = 0
+
+let test#python#pytest#executable = 'pytest'
+" This one is multithread, but slower if the tests are just a few seconds
+"let test#python#pytest#executable = 'pytest -n auto' 
 
 " Two modes:
 " 0: Run all test + runs the nearest after sving

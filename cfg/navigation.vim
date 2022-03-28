@@ -1,6 +1,6 @@
-nnoremap <F2> :NvimTreeToggle<CR>
+nnoremap <silent><F2> :NvimTreeToggle<CR>
 " Tag browser (LSP based)
-nnoremap <F4> :Vista!!<CR>  
+nnoremap <silent><F4> :Vista!!<CR>  
 
 " Go to word that breaks column 89
 nnoremap <leader><Right> :call feedkeys("089lb")<CR>
@@ -33,7 +33,7 @@ let g:fzf_layout = { 'down': '~35%' }
 set termguicolors " this variable must be enabled for colors to be applied properly
 " a list of groups can be" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
 let g:vista#renderer#enable_icon = 1
-let g:vista_sidebar_width = 40
+let g:vista_sidebar_width = 60
 let g:vista_echo_cursor_strategy = 'echo'
 let g:vista_cursor_delay = 0
 
@@ -53,6 +53,7 @@ require'nvim-tree'.setup()
 local actions = require "telescope.actions"
 require('telescope').setup({
   defaults = {
+    file_ignore_patterns = {"__init__.py"},
     mappings = {
         i = {
             ["<C-Up>"] = actions.preview_scrolling_up,

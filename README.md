@@ -21,7 +21,7 @@ still be buggy.
 Use the following lines:
 
 ```
-git config --global mergetool.fugitive.cmd 'vim -f -c "Gvdiffsplit!" "$MERGED"'
+git config --global mergetool.fugitive.cmd 'nvim -f -c "Gvdiffsplit!" "$MERGED"'
 git config --global merge.tool fugitive
 ```
 
@@ -38,7 +38,7 @@ Main features of this VIM:
 - Fuzzy finder: Search any file given its name or any string inside it.
   Open the file in any split you want.
 - Git full integration: Full integration (log, stash, branch management, push,
-  commit...)
+  commit...) and also with the online repository.
 - LSP functionalities: go to reference, definition, hover, context-aware
   statusline...
 - Temporary maximize one window to better code
@@ -103,6 +103,8 @@ Main use
 | .                  | Repeat last action performed in vim                                        |
 | ctrl + r           | Update opened file (should be automatic)                                   |
 | ctrl + x           | Switch between source and header files                                     |
+| ctrl + up          | Go two lines up                                                            |
+| ctrl + down        | Go two lines down                                                          |
 | F4                 | Toggles and untoggles the taglist (summary of a file, defined by itsclasses or variables). To remove entries just press u |
 | Enter              | Selects everything between two brackets. Multiple enters will select more  |
 | ctrl + u/d         | Moves the cursor half the screen                                           |
@@ -168,7 +170,7 @@ Highlighting and copy/pasting
 | Shift + x         | Temporary fulscreens a split pane                  |
 | :vsplit or :vs    | Creates a new vertical split with the same file    |
 | :split            | Creates a new horizontal split with the same file  |
-| Ctrl+Up/Down      | Move between items in the quickfix list            |
+| Ctrl+Left/Right   | Move between items in the quickfix list            |
 
 Resizing and moving split planes
 
@@ -185,24 +187,25 @@ Resizing and moving split planes
 
 | Command/Shortcut | Description                       |
 | ---------------- | --------------------------------- |
-| F2               | Toggle and untoggle the NERDTree  |
+| F2               | Toggle and untoggle the nvim tree |
 | Ctrl + v         | Opens a file in vertical split    |
 | Ctrl + x         | Opens a file in horizontal split  |
 | Ctrl + t         | Opens a file in new tab           |
-| Ctrl + t         | Opens a file in new tab           |
 | r                | Rename a file                     |
-| p                | Paste a file                      |
-| d                | Rename a file                     |
 | R                | Refresh tree                      |
+| p                | Paste a file                      |
+| d                | Remove a file                     |
+| a                | Create file/folder                |
+| x                | Cut a file                        |
 
 
 ### Searching
 
 Search for strings in a file
-| Command/Shortcut     | Description               |
-| -------------------- | ------------------------- |
-| /word + enter        | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive  |
-| /word + enter + n/N  | Previous and next matches |
+| Command/Shortcut     | Description                                                                                                                                              |
+| -------------------- | -------------------------                                                                                                                                |
+| /word + enter        | Searches for a word of string. If the saerch is in lowercase, it will be non-sensitive case search. If there is any uppercase, it will be case sensitive |
+| /word + enter + n/N  | Previous and next matches                                                                                                                                |
 
 Search for files and navigation
 | Command/Shortcut   | Description                                                     |
@@ -237,7 +240,7 @@ Mainly LSP-related functionalities
 | \<leader\>lL       | Toggle a list of all diagnotics for the entier working dir     |
 | \<leader\>lr       | Open a list with references                                    |
 | \<leader\>ld       | Go to definition                                               |
-| Ctrl + o           | Goes to previews jump (useful after go to definition)          |
+| Ctrl + i/o         | Goes to previews/next jump (useful after go to definition)     |
 | \<leader\>lh       | Hover                                                          |
 
 ### Refactor
@@ -279,19 +282,25 @@ Mainly LSP-related functionalities
 
 ### Misc
 Misc 
-| Command/Shortcut              | Description                                               |
-| ----------------------------- | --------------------------------------------------------- |
-| :SO write here the issue      | Search the issue in stack overflow                        |
-| :Google write here the issue  | Search the issue in google                                |
-| :Googlef write here the issue | Search the issue in google and adds the programming language beaing used as the first word in the saerch|
-| ctrl+p (Insert mode)          | Autocomplete the word based on the document               |
-| ctrl+d                        | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments|
-| \<Leader\> + p/P              | Inserts a print statement above or below with the variable chosen by the cursor|
-| gS/gJ                         | Splits/Join the arguments from a function into multiple lines (or the code in general)|
-| \<Leader\>\<Leader\>          | Swap between the todo list and the file that is being edit |
-| \<Leader\><Right>             | Go to column 90 (useful when you want to split a long line)|
-| :Isort/:isort                 | Sorts the imports of Python script according to Pep8       |
-| :Glow                         | Previsualized markdown file                                |
+| Command/Shortcut              |                                                                                                                                                            Description |
+| ----------------------------- |                                                                                                              --------------------------------------------------------- |
+| :SO write here the issue      |                                                                                                                                     Search the issue in stack overflow |
+| :Google write here the issue  |                                                                                                                                             Search the issue in google |
+| :Googlef write here the issue |                                                               Search the issue in google and adds the programming language beaing used as the first word in the saerch |
+| ctrl+p (Insert mode)          |                                                                                                                            Autocomplete the word based on the document |
+| ctrl+d                        | Generates docstring for a given function or class. The cursor must be in the same line as the declaration. You can use tab/shift tab to move between the TODO comments |
+| \<Leader\> + p/P              |                                                                                        Inserts a print statement above or below with the variable chosen by the cursor |
+| gS/gJ                         |                                                                                 Splits/Join the arguments from a function into multiple lines (or the code in general) |
+| \<Leader\><Right>             |                                                                                                            Go to column 90 (useful when you want to split a long line) |
+| :Isort/:isort                 |                                                                                                                   Sorts the imports of Python script according to Pep8 |
+| :Glow                         |                                                                                                                                            Previsualized markdown file |
+
+Vimwiki (notes)
+| Command/Shortcut       | Description                                                     |
+| ---------------------- | --------------------------------------------------------------  |
+| \<leader\>\<leader\>   | Toggle between vimwiki (notes) and your normal file             |
+| Enter (in this mode)   | Generate a link to  anew file or enter if it is already defined |
+| Delete (in this mode)  | Go back to previous file (you can also use ctrl-o)              |
 
 Spotify
 | Command/Shortcut       | Description                                                    |
@@ -313,7 +322,7 @@ Vim-fugitive or git integration
 Note: g stands for git
 | Command/Shortcut  | Description |
 | ------------- | --------------------------------------------------------------------------------------- |
-| \<Leader\>gs  | Run the tool git status useful to stage, usntage...                                     |
+| \<leader\>gs  | Run the tool git status useful to stage, usntage...                                     |
 | s/u/U on a file or folder | Stage/Unstage(all)                                                          |
 | Enter on file | Open the file                                                                           |
 | = on a file   | Visualize the changes to the file in quick format                                       |
@@ -333,11 +342,12 @@ Note: g stands for git
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
 | \<Leader\>gl  | Log to visualize commits at file level                                                  |
 | \<Leader\>gL  | Log to visualize commits at repo level                                                  |
+| \<Leader\>gS  | Stash menu                                                                              |
 | Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
 | q             | Quit                                                                                    |
 | \<Leader\>gm  | Resolve the merge conflicts for that file (m stands for mergetool). Options below       |
 | \<Leader\>g\<arrows\> | Select from which file (left or right) you want the code to solve the conflict  |
-| \<Leader\>gp  | Git push                                                                                |
+| \<Leader\>gP  | Git push                                                                                |
 | \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
@@ -345,6 +355,26 @@ Note: g stands for git
 | Ctrl + t      | Function to toggle/untoggle the folds found in the diff code                            |
 | \<Leader\>gh  | History of commits that affected that function                                          |
 | :Git revert COMMIT-SHA | Rever a specific commit. You can write HEAD~0 to select last commit            |
+
+Git integration on the online repo (with octo nvim)
+| Command/Shortcut  | Description |
+| ------------- | --------------------------------------------------------------------------------------- |
+| \<Leader\>ca/sa | In general (reviews or pr) writes a comment or suggestion                             |
+| \<Leader\>gpp | Git PR pipeline checks                                                                  |
+| \<Leader\>gpa | Git PR approve                                                                          |
+| \<Leader\>gpr | Reload PR                                                                               |
+| \<Leader\>gpl | List the PRs with telescope                                                             |
+| \<Leader\>gpc | See commits of PR                                                                       |
+| \<Leader\>gpn | New/Create PR                                                                           |
+| \<Leader\>gpm | Merge the PR (squash by default)                                                        |
+| \<Leader\>gpb | See the PR in the browser                                                               |
+| \<Leader\>grs | Start a review                                                                          |
+| \<Leader\>grc | Close a review                                                                          |
+| \<Leader\>grr | Resume a review                                                                         |
+| \<Leader\>gr\<CR\> | Publish a review                                                                   |
+| \<Leader\>grd | Discard current review                                                                  |
+| \<Leader\>grC | Review comments                                                                         |
+
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |

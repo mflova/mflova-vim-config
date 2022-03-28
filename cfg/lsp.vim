@@ -23,7 +23,7 @@ function! ToggleLSPLinting()
         let g:mflova_lsplinting_status = 0
         call SetDiagsState('OFF')
     else
-        lua vim.diagnostic.enable()
+        silent! lua vim.diagnostic.enable()
         let g:mflova_lsplinting_status = 1
     endif
 endfunction
@@ -34,38 +34,38 @@ lua << EOF
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()) -- To install the cmp in the LSP. nvim-cmp
 
 -- Python LSP
---require'lspconfig'.pyright.setup{
---  capabilities = capabilities; -- Autocomplete. Line from nvim-cmp
---    settings = {
---      python = {
---        analysis = {
---          autoSearchPaths = true,
---          diagnosticMode = "workspace", -- openFilesOnly is the other option
---          stubPath = os.getenv('STUBSPATH'),
---          typeCheckingMode = "off", -- linting disable, as mypy is much more accurate at the moment and the stubs are better read
---        }
---      }
---    }
---}
+require'lspconfig'.pyright.setup{
+  capabilities = capabilities; -- Autocomplete. Line from nvim-cmp
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace", -- openFilesOnly is the other option
+          stubPath = os.getenv('STUBSPATH'),
+          typeCheckingMode = "off", -- linting types disable, as mypy is much more accurate at the moment and the stubs are better read
+        }
+      }
+    }
+}
 
 -- Python LSP
-require'lspconfig'.pylsp.setup{
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {enabled = false,},
-                pyflakes = {enabled = false,},
-                pylsp_mypy = {
-                    strict = true,
-                    enabled = true,
-                    live_mode = true,
-                    overrides = {"--warn-unreachable", true},
-                    -- TODO activate unreachable https://github.com/Richardk2n/pylsp-mypy
-                },
-            },
-        },
-    },
-}
+--require'lspconfig'.pylsp.setup{
+--    settings = {
+--        pylsp = {
+--            plugins = {
+--                pycodestyle = {enabled = false,},
+--                pyflakes = {enabled = false,},
+--                pylsp_mypy = {
+--                    strict = true,
+--                   enabled = true,
+--                   live_mode = true,
+--                    overrides = {"--warn-unreachable", true},
+--                    -- TODO activate unreachable https://github.com/Richardk2n/pylsp-mypy
+--                },
+--            },
+--        },
+--    },
+--}
 
 -- C++ LSP
 local cpp_compilation_database_dir = os.getenv('CPP_BUILD_DIR')
@@ -75,7 +75,7 @@ require'lspconfig'.ccls.setup{
     -- Path where the compilationdatabase.json is located
     compilationDatabaseDirectory = cpp_compilation_database_dir;
     index = {
-      threads = 0;
+      threads = 2;
     };
    clang = {
       extraArgs= {'-Wno-everything'} ; -- Handled separately by linters to avoid duplications
@@ -98,16 +98,6 @@ require'lspconfig'.esbonio.setup {
       logLevel = "debug"
     },
   }
-}
--- MARDKWON/MD
-require'lspconfig'.ltex.setup{
-capabilities = capabilities;
-    filetypes = { "bib", "markdown", "org", "plaintex", "rnoweb", "tex" };
-    settings = {
-        ltex = { 
-           language = 'en';
-        };
-    };
 }
 -- LUA
 local runtime_path = vim.split(package.path, ';')
@@ -142,7 +132,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
  vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
-    underline = false,
     update_in_insert = false,
   }
 )

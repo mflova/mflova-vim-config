@@ -19,6 +19,7 @@ local types = require("luasnip.util.types")
 -- Dots to show the nodes
 require'luasnip'.config.setup({
         updateevents = 'TextChangedI',
+        region_check_events = 'CursorMoved', -- If cursor moved out of the snippet, disable the snippet
 	ext_opts = {
 		[types.choiceNode] = {
 			active = {

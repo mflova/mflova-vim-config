@@ -15,9 +15,9 @@ lua << EOF
 
 EOF
 
-noremap <leader>rr :call RopeRename()<CR>
-noremap <leader>ru :call RopeUndo()<CR>
-noremap <leader>rm :call RopeExtractMethod()<CR>
-noremap <leader>rf :call RopeExtractMethod()<CR>
+"noremap <leader>rr :call RopeRename()<CR>
+"noremap <leader>ru :call RopeUndo()<CR>
+"noremap <leader>rm :call RopeExtractMethod()<CR>
+"noremap <leader>rf :call RopeExtractMethod()<CR>
 "nnoremap <silent><leader>rR <cmd>lua vim.lsp.buf.code_action()<CR>
 "map <silent><leader>rr <cmd>lua require('telescope').extensions.refactoring.refactors()<CR>

@@ -41,7 +41,6 @@ call vundle#begin()
   Plugin 'ggreer/the_silver_searcher'
 "  Plugin 'gcmt/wildfire.vim' " Press enter to select everything inside parenthesis
   Plugin 'miyakogi/conoline.vim' " Highlights the line of the cursor
-  Plugin 'nvie/vim-flake8' " Flake 8 Plugin
   Plugin 'mflova/vim-easycomment' " Plugin to comment lines
   Plugin 'hauleth/sad.vim' " Plugin to easily replace words
   Plugin 'hienvd/vim-stackoverflow' " Search in Stack Overflow
@@ -74,9 +73,11 @@ call vundle#begin()
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
   Plugin 'folke/trouble.nvim' " Better diagnos navigation
+  Plugin 'vimwiki/vimwiki'
+  Plugin 'pwntester/octo.nvim' " Git online management
 
   " Refactoring
-  Plugin 'python-rope/ropevim' " Refactoring for Python
+"  Plugin 'python-rope/ropevim' " Refactoring for Python
 "  Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
 
   " File explorer and file navigation
@@ -98,12 +99,15 @@ call vundle#begin()
   Plugin 'SmiteshP/nvim-gps' " Component that tells you the current function
 
   " cmp
+  Plugin 'lukas-reineke/cmp-under-comparator'  " Improve otder of cmp in python
   Plugin 'hrsh7th/cmp-nvim-lsp'
   Plugin 'hrsh7th/cmp-buffer'
   Plugin 'hrsh7th/cmp-path'
   Plugin 'hrsh7th/cmp-cmdline'
   Plugin 'hrsh7th/nvim-cmp'
   Plugin 'saadparwaiz1/cmp_luasnip'
+  Plugin 'ray-x/lsp_signature.nvim' " Real-time parameters for the function
+"  Plugin 'hrsh7th/cmp-nvim-lsp-signature-help'
 
   " Coding
   Plugin 'michaelb/sniprun', {'do': 'bash install.sh'} " Run the specified lines
@@ -131,6 +135,9 @@ call vundle#begin()
   Plugin 'mhartington/oceanic-next' " Theme
   Plugin 'PHSix/nvim-hybrid' " Theme
 call vundle#end()
+
+" Avoid folds by default
+set nofoldenable
 
 " Overwrite the key for the macros, since I do not use them
 nmap <silent>q :q<CR>
@@ -173,6 +180,10 @@ cmap isort Isort
 " Alternate between the last two files
 nmap <silent><C-a> :w<CR>:e#<CR>
 inoremap <silent><C-a> <C-[>:w<CR>:e#<CR>
+
+" Jump list
+nnoremap <C-i> <C-O>
+nnoremap <C-o> <C-I>
 
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
@@ -254,8 +265,8 @@ let g:winresizer_keycode_up = "\<UP>"
 let g:winresizer_keycode_down = "\<DOWN>"
 let g:winresizer_keycode_left = "\<LEFT>"
 let g:winresizer_keycode_right = "\<RIGHT>"
-let g:winresizer_horiz_resize = 2
-let g:winresizer_vert_resize = 2
+let g:winresizer_horiz_resize = 5
+let g:winresizer_vert_resize = 5
 
 " This line will make the window close after a file is chosen in grep style commands
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
@@ -315,8 +326,29 @@ endfunction
 "autocmd! FileType qf nnoremap <buffer> <leader>ov <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
 " Move between items
-nmap <silent><C-Down> :cn<CR>
-nmap <silent><C-Up> :cp<CR>
+"nmap <silent><C-Right> :call CnWrapper()<CR>
+"nmap <silent><C-Left> :call CpWrapper()<CR>
+nmap <silent><C-Up> 2k
+nmap <silent><C-Down> 2j
+nmap <silent><C-Left> b
+nmap <silent><C-Right> w
+
+" Wrappers to save changes when switching between different elements in quickfixlist
+function! CnWrapper()
+"    if expand('%:t') != ''
+"        write
+"    end
+    cn
+endfunction
+
+function! CpWrapper()
+"    if expand('%:t') != ''
+"        write
+"    end
+    cp
+endfunction
+
+
 " QF default location: Very bottom
 autocmd FileType qf wincmd J
 " Adjust the quickfix height to the number of elemens. Maximum 10
@@ -326,7 +358,23 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 " To do list manager
-" Quick-switch between current file and `TODO.md` of project root
+let g:vimwiki_key_mappings =
+  \ {
+  \   'all_maps': 1,
+  \   'global': 0,
+  \   'headers': 0,
+  \   'text_objs': 0,
+  \   'table_format': 0,
+  \   'table_mappings': 0,
+  \   'lists': 0,
+  \   'links': 1,
+  \   'html': 0,
+  \   'mouse': 0,
+  \ }
+
+set scrolloff=4 " Keep 4 lines below and above the cursor
+let g:vimwiki_global_ext = 0
+
 nnoremap <silent><LocalLeader><LocalLeader> :call Swap_todo()<CR>
 let g:mflova_todo_mode=0
 function! Swap_todo()
@@ -334,7 +382,7 @@ function! Swap_todo()
         write
     end
     if g:mflova_todo_mode == 0
-        edit ~/TODO.md
+        edit ~/vimwiki/index.wiki
         let g:mflova_todo_mode = 1
     else
         e#

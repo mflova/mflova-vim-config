@@ -26,13 +26,16 @@ lua << EOF
 local python_max_line_length = 90
 local python_indent_size = 4 -- spaces
 local python_docstring_style = 'sphinx'
-local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt, ax'
-local python_flake8_ignore = 'S101, DAR402, F841, DU0116, S603, S607, DAR103, PIE790'
-local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, W0613, C0115, C0114, C0116, C0501, ' .. -- Overlapping or clashing with my format
+local python_good_names = 'q1, q2, q3, q4, q5, q, i, j, k, df, dt, ax, t, f, e'
+local python_flake8_ignore = 'S101, DAR402, F841, DU0116, S603, S607, DAR103, PIE790, PT006, D100, C812, PIE803, PIE789, E721, FS001, PD011, TC002, FS003'
+local python_pylint_ignore = 'W0102, W0212, R0913, R0903, R0902, R0914, W0621, C0301, W0613, C0115, C0116, C0501, ' .. -- Overlapping or clashing with my format
                              'R6103, C0199, C0198, ' .. -- From extensions
-                             'R0915' ..
+                             'R0915, ' ..
+                             'W0511, ' .. -- ule added by flake8
+                             'C0209, ' .. -- Rule that forces fstring even in logging
+                             'C0123, ' .. -- Annoting use isinstance instead of type
+                             'C2001, ' .. -- Annoying "avoid comparison to zero"
                              'W9015, W0917, ' .. -- Overlapping with flake8-darglint
-                             --'W0612' .. -- unused variables: overlapping with other plugins
                              '' 
 
 -- Yaml params
@@ -56,14 +59,12 @@ require('lint').linters.flake8.args = {'--docstring-style', python_docstring_sty
                                        '--ignore', python_flake8_ignore,
                                        '--indent-size', python_indent_size,
                                        '--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s',
-                                       '--use-class-attributes-order-strict-mode',
                                        '--no-show-source',
                                        '--percent-greedy', "2",
                                        '--format-greedy', "2",
                                        '--enable-extensions',"FS003",
                                        '--scan-host-site-packages',
                                        '-',}
-
 require('lint').linters.mypy.args = {'--strict',
                                      '--warn-unreachable',
                                      '--show-column-numbers',
@@ -117,11 +118,14 @@ require('lint').linters.cmakelint.args = {'--linelength=' .. cmake_max_line_leng
 require('lint').linters.rstlint.args = {'--level=info'}
 
 require('lint').linters_by_ft = {
-  python = {'flake8', 'pylint', 'vulture', 'codespell', 'pytestcov'}, -- mypy in LSP
+  --python = {'flake8', 'pylint', 'vulture', 'codespell', 'mypy', 'pytestcov'}, -- mypy is included in pylsp, but not in pyright
+  --python = {'flake8', 'pylint', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
+python = {'flake8', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
+  --python = {'mypy'}, -- mypy is included in pylsp, but not in pyright
   cpp = {'cppcheck', 'clangtidy', 'cpplint', 'codespell'},
   rst = {'rstlint', 'rstcheck', 'proselint', 'codespell'},
   markdown = {'markdownlint', 'codespell', 'proselint'},
-  yaml = {'yamllint', 'codespell', 'proselint'},
+  yaml = {'yamllint', 'codespell'},
   cmake = {'cmakelint'},
   sh = {'shellcheck'},
   lua = {'luacheck'},
