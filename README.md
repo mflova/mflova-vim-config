@@ -270,12 +270,12 @@ Mainly LSP-related functionalities
 | Command/Shortcut     | Description                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
 | \<Leader\>dd         | Toggle debugger mode (UI) (only python)                                          |
-| \<Leader\>dc or d\<Leader\>       | Run the code till breakpoint                                        |
+| \<Leader\>dc or d\<Leader\>       | Run the debugger till breakpoint. It detects "test_" scripts        |
 | \<Leader\>db         | Toggle breakpoint                                                                |
 | \<Leader\>d\<Up\>    | Step out                                                                         |
 | \<Leader\>d\<Down\>  | Step into                                                                        |
 | \<Leader\>d\<Right\> | Step over                                                                        |
-| \<Leader\>dt         | Debug a `test_` function from pytest                                             |
+| \<Leader\>dt         | Debug a `test_` function from pytest. Better use the "run debugger" command      |
 | \<Leader\>dT         | Debug a `Class` containing multiple pytest test                                  |
 
 

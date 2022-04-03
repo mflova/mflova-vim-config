@@ -1,9 +1,10 @@
+let g:mflova_debug_mode = 0
 augroup debuggable
     autocmd!
-    autocmd filetype python nmap <silent><leader>dd :lua require("dapui").toggle()<CR>
+    autocmd filetype python nmap <silent><leader>dd :call Toggle_debug_mode()<CR>
     autocmd filetype python nmap <silent><leader>db :lua require'dap'.toggle_breakpoint()<CR>
-    autocmd filetype python nmap <silent><leader>d<leader> :lua require'dap'.continue()<CR>
-    autocmd filetype python nmap <silent><leader>dc :lua require'dap'.continue()<CR>
+    autocmd filetype python nmap <silent><leader>d<leader> :call Run_debug()<CR>
+    autocmd filetype python nmap <silent><leader>dc:call Run_debug()<CR>
 
     autocmd filetype python nmap <silent><leader>d<Right> :lua require'dap'.step_over()<CR>
     autocmd filetype python nmap <silent><leader>d<Down> :lua require'dap'.step_into()<CR>
@@ -11,7 +12,7 @@ augroup debuggable
 
     " For pytest
     autocmd filetype python nnoremap <silent><leader>dt :lua require('dap-python').test_method()<CR>
-    autocmd filetype python nnoremap <silent><leader>da :lua require('dap-python').test_class()<CR>
+    autocmd filetype python nnoremap <silent><leader>dT :lua require('dap-python').test_class()<CR>
 augroup END
 
 lua << EOF
@@ -76,3 +77,38 @@ vim.fn.sign_define('DapBreakpointConditionRejected', {text='', texthl='', lin
 -- `DapBreakpointRejected`, defaults to `R` for breakpoints which the debug
 --  adapter rejected.
 EOF
+
+" It detects if the file is test_ to run the function with the reequired
+" command
+function! Run_debug()
+    let l:name = expand('%:t')
+    let l:is_test = l:name[0:len("test_")-1] ==# "test_"
+    if l:is_test == 1
+        lua require('dap-python').test_method()
+    else
+        lua require'dap'.continue()
+    endif
+endfunction
+
+" It uses Ctrl w + o to close the debugger mode instead of toggle
+function! Toggle_debug_mode()
+
+    if g:mflova_debug_mode == 0
+        let g:mflova_debug_mode = 1
+        lua require("dapui").toggle()
+        echo "Debug mode enabled"
+    else
+       " Close all splits but the main one
+        let g:mflova_debug_mode = 0
+        execute "normal \<C-W>o"
+        call ClearBreakpoints()
+        echo "Debug mode disabled"
+    endif 
+endfunction
+
+function! ClearBreakpoints() 
+    exec "lua require'dap'.list_breakpoints()"
+    for item in getqflist()
+        exec "exe " . item.lnum . "|lua require'dap'.toggle_breakpoint()"
+    endfor
+endfunction

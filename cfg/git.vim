@@ -5,7 +5,7 @@ autocmd VimEnter * PatienceDiff
 command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 " Zr means that by default, the diff will be fully unfolded
 " Opens the window at minimum height
-map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(3,99)<CR> 
+map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(15,99)<CR> 
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
 map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
