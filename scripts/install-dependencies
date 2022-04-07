@@ -2,20 +2,24 @@ sudo apt-get update
 # Neovim modules
 sudo npm install -g neovim
 sudo gem install neovim
+sudo apt-get install y python3-pip
 
+# Update npm
+sudo snap install curl
+sudo npm install npm -g
 # Fonts
 # Install Patched fonts (Look for Nerdfonts)
 # This ones are used to visualize the icons in some plugins such as Trouble
-cp -r ../cfg/fonts/NerdFonts $HOME/.local/shared/fonts
+cp -r ../cfg/fonts/NerdFonts $HOME/.local/share/fonts
 
 sudo apt-get install -y xclip
-sudo apt install -y build-essential cmake python3-dev
-sudo apt install -y mono-complete golang nodejs default-jdk npm
-sudo apt install universal-ctags
+sudo apt-get install -y build-essential cmake python3-dev
+sudo apt-get install -y mono-complete golang nodejs default-jdk npm
+sudo apt-get install universal-ctags
 sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y isort
-sudo apt-get install -y yapf
-sudo apt-get install -y autopep8
+sudo apt-get install -y yapf3
+sudo apt-get install -y python3-autopep8
 sudo apt-get install -y ripgrep
 pip install --user pynvim
 pip3 install --user pynvim
@@ -45,6 +49,7 @@ pip install pytest-xdist
 
 # Spotify
 sudo snap install Spotify
+sudo snap install gh
 # Go to its directory and run do make
 
 # Sniprun

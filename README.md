@@ -28,6 +28,9 @@ git config --global merge.tool fugitive
 And then you can use "git mergetool" after finding conflicts to use Vim fugitive
 tool. The centered window corresponds to the final changes that will be applied.
 
+On vim, you can open a file in three way split by pressing `dv` over the conflicted
+file in git status window from fugitive.
+
 ## Features
 
 Main features of this VIM:
@@ -324,6 +327,7 @@ Note: g stands for git
 | ------------- | --------------------------------------------------------------------------------------- |
 | \<leader\>gs  | Run the tool git status useful to stage, usntage...                                     |
 | s/u/U on a file or folder | Stage/Unstage(all)                                                          |
+| dv on a file  | 3 way split to solve merge conflicts                                                    |
 | Enter on file | Open the file                                                                           |
 | = on a file   | Visualize the changes to the file in quick format                                       |
 | dd on file    | Performs diff in two windows                                                            |
