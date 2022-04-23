@@ -8,12 +8,13 @@ nnoremap <leader><Right> :call feedkeys("089lb")<CR>
 " Telescope. Since it is slower than FZF, only ctrl p is defined here
 nnoremap <silent><C-p> :lua require('telescope.builtin').find_files()<CR>
 nnoremap <silent><leader><C-p> :lua search_vimfiles()<CR>
-nnoremap <silent><C-f> :lua require('telescope.builtin').tags()<CR>
+nnoremap <silent><C-f> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-t> :lua require('telescope.builtin').current_buffer_tags()<CR>
 nnoremap <silent><C-b> :Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>
 " Fzf remaps
 nnoremap <silent><C-g> :Ag<Cr>
 nnoremap <silent><C-h> :w<cr>:Changes<cr>
+nnoremap <C-h> :FZFFzm<cr>
 
 " Easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings

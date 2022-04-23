@@ -214,11 +214,11 @@ Search for files and navigation
 | Command/Shortcut   | Description                                                     |
 | ------------------ | --------------------------------------------------------------- |
 | Ctrl + b           | Find a specific line within a file (fuzzy finder)               |
-| Ctrl + f           | Search for any tag in the current buffer                        |
+| Ctrl + f           | Fuzzy finder for your files in the buffer                       |
 | Ctrl + t           | Search for any tag in the current project                       |
 | Ctrl + g           | Search for a file in the current directory given a string       |
-| Ctrl + h           | Navigate in history of changes made on the buffers              |
 | Ctrl + p           | Search for file name in the current directory. Use \<Tab\> to select more than one file and then opened them with ctrl+v or ctrl+x |
+| Ctrl + h           | FZF marks menu to quickly cd inside vim                         |
 | \<leader\>Ctrl + p | Search within my own vim files                                  |
 | Ctrl + v           | Open the file in vertical split                                 |
 | Ctrl + x           | Open the file in horizontal split                               |

@@ -54,6 +54,7 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
+  Plugin 'tenfyzhong/fzf-marks.vim'  " Integration of fzf marks by using FZFFzm command
   Plugin 'nvim-telescope/telescope.nvim' " Another FZF finder
   Plugin 'nvim-telescope/telescope-fzf-native.nvim' " FZF native sorter for telescope
   Plugin 'fisadev/vim-isort' " Isort plugin to order imporst in Python

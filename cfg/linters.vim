@@ -119,7 +119,7 @@ require('lint').linters.rstlint.args = {'--level=info'}
 
 require('lint').linters_by_ft = {
   --python = {'flake8', 'pylint', 'vulture', 'codespell', 'mypy', 'pytestcov'}, -- mypy is included in pylsp, but not in pyright
- -- python = {'flake8', 'pylint', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
+  --python = {'flake8', 'pylint', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
   python = {'flake8', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
  -- python = {'flake8', 'vulture', 'codespell', 'mypy', 'pytestcov'}, -- mypy is included in pylsp, but not in pyright
   --python = {'mypy'}, -- mypy is included in pylsp, but not in pyright

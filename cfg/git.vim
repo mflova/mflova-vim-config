@@ -8,7 +8,7 @@ command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(15,99)<CR> 
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
-map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
+map <silent><Leader>gdm :Gvdiffsplit main<CR>zR
 map <silent><Leader>gl :BCommits<CR>
 map <silent><Leader>gh :Gclogfunc<CR>
 map <silent><Leader>gS :GStash<CR>
