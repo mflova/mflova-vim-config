@@ -1,31 +1,7 @@
-sudo apt-get update
-# Neovim modules
-sudo npm install -g neovim
-sudo gem install neovim
-sudo apt-get install y python3-pip
-
 # Update npm
-sudo snap install curl
-sudo npm install npm -g
 # Fonts
 # Install Patched fonts (Look for Nerdfonts)
 # This ones are used to visualize the icons in some plugins such as Trouble
-cp -r ../cfg/fonts/NerdFonts $HOME/.local/share/fonts
-
-sudo apt-get install -y xclip
-sudo apt-get install -y build-essential cmake python3-dev
-sudo apt-get install -y mono-complete golang nodejs default-jdk npm
-sudo apt-get install universal-ctags
-sudo apt-get install -y silversearcher-ag
-sudo apt-get install -y isort
-sudo apt-get install -y yapf3
-sudo apt-get install -y python3-autopep8
-sudo apt-get install -y ripgrep
-pip install --user pynvim
-pip3 install --user pynvim
-pip install --upgrade pynvim
-pip3 install --upgrade pynvim
-pip install -U ropevim # Refactoring in python
 
 # RST previewer
 sudo pip install https://github.com/Rykka/instant-rst.py/archive/master.zip
@@ -41,15 +17,6 @@ sudo apt-get install curl
 # Maybe is also necessary pip install Flask-SocketIO==4.3.1
 #    original: 5.1.1
 
-# Debugger
-pip install debugpy
-
-# Paralell pytest
-pip install pytest-xdist
-
-# Spotify
-sudo snap install Spotify
-sudo snap install gh
 # Go to its directory and run do make
 
 # Sniprun
@@ -60,9 +27,6 @@ sudo snap install gh
 # generate them with:
 # - stubgen -m module -o $STUBSPATH
 # - stubgen path -o $STUBSPATH
-echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
-echo "export MYPYPATH=$STUBSPATH" >> ~/.bashrc
-echo "export PYTHON_DIR=$(which python3)" >> ~/.bashrc
 
 # To install ctags (used for tags browser)
 git clone https://github.com/universal-ctags/ctags.git --depth=1

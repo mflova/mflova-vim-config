@@ -1,0 +1,69 @@
+- hosts: localhost
+  tasks:
+  - name: Install neovim
+    apt:
+      name: neovim=0.7.0
+      update_cache: yes
+
+  - name: Install python
+    apt:
+      pkg:
+        - python3-dev
+        - python3-pip
+      update_cache: yes
+
+  - name: Install curl
+    community.general.snap:
+      name: curl
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+      - xclip
+      - build-essential
+      - cmake
+      - mono-complete
+      - golang
+      - nodejs
+      - default-jdk
+      - npm
+      - universal-ctags
+      - silversearcher-ag
+      - isort
+      - yapf3
+      - python3-autopep8
+      - ripgrep
+      - pynvim
+      - ropevim
+      - https://github.com/Rykka/instant-rst.py/archive/master.zip
+    update_cache: yes
+
+  - name: Install python packages
+    pip:
+      name: 
+        - debugpy
+        - pytest-xdist
+
+  - name: Install other snap packages
+    community.general.snap:
+      name:
+        - Spotify
+        - gh
+
+  - name: Create STUBSPATH variable
+    ansible.builtin.shell: echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
+
+  - name: Create MYPYPATH
+    ansible.builtin.shell: echo "export MYPYPATH=$STUBSPATH" >> ~/.bashrc
+
+  - name: Create MYVIMRC
+    ansible.builtin.shell: echo "export MYVIMRC='{{playbook_dir}}/../cfg/init.vim'" >> ~/.bashrc
+
+  - name: Create VIMINIT
+    ansible.builtin.shell: echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
+
+  - shell: which python3
+    register: python3_dir
+
+  - name: Create PYTHON_DIR
+    ansible.builtin.shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc

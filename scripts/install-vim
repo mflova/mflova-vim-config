@@ -10,10 +10,6 @@ echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
 
 echo "Open VIM, ignore the errors and execute :PluginInstall"
 
-cd ~/.vim/bundle/YouCompleteMe
-python3 install.py --all
-cd ~
-
 
 nvim -c PluginInstall
 read -p "Go to the folder of the spotify plugin in bundle and execute 'do make'. Press [ENTER]"
