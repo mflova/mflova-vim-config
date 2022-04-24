@@ -79,3 +79,7 @@
   - name: Create PYTHON_DIR
     shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc
     become: no
+
+  - name: Create empty CPP_BUILD_DIR
+    shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
+    become: no
