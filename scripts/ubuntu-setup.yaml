@@ -1,8 +1,15 @@
 - hosts: localhost
+  become: yes
   tasks:
+
+  - name: Download nvim 0.7.0
+    get_url:
+      url: https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
+      dest: /tmp
+
   - name: Install neovim
     apt:
-      name: neovim=0.7.0
+      deb: /tmp/nvim-linux64.deb
       update_cache: yes
 
   - name: Install python
@@ -13,7 +20,7 @@
       update_cache: yes
 
   - name: Install curl
-    community.general.snap:
+    snap:
       name: curl
 
   - name: Install a list of packages
@@ -33,37 +40,42 @@
       - yapf3
       - python3-autopep8
       - ripgrep
-      - pynvim
-      - ropevim
-      - https://github.com/Rykka/instant-rst.py/archive/master.zip
-    update_cache: yes
+      update_cache: yes
 
   - name: Install python packages
     pip:
       name: 
         - debugpy
         - pytest-xdist
+        - ropevim
+        - pynvim
+        - https://github.com/Rykka/instant-rst.py/archive/master.zip
 
   - name: Install other snap packages
-    community.general.snap:
+    snap:
       name:
-        - Spotify
+        - spotify
         - gh
 
   - name: Create STUBSPATH variable
-    ansible.builtin.shell: echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
+    shell: echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
+    become: no
 
   - name: Create MYPYPATH
-    ansible.builtin.shell: echo "export MYPYPATH=$STUBSPATH" >> ~/.bashrc
+    shell: echo "export MYPYPATH=\$STUBSPATH" >> ~/.bashrc
+    become: no
 
   - name: Create MYVIMRC
-    ansible.builtin.shell: echo "export MYVIMRC='{{playbook_dir}}/../cfg/init.vim'" >> ~/.bashrc
+    shell: echo "export MYVIMRC='{{playbook_dir}}/../cfg/init.vim'" >> ~/.bashrc
+    become: no
 
   - name: Create VIMINIT
-    ansible.builtin.shell: echo "export VIMINIT='source $MYVIMRC'" >> ~/.bashrc
+    shell: echo "export VIMINIT='source \$MYVIMRC'" >> ~/.bashrc
+    become: no
 
   - shell: which python3
     register: python3_dir
 
   - name: Create PYTHON_DIR
-    ansible.builtin.shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc
+    shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc
+    become: no
