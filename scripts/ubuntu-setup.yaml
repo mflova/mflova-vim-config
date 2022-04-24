@@ -83,3 +83,13 @@
   - name: Create empty CPP_BUILD_DIR
     shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
     become: no
+
+  - name: Install Vundle neovim plugin
+    become: no
+    git:
+      repo: https://github.com/VundleVim/Vundle.vim.git
+      dest: ~/.vim/bundle/Vundle.vim
+
+  - name: Install Plugins wih PluginInstall
+    shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
+    become: no

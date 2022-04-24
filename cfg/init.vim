@@ -137,6 +137,12 @@ call vundle#begin()
   Plugin 'PHSix/nvim-hybrid' " Theme
 call vundle#end()
 
+" Install VIM plugins with this in shell:
+" export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
+if $INSTALL_VIM_PLUGINS == 1
+    PluginInstall
+endif
+
 " Avoid folds by default
 set nofoldenable
 
