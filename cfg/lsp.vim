@@ -69,6 +69,9 @@ require'lspconfig'.pyright.setup{
 
 -- C++ LSP
 local cpp_compilation_database_dir = os.getenv('CPP_BUILD_DIR')
+if cpp_compilation_database_dir == nil then
+    cpp_compilation_database_dir = ""
+end
 require'lspconfig'.ccls.setup{
   capabilities = capabilities; -- Autocomplete. Line from nvim-cmp
   init_options = {
