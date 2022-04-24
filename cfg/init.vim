@@ -73,7 +73,7 @@ call vundle#begin()
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
-  Plugin 'folke/trouble.nvim' " Better diagnos navigation
+  Plugin 'mflova/trouble.nvim' " Better diagnos navigation and LSP features
   Plugin 'vimwiki/vimwiki'
   Plugin 'pwntester/octo.nvim' " Git online management
 
