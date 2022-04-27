@@ -107,7 +107,7 @@
         name: cargo
 
   - name: Install sniprun
-    shell: ~/.vim/bundle/sniprun/install.sh
+    shell: bash ~/.vim/bundle/sniprun/install.sh
     become: no
 
   - name: Clone go
@@ -377,3 +377,7 @@
 # Markdown LSP?
 # Setup spotify (login, install cli package...)
 # Verify other features missing
+#
+#
+# To verify after reinstallation
+# sniprun is ok
