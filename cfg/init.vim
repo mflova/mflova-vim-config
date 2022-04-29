@@ -73,7 +73,7 @@ call vundle#begin()
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
-  Plugin 'folke/trouble.nvim' " Better diagnos navigation
+  Plugin 'mflova/trouble.nvim' " Better diagnos navigation and LSP functionalities
   Plugin 'vimwiki/vimwiki'
   Plugin 'pwntester/octo.nvim' " Git online management
 
@@ -120,6 +120,7 @@ call vundle#begin()
   
   " Misc
   Plugin 'jbyuki/nabla.nvim'
+  Plugin 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 
   " Debugger
   Plugin 'mfussenegger/nvim-dap'
@@ -408,9 +409,6 @@ nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
 
 nmap <silent><leader>sa <Plug>(SpotifySkip)
 nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
-nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
-nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
-nmap <silent><leader>s<Right> <Plug>(SpotifySkip)
 
 " Imports
 let s:git_cfg_path = s:vim_cfg_path . '/git.vim'
@@ -424,6 +422,7 @@ let s:snippets_cfg_path = s:vim_cfg_path . '/snippets.vim'
 let s:navigation_cfg_path = s:vim_cfg_path . '/navigation.vim'
 let s:coding_cfg_path = s:vim_cfg_path . '/coding.vim'
 let s:debugger_cfg_path = s:vim_cfg_path . '/debugger.vim'
+let s:formatter_cfg_path = s:vim_cfg_path . '/formatter.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:testing_cfg_path
@@ -436,3 +435,4 @@ exec 'source ' . s:snippets_cfg_path
 exec 'source ' . s:navigation_cfg_path
 exec 'source ' . s:coding_cfg_path
 exec 'source ' . s:debugger_cfg_path
+exec 'source ' . s:formatter_cfg_path

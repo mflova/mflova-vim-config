@@ -16,6 +16,7 @@ map <silent><Leader>gb :GBranches --locals<CR>
 map <silent><Leader>gB :GBranches<CR>
 map <silent><Leader>gc :call Commitizen()<CR>
 map <silent><Leader>gP :Git push<CR>
+map <silent><Leader>gPu :Git push --no-verify<CR>
 map <silent><Leader>gL :GV<CR>
 " As merge tool: gets from left and right
 nmap <silent><leader>g<Right> :diffget //3<CR>

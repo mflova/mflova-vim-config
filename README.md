@@ -352,6 +352,7 @@ Note: g stands for git
 | \<Leader\>gm  | Resolve the merge conflicts for that file (m stands for mergetool). Options below       |
 | \<Leader\>g\<arrows\> | Select from which file (left or right) you want the code to solve the conflict  |
 | \<Leader\>gP  | Git push                                                                                |
+| \<Leader\>gPu | Git push (unsafe, with --no-verify which skip hooks)                                    |
 | \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
