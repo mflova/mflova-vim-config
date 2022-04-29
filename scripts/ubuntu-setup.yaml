@@ -232,6 +232,10 @@
     pip: 
       name: pyright
 
+  - name: Install grammar based LSP for markdown/latex/bib
+    shell: nvim +'LspInstall ltex' +'sleep 40000m' +qa
+    become: no
+
   - name: Install pylsp LSP
     shell: nvim +'LspInstall pylsp' +'sleep 10000m' +qa
     become: no
@@ -363,21 +367,21 @@
       cmd: yarn install
     become: no
 
+  - name: Install spotify TUI
+    snap:
+      name: spt
+
+  - name: Set up spt (Spotify CLI for nvim)
+    pause:
+      prompt: "Run spt and follow the instructions to set up spotify to work on nvim."
+
   - name: Set up gh
     pause:
       prompt: "Run 'gh auth login' and choose github.com, SSH, No/Yes, Login with a web server"
 
 
-  # LSPs
-
 # TODO
-# Install rustup and run sniprun/install
-# Run scripts left from vundle (see plugins that require it)
-#   Left: spotify, sniprun
-# Markdown LSP?
-# Setup spotify (login, install cli package...)
-# Verify other features missing
-#
-#
 # To verify after reinstallation
 # sniprun is ok
+# markdown previwer
+# debugger
