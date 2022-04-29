@@ -326,7 +326,7 @@
         - flake8-assertive
         - flake8-bandit
         - flake8-eradicate
-        - flake8-pollyfil
+        - flake8-polyfill
         - flake8-prettycount
         - flake8-pytest-style
         - flake8-simplify
