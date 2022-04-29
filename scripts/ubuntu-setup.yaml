@@ -148,7 +148,7 @@
     become: no
 
   - name: Install Python Treesitter
-    shell: nvim +'TSInstall python' +'sleep 2000m' +qa
+    shell: nvim +'TSInstall python' +'sleep 5000m' +qa
     become: no
     ignore_errors: yes  # If already installed
 
