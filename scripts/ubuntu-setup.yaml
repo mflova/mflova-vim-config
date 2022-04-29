@@ -103,8 +103,6 @@
   - name: Install cargo
     apt:
       name: cargo
-      apt:
-        name: cargo
 
   - name: Install sniprun
     shell: bash ~/.vim/bundle/sniprun/install.sh
