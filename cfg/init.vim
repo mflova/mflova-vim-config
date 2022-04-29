@@ -121,6 +121,9 @@ call vundle#begin()
   " Misc
   Plugin 'jbyuki/nabla.nvim'
 
+  " LSP
+  Plugin 'brymer-meneses/grammar-guard.nvim'  " Markdown/Latex LSP based on ltex
+
   " Debugger
   Plugin 'mfussenegger/nvim-dap'
   Plugin 'rcarriga/nvim-dap-ui'
