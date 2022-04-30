@@ -1,6 +1,0 @@
-# MARKDOWN LSP
-read -p "Install the markdown lsp with :LSPInstall (with a .md opened). Then choose ltex. The path to this server is automatically added to PATH in bashrc now"
-echo "export PATH=$PATH:~/.local/share/nvim/lsp_servers/ltex" >> ~/.bashrc
-
-# LUA LSP
-read -p "Install the lua lsp with :LSPInstall (with a .lua opened). Then choose sumneko_lua."

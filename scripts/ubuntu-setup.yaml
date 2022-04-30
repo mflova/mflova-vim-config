@@ -19,14 +19,11 @@
         - python3-pip
       update_cache: yes
 
-  - name: Install curl
-    snap:
-      name: curl
-
   - name: Install a list of packages
     apt:
       pkg:
       - xclip
+      - curl
       - build-essential
       - cmake
       - mono-complete
@@ -57,33 +54,6 @@
         - spotify
         - gh
 
-  - name: Create STUBSPATH variable
-    shell: echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
-    become: no
-
-  - name: Create MYPYPATH
-    shell: echo "export MYPYPATH=\$STUBSPATH" >> ~/.bashrc
-    become: no
-
-  - name: Create MYVIMRC
-    shell: echo "export MYVIMRC='{{playbook_dir}}/../cfg/init.vim'" >> ~/.bashrc
-    become: no
-
-  - name: Create VIMINIT
-    shell: echo "export VIMINIT='source \$MYVIMRC'" >> ~/.bashrc
-    become: no
-
-  - shell: which python3
-    register: python3_dir
-
-  - name: Create PYTHON_DIR
-    shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc
-    become: no
-
-  - name: Create empty CPP_BUILD_DIR
-    shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
-    become: no
-
   - name: Install Vundle neovim plugin
     become: no
     git:
@@ -93,3 +63,289 @@
   - name: Install Plugins wih PluginInstall
     shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
     become: no
+
+  - name: Update remote plugins
+    shell: export INSTALL_VIM_PLUGINS=1 && nvim +'UpdateRemotePlugins' +qa && unset INSTALL_VIM_PLUGINS
+    become: no
+
+  - name: Install vim-language-server
+    npm:
+      name: vim-language-server
+      global: yes
+
+  - name: Install cargo
+    apt:
+      name: cargo
+
+  - name: Clone go
+    git:
+      repo: https://github.com/udhos/update-golang
+      dest: /tmp/go_updater
+
+  - name: Uninstall go
+    apt:
+      name: go
+      state: absent
+
+  - name: Update go
+    snap:
+      name: go
+      classic: yes
+
+  - name: Curl Node release
+    shell: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+    become: no
+
+  - name: Update nodejs
+    apt:
+      name: nodejs
+
+  - name: Install YAML LSP
+    snap:
+      name: yaml-language-server
+
+  - name: Install languagetool
+    snap:
+      name: languagetool
+
+  - name: python3-venv
+    apt:
+      name: python3-venv
+
+  - name: Update Treesitter
+    shell: nvim +'TSUpdate' +qa
+    become: no
+
+  - name: Install Python Treesitter
+    shell: nvim +'TSInstall python' +'sleep 5000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install JSON Treesitter
+    shell: nvim +'TSInstall json' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install cpp Treesitter
+    shell: nvim +'TSInstall cpp' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install rst Treesitter
+    shell: nvim +'TSInstall rst' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install vim Treesitter
+    shell: nvim +'TSInstall vim' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install cmake Treesitter
+    shell: nvim +'TSInstall cmake' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: Install bash Treesitter
+    shell: nvim +'TSInstall bash' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: install YAML treesitter
+    shell: nvim +'TSInstall yaml' +'sleep 2000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  - name: install markdown treesitter
+    shell: nvim +'TSInstall markdown' +'sleep 5000m' +qa
+    become: no
+    ignore_errors: yes  # If already installed
+
+  # LSPS
+  - name: Install cmake LSP
+    pip: 
+      name: cmake-language-server
+
+  - name: Install esbonio LSP
+    shell: nvim +'LspInstall esbonio' +'sleep 20000m' +qa
+    become: no
+
+  - name: Install ltex LSP
+    shell: nvim +'LspInstall ltex' +'sleep 30000m' +qa
+    become: no
+
+  - name: Install jsonls LSP
+    shell: nvim +'LspInstall jsonls' +'sleep 15000m' +qa
+    become: no
+
+  - name: Install grammarly LSP
+    shell: nvim +'LspInstall grammarly' +'sleep 25000m' +qa
+    become: no
+
+  - name: Install sumneko lua LSP
+    shell: nvim +'LspInstall sumneko_lua' +'sleep 10000m' +qa
+    become: no
+      
+  - name: Install DogeGenerator for Python
+    shell: nvim +'call doge#install()' +'sleep 10000m' +qa
+    become: no
+
+  - name: Insatll Bash LSP
+    npm:
+      name: bash-language-server
+      global: yes
+
+  - name: Install pyright LSP
+    pip: 
+      name: pyright
+
+  - name: Install grammar based LSP for markdown/latex/bib
+    shell: nvim +'LspInstall ltex' +'sleep 40000m' +qa
+    become: no
+
+  - name: Install pylsp LSP
+    shell: nvim +'LspInstall pylsp' +'sleep 10000m' +qa
+    become: no
+
+  - name: Install pylsp LSP plugins
+    pip: 
+      name:
+        - pylsp-mypy
+        - pylsp-rope
+
+  - name: Install ccls LSP (C++)
+    apt: 
+      name: ccls
+
+  - name: Install grammar-based linters (pip)
+    pip:
+      name: codespell
+
+  - name:
+    npm:
+      name: markdownlint-cli
+      global: yes  
+
+  - name: Install cpp linters (pip)
+    pip:
+      name: cpplint
+
+  - name: Install cpp linters (apt)
+    apt:
+      name:
+        - cppcheck
+        - clang-tidy
+
+  - name: Install rst-lint dependencies
+    apt:
+      name: python3-testresources
+
+  - name: Install RST linters (pip)
+    pip:
+      name:
+        - rstcheck
+        - proselint
+        - restructuredtext-lint
+
+  - name: Install  YAML linters (pip)
+    pip:
+      name: yamllint
+
+  - name: Install  CMAKE linters (pip)
+    pip:
+      name: cmakelint
+
+  - name: Install  shell linters (apt)
+    apt:
+      name: shellcheck
+
+  - name: Install  vim linters (pip)
+    pip:
+      name: vim-vint
+
+  - name: Install  lua linters (apt)
+    apt:
+      name: lua-check
+
+  - name: Install python packages
+    pip:
+      name: 
+        - python-language-server[all]
+        - setuptools
+        - pandas-stubs
+        - numpy
+        - pytest
+
+
+  - name: Install python tools and linters
+    pip:
+      name: 
+        - pydocstyle
+        - pycodestyle
+        - vulture
+        - mypy
+        - flake8
+        - pydocstyle
+        - pylint
+        - doq
+        - pytest-cov
+        - dlint
+        - pandas-vet
+        - darglint
+        - flake8-assertive
+        - flake8-bandit
+        - flake8-eradicate
+        - flake8-polyfill
+        - flake8-prettycount
+        - flake8-pytest-style
+        - flake8-simplify
+        - flake8-todo
+        - flake8-bugbear
+        - flake8-docstrings
+        - flake8-comprehensions
+        - flake8-commas
+        - flake8-rst-docstrings
+        - flake8-docstrings
+        - flake8-markdown
+        - flake8-builtins
+        - flake8-broken-line
+        - flake8-pie
+        - flake8-mutable
+        - flake8-deprecated
+        - flake8-type-checking
+        - flake8-typing-imports
+        - flake8-requirements
+        - flake8-implicit-str-concat
+        - flake8-use-fstring
+
+  - name: Install markdown linters
+    npm:
+      name: markdownlint-cli
+      global: yes
+
+  - name: Install yarn
+    npm:
+      name: yarn
+      global: yes
+
+  - name: Install markdown previewer
+    shell:
+      chdir:  ~/.vim/bundle/markdown-preview.nvim/app/
+      cmd: yarn install
+    become: no
+
+  - name: Install spotify TUI
+    snap:
+      name: spt
+
+  - name: Install sniprun
+    pause:
+      prompt: "Run bash ~/.vim/bundle/sniprun/install.sh and then press ENTER here."
+
+  - name: Set up spt (Spotify CLI for nvim)
+    pause:
+      prompt: "Run spt and follow the instructions to set up spotify to work on nvim."
+
+  - name: Set up gh
+    pause:
+      prompt: "Run 'gh auth login' and choose github.com, SSH, No/Yes, Login with a web server"

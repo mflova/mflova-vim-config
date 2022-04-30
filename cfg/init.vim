@@ -73,7 +73,7 @@ call vundle#begin()
   Plugin 'nvim-lua/plenary.nvim' " Developing plugins
   Plugin 'kyazdani42/nvim-web-devicons' " Cool icons
   Plugin 'williamboman/nvim-lsp-installer' " LSP Installer
-  Plugin 'mflova/trouble.nvim' " Better diagnos navigation and LSP functionalities
+  Plugin 'mflova/trouble.nvim' " Better diagnos navigation and LSP features
   Plugin 'vimwiki/vimwiki'
   Plugin 'pwntester/octo.nvim' " Git online management
 
@@ -121,6 +121,9 @@ call vundle#begin()
   " Misc
   Plugin 'jbyuki/nabla.nvim'
   Plugin 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+
+  " LSP
+  Plugin 'brymer-meneses/grammar-guard.nvim'  " Markdown/Latex LSP based on ltex
 
   " Debugger
   Plugin 'mfussenegger/nvim-dap'

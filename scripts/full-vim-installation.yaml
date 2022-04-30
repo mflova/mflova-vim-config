@@ -1,0 +1,34 @@
+- hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Create STUBSPATH variable
+    shell: echo "export STUBSPATH=$HOME/stubs" >> ~/.bashrc
+    become: no
+
+  - name: Create MYPYPATH
+    shell: echo "export MYPYPATH=\$STUBSPATH" >> ~/.bashrc
+    become: no
+
+  - name: Create MYVIMRC
+    shell: echo "export MYVIMRC='{{playbook_dir}}/../cfg/init.vim'" >> ~/.bashrc
+    become: no
+
+  - name: Create VIMINIT
+    shell: echo "export VIMINIT='source \$MYVIMRC'" >> ~/.bashrc
+    become: no
+
+  - shell: which python3
+    register: python3_dir
+
+  - name: Create PYTHON_DIR
+    shell: echo "export PYTHON_DIR='{{python3_dir.stdout_lines[0]}}'" >> ~/.bashrc
+    become: no
+
+  - name: Create empty CPP_BUILD_DIR
+    shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
+    become: no
+
+  - name: Bashrc info
+    pause:
+      prompt: "Restart the terminal to re-load bashrc before continuing with next scripts."
