@@ -130,6 +130,22 @@ require'lspconfig'.sumneko_lua.setup {
     },
   },
 }
+require'lspconfig'.ltex.setup{
+  cmd = { os.getenv("HOME") .. '/.local/share/nvim/lsp_servers/ltex/ltex-ls/bin/ltex-ls' },
+    settings = {
+        ltex = {
+            enabled = {'latex', 'tex', 'bib', 'markdown'},
+            language = 'en',
+            diagnosticSeverity = 'information',
+            setenceCacheSize = 2000,
+            additionalRules = {enablePickyRules = true, motherTongue = 'es'},
+            trace = {server = 'verbose'},
+            dictionary = {},
+            disabledRules = {['en-GB'] = {'OXFORD_SPELLING_Z_NOT_S'}},
+            hiddenFalsePositives = {}
+        }
+    }}
+
 -- Disable underline in diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
  vim.lsp.with(
