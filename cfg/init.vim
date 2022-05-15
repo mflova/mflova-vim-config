@@ -50,7 +50,6 @@ call vundle#begin()
   Plugin 'mflova/vim-printer' " Print debugging variables easily
   Plugin 'szw/vim-g' " Google searches
   Plugin 'dominikduda/vim_current_word' "Highlight the current word 
-  Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
   Plugin 'salcode/vim-interactive-rebase-reverse' " Change commit order in rebase interactive
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
@@ -86,6 +85,7 @@ call vundle#begin()
   Plugin 'liuchengxu/vista.vim' " Taglist compatible with LSP
   Plugin 'rbgrouleff/bclose.vim' " Ranger dependency
   Plugin 'francoiscabrol/ranger.vim' " Ranger
+  Plugin 'phaazon/hop.nvim' " Move between words in the file
 
   " Snippets
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
