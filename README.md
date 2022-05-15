@@ -343,7 +343,8 @@ Note: g stands for git
 | gi            | Opens the file .git/info/exclude under repo to add personal ignored files               |
 | gI            | Ignore THAT file by adding it to the personal .git/info/ecxclude                        |
 | cc            | Commit                                                                                  |
-| ca            | Amend and commit (add something I forgot to the last commit)                            |
+| ca            | commit with --amend (add something I forgot in the last commit and edit the message)    |
+| ce            | commit with --amend --no-edit (add something I forgot in the last commit)               |
 | X             | Discard changes of that file                                                            |
 | \<Leader\>gt  | Run the stash tool                                                                      |
 | Ctrl + p      | Pop                                                                                     |
