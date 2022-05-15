@@ -132,6 +132,7 @@ require'lspconfig'.sumneko_lua.setup {
 }
 require'lspconfig'.ltex.setup{
   cmd = { os.getenv("HOME") .. '/.local/share/nvim/lsp_servers/ltex/ltex-ls/bin/ltex-ls' },
+  filetypes = {'latex', 'tex', 'bib', 'markdown'},
     settings = {
         ltex = {
             enabled = {'latex', 'tex', 'bib', 'markdown'},

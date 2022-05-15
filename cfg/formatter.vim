@@ -4,8 +4,8 @@ let g:black#settings = {
     \ 'line_length': 90
 \}
 
-augroup formatter
-    autocmd!
-    au BufWritePost *.py call Black()
-augroup END
+"augroup formatter
+"    autocmd!
+"    au BufWritePost *.py call Black()
+"augroup END
 

@@ -29,6 +29,19 @@
     shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
     become: no
 
-  - name: Bashrc info
+  - name: Clean npm cache
+    shell:
+      cmd:  npm cache clean -f
+
+  - name: Install n, node version manager
+    npm:
+      name:  n
+      global: yes
+
+  - name: Install latest node stable version
+    shell:
+      cmd:  n stable
+
+  - name: Important note
     pause:
-      prompt: "Restart the terminal to re-load bashrc before continuing with next scripts."
+      prompt: "Important: Reload bashrc before processing the neovim installation."

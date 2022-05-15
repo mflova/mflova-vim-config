@@ -3,16 +3,17 @@ augroup debuggable
     autocmd!
     autocmd filetype python nmap <silent><leader>dd :call Toggle_debug_mode()<CR>
     autocmd filetype python nmap <silent><leader>db :lua require'dap'.toggle_breakpoint()<CR>
-    autocmd filetype python nmap <silent><leader>d<leader> :call Run_debug()<CR>
-    autocmd filetype python nmap <silent><leader>dc:call Run_debug()<CR>
+    autocmd filetype python nmap <silent><leader>d<leader> :lua require'dap'.continue()<CR>
+    autocmd filetype python nmap <silent><leader>dc :lua require'dap'.continue()<CR>
 
-    autocmd filetype python nmap <silent><leader>d<Right> :lua require'dap'.step_over()<CR>
-    autocmd filetype python nmap <silent><leader>d<Down> :lua require'dap'.step_into()<CR>
+    " Compatible with Ctrl + arrows if in debug mode
+    autocmd filetype python nmap <silent><leader>d<Down> :lua require'dap'.step_over()<CR>
+    autocmd filetype python nmap <silent><leader>d<Right> :lua require'dap'.step_into()<CR>
     autocmd filetype python nmap <silent><leader>d<Up> :lua require'dap'.step_out()<CR>
 
     " For pytest
-    autocmd filetype python nnoremap <silent><leader>dt :lua require('dap-python').test_method()<CR>
-    autocmd filetype python nnoremap <silent><leader>dT :lua require('dap-python').test_class()<CR>
+    autocmd filetype python nnoremap <silent><leader>dt :call Debug_mode(1)<CR> :lua require('dap-python').test_method()<CR>
+    autocmd filetype python nnoremap <silent><leader>dT :call Debug_mode(1)<CR> :lua require('dap-python').test_class()<CR>
 augroup END
 
 lua << EOF
@@ -86,7 +87,7 @@ function! Run_debug()
     if l:is_test == 1
         lua require('dap-python').test_method()
     else
-        lua require'dap'.continue()
+        
     endif
 endfunction
 
@@ -94,16 +95,33 @@ endfunction
 function! Toggle_debug_mode()
 
     if g:mflova_debug_mode == 0
+        call Debug_mode(1)
+    else
+        call Debug_mode(0)
+    endif 
+endfunction
+
+function! Debug_mode(mode)
+    if a:mode
+        if g:mflova_test_mode
+            call Toggle_test_mode(0)
+        endif
+        if g:mflova_debug_mode
+            return
+        endif
         let g:mflova_debug_mode = 1
-        lua require("dapui").toggle()
+        lua require("dapui").open()
         echo "Debug mode enabled"
     else
+        if g:mflova_debug_mode ==? 0
+            return
+        endif
        " Close all splits but the main one
         let g:mflova_debug_mode = 0
         execute "normal \<C-W>o"
         call ClearBreakpoints()
         echo "Debug mode disabled"
-    endif 
+    endif
 endfunction
 
 function! ClearBreakpoints() 

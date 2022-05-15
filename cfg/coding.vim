@@ -55,21 +55,10 @@ setlocal foldtext=FoldText()
 setlocal fillchars=
 
 map <buffer> - za
-map <buffer> <C-f> :call ToggleFold()<CR>
 
 let b:folded = 1
 
 hi Folded     gui=bold cterm=bold guifg=cyan ctermfg=cyan guibg=NONE ctermbg=NONE
-
-function! ToggleFold()
-  if b:folded == 0
-    exec "normal! zM"
-    let b:folded = 1
-  else
-    exec "normal! zR"
-    let b:folded = 0
-  endif
-endfunction
 
 function! s:Strip(string)
   return substitute(a:string, '^[[:space:][:return:][:cntrl:]]\+\|[[:space:][:return:][:cntrl:]]\+$', '', '')

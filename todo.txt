@@ -1,4 +1,0 @@
-Pending:
- - Edit this plugin https://github.com/kkoomen/vim-doge to be used
- - Create a command to easily add (,",' by pairs and also remove them
- - Install vim debugger

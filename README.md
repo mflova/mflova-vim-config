@@ -1,20 +1,19 @@
 # mflova-vim-config
 
 Repository used to install and set up vim and my main configuration used. This will
-setup vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might
+set up vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might
 still be buggy.
 
 ## Install
 
-- Install any patched fonts (done by the script) to have special icons.
-- FZF installed.
-- Install lsp dependencies, which also includes linters. While coding, the LSP
-  typically includes one linter while nvim-lint API provides many more, that can be
-  configured separately.
-- Install vim dependencies
-- Install vim
-- Call :PluginInstall
-- Install the TreeSitter parsers with :TSUpdate and :TSinstall [filetype]
+You can run first the `bashrc_setup.yaml` and then the `nvim_installation.yaml`
+with `ansible-playbook --ask-become`. Be aware that for the second script the variables
+defined by the first one must be available, so it is necessary to either source
+`.bashrc` or to launch a new terminal. You can do all of this with a single file:
+
+```shell
+. full_installation.yaml
+```
 
 ## Set up as merge tool
 
@@ -71,6 +70,7 @@ Main features of this VIM:
 - Previewers for RST and Markdown that are live updated.
 - Debugger for Python.
 - Refactor capabilites.
+- Ranger
 
 ## Installation
 
@@ -173,7 +173,7 @@ Highlighting and copy/pasting
 | Shift + x         | Temporary fulscreens a split pane                  |
 | :vsplit or :vs    | Creates a new vertical split with the same file    |
 | :split            | Creates a new horizontal split with the same file  |
-| Ctrl+Left/Right   | Move between items in the quickfix list            |
+| Ctrl+Up/Down      | Move between items in the quickfix list            |
 
 Resizing and moving split planes
 
@@ -214,12 +214,14 @@ Search for files and navigation
 | Command/Shortcut   | Description                                                     |
 | ------------------ | --------------------------------------------------------------- |
 | Ctrl + b           | Find a specific line within a file (fuzzy finder)               |
-| Ctrl + f           | Fuzzy finder for your files in the buffer                       |
-| Ctrl + t           | Search for any tag in the current project                       |
-| Ctrl + g           | Search for a file in the current directory given a string       |
+| Ctrl + f           | Fuzzy finder for strings in multiple files                      |
+| Ctrl + t           | Search files among open buffers                                 |
+| Ctrl + f           | Search for a file in the current directory given a string       |
+| Ctrl + g           | FZF Marks (change directory inside nvim)                        |
 | Ctrl + p           | Search for file name in the current directory. Use \<Tab\> to select more than one file and then opened them with ctrl+v or ctrl+x |
 | Ctrl + h           | FZF marks menu to quickly cd inside vim                         |
 | \<leader\>Ctrl + p | Search within my own vim files                                  |
+| \<leader\>f        | Open ranger                                                     |
 | Ctrl + v           | Open the file in vertical split                                 |
 | Ctrl + x           | Open the file in horizontal split                               |
 | Ctrl + t           | Open the file in new tab                                        |
@@ -268,18 +270,20 @@ Mainly LSP-related functionalities
 | \<Leader\>tt        | Same as previous on but with summary                                             |
 | R in summary window | Rerun a test                                                                     |
 | \<Leader\>tr        | After entering in the test mode, this one runs all the tests regardless the current buffer |
+| Alt+Up/down         | Move between prev and next failed tests                                          |
+| Alt+Left/Right      | Enter the preview wndow that dsplays the results of the test                     |
 
 ### Debugging
 | Command/Shortcut     | Description                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
 | \<Leader\>dd         | Toggle debugger mode (UI) (only python)                                          |
-| \<Leader\>dc or d\<Leader\>       | Run the debugger till breakpoint. It detects "test_" scripts        |
+| \<Leader\>dc or d\<Leader\>       | Run the debugger till breakpoint. Ctrl + Left if debug mode enabled |
 | \<Leader\>db         | Toggle breakpoint                                                                |
-| \<Leader\>d\<Up\>    | Step out                                                                         |
-| \<Leader\>d\<Down\>  | Step into                                                                        |
-| \<Leader\>d\<Right\> | Step over                                                                        |
-| \<Leader\>dt         | Debug a `test_` function from pytest. Better use the "run debugger" command      |
-| \<Leader\>dT         | Debug a `Class` containing multiple pytest test                                  |
+| \<Leader\>d\<Up\>    | Step out (Ctrl+Up if debugger mode enabled)                                      |
+| \<Leader\>d\<Down\>  | Step into (Ctrl+Down if debugger mode enabled)                                   |
+| \<Leader\>d\<Right\> | Step over (Ctrl+Right if debugger mode enabled)                                  |
+| \<Leader\>dt         | Debug a `test_` function from pytest. It launches the debug mode automatically   |
+| \<Leader\>dT         | Debug a `Class` containing multiple pytest test. Launches debug mode as well     |
 
 
 
@@ -344,8 +348,6 @@ Note: g stands for git
 | Enter         | Apply                                                                                   |
 | \<Leader\>gb  | Open the menu for operating with local branches. Options below                          |
 | \<Leader\>gB  | Open the menu for operating with all branches. Options below                            |
-| \<Leader\>gl  | Log to visualize commits at file level                                                  |
-| \<Leader\>gL  | Log to visualize commits at repo level                                                  |
 | \<Leader\>gS  | Stash menu                                                                              |
 | Enter         | Perform the diff of that commit. Can select range with visual line mode                 |
 | q             | Quit                                                                                    |
@@ -355,11 +357,27 @@ Note: g stands for git
 | \<Leader\>gPP | Git push (with --no-verify which skip hooks)                                            |
 | \<Leader\>gc  | Git commit (modify to use "commitizen"                                                  |
 | \<Leader\>gdf | Git diff of the current file wrt the previous commit                                    |
+| \<Leader\>gDF | Git diff with all files wrt the previous commit                                         |
 | \<Leader\>gdd | Git diff of the current file wrt the develop branch                                     |
 | \<Leader\>gdm | Git diff of the current file wrt the master branch                                      |
+| \<Leader\>gDD | Git diff all files wrt the develop branch                                               |
+| \<Leader\>gDM | Git diff all files wrt the current file wrt the main branch                             |
+|               | Use alt + up/down to move and alt + left to quit                                        |
 | Ctrl + t      | Function to toggle/untoggle the folds found in the diff code                            |
 | \<Leader\>gh  | History of commits that affected that function                                          |
+| \<Alt\>Up/down  | Move between different diff hunk in a merge conflict                                  |
+| \<Alt\>Left/Right | Take the left or right resutls from a 3-diff split merge conflict                   |
 | :Git revert COMMIT-SHA | Rever a specific commit. You can write HEAD~0 to select last commit            |
+| \<Leader\>gl  | Log to visualize commits at file level (close it with alt + left)                       |
+| \<Leader\>gL  | Log graph. Different options available listed below. You can use them to filter out and locate a commit    |
+| a             | Alternate between current branch and all branches in the repo                           |
+| dd            | Diff between two selected commits                                                       |
+| ri            | Interactive rebase with the branch selected                                             |
+| gm            | Display the commits that have been not merged (commits with less than one parent)       |
+| cob           | Checkout branch                                                                         |
+| coo           | Checkout commit                                                                         |
+| u             | Update graph                                                                            |
+| g?            | See mapping                                                                             |
 
 Git integration on the online repo (with octo nvim)
 | Command/Shortcut  | Description |

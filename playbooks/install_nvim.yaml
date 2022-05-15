@@ -221,7 +221,7 @@
     pip:
       name: codespell
 
-  - name:
+  - name: Insatll markdown-cli
     npm:
       name: markdownlint-cli
       global: yes  
@@ -302,6 +302,9 @@
         - flake8-todo
         - flake8-bugbear
         - flake8-docstrings
+        - flake8-comments
+        # - flake8-encodings buggy
+        # - flake8-warnings slow
         - flake8-comprehensions
         - flake8-commas
         - flake8-rst-docstrings
@@ -323,6 +326,12 @@
       name: markdownlint-cli
       global: yes
 
+  - name: Install sniprun
+    shell:
+      cmd: bash install.sh
+      chdir: "~/.vim/bundle/sniprun/"
+    become: no
+
   - name: Install yarn
     npm:
       name: yarn
@@ -338,13 +347,9 @@
     snap:
       name: spt
 
-  - name: Install sniprun
-    pause:
-      prompt: "Run bash ~/.vim/bundle/sniprun/install.sh and then press ENTER here."
-
   - name: Set up spt (Spotify CLI for nvim)
     pause:
-      prompt: "Run spt and follow the instructions to set up spotify to work on nvim."
+      prompt: "Run 'spt' in another terminal and follow the instructions to set up spotify to work on nvim."
 
   - name: Set up gh
     pause:

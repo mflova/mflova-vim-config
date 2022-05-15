@@ -28,6 +28,9 @@ function! Toggle_test_mode(open_summary)
         autocmd! UltestRunner
         echo "Test mode disabled"
     else
+        if g:mflova_debug_mode
+            call Debug_mode(0)
+        endif
         let g:mflova_test_mode = 1
         Ultest
         if a:open_summary

@@ -8,20 +8,16 @@ nnoremap <leader><Right> :call feedkeys("089lb")<CR>
 " Telescope. Since it is slower than FZF, only ctrl p is defined here
 nnoremap <silent><C-p> :lua require('telescope.builtin').find_files()<CR>
 nnoremap <silent><leader><C-p> :lua search_vimfiles()<CR>
-nnoremap <silent><C-f> :lua require('telescope.builtin').buffers()<CR>
-nnoremap <silent><C-t> :lua require('telescope.builtin').current_buffer_tags()<CR>
+nnoremap <silent><C-t> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-b> :Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>
 " Fzf remaps
-nnoremap <silent><C-g> :Ag<Cr>
-nnoremap <silent><C-h> :w<cr>:Changes<cr>
-nnoremap <C-h> :FZFFzm<cr>
+nnoremap <silent><C-f> :Ag<Cr>
+nnoremap <silent><C-g> :FZFFzm<cr>
 
 " Easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " One char
 map <Leader>. <Plug>(easymotion-repeat)
-map <Leader>f <Plug>(easymotion-bd-f) 
-map <Leader>F <Plug>(easymotion-overwin-f)
 map <Leader>e <Plug>(easymotion-bd-e)
 map <Leader>j <Plug>(easymotion-overwin-line)
 map <Leader>k <Plug>(easymotion-overwin-line)
@@ -122,21 +118,6 @@ function GetLine(bufnr, lnum)
     return ''
   endif
 endfunction
-
-function! Changes()
-  let changes  = reverse(copy(getchangelist()[0]))
-
-  let changetext = map(copy(changes), { index, val -> 
-      \ expand('%').':'.(val.lnum).':'.(val.col+1).': '.GetLine(bufnr('%'), val.lnum) })
-
-  call fzf#run(fzf#vim#with_preview(fzf#wrap({
-        \ 'source': changetext,
-        \ 'column': 1,
-        \ 'options': ['--delimiter', ':', '--bind', 'alt-a:select-all,alt-d:deselect-all', '--preview-window', '+{2}-/2'],
-        \ 'sink': function('GoTo')})))
-endfunction
-
-command! Changes call Changes()
 
 " Ignore some files in FZF
 let $FZF_DEFAULT_COMMAND="fdfind --exclude={.pyc,.bag,.bag.info,build,tmp,__init__.py} --type f"  

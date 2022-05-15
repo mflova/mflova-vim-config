@@ -52,6 +52,7 @@ call vundle#begin()
   Plugin 'dominikduda/vim_current_word' "Highlight the current word 
   Plugin 'mflova/vim-easymotion' " Improved motion for vim
   Plugin 'tpope/vim-fugitive' " GIT commands in VIM
+  Plugin 'salcode/vim-interactive-rebase-reverse' " Change commit order in rebase interactive
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder stuff for vim
   Plugin 'junegunn/fzf.vim' " Fuzzy finder stuff for vim
   Plugin 'tenfyzhong/fzf-marks.vim'  " Integration of fzf marks by using FZFFzm command
@@ -63,7 +64,6 @@ call vundle#begin()
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
-  Plugin 'junegunn/gv.vim' " Git commits browser (commit tree visualizer)
   Plugin 'mflova/vim-test' " To be used in ultest
   Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -84,6 +84,8 @@ call vundle#begin()
   " File explorer and file navigation
   Plugin 'kyazdani42/nvim-tree.lua' " Lua file explorer
   Plugin 'liuchengxu/vista.vim' " Taglist compatible with LSP
+  Plugin 'rbgrouleff/bclose.vim' " Ranger dependency
+  Plugin 'francoiscabrol/ranger.vim' " Ranger
 
   " Snippets
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
@@ -92,6 +94,7 @@ call vundle#begin()
   " Misc
   " Spotify 
   Plugin 'KadoBOT/nvim-spotify', { 'do': 'make' } " Wrapper for spotify
+
   " CSV Visualizer
   Plugin 'chrisbra/csv.vim'
 
@@ -116,11 +119,12 @@ call vundle#begin()
   Plugin 'yhat/vim-docstring' " Fold docstrings
   Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " Markdown Previwer
   Plugin 'Rykka/InstantRst' " RST previewers
-  Plugin 'Rykka/riv.vim' " RST previewers
+  "Plugin 'Rykka/riv.vim' " RST previewers
   
   " Misc
   Plugin 'jbyuki/nabla.nvim'
   Plugin 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+  Plugin 'nathom/filetype.nvim' " Faster Startup
 
   " LSP
   Plugin 'brymer-meneses/grammar-guard.nvim'  " Markdown/Latex LSP based on ltex
@@ -139,6 +143,11 @@ call vundle#begin()
   Plugin 'folke/tokyonight.nvim' " Theme
   Plugin 'mhartington/oceanic-next' " Theme
   Plugin 'PHSix/nvim-hybrid' " Theme
+  Plugin 'xiyaowong/nvim-transparent' " Transparent
+
+  " Git (new plugins)
+  Plugin 'rbong/vim-flog' " Commit browser, git log
+  Plugin 'sindrets/diffview.nvim'  " Diff viewer with multiple files side by side
 call vundle#end()
 
 " Install VIM plugins with this in shell:
@@ -150,8 +159,7 @@ endif
 " Avoid folds by default
 set nofoldenable
 
-" Overwrite the key for the macros, since I do not use them
-nmap <silent>q :q<CR>
+nmap <silent>q :q<CR> 
 
 " Edit anyway option if there exists a swap
 autocmd SwapExists * let v:swapchoice = "e"
@@ -192,10 +200,6 @@ cmap isort Isort
 nmap <silent><C-a> :w<CR>:e#<CR>
 inoremap <silent><C-a> <C-[>:w<CR>:e#<CR>
 
-" Jump list
-nnoremap <C-i> <C-O>
-nnoremap <C-o> <C-I>
-
 " When using the / tool, it will not be sensitive case unless you write some case letters.
 set ignorecase
 set smartcase
@@ -203,6 +207,7 @@ set smartcase
 "Auto reload files
 set autoread 
 au CursorHold * checktime 
+au FocusGained,BufEnter * :silent! !
 
 " Common clipboard between vim and the ubuntu system
 set clipboard=unnamed
@@ -336,28 +341,6 @@ endfunction
 " v and x for vertical/horizontal split
 "autocmd! FileType qf nnoremap <buffer> <leader>ov <C-w><Enter><C-w>L
 autocmd! FileType qf nnoremap <buffer> x <C-w><Enter>
-" Move between items
-"nmap <silent><C-Right> :call CnWrapper()<CR>
-"nmap <silent><C-Left> :call CpWrapper()<CR>
-nmap <silent><C-Up> 2k
-nmap <silent><C-Down> 2j
-nmap <silent><C-Left> b
-nmap <silent><C-Right> w
-
-" Wrappers to save changes when switching between different elements in quickfixlist
-function! CnWrapper()
-"    if expand('%:t') != ''
-"        write
-"    end
-    cn
-endfunction
-
-function! CpWrapper()
-"    if expand('%:t') != ''
-"        write
-"    end
-    cp
-endfunction
 
 
 " QF default location: Very bottom
@@ -386,7 +369,7 @@ let g:vimwiki_key_mappings =
 set scrolloff=4 " Keep 4 lines below and above the cursor
 let g:vimwiki_global_ext = 0
 
-nnoremap <silent><LocalLeader><LocalLeader> :call Swap_todo()<CR>
+"nnoremap <silent><LocalLeader><LocalLeader> :call Swap_todo()<CR>
 let g:mflova_todo_mode=0
 function! Swap_todo()
     if expand('%:t') != ''
@@ -426,6 +409,7 @@ let s:navigation_cfg_path = s:vim_cfg_path . '/navigation.vim'
 let s:coding_cfg_path = s:vim_cfg_path . '/coding.vim'
 let s:debugger_cfg_path = s:vim_cfg_path . '/debugger.vim'
 let s:formatter_cfg_path = s:vim_cfg_path . '/formatter.vim'
+let s:conditional_mapping = s:vim_cfg_path . '/conditional_mapping.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:testing_cfg_path
@@ -439,3 +423,4 @@ exec 'source ' . s:navigation_cfg_path
 exec 'source ' . s:coding_cfg_path
 exec 'source ' . s:debugger_cfg_path
 exec 'source ' . s:formatter_cfg_path
+exec 'source ' . s:conditional_mapping
