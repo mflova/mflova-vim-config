@@ -8,8 +8,10 @@ still be buggy.
 
 There is a back up with all the plugins I used in order to have the versions that are
 working for this repo. In case any of the plugins installed by this repo is not working,
-you can alsways use the `bundle_backup` folder. Plugins are typically installed
-in `~.vim/bundle`
+you can always use the `bundle_backup` folder. Plugins are typically installed
+in `~.vim/bundle`. By default, the installation of this editor using the `.yaml`
+scripts will pull the latest versions. However, if these introduced breaking changes,
+using this backup might help.
 
 ## Install
 
