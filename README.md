@@ -4,16 +4,19 @@ Repository used to install and set up vim and my main configuration used. This w
 set up vim with the vimrc found at cfg/vimrc. Intended for personal use, so it might
 still be buggy.
 
+## Bundle back up
+
+There is a back up with all the plugins I used in order to have the versions that are
+working for this repo. In case any of the plugins installed by this repo is not working,
+you can alsways use the `bundle_backup` folder. Plugins are typically installed
+in `~.vim/bundle`
+
 ## Install
 
-You can run first the `bashrc_setup.yaml` and then the `nvim_installation.yaml`
+You can run first the `install_nvim_setup.yaml` and then the `install_nvim.yaml`
 with `ansible-playbook --ask-become`. Be aware that for the second script the variables
 defined by the first one must be available, so it is necessary to either source
-`.bashrc` or to launch a new terminal. You can do all of this with a single file:
-
-```shell
-. full_installation.yaml
-```
+`.bashrc` or to launch a new terminal.
 
 ## Set up as merge tool
 
