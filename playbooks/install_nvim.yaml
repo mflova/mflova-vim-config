@@ -300,6 +300,9 @@
         - flake8-pytest-style
         - flake8-simplify
         - flake8-todo
+        - flake8-slots
+        - flake8-newspaper-style
+        - flake8_sphinx_links
         - flake8-bugbear
         - flake8-docstrings
         - flake8-comments
