@@ -19,24 +19,6 @@ lua << EOF
 EOF
 
 " STATUSLINE
-" Init the status bar with the diagnos ON/OFF
-function! UpdateStatusDiagsAndCmp()
-    let l:diags_status = ' '
-    if g:mflova_diagnostics_status == 1
-        let l:diags_status = l:diags_status . ''
-    else
-        let l:diags_status = l:diags_status . 'X'
-    endif
-
-    let l:cmp_status = ' '
-    if g:mflova_cmp_status == 1
-        let l:cmp_status = l:cmp_status . ''
-    else
-        let l:cmp_status = l:cmp_status . 'X'
-    endif
-    return l:diags_status . '  ' . l:cmp_status
-endfunction
-
 " Edit the icons of the Spotify status component
 function! UpdateTogglers()
     let l:diags_status = ' '
@@ -59,7 +41,15 @@ function! UpdateTogglers()
     else
         let l:diags_lsp_linting = l:diags_lsp_linting . ' X'
     endif
-    return l:diags_lsp_linting . '  ' . l:diags_status . '  ' . l:cmp_status
+
+    let l:formatter_status= ''
+    if g:mflova_formatter_status == 1
+        let l:formatter_status = l:formatter_status . ''
+    else
+        let l:formatter_status = l:formatter_status . 'X'
+    endif
+
+    return l:diags_lsp_linting . '  ' . l:diags_status . '  ' . l:cmp_status . '  ' . l:formatter_status
 endfunction
 
 lua <<EOF

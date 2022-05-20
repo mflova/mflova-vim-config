@@ -234,13 +234,14 @@ Search for files and navigation
 | Ctrl + Arrows      | Move the content of the previow window up or down               |
 | Ctrl + a           | Alternate with the last file opened. Valid in insert mode       |
 
-### LSP
+### LSP and other tools for easy coding
 Mainly LSP-related functionalities
 | Command/Shortcut   | Description                                                    |
 | ------------------ | -------------------------------------------------------------- |
 | \<leader\>l        | LSP-related commands                                           |
 | \<leader\>lt       | Toggle basic linting coming from LSP (as well as heavy linting)|
 | \<leader\>lv       | Toggle heavy linting                                           |
+| \<leader\>lf       | Toggle formatter (Python only so far).                         |
 | \<leader\>lc       | Toggle CMP. CMP keys below                                     |
 | Tab/Shift-Tab      | Move between autocomplete options                              |
 | Ctrl + Up/Down     | Scroll the documentation of a function in case it is displayed |
