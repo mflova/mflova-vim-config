@@ -27,6 +27,23 @@ vim.api.nvim_set_keymap('n', '<leader>e', "<cmd> lua require'hop'.hint_words({ h
 vim.api.nvim_set_keymap('v', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
 vim.api.nvim_set_keymap('o', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>", {})
 require'hop'.setup()
+
+local stf = require("syntax-tree-surfer")
+vim.keymap.set("n", "<leader>W", function() -- jump to all that you specify
+	stf.targeted_jump({
+		"function",
+	  "if_statement",
+		"else_clause",
+		"else_statement",
+		"elseif_statement",
+		"for_statement",
+		"while_statement",
+		"switch_statement",
+	})
+end, opts)
+
+
+
 EOF
 
 " Set how the window appears in the FZF command
@@ -42,7 +59,7 @@ let g:vista_cursor_delay = 0
 lua << EOF
 function search_vimfiles()
     local home_dir = os.getenv('HOME')
-    local vim_dir = home_dir .. '/mflova-linux-setup/mflova-vim-config'
+    local vim_dir = home_dir .. '/mflova-linux-setup/mflova-vim-config/cfg'
     require('telescope.builtin').find_files({
         prompt_title = "< VimRC >",
         cwd = vim_dir,

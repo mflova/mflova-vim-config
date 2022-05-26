@@ -86,6 +86,7 @@ call vundle#begin()
   Plugin 'rbgrouleff/bclose.vim' " Ranger dependency
   Plugin 'francoiscabrol/ranger.vim' " Ranger
   Plugin 'phaazon/hop.nvim' " Move between words in the file
+  Plugin 'ziontee113/syntax-tree-surfer' " Navigate using TS
 
   " Snippets
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
@@ -299,7 +300,6 @@ augroup END
 
 " Replace mode
 nmap S <Plug>(sad-change-forward)
-xmap S <Plug>(sad-change-forward)
 
 " Delete entire word in insert mode
 imap <C-d> <C-[>diwi

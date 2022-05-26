@@ -412,6 +412,7 @@ Vim-easy-motion
 | \<Leader\>f      | displays how to jump to the start of a word                                  |
 | \<Leader\>e      | displays how to jump to the end of a word                                    |
 | \<Leader\>w      | displays how to jump to the start of every single word, including all splits |
+| \<Leader\>W      | jump with treesitter to key statements: for, if, else...                     |
 | \<Leader\>.      | Repeat last vim-easy-motion command                                          |
 | \<Leader\>j or k | Jump to specified line                                                       |
 
