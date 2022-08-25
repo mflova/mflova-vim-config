@@ -1,60 +1,25 @@
-" Testing mode
-nmap <silent><leader>tT :call Toggle_test_mode(0)<CR> 
-nmap <silent><leader>tt :call Toggle_test_mode(1)<CR> 
-nmap <silent><leader>tr :UltestLast<CR> 
-" Activate clors in the output. Kinda experimental
-let g:ultest_use_pty=1
-let g:ultest_running_sign='~'
-let g:ultest_summary_width=60
-let g:ultest_output_on_run=0
-
-let g:mflova_test_mode = 0
-
-let test#python#pytest#executable = 'pytest'
-" This one is multithread, but slower if the tests are just a few seconds
-"let test#python#pytest#executable = 'pytest -n auto' 
-
-" Two modes:
-" 0: Run all test + runs the nearest after sving
-" 1: 0 mode + Opens summary (vertical and unfolded if enough space, otherwise
-" down and unfolded)
-function! Toggle_test_mode(open_summary)
-
-    if g:mflova_test_mode == 1
-        let g:mflova_test_mode = 0
-        UltestStop
-        UltestSummaryClose
-        UltestClear
-        autocmd! UltestRunner
-        echo "Test mode disabled"
-    else
-        if g:mflova_debug_mode
-            call Debug_mode(0)
-        endif
-        let g:mflova_test_mode = 1
-        Ultest
-        if a:open_summary
-            let g:mflova_curr_win_width = winwidth(0)
-            if g:mflova_curr_win_width > 120
-            "   Open vertical
-                let g:ultest_summary_open = 'botright vsplit | vertical resize' .g:ultest_summary_width
-                UltestSummaryOpen!
-                call feedkeys("\zR")
-                call feedkeys("\<C-W>h")
-            else
-            "   Open horizontal
-                let g:ultest_summary_open = 'botright split'
-                UltestSummaryOpen!
-                " Minimum height
-                call AdjustWindowHeight(3,10)
-                call feedkeys("\zR")
-                call feedkeys("\<C-W>k")
-            endif
-        endif
-        echo "Test mode enabled"
-        augroup UltestRunner
-            au!
-            au BufWritePost * UltestNearest
-        augroup ENDltestSummary
-    endif 
-endfunction
+lua <<EOF
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")({
+        -- Extra arguments for nvim-dap configuration
+        dap = { justMyCode = false },
+        -- Command line arguments for runner
+        -- Can also be a function to return dynamic values
+        args = {"--log-level", "DEBUG"},
+        -- Runner to use. Will use pytest if available by default.
+        -- Can be a function to return dynamic value.
+        runner = "pytest",
+        -- Custom python path for the runner.
+        -- Can be a string or a list of strings.
+        -- Can also be a function to return dynamic value.
+        -- If not provided, the path will be inferred by checking for 
+        -- virtual envs in the local directory and for Pipenev/Poetry configs
+        python = "/usr/bin/python3",
+        -- Returns if a given file path is a test file.
+        -- NB: This function is called a lot so don't perform any heavy tasks within it.
+        
+    })
+  }
+})
+EOF

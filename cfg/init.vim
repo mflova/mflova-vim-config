@@ -63,8 +63,8 @@ call vundle#begin()
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
-  Plugin 'mflova/vim-test' " To be used in ultest
-  Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
+"  Plugin 'mflova/vim-test' " To be used in ultest
+"  Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plugin 'neovim/nvim-lspconfig' " LSP configurations
   Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
@@ -76,7 +76,11 @@ call vundle#begin()
   Plugin 'vimwiki/vimwiki'
   Plugin 'pwntester/octo.nvim' " Git online management
 
-  " Refactoring
+  " Testing
+  Plugin 'nvim-neotest/neotest'
+  Plugin 'nvim-neotest/neotest-python'
+
+" Refactoring
 "  Plugin 'python-rope/ropevim' " Refactoring for Python
 "  Plugin 'ThePrimeagen/refactoring.nvim' " Refactoring API
 
@@ -150,6 +154,8 @@ call vundle#begin()
   " Git (new plugins)
   Plugin 'rbong/vim-flog' " Commit browser, git log
   Plugin 'sindrets/diffview.nvim'  " Diff viewer with multiple files side by side
+
+  Plugin 'antoinemadec/FixCursorHold.nvim' " Fix CursorHold event from NeoVim
 call vundle#end()
 
 " Install VIM plugins with this in shell:
