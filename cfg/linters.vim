@@ -51,7 +51,7 @@ local cmake_indent_size = 4 -- spaces
 -- (compilationdatabase.json) is located
 local cpp_compilation_database_dir = os.getenv('CPP_BUILD_DIR') 
 local cpp_max_line_length = 90
-local cpp_cpplint_ignore = '-whitespace/braces, -legal/copyright, -whitespace/newline'
+local cpp_cpplint_ignore = '-whitespace/braces, -legal/copyright, -whitespace/newline, -whitespace/indent'
 local cpp_std_flag = 'c++17' -- c89, c99, c11, c++03, c++11, c++14, c++17, c++20. Empty means last std
 
 require('lint').linters.flake8.args = {'--docstring-style', python_docstring_style, 
@@ -123,7 +123,8 @@ require('lint').linters_by_ft = {
   python = {'flake8', 'vulture', 'codespell', 'mypy'}, -- mypy is included in pylsp, but not in pyright
   --python = {'flake8', 'vulture', 'codespell', 'mypy', 'pytestcov'}, -- mypy is included in pylsp, but not in pyright
   --python = {'mypy'}, -- mypy is included in pylsp, but not in pyright
-  cpp = {'cppcheck', 'clangtidy', 'cpplint', 'codespell'},
+  cpp = {'cppcheck', 'clangtidy', 'cpplint'},
+  c = {'cppcheck', 'clangtidy', 'cpplint'},
   rst = {'rstlint', 'rstcheck', 'proselint', 'codespell'},
   markdown = {'markdownlint', 'codespell', 'proselint'},
   yaml = {'yamllint', 'codespell'},
@@ -178,8 +179,8 @@ function SetAutoLinters(mode)
         augroup auto_linters
             autocmd!
             " Launch the toggler but not in the exceptions
-            au BufWritePost *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
-            au BufEnter *.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
+            au BufWritePost *.c,*.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
+            au BufEnter *.c,*.py,*.hpp,*.cpp,*.md,*.yaml,*.vim,*.bash,*.make,*.rst,*.lua,CMakeLists.txt call SetDiagsState('ON')
         augroup end
     else
         if g:is_autolinters_defined

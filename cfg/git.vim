@@ -9,9 +9,9 @@ map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(15,99)<CR>
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
 map <silent><Leader>gDF :DiffviewOpen<CR>
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
-map <silent><Leader>gdm :Gvdiffsplit main<CR>zR
+map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gDD :DiffviewOpen develop<CR>
-map <silent><Leader>gDM :DiffviewOpen main<CR>
+map <silent><Leader>gDM :DiffviewOpen master<CR>
 map <silent><Leader>gl :DiffviewFileHistory<CR>
 map <silent><Leader>gh :Gclogfunc<CR>
 map <silent><Leader>gS :GStash<CR>

@@ -90,11 +90,12 @@ call vundle#begin()
 
   " Snippets
   Plugin 'L3MON4D3/LuaSnip' " Snippets engine
-  Plugin 'rafamadriz/friendly-snippets' " Collection of snippets
+  Plugin 'mflova/friendly-snippets' " Collection of snippets
 
   " Misc
   " Spotify 
   Plugin 'KadoBOT/nvim-spotify', { 'do': 'make' } " Wrapper for spotify
+  Plugin 'lervag/vimtex'
 
   " CSV Visualizer
   Plugin 'chrisbra/csv.vim'
@@ -220,6 +221,7 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 " Set tab to be 4 spaces (2 for lua)
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 autocmd FileType lua setlocal shiftwidth=2 softtabstop=2 smarttab
+autocmd FileType cpp setlocal shiftwidth=2 softtabstop=2 smarttab
 
 " Use mouse to copy-paste
 set mouse-=a
@@ -410,6 +412,7 @@ let s:coding_cfg_path = s:vim_cfg_path . '/coding.vim'
 let s:debugger_cfg_path = s:vim_cfg_path . '/debugger.vim'
 let s:formatter_cfg_path = s:vim_cfg_path . '/formatter.vim'
 let s:conditional_mapping = s:vim_cfg_path . '/conditional_mapping.vim'
+let s:latex_mapping = s:vim_cfg_path . '/latex_mapping.vim'
 
 exec 'source ' . s:git_cfg_path
 exec 'source ' . s:testing_cfg_path
@@ -424,3 +427,4 @@ exec 'source ' . s:coding_cfg_path
 exec 'source ' . s:debugger_cfg_path
 exec 'source ' . s:formatter_cfg_path
 exec 'source ' . s:conditional_mapping
+exec 'source ' . s:latex_mapping

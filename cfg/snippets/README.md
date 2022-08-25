@@ -1,6 +1,8 @@
 # Vim snippets I mainly use
 
-These include the ones defined by me and the ones from the repo by default
+These include the ones defined by me and the ones from the repo by default.
+In order to add more, search for `vim-snippets` plugin. For python, they are defined in
+`snippets/python.snippets`
 
 In case you change the files, it is recommended to call ``:call UltiSnips#RefreshSnippets()``
 

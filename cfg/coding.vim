@@ -34,6 +34,7 @@ augroup visualizable
     autocmd!
     autocmd filetype markdown nmap <silent><leader>cr :MarkdownPreviewToggle<CR>
     autocmd filetype rst nmap <silent><leader>cr :call ToggleInstantRst()<CR>
+    autocmd filetype tex nmap <silent><leader>cr :VimtexCompile<CR>
 augroup END
 
 

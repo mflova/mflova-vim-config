@@ -76,7 +76,7 @@ require'lspconfig'.ccls.setup{
   capabilities = capabilities; -- Autocomplete. Line from nvim-cmp
   init_options = {
     -- Path where the compilationdatabase.json is located
-    compilationDatabaseDirectory = cpp_compilation_database_dir;
+    compilationDatabaseDirectory = "";
     index = {
       threads = 2;
     };

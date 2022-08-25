@@ -26,6 +26,8 @@
       - curl
       - build-essential
       - cmake
+      - latexmk
+      - okular
       - mono-complete
       - golang
       - nodejs

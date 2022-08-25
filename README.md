@@ -405,6 +405,11 @@ Git integration on the online repo (with octo nvim)
 | \<Leader\>grd | Discard current review                                                                  |
 | \<Leader\>grC | Review comments                                                                         |
 
+Latex
+| Command/Shortcut  | Description |
+| ------------- | --------------------------------------------------------------------------------------- |
+| \<Leader\>cr  | Compile code and open the PDF viewer                                                    |
+| \<Leader\>gpp | Git PR pipeline checks                                                                  |
 
 Vim-easy-motion
 | Command/Shortcut | Description                                                                  |

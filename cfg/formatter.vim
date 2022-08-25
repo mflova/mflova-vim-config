@@ -1,4 +1,4 @@
-let g:current_formatter_state = 1  " defines the initial status of formatter
+let g:current_formatter_state = 0  " defines the initial status of formatter
 
 nnoremap <silent><leader>lf :call ToggleFormatterState()<CR>
 " Python formater

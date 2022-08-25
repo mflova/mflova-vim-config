@@ -61,6 +61,13 @@ function! ConditionalArrows(map)
             return
         endif
     endif
+
+    if (&ft ==? "tex")
+        if a:map ==? 'right'
+            execute  "VimtexView"
+            return
+        endif
+    endif
     " Standard behaviour (GIT conflicts)
     if a:map ==? 'up'
         call feedkeys('[c')
