@@ -270,14 +270,13 @@ Mainly LSP-related functionalities
 | \<leader\>cr           | Toggle preview for markdown and rst                            |
 
 ### Testing
+
 | Command/Shortcut    | Description                                                                      |
 | ------------------- | -------------------------------------------------------------------------------- |
 | \<Leader\>tT        | Toggle/Untoggle testing mode (pytest and pyunit) for the given file. Runs nearest test after saving |
 | \<Leader\>tt        | Same as previous on but with summary                                             |
-| R in summary window | Rerun a test                                                                     |
-| \<Leader\>tr        | After entering in the test mode, this one runs all the tests regardless the current buffer |
 | Alt+Up/down         | Move between prev and next failed tests                                          |
-| Alt+Left/Right      | Enter the preview wndow that dsplays the results of the test                     |
+| Alt+Left/Right      | Enter the preview window that displays the results of the test                   |
 
 ### Debugging
 | Command/Shortcut     | Description                                                                      |
@@ -289,7 +288,6 @@ Mainly LSP-related functionalities
 | \<Leader\>d\<Down\>  | Step into (Ctrl+Down if debugger mode enabled)                                   |
 | \<Leader\>d\<Right\> | Step over (Ctrl+Right if debugger mode enabled)                                  |
 | \<Leader\>dt         | Debug a `test_` function from pytest. It launches the debug mode automatically   |
-| \<Leader\>dT         | Debug a `Class` containing multiple pytest test. Launches debug mode as well     |
 
 
 
