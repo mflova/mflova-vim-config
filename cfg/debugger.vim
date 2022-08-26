@@ -12,8 +12,8 @@ augroup debuggable
     autocmd filetype python nmap <silent><leader>d<Up> :lua require'dap'.step_out()<CR>
 
     " For pytest
-    autocmd filetype python nnoremap <silent><leader>dt :call Debug_mode(1)<CR> :lua require('dap-python').test_method()<CR>
-    autocmd filetype python nnoremap <silent><leader>dT :call Debug_mode(1)<CR> :lua require('dap-python').test_class()<CR>
+    autocmd filetype python nnoremap <silent><leader>dt :call Debug_mode(1)<CR> :lua require("neotest").run.run({strategy = "dap"})<CR>
+    autocmd filetype python nnoremap <silent><leader>dT :call Debug_mode(1)<CR> :lua require("neotest").run.run({strategy = "dap"})<CR>
 augroup END
 
 lua << EOF

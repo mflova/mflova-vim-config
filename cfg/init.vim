@@ -78,7 +78,7 @@ call vundle#begin()
 
   " Testing
   Plugin 'nvim-neotest/neotest'
-  Plugin 'nvim-neotest/neotest-python'
+  Plugin 'mflova/neotest-python'
 
 " Refactoring
 "  Plugin 'python-rope/ropevim' " Refactoring for Python

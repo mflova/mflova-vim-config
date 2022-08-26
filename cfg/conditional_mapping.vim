@@ -29,13 +29,16 @@ function! ConditionalArrows(map)
 
     if g:mflova_test_mode
         if a:map ==? 'up'
-            execute "normal \<Plug>(ultest-prev-fail)"
+            lua require("neotest").jump.prev({ status = "failed" })
             return
         elseif a:map ==? 'down'
-            execute "normal \<Plug>(ultest-next-fail)"
+            lua require("neotest").jump.next({ status = "failed" })
             return
         elseif a:map ==? 'right'
-            execute "normal \<Plug>(ultest-output-jump)"
+            lua require("neotest").output.open({ enter = true })
+            return
+        elseif a:map ==? 'left'
+            q
             return
         endif
     endif
