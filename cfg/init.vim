@@ -63,8 +63,7 @@ call vundle#begin()
   Plugin 'mflova/fzf-checkout.vim' " Manage git branches with FZF engine
   Plugin 'chrisbra/vim-diff-enhanced' " Diff visualizer enhanced
   Plugin 'mflova/vim-fuzzy-stash' " Vim fuzzy stash
-"  Plugin 'mflova/vim-test' " To be used in ultest
-"  Plugin 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " To test in real time
+  Plugin 'mflova/vim-test' " To be used in neotest
   Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plugin 'neovim/nvim-lspconfig' " LSP configurations
   Plugin 'mflova/nvim-lint' " Linters with the built-in LSP neovim
