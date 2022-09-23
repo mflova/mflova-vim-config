@@ -74,9 +74,11 @@ if cpp_compilation_database_dir == nil then
 end
 require'lspconfig'.ccls.setup{
   capabilities = capabilities; -- Autocomplete. Line from nvim-cmp
+  filetypes = {"c", "cpp"};
+  root_pattern = {'compile_commands.json', '.ccls', '.git'};  -- To be detected you need any of these files in the root dir. To check if this is well set, try with :LspInfo and check root_dir
   init_options = {
     -- Path where the compilationdatabase.json is located
-    compilationDatabaseDirectory = "";
+    compilationDatabaseDirectory = cpp_compilation_database_dir;
     index = {
       threads = 2;
     };

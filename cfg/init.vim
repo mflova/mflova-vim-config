@@ -128,7 +128,7 @@ call vundle#begin()
   
   " Misc
   Plugin 'jbyuki/nabla.nvim'
-  Plugin 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+  Plugin 'mflova/black-nvim', {'do': ':UpdateRemotePlugins'}
   Plugin 'nathom/filetype.nvim' " Faster Startup
 
   " LSP

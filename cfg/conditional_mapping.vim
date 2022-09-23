@@ -35,7 +35,7 @@ function! ConditionalArrows(map)
             lua require("neotest").jump.next({ status = "failed" })
             return
         elseif a:map ==? 'right'
-            lua require("neotest").output.open({ enter = true })
+            NeotestOutput
             return
         elseif a:map ==? 'left'
             q

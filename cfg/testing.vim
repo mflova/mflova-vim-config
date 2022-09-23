@@ -53,6 +53,7 @@ command! NeotestDebug lua require("neotest").run.run({ strategy = "dap" })
 command! NeotestAttach lua require("neotest").run.attach()
 command! NeotestClear lua require("neotest").summary.clear_marked()
 command! NeotestStop lua require("neotest").run.stop()
+command! NeotestOutput lua require("neotest").output.open({ short = true, enter = true })
 ]])
 
 EOF
@@ -68,7 +69,10 @@ function! Toggle_test_mode(open_summary)
         echo "Test mode disabled"
     else
         NeotestFile
-        NeotestSummaryOpen
+        let g:mflova_curr_win_width = winwidth(0)
+        if g:mflova_curr_win_width > 120
+            NeotestSummaryOpen
+        endif
         if g:mflova_debug_mode
             call Debug_mode(0)
         endif

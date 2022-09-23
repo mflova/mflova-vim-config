@@ -7,7 +7,7 @@ command! -bar Gclogfunc execute '.Gclog -L :' . expand('<cword>') . ':%'
 " Opens the window at minimum height
 map <silent><Leader>gs :G<CR>:call AdjustWindowHeight(15,99)<CR> 
 map <silent><Leader>gdf :Gvdiffsplit<CR>zR 
-map <silent><Leader>gDF :DiffviewOpen<CR>
+map <silent><Leader>gDF :DiffviewOpen HEAD^ HEAD<CR>
 map <silent><Leader>gdd :Gvdiffsplit develop<CR>zR
 map <silent><Leader>gdm :Gvdiffsplit master<CR>zR
 map <silent><Leader>gDD :DiffviewOpen develop<CR>
@@ -18,8 +18,8 @@ map <silent><Leader>gS :GStash<CR>
 map <silent><Leader>gb :GBranches --locals<CR>
 map <silent><Leader>gB :GBranches<CR>
 map <silent><Leader>gc :call Commitizen()<CR>
-map <silent><Leader>gP :Git push<CR>
-map <silent><Leader>gPP :Git push --no-verify<CR>
+map <silent><Leader>gP :Git -c push.default=current push<CR>
+map <silent><Leader>gPP :Git -c push.default=current push --no-verify<CR>
 map <silent><Leader>gL :Flog -all<CR>
 " As merge tool: gets from left and right
 nmap <silent><leader>g<Right> :diffget //3<CR>
