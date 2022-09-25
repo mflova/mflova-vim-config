@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Get $HOME variable
+    shell: "echo $HOME"
+    become: no
+    register: HOME
+
+  - name: Save plugin refs
+    ansible.builtin.copy:
+      src: "{{HOME.stdout_lines[0]}}/.vim/bundle/"
+      dest: "{{playbook_dir}}/../bundle_backup/"
+    become: no
