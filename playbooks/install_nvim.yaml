@@ -2,6 +2,11 @@
   become: yes
   tasks:
 
+  - name: Get $HOME variable
+    shell: "echo $HOME"
+    become: no
+    register: HOME
+
   - name: Download nvim 0.7.0
     get_url:
       url: https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
@@ -62,8 +67,16 @@
       repo: https://github.com/VundleVim/Vundle.vim.git
       dest: ~/.vim/bundle/Vundle.vim
 
-  - name: Install Plugins wih PluginInstall
-    shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
+# Install plugins through GIT (latest versions)
+# - name: Install Plugins with PluginInstall
+#   shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
+#   become: no
+
+# Install stable releases
+  - name: Install Plugins (stable releases)
+    ansible.builtin.copy:
+      src: "{{playbook_dir}}/../bundle_backup/"
+      dest: "{{HOME.stdout_lines[0]}}/.vim/bundle/"
     become: no
 
   - name: Update remote plugins
