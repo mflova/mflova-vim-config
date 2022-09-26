@@ -73,11 +73,11 @@
 # become: no
 
 # Install stable releases
-  - name: Install Plugins (stable releases)
-    ansible.builtin.copy:
+  - name: Install plugins (copying data from the repo to vim folder)
+    synchronize:
       src: "{{playbook_dir}}/../bundle_backup/"
       dest: "{{HOME.stdout_lines[0]}}/.vim/bundle/"
-    become: no
+      owner: yes
 
   - name: Update remote plugins
     shell: export INSTALL_VIM_PLUGINS=1 && nvim +'UpdateRemotePlugins' +qa && unset INSTALL_VIM_PLUGINS
