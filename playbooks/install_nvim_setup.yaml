@@ -29,6 +29,10 @@
     shell: echo "export CPP_BUILD_DIR=''" >> ~/.bashrc
     become: no
 
+  - name: Install npm
+    apt:
+      name: npm
+
   - name: Clean npm cache
     shell:
       cmd:  npm cache clean -f
