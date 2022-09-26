@@ -67,17 +67,17 @@
       repo: https://github.com/VundleVim/Vundle.vim.git
       dest: ~/.vim/bundle/Vundle.vim
 
-#  Install plugins through GIT (latest versions)
-  - name: Install Plugins with PluginInstall
-    shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
-    become: no
+#  Install plugins through GIT inside vim (latest versions)
+# - name: Install Plugins with PluginInstall
+# shell: export INSTALL_VIM_PLUGINS=1 && nvim +'' +qa && unset INSTALL_VIM_PLUGINS
+# become: no
 
 # Install stable releases
-# - name: Install Plugins (stable releases)
-#   ansible.builtin.copy:
-#     src: "{{playbook_dir}}/../bundle_backup/"
-#     dest: "{{HOME.stdout_lines[0]}}/.vim/bundle/"
-#   become: no
+  - name: Install plugins (copying data from the repo to vim folder)
+    synchronize:
+      src: "{{playbook_dir}}/../bundle_backup/"
+      dest: "{{HOME.stdout_lines[0]}}/.vim/bundle/"
+      owner: yes
 
   - name: Update remote plugins
     shell: export INSTALL_VIM_PLUGINS=1 && nvim +'UpdateRemotePlugins' +qa && unset INSTALL_VIM_PLUGINS
@@ -291,6 +291,13 @@
         - numpy
         - pytest
 
+
+  - name: Install python tools and linters (APT)
+    apt:
+      name:
+        - flake8
+        - vulture
+        - codespell
 
   - name: Install python tools and linters
     pip:

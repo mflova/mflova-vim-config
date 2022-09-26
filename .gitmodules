@@ -494,10 +494,6 @@
     path = bundle_backup/cmp-nvim-lsp
     url = https://github.com/hrsh7th/cmp-nvim-lsp.git
 
-[submodule "bundle_backup/nvim-spotify"]
-    path = bundle_backup/nvim-spotify
-    url = https://github.com/KadoBOT/nvim-spotify.git
-
 [submodule "bundle_backup/fzf-checkout.vim"]
     path = bundle_backup/fzf-checkout.vim
     url = https://github.com/mflova/fzf-checkout.vim.git
@@ -765,3 +761,7 @@
 [submodule "bundle_backup/telescope-fzf-native.nvim"]
     path = bundle_backup/telescope-fzf-native.nvim
     url = https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
+
+[submodule "bundle_backup/nvim-spotify"]
+    path = bundle_backup/nvim-spotify
+    url = https://github.com/KadoBOT/nvim-spotify
