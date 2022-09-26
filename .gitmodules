@@ -1,0 +1,767 @@
+[submodule "bundle_backup/neorg"]
+    path = bundle_backup/neorg
+    url = https://github.com/nvim-neorg/neorg.git
+
+[submodule "bundle_backup/vim-airline"]
+    path = bundle_backup/vim-airline
+    url = https://github.com/vim-airline/vim-airline.git
+
+[submodule "bundle_backup/trouble.nvim"]
+    path = bundle_backup/trouble.nvim
+    url = https://github.com/mflova/trouble.nvim.git
+
+[submodule "bundle_backup/syntax-tree-surfer"]
+    path = bundle_backup/syntax-tree-surfer
+    url = https://github.com/ziontee113/syntax-tree-surfer.git
+
+[submodule "bundle_backup/nvim-dap"]
+    path = bundle_backup/nvim-dap
+    url = https://github.com/mfussenegger/nvim-dap.git
+
+[submodule "bundle_backup/vim-grammarous"]
+    path = bundle_backup/vim-grammarous
+    url = https://github.com/rhysd/vim-grammarous.git
+
+[submodule "bundle_backup/fzf"]
+    path = bundle_backup/fzf
+    url = https://github.com/junegunn/fzf.git
+
+[submodule "bundle_backup/vim-docstring"]
+    path = bundle_backup/vim-docstring
+    url = https://github.com/yhat/vim-docstring.git
+
+[submodule "bundle_backup/nvim-gps"]
+    path = bundle_backup/nvim-gps
+    url = https://github.com/SmiteshP/nvim-gps.git
+
+[submodule "bundle_backup/monokai.nvim"]
+    path = bundle_backup/monokai.nvim
+    url = https://github.com/tanvirtin/monokai.nvim.git
+
+[submodule "bundle_backup/YouCompleteMe"]
+    path = bundle_backup/YouCompleteMe
+    url = https://github.com/ycm-core/YouCompleteMe.git
+
+[submodule "bundle_backup/lsp_signature.nvim"]
+    path = bundle_backup/lsp_signature.nvim
+    url = https://github.com/ray-x/lsp_signature.nvim.git
+
+[submodule "bundle_backup/nvim-lint-orig"]
+    path = bundle_backup/nvim-lint-orig
+    url = https://github.com/mfussenegger/nvim-lint.git
+
+[submodule "bundle_backup/vimwiki"]
+    path = bundle_backup/vimwiki
+    url = https://github.com/vimwiki/vimwiki.git
+
+[submodule "bundle_backup/black-nvim"]
+    path = bundle_backup/black-nvim
+    url = git@github.com:mflova/black-nvim.git
+
+[submodule "bundle_backup/stakeholders_vim"]
+    path = bundle_backup/stakeholders_vim
+    url = https://github.com/tomtom/stakeholders_vim.git
+
+[submodule "bundle_backup/cmp-under-comparator"]
+    path = bundle_backup/cmp-under-comparator
+    url = https://github.com/lukas-reineke/cmp-under-comparator.git
+
+[submodule "bundle_backup/vim-session"]
+    path = bundle_backup/vim-session
+    url = https://github.com/xolox/vim-session.git
+
+[submodule "bundle_backup/lh-tags"]
+    path = bundle_backup/lh-tags
+    url = https://github.com/LucHermitte/lh-tags.git
+
+[submodule "bundle_backup/nvim-autopairs"]
+    path = bundle_backup/nvim-autopairs
+    url = https://github.com/windwp/nvim-autopairs.git
+
+[submodule "bundle_backup/lspsaga.nvim"]
+    path = bundle_backup/lspsaga.nvim
+    url = https://github.com/glepnir/lspsaga.nvim.git
+
+[submodule "bundle_backup/auto-pairs"]
+    path = bundle_backup/auto-pairs
+    url = https://github.com/jiangmiao/auto-pairs.git
+
+[submodule "bundle_backup/hop.nvim"]
+    path = bundle_backup/hop.nvim
+    url = https://github.com/phaazon/hop.nvim.git
+
+[submodule "bundle_backup/github-colors"]
+    path = bundle_backup/github-colors
+    url = https://github.com/lourenci/github-colors.git
+
+[submodule "bundle_backup/alpha-nvim"]
+    path = bundle_backup/alpha-nvim
+    url = https://github.com/goolord/alpha-nvim.git
+
+[submodule "bundle_backup/winmanager"]
+    path = bundle_backup/winmanager
+    url = https://github.com/vim-scripts/winmanager.git
+
+[submodule "bundle_backup/ropevim"]
+    path = bundle_backup/ropevim
+    url = https://github.com/python-rope/ropevim.git
+
+[submodule "bundle_backup/bclose.vim"]
+    path = bundle_backup/bclose.vim
+    url = https://github.com/rbgrouleff/bclose.vim.git
+
+[submodule "bundle_backup/vim-autopep8"]
+    path = bundle_backup/vim-autopep8
+    url = https://github.com/tell-k/vim-autopep8.git
+
+[submodule "bundle_backup/FixCursorHold.nvim"]
+    path = bundle_backup/FixCursorHold.nvim
+    url = https://github.com/antoinemadec/FixCursorHold.nvim.git
+
+[submodule "bundle_backup/vim-illuminate"]
+    path = bundle_backup/vim-illuminate
+    url = https://github.com/RRethy/vim-illuminate.git
+
+[submodule "bundle_backup/filetype.nvim"]
+    path = bundle_backup/filetype.nvim
+    url = https://github.com/nathom/filetype.nvim.git
+
+[submodule "bundle_backup/vim-glaive"]
+    path = bundle_backup/vim-glaive
+    url = https://github.com/google/vim-glaive.git
+
+[submodule "bundle_backup/sad.vim"]
+    path = bundle_backup/sad.vim
+    url = https://github.com/hauleth/sad.vim.git
+
+[submodule "bundle_backup/cmp-path"]
+    path = bundle_backup/cmp-path
+    url = https://github.com/hrsh7th/cmp-path.git
+
+[submodule "bundle_backup/nvim-dap-python"]
+    path = bundle_backup/nvim-dap-python
+    url = https://github.com/mfussenegger/nvim-dap-python.git
+
+[submodule "bundle_backup/vim-pydocstring"]
+    path = bundle_backup/vim-pydocstring
+    url = https://github.com/heavenshell/vim-pydocstring.git
+
+[submodule "bundle_backup/splitjoin.vim"]
+    path = bundle_backup/splitjoin.vim
+    url = https://github.com/AndrewRadev/splitjoin.vim.git
+
+[submodule "bundle_backup/CurtineIncSw.vim"]
+    path = bundle_backup/CurtineIncSw.vim
+    url = https://github.com/ericcurtin/CurtineIncSw.vim.git
+
+[submodule "bundle_backup/ctrlp.vim"]
+    path = bundle_backup/ctrlp.vim
+    url = https://github.com/ctrlpvim/ctrlp.vim.git
+
+[submodule "bundle_backup/lh-brackets"]
+    path = bundle_backup/lh-brackets
+    url = https://github.com/LucHermitte/lh-brackets.git
+
+[submodule "bundle_backup/sqlite.lua"]
+    path = bundle_backup/sqlite.lua
+    url = https://github.com/tami5/sqlite.lua.git
+
+[submodule "bundle_backup/ranger.vim"]
+    path = bundle_backup/ranger.vim
+    url = https://github.com/francoiscabrol/ranger.vim.git
+
+[submodule "bundle_backup/nvim-web-devicons"]
+    path = bundle_backup/nvim-web-devicons
+    url = https://github.com/kyazdani42/nvim-web-devicons.git
+
+[submodule "bundle_backup/vim-easycomment"]
+    path = bundle_backup/vim-easycomment
+    url = https://github.com/mflova/vim-easycomment.git
+
+[submodule "bundle_backup/litee.nvim"]
+    path = bundle_backup/litee.nvim
+    url = https://github.com/ldelossa/litee.nvim.git
+
+[submodule "bundle_backup/vim-printer"]
+    path = bundle_backup/vim-printer
+    url = https://github.com/mflova/vim-printer.git
+
+[submodule "bundle_backup/nvim-transparent"]
+    path = bundle_backup/nvim-transparent
+    url = https://github.com/xiyaowong/nvim-transparent.git
+
+[submodule "bundle_backup/vim-getting-things-down"]
+    path = bundle_backup/vim-getting-things-down
+    url = https://github.com/mflova/vim-getting-things-down.git
+
+[submodule "bundle_backup/vista.vim"]
+    path = bundle_backup/vista.vim
+    url = https://github.com/liuchengxu/vista.vim.git
+
+[submodule "bundle_backup/vim-searchindex"]
+    path = bundle_backup/vim-searchindex
+    url = https://github.com/google/vim-searchindex.git
+
+[submodule "bundle_backup/nerdtree-git-plugin"]
+    path = bundle_backup/nerdtree-git-plugin
+    url = https://github.com/xuyuanp/nerdtree-git-plugin.git
+
+[submodule "bundle_backup/nerdtree"]
+    path = bundle_backup/nerdtree
+    url = https://github.com/preservim/nerdtree.git
+
+[submodule "bundle_backup/plenary.nvim"]
+    path = bundle_backup/plenary.nvim
+    url = https://github.com/nvim-lua/plenary.nvim.git
+
+[submodule "bundle_backup/cmp-nvim-lsp-signature-help"]
+    path = bundle_backup/cmp-nvim-lsp-signature-help
+    url = https://github.com/hrsh7th/cmp-nvim-lsp-signature-help.git
+
+[submodule "bundle_backup/nvcode-color-schemes.vim"]
+    path = bundle_backup/nvcode-color-schemes.vim
+    url = https://github.com/ChristianChiarulli/nvcode-color-schemes.vim.git
+
+[submodule "bundle_backup/glow.nvim"]
+    path = bundle_backup/glow.nvim
+    url = https://github.com/ellisonleao/glow.nvim.git
+
+[submodule "bundle_backup/cmp_luasnip"]
+    path = bundle_backup/cmp_luasnip
+    url = https://github.com/saadparwaiz1/cmp_luasnip.git
+
+[submodule "bundle_backup/vim-clap"]
+    path = bundle_backup/vim-clap
+    url = https://github.com/liuchengxu/vim-clap.git
+
+[submodule "bundle_backup/vim-colorschemes"]
+    path = bundle_backup/vim-colorschemes
+    url = https://github.com/flazz/vim-colorschemes.git
+
+[submodule "bundle_backup/nvim"]
+    path = bundle_backup/nvim
+    url = https://github.com/catppuccin/nvim.git
+
+[submodule "bundle_backup/vim-matchup"]
+    path = bundle_backup/vim-matchup
+    url = https://github.com/andymass/vim-matchup.git
+
+[submodule "bundle_backup/the_silver_searcher"]
+    path = bundle_backup/the_silver_searcher
+    url = https://github.com/ggreer/the_silver_searcher.git
+
+[submodule "bundle_backup/telescope-bookmarks.nvim"]
+    path = bundle_backup/telescope-bookmarks.nvim
+    url = https://github.com/dhruvmanila/telescope-bookmarks.nvim.git
+
+[submodule "bundle_backup/cmp-git"]
+    path = bundle_backup/cmp-git
+    url = https://github.com/petertriho/cmp-git.git
+
+[submodule "bundle_backup/vim"]
+    path = bundle_backup/vim
+    url = https://github.com/embark-theme/vim.git
+
+[submodule "bundle_backup/vim-misc"]
+    path = bundle_backup/vim-misc
+    url = https://github.com/xolox/vim-misc.git
+
+[submodule "bundle_backup/telescope-smart-history.nvim"]
+    path = bundle_backup/telescope-smart-history.nvim
+    url = https://github.com/nvim-telescope/telescope-smart-history.nvim.git
+
+[submodule "bundle_backup/fzf-marks.vim"]
+    path = bundle_backup/fzf-marks.vim
+    url = https://github.com/tenfyzhong/fzf-marks.vim.git
+
+[submodule "bundle_backup/lightline.vim"]
+    path = bundle_backup/lightline.vim
+    url = https://github.com/itchyny/lightline.vim.git
+
+[submodule "bundle_backup/vim-ultest"]
+    path = bundle_backup/vim-ultest
+    url = https://github.com/rcarriga/vim-ultest.git
+
+[submodule "bundle_backup/ultisnips"]
+    path = bundle_backup/ultisnips
+    url = https://github.com/SirVer/ultisnips.git
+
+[submodule "bundle_backup/ale"]
+    path = bundle_backup/ale
+    url = https://github.com/dense-analysis/ale.git
+
+[submodule "bundle_backup/vn-night.nvim"]
+    path = bundle_backup/vn-night.nvim
+    url = https://github.com/nxvu699134/vn-night.nvim.git
+
+[submodule "bundle_backup/winresizer"]
+    path = bundle_backup/winresizer
+    url = https://github.com/simeji/winresizer.git
+
+[submodule "bundle_backup/black"]
+    path = bundle_backup/black
+    url = https://github.com/ambv/black.git
+
+[submodule "bundle_backup/vim-flake8"]
+    path = bundle_backup/vim-flake8
+    url = https://github.com/nvie/vim-flake8.git
+
+[submodule "bundle_backup/roshnivim-cs"]
+    path = bundle_backup/roshnivim-cs
+    url = https://github.com/shaeinst/roshnivim-cs.git
+
+[submodule "bundle_backup/indentpython.vim"]
+    path = bundle_backup/indentpython.vim
+    url = https://github.com/vim-scripts/indentpython.vim.git
+
+[submodule "bundle_backup/nvim-hybrid"]
+    path = bundle_backup/nvim-hybrid
+    url = https://github.com/PHSix/nvim-hybrid.git
+
+[submodule "bundle_backup/ag.vim"]
+    path = bundle_backup/ag.vim
+    url = https://github.com/mflova/ag.vim.git
+
+[submodule "bundle_backup/vimtex"]
+    path = bundle_backup/vimtex
+    url = https://github.com/lervag/vimtex.git
+
+[submodule "bundle_backup/friendly-snippets"]
+    path = bundle_backup/friendly-snippets
+    url = https://github.com/mflova/friendly-snippets.git
+
+[submodule "bundle_backup/vim-test"]
+    path = bundle_backup/vim-test
+    url = https://github.com/mflova/vim-test.git
+
+[submodule "bundle_backup/vim-easymotion"]
+    path = bundle_backup/vim-easymotion
+    url = https://github.com/mflova/vim-easymotion.git
+
+[submodule "bundle_backup/vim-airline-themes"]
+    path = bundle_backup/vim-airline-themes
+    url = https://github.com/vim-airline/vim-airline-themes.git
+
+[submodule "bundle_backup/vim-gitgutter"]
+    path = bundle_backup/vim-gitgutter
+    url = https://github.com/airblade/vim-gitgutter.git
+
+[submodule "bundle_backup/wildfire.vim"]
+    path = bundle_backup/wildfire.vim
+    url = https://github.com/gcmt/wildfire.vim.git
+
+[submodule "bundle_backup/octo.nvim"]
+    path = bundle_backup/octo.nvim
+    url = https://github.com/pwntester/octo.nvim.git
+
+[submodule "bundle_backup/rainbow_parentheses.vim"]
+    path = bundle_backup/rainbow_parentheses.vim
+    url = https://github.com/junegunn/rainbow_parentheses.vim.git
+
+[submodule "bundle_backup/edge"]
+    path = bundle_backup/edge
+    url = https://github.com/sainnhe/edge.git
+
+[submodule "bundle_backup/onenord.nvim"]
+    path = bundle_backup/onenord.nvim
+    url = https://github.com/rmehri01/onenord.nvim.git
+
+[submodule "bundle_backup/conoline.vim"]
+    path = bundle_backup/conoline.vim
+    url = https://github.com/miyakogi/conoline.vim.git
+
+[submodule "bundle_backup/vim-snippets"]
+    path = bundle_backup/vim-snippets
+    url = https://github.com/honza/vim-snippets.git
+
+[submodule "bundle_backup/nvim-dap-virtual-text"]
+    path = bundle_backup/nvim-dap-virtual-text
+    url = https://github.com/theHamsta/nvim-dap-virtual-text.git
+
+[submodule "bundle_backup/vim-cpp-enhanced-highlight"]
+    path = bundle_backup/vim-cpp-enhanced-highlight
+    url = https://github.com/octol/vim-cpp-enhanced-highlight.git
+
+[submodule "bundle_backup/neon"]
+    path = bundle_backup/neon
+    url = https://github.com/rafamadriz/neon.git
+
+[submodule "bundle_backup/vim-tasks"]
+    path = bundle_backup/vim-tasks
+    url = https://github.com/crispyDrone/vim-tasks.git
+
+[submodule "bundle_backup/nabla.nvim"]
+    path = bundle_backup/nabla.nvim
+    url = https://github.com/jbyuki/nabla.nvim.git
+
+[submodule "bundle_backup/tokyonight.nvim"]
+    path = bundle_backup/tokyonight.nvim
+    url = https://github.com/folke/tokyonight.nvim.git
+
+[submodule "bundle_backup/nerdtree-visual-selection"]
+    path = bundle_backup/nerdtree-visual-selection
+    url = https://github.com/PhilRunninger/nerdtree-visual-selection.git
+
+[submodule "bundle_backup/cmp-buffer"]
+    path = bundle_backup/cmp-buffer
+    url = https://github.com/hrsh7th/cmp-buffer.git
+
+[submodule "bundle_backup/vimspector"]
+    path = bundle_backup/vimspector
+    url = https://github.com/mflova/vimspector.git
+
+[submodule "bundle_backup/vim-signify"]
+    path = bundle_backup/vim-signify
+    url = https://github.com/mhinz/vim-signify.git
+
+[submodule "bundle_backup/gh.nvim"]
+    path = bundle_backup/gh.nvim
+    url = https://github.com/ldelossa/gh.nvim.git
+
+[submodule "bundle_backup/vim-highlightedyank"]
+    path = bundle_backup/vim-highlightedyank
+    url = https://github.com/machakann/vim-highlightedyank.git
+
+[submodule "bundle_backup/nvim-treesitter-textobjects"]
+    path = bundle_backup/nvim-treesitter-textobjects
+    url = https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git
+
+[submodule "bundle_backup/stackanswers.vim"]
+    path = bundle_backup/stackanswers.vim
+    url = https://github.com/james9909/stackanswers.vim.git
+
+[submodule "bundle_backup/vim-stackoverflow"]
+    path = bundle_backup/vim-stackoverflow
+    url = https://github.com/hienvd/vim-stackoverflow.git
+
+[submodule "bundle_backup/nvim-lint"]
+    path = bundle_backup/nvim-lint
+    url = https://github.com/mflova/nvim-lint.git
+
+[submodule "bundle_backup/vim-fugitive"]
+    path = bundle_backup/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive.git
+
+[submodule "bundle_backup/nvim-dap-ui"]
+    path = bundle_backup/nvim-dap-ui
+    url = https://github.com/rcarriga/nvim-dap-ui.git
+
+[submodule "bundle_backup/vim-maximizer"]
+    path = bundle_backup/vim-maximizer
+    url = https://github.com/szw/vim-maximizer.git
+
+[submodule "bundle_backup/a.vim"]
+    path = bundle_backup/a.vim
+    url = https://github.com/vim-scripts/a.vim.git
+
+[submodule "bundle_backup/vim-terminal"]
+    path = bundle_backup/vim-terminal
+    url = https://github.com/tc50cal/vim-terminal.git
+
+[submodule "bundle_backup/neotest"]
+    path = bundle_backup/neotest
+    url = https://github.com/nvim-neotest/neotest.git
+
+[submodule "bundle_backup/pantran.nvim"]
+    path = bundle_backup/pantran.nvim
+    url = https://github.com/potamides/pantran.nvim.git
+
+[submodule "bundle_backup/gruvbox"]
+    path = bundle_backup/gruvbox
+    url = https://github.com/morhetz/gruvbox.git
+
+[submodule "bundle_backup/lsp-colors.nvim"]
+    path = bundle_backup/lsp-colors.nvim
+    url = https://github.com/folke/lsp-colors.nvim.git
+
+[submodule "bundle_backup/lspkind-nvim"]
+    path = bundle_backup/lspkind-nvim
+    url = https://github.com/onsails/lspkind-nvim.git
+
+[submodule "bundle_backup/dashboard-nvim"]
+    path = bundle_backup/dashboard-nvim
+    url = https://github.com/glepnir/dashboard-nvim.git
+
+[submodule "bundle_backup/vim_current_word"]
+    path = bundle_backup/vim_current_word
+    url = https://github.com/dominikduda/vim_current_word.git
+
+[submodule "bundle_backup/nerdtree-project-plugin"]
+    path = bundle_backup/nerdtree-project-plugin
+    url = https://github.com/scrooloose/nerdtree-project-plugin.git
+
+[submodule "bundle_backup/cmp-nvim-lsp"]
+    path = bundle_backup/cmp-nvim-lsp
+    url = https://github.com/hrsh7th/cmp-nvim-lsp.git
+
+[submodule "bundle_backup/nvim-spotify"]
+    path = bundle_backup/nvim-spotify
+    url = https://github.com/KadoBOT/nvim-spotify.git
+
+[submodule "bundle_backup/fzf-checkout.vim"]
+    path = bundle_backup/fzf-checkout.vim
+    url = https://github.com/mflova/fzf-checkout.vim.git
+
+[submodule "bundle_backup/vim-sort-python-imports"]
+    path = bundle_backup/vim-sort-python-imports
+    url = https://github.com/public/vim-sort-python-imports.git
+
+[submodule "bundle_backup/lh-dev"]
+    path = bundle_backup/lh-dev
+    url = https://github.com/LucHermitte/lh-dev.git
+
+[submodule "bundle_backup/firenvim"]
+    path = bundle_backup/firenvim
+    url = https://github.com/glacambre/firenvim.git
+
+[submodule "bundle_backup/vim-maktaba"]
+    path = bundle_backup/vim-maktaba
+    url = https://github.com/google/vim-maktaba.git
+
+[submodule "bundle_backup/nvim-cmp"]
+    path = bundle_backup/nvim-cmp
+    url = https://github.com/hrsh7th/nvim-cmp.git
+
+[submodule "bundle_backup/LuaSnip"]
+    path = bundle_backup/LuaSnip
+    url = https://github.com/L3MON4D3/LuaSnip.git
+
+[submodule "bundle_backup/vim-ros"]
+    path = bundle_backup/vim-ros
+    url = https://github.com/taketwo/vim-ros.git
+
+[submodule "bundle_backup/vim-mypy"]
+    path = bundle_backup/vim-mypy
+    url = https://github.com/integralist/vim-mypy.git
+
+[submodule "bundle_backup/vim-rainbow"]
+    path = bundle_backup/vim-rainbow
+    url = https://github.com/frazrepo/vim-rainbow.git
+
+[submodule "bundle_backup/vim-wordfuzzycompletion-plugin"]
+    path = bundle_backup/vim-wordfuzzycompletion-plugin
+    url = https://github.com/jaanauati/vim-wordfuzzycompletion-plugin.git
+
+[submodule "bundle_backup/grammar-guard.nvim"]
+    path = bundle_backup/grammar-guard.nvim
+    url = https://github.com/brymer-meneses/grammar-guard.nvim.git
+
+[submodule "bundle_backup/fzf.vim"]
+    path = bundle_backup/fzf.vim
+    url = https://github.com/junegunn/fzf.vim.git
+
+[submodule "bundle_backup/sniprun"]
+    path = bundle_backup/sniprun
+    url = https://github.com/michaelb/sniprun.git
+
+[submodule "bundle_backup/vim-flog"]
+    path = bundle_backup/vim-flog
+    url = https://github.com/rbong/vim-flog.git
+
+[submodule "bundle_backup/csv.vim"]
+    path = bundle_backup/csv.vim
+    url = https://github.com/chrisbra/csv.vim.git
+
+[submodule "bundle_backup/vim-diff-enhanced"]
+    path = bundle_backup/vim-diff-enhanced
+    url = https://github.com/chrisbra/vim-diff-enhanced.git
+
+[submodule "bundle_backup/vim-g"]
+    path = bundle_backup/vim-g
+    url = https://github.com/szw/vim-g.git
+
+[submodule "bundle_backup/vim-refactor"]
+    path = bundle_backup/vim-refactor
+    url = https://github.com/LucHermitte/vim-refactor.git
+
+[submodule "bundle_backup/nebulous.nvim"]
+    path = bundle_backup/nebulous.nvim
+    url = https://github.com/Yagua/nebulous.nvim.git
+
+[submodule "bundle_backup/cmp-cmdline"]
+    path = bundle_backup/cmp-cmdline
+    url = https://github.com/hrsh7th/cmp-cmdline.git
+
+[submodule "bundle_backup/circles.nvim"]
+    path = bundle_backup/circles.nvim
+    url = https://github.com/projekt0n/circles.nvim.git
+
+[submodule "bundle_backup/mu-template"]
+    path = bundle_backup/mu-template
+    url = https://github.com/LucHermitte/mu-template.git
+
+[submodule "bundle_backup/alternate-lite"]
+    path = bundle_backup/alternate-lite
+    url = https://github.com/LucHermitte/alternate-lite.git
+
+[submodule "bundle_backup/vim-isort"]
+    path = bundle_backup/vim-isort
+    url = https://github.com/fisadev/vim-isort.git
+
+[submodule "bundle_backup/onedark.nvim"]
+    path = bundle_backup/onedark.nvim
+    url = https://github.com/navarasu/onedark.nvim.git
+
+[submodule "bundle_backup/gv.vim"]
+    path = bundle_backup/gv.vim
+    url = https://github.com/junegunn/gv.vim.git
+
+[submodule "bundle_backup/vim-lsp"]
+    path = bundle_backup/vim-lsp
+    url = https://github.com/prabirshrestha/vim-lsp.git
+
+[submodule "bundle_backup/diffview.nvim"]
+    path = bundle_backup/diffview.nvim
+    url = https://github.com/sindrets/diffview.nvim.git
+
+[submodule "bundle_backup/riv.vim"]
+    path = bundle_backup/riv.vim
+    url = https://github.com/Rykka/riv.vim.git
+
+[submodule "bundle_backup/vim-coverage"]
+    path = bundle_backup/vim-coverage
+    url = https://github.com/google/vim-coverage.git
+
+[submodule "bundle_backup/aquarium-vim"]
+    path = bundle_backup/aquarium-vim
+    url = https://github.com/FrenzyExists/aquarium-vim.git
+
+[submodule "bundle_backup/taglist"]
+    path = bundle_backup/taglist
+    url = https://github.com/yegappan/taglist.git
+
+[submodule "bundle_backup/onedark.vim"]
+    path = bundle_backup/onedark.vim
+    url = https://github.com/joshdick/onedark.vim.git
+
+[submodule "bundle_backup/ZoomWin"]
+    path = bundle_backup/ZoomWin
+    url = https://github.com/vim-scripts/ZoomWin.git
+
+[submodule "bundle_backup/InstantRst"]
+    path = bundle_backup/InstantRst
+    url = https://github.com/Rykka/InstantRst.git
+
+[submodule "bundle_backup/nvim-treesitter-textsubjects"]
+    path = bundle_backup/nvim-treesitter-textsubjects
+    url = https://github.com/RRethy/nvim-treesitter-textsubjects.git
+
+[submodule "bundle_backup/vim-interactive-rebase-reverse"]
+    path = bundle_backup/vim-interactive-rebase-reverse
+    url = https://github.com/salcode/vim-interactive-rebase-reverse.git
+
+[submodule "bundle_backup/vim-python-docstring"]
+    path = bundle_backup/vim-python-docstring
+    url = https://github.com/mflova/vim-python-docstring.git
+
+[submodule "bundle_backup/cmp-nvim-ultisnips"]
+    path = bundle_backup/cmp-nvim-ultisnips
+    url = https://github.com/quangnguyen30192/cmp-nvim-ultisnips.git
+
+[submodule "bundle_backup/nvim-tree.lua"]
+    path = bundle_backup/nvim-tree.lua
+    url = https://github.com/kyazdani42/nvim-tree.lua.git
+
+[submodule "bundle_backup/nvim-treesitter"]
+    path = bundle_backup/nvim-treesitter
+    url = https://github.com/nvim-treesitter/nvim-treesitter.git
+
+[submodule "bundle_backup/asyncomplete.vim"]
+    path = bundle_backup/asyncomplete.vim
+    url = https://github.com/prabirshrestha/asyncomplete.vim.git
+
+[submodule "bundle_backup/zephyrium"]
+    path = bundle_backup/zephyrium
+    url = https://github.com/titanzero/zephyrium.git
+
+[submodule "bundle_backup/committia.vim"]
+    path = bundle_backup/committia.vim
+    url = https://github.com/rhysd/committia.vim.git
+
+[submodule "bundle_backup/nvim-lspconfig"]
+    path = bundle_backup/nvim-lspconfig
+    url = https://github.com/neovim/nvim-lspconfig.git
+
+[submodule "bundle_backup/lh-vim-lib"]
+    path = bundle_backup/lh-vim-lib
+    url = https://github.com/LucHermitte/lh-vim-lib.git
+
+[submodule "bundle_backup/telescope-fzy-native.nvim"]
+    path = bundle_backup/telescope-fzy-native.nvim
+    url = https://github.com/nvim-telescope/telescope-fzy-native.nvim.git
+
+[submodule "bundle_backup/lh-style"]
+    path = bundle_backup/lh-style
+    url = https://github.com/LucHermitte/lh-style.git
+
+[submodule "bundle_backup/nvim-code-action-menu"]
+    path = bundle_backup/nvim-code-action-menu
+    url = https://github.com/weilbith/nvim-code-action-menu.git
+
+[submodule "bundle_backup/lualine.nvim"]
+    path = bundle_backup/lualine.nvim
+    url = https://github.com/nvim-lualine/lualine.nvim.git
+
+[submodule "bundle_backup/markdown-preview.nvim"]
+    path = bundle_backup/markdown-preview.nvim
+    url = https://github.com/iamcco/markdown-preview.nvim.git
+
+[submodule "bundle_backup/vim-doge"]
+    path = bundle_backup/vim-doge
+    url = https://github.com/kkoomen/vim-doge.git
+
+[submodule "bundle_backup/sonokai"]
+    path = bundle_backup/sonokai
+    url = https://github.com/sainnhe/sonokai.git
+
+[submodule "bundle_backup/vscode.nvim"]
+    path = bundle_backup/vscode.nvim
+    url = https://github.com/Mofiqul/vscode.nvim.git
+
+[submodule "bundle_backup/oceanic-next"]
+    path = bundle_backup/oceanic-next
+    url = https://github.com/mhartington/oceanic-next.git
+
+[submodule "bundle_backup/toggle-lsp-diagnostics.nvim"]
+    path = bundle_backup/toggle-lsp-diagnostics.nvim
+    url = https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim.git
+
+[submodule "bundle_backup/material.nvim"]
+    path = bundle_backup/material.nvim
+    url = https://github.com/marko-cerovac/material.nvim.git
+
+[submodule "bundle_backup/refactoring.nvim"]
+    path = bundle_backup/refactoring.nvim
+    url = https://github.com/ThePrimeagen/refactoring.nvim.git
+
+[submodule "bundle_backup/molokai"]
+    path = bundle_backup/molokai
+    url = https://github.com/tomasr/molokai.git
+
+[submodule "bundle_backup/nvim-lsp-installer"]
+    path = bundle_backup/nvim-lsp-installer
+    url = https://github.com/williamboman/nvim-lsp-installer.git
+
+[submodule "bundle_backup/neotest-python"]
+    path = bundle_backup/neotest-python
+    url = https://github.com/mflova/neotest-python.git
+
+[submodule "bundle_backup/vim-submode"]
+    path = bundle_backup/vim-submode
+    url = https://github.com/kana/vim-submode.git
+
+[submodule "bundle_backup/telescope.nvim"]
+    path = bundle_backup/telescope.nvim
+    url = https://github.com/nvim-telescope/telescope.nvim.git
+
+[submodule "bundle_backup/vim-fuzzy-stash"]
+    path = bundle_backup/vim-fuzzy-stash
+    url = https://github.com/mflova/vim-fuzzy-stash.git
+
+[submodule "bundle_backup/Vundle.vim"]
+    path = bundle_backup/Vundle.vim
+    url = https://github.com/VundleVim/Vundle.vim.git
+
+[submodule "bundle_backup/telescope-fzf-native.nvim"]
+    path = bundle_backup/telescope-fzf-native.nvim
+    url = https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
