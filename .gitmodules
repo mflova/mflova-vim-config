@@ -1,4 +1,6 @@
 [submodule "bundle_backup/ZoomWin"]
 	path = bundle_backup/ZoomWin
 	url = https://github.com/vim-scripts/ZoomWin
-	branch = ac6474a31560b217c1866107dce876bcd1e9f81c
+[submodule "YouCompleteMe/ZoomWin"]
+	path = bundle_backup/YouCompleteMe
+	url = https://github.com/ycm-core/YouCompleteMe.git
