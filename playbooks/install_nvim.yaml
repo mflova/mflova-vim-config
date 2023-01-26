@@ -295,9 +295,13 @@
   - name: Install python tools and linters (APT)
     apt:
       name:
-        - flake8
         - vulture
         - codespell
+        
+  - name: Install flake8
+    pip:
+      name: flake8
+      version: 5.0.4
 
   - name: Install python tools and linters
     pip:
@@ -322,7 +326,7 @@
         - flake8-pytest-style
         - flake8-simplify
         - flake8-todo
-        - flake8-slots
+        # - flake8-slots outdated
         - flake8-newspaper-style
         - flake8_sphinx_links
         - flake8-bugbear
