@@ -132,7 +132,7 @@
     become: no
 
   - name: Install Python Treesitter
-    shell: nvim +'TSInstall python' +'sleep 5000m' +qa
+    shell: nvim +'TSInstall python' +'sleep 8000m' +qa
     become: no
     ignore_errors: yes  # If already installed
 
@@ -142,7 +142,7 @@
     ignore_errors: yes  # If already installed
 
   - name: Install cpp Treesitter
-    shell: nvim +'TSInstall cpp' +'sleep 2000m' +qa
+    shell: nvim +'TSInstall cpp' +'sleep 8000m' +qa
     become: no
     ignore_errors: yes  # If already installed
 
@@ -152,7 +152,7 @@
     ignore_errors: yes  # If already installed
 
   - name: Install vim Treesitter
-    shell: nvim +'TSInstall vim' +'sleep 2000m' +qa
+    shell: nvim +'TSInstall vim' +'sleep 5000m' +qa
     become: no
     ignore_errors: yes  # If already installed
 
