@@ -342,37 +342,7 @@
         - dlint
         - pandas-vet
         - darglint
-        - flake8-assertive
-        - flake8-bandit
-        - flake8-eradicate
-        - flake8-polyfill
-        - flake8-prettycount
-        - flake8-pytest-style
-        - flake8-simplify
-        - flake8-todo
-        # - flake8-slots outdated
-        - flake8-newspaper-style
-        - flake8_sphinx_links
-        - flake8-bugbear
-        - flake8-docstrings
-        - flake8-comments
-        # - flake8-encodings buggy
-        # - flake8-warnings slow
-        - flake8-comprehensions
-        - flake8-commas
-        - flake8-rst-docstrings
-        - flake8-docstrings
-        - flake8-markdown
-        - flake8-builtins
-        - flake8-broken-line
-        - flake8-pie
-        - flake8-mutable
-        - flake8-deprecated
-        - flake8-type-checking
-        - flake8-typing-imports
-        - flake8-requirements
-        - flake8-implicit-str-concat
-        - flake8-use-fstring
+        - ruff
       executable: "{{ pip_version }}"
     become: no
 
