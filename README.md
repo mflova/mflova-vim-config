@@ -20,6 +20,10 @@ with `ansible-playbook --ask-become`. Be aware that for the second script the va
 defined by the first one must be available, so it is necessary to either source
 `.bashrc` or to launch a new terminal.
 
+### Input arguments to ansible script:
+
+  - `pip_version`: You can modify the script to use a different python interpreter
+
 ## Set up as merge tool
 
 Use the following lines:

@@ -1,5 +1,7 @@
 - hosts: localhost
   become: yes
+  vars:
+  	pip_version: "pip3.8"
   tasks:
 
   - name: Get $HOME variable
@@ -54,6 +56,8 @@
         - ropevim
         - pynvim
         - https://github.com/Rykka/instant-rst.py/archive/master.zip
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install other snap packages
     snap:
@@ -180,6 +184,8 @@
   - name: Install cmake LSP
     pip: 
       name: cmake-language-server
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install esbonio LSP
     shell: nvim +'LspInstall esbonio' +'sleep 20000m' +qa
@@ -213,6 +219,8 @@
   - name: Install pyright LSP
     pip: 
       name: pyright
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install grammar based LSP for markdown/latex/bib
     shell: nvim +'LspInstall ltex' +'sleep 40000m' +qa
@@ -227,6 +235,8 @@
       name:
         - pylsp-mypy
         - pylsp-rope
+      become: no
+      executable: "{{ pip_version }}"
 
   - name: Install ccls LSP (C++)
     apt: 
@@ -235,6 +245,8 @@
   - name: Install grammar-based linters (pip)
     pip:
       name: codespell
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Insatll markdown-cli
     npm:
@@ -244,6 +256,8 @@
   - name: Install cpp linters (pip)
     pip:
       name: cpplint
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install cpp linters (apt)
     apt:
@@ -261,6 +275,8 @@
         - rstcheck
         - proselint
         - restructuredtext-lint
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install  YAML linters (pip)
     pip:
@@ -269,6 +285,8 @@
   - name: Install  CMAKE linters (pip)
     pip:
       name: cmakelint
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install  shell linters (apt)
     apt:
@@ -277,6 +295,8 @@
   - name: Install  vim linters (pip)
     pip:
       name: vim-vint
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install  lua linters (apt)
     apt:
@@ -290,6 +310,8 @@
         - pandas-stubs
         - numpy
         - pytest
+      executable: "{{ pip_version }}"
+    become: no
 
 
   - name: Install python tools and linters (APT)
@@ -302,6 +324,8 @@
     pip:
       name: flake8
       version: 5.0.4
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install python tools and linters
     pip:
@@ -349,6 +373,8 @@
         - flake8-requirements
         - flake8-implicit-str-concat
         - flake8-use-fstring
+      executable: "{{ pip_version }}"
+    become: no
 
   - name: Install markdown linters
     npm:
